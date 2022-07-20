@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField]
-    private float enemySpeed = 10f;
+
+    [SerializeField] private float enemySpeed = 10f;
     private Transform target;
     private int wayCountIndex = 0;
 
