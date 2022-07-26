@@ -14,6 +14,7 @@ public class TowerBuildManager : MonoBehaviour
 
     public bool SelectMissileLauncherTower = false;
     public bool SelectStandardTower = false;
+    public bool SelectLaserTower = false;
 
     public bool CanBuild { get { return towerToBuild != null; } }
     public bool HasManey { get { return PlayerStats.Money >= towerToBuild.cost; } }
@@ -42,6 +43,7 @@ public class TowerBuildManager : MonoBehaviour
             Debug.Log("Not Enough Money to Build !!!");
             SelectStandardTower = false;
             SelectMissileLauncherTower = false;
+            SelectLaserTower = false;
             return;
         }
 
@@ -53,6 +55,7 @@ public class TowerBuildManager : MonoBehaviour
         groundBehavior.tower = tower;
         SelectStandardTower = false;
         SelectMissileLauncherTower = false;
+        SelectLaserTower = false;
 
         Debug.Log("Tower build! Money left: " + PlayerStats.Money);
     }

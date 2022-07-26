@@ -32,12 +32,12 @@ public class GroundBehavior : MonoBehaviour
         }
 
         if (towerBuildManager.SelectMissileLauncherTower == true && towerBuildManager.HasManey ||
-            towerBuildManager.SelectStandardTower == true && towerBuildManager.HasManey)
+            towerBuildManager.SelectStandardTower == true && towerBuildManager.HasManey || towerBuildManager.SelectLaserTower == true && towerBuildManager.HasManey)
         {
             rend.material.color = hoverColor;
         }
         else if(towerBuildManager.SelectMissileLauncherTower == true && !towerBuildManager.HasManey ||
-            towerBuildManager.SelectStandardTower == true && !towerBuildManager.HasManey)
+            towerBuildManager.SelectStandardTower == true && !towerBuildManager.HasManey || towerBuildManager.SelectLaserTower == true && !towerBuildManager.HasManey)
         {
             rend.material.color = cantBuildColor;
         }
@@ -67,7 +67,7 @@ public class GroundBehavior : MonoBehaviour
         }
 
         //Build a tower
-        if (towerBuildManager.SelectMissileLauncherTower == true || towerBuildManager.SelectStandardTower == true)
+        if (towerBuildManager.SelectMissileLauncherTower == true || towerBuildManager.SelectStandardTower == true || towerBuildManager.SelectLaserTower == true)
         {
             towerBuildManager.BuildTowerOn(this);
         }
@@ -85,6 +85,11 @@ public class GroundBehavior : MonoBehaviour
         if (towerBuildManager.SelectMissileLauncherTower == true)
         {
             positionOffset = new Vector3(0, 2f, 0);
+        }
+
+        if (towerBuildManager.SelectLaserTower == true)
+        {
+            positionOffset = new Vector3(0, 0.5f, 0);
         }
         return transform.position + positionOffset;
     }

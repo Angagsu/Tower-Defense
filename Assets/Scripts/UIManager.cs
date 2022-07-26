@@ -4,7 +4,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Text moneyText, timerText, livesText;
-    [SerializeField] private Text standardTowerCostText, missileLauncherTowerCostText;
+    [SerializeField] private Text standardTowerCostText, missileLauncherTowerCostText, laserTowerCostText;
 
     private Shop towerCost;
     private WaveSpawner waveSpawner;
@@ -33,5 +33,6 @@ public class UIManager : MonoBehaviour
     {
         standardTowerCostText.text = "$ " + towerCost.standardTower.cost.ToString();
         missileLauncherTowerCostText.text = "$ " + towerCost.missileLauncherTower.cost.ToString();
+        laserTowerCostText.text = "$ " + towerCost.laserTower.cost.ToString();
     }
 }
