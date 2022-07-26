@@ -6,9 +6,9 @@ public class WaveSpawner : MonoBehaviour
 {
     [SerializeField] private Transform enemyPrefab;
     [SerializeField] private Transform spawnPoint;
-    [SerializeField] private Text countdownText;
     [SerializeField] private float timeBetweenWaves = 5f;
     private float countdown = 2f;
+    public float CountDown { get { return countdown; } }
     private int waveIndex = 1;
 
     private void Start()
@@ -25,7 +25,8 @@ public class WaveSpawner : MonoBehaviour
         }
 
         countdown -= Time.deltaTime;
-        countdownText.text = Mathf.Round(countdown).ToString();
+        countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
+        
     }
 
     private IEnumerator SpawnWaves()

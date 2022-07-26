@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 5333765879418726947}
   - component: {fileID: 229616446}
   m_Layer: 0
-  m_Name: Tower
+  m_Name: MissileLauncherTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,11 +77,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerRotatPart: {fileID: 2001038220157922961}
   bulletInstPoint: {fileID: 74253773003238890}
-  bulletPrefab: {fileID: 1639264894093340335, guid: 5786d213a6b41444cb4f22ef52f72a0b,
+  bulletPrefab: {fileID: 5573161876198323151, guid: 8f30d3e7eaa11f7429faf9d5c69657be,
     type: 3}
   turnSpeed: 10
   fireRate: 1
-  range: 15
+  range: 30
 --- !u!1001 &2001038220157531153
 PrefabInstance:
   m_ObjectHideFlags: 0
