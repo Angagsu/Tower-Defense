@@ -13,12 +13,15 @@ public class TowerDetection : MonoBehaviour
     [SerializeField] private float range = 15f;
 
     [Header("Use Laser")]
-    public bool UseLaser = false;
-    public LineRenderer lineRenderer;
-    public ParticleSystem laserImpactEffect;
-    public Light impactLight;
+    [SerializeField] private int damageOverTime = 30;
+    [SerializeField] private float slowAmount = 0.5f;
+    [SerializeField] bool UseLaser = false;
+    [SerializeField] LineRenderer lineRenderer;
+    [SerializeField] ParticleSystem laserImpactEffect;
+    [SerializeField] Light impactLight;
 
     private Transform target;
+    private Enemy targetEnemy;
     private string enemyTag = "Enemy";
     private float fireCountdown = 0f;
 
@@ -47,7 +50,7 @@ public class TowerDetection : MonoBehaviour
 
         if (UseLaser)
         {
-            LaserAttackType();
+            LaserAttack();
         }
         else
         {
@@ -99,6 +102,7 @@ public class TowerDetection : MonoBehaviour
         if (nearestEnemy != null && shortestDistance <= range)
         {
             target = nearestEnemy.transform;
+            targetEnemy = nearestEnemy.GetComponent<Enemy>();
         }
         else
         {
@@ -106,8 +110,11 @@ public class TowerDetection : MonoBehaviour
         }
     }
 
-    private void LaserAttackType()
+    private void LaserAttack()
     {
+        targetEnemy.AmountOfDamagetoEnemy(damageOverTime * Time.deltaTime);
+        targetEnemy.Slow(slowAmount);
+
         if (!lineRenderer.enabled)
         {
             lineRenderer.enabled = true;
