@@ -7,10 +7,16 @@ public class TowerDetection : MonoBehaviour
     [SerializeField] private Transform bulletInstPoint;
     [SerializeField] private GameObject bulletPrefab;
     
-    [Header("settings")] 
+    [Header("Settings")] 
     [SerializeField] private float turnSpeed = 10f;
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private float range = 15f;
+
+    [Header("Use Laser")]
+    public bool UseLaser = false;
+    public LineRenderer lineRenderer;
+    public ParticleSystem laserImpactEffect;
+    public Light impactLight;
 
     private Transform target;
     private string enemyTag = "Enemy";
@@ -25,21 +31,35 @@ public class TowerDetection : MonoBehaviour
     {
         if (target == null)
         {
+            if (UseLaser)
+            {
+                if (lineRenderer.enabled)
+                {
+                    lineRenderer.enabled = false;
+                    impactLight.enabled = false;
+                    laserImpactEffect.Stop();  
+                }
+            }
             return;
         }
 
-        Vector3 direction = target.position - transform.position;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        Vector3 rotation = Quaternion.Lerp(towerRotatPart.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
-        towerRotatPart.rotation = Quaternion.Euler(0, rotation.y, 0);
+        LockOnTarget();
 
-        if (fireCountdown <= 0)
+        if (UseLaser)
         {
-            Shoot();
-            fireCountdown = 1f / fireRate;
+            LaserAttackType();
+        }
+        else
+        {
+            if (fireCountdown <= 0)
+            {
+                Shoot();
+                fireCountdown = 1f / fireRate;
+            }
+
+            fireCountdown -= Time.deltaTime;
         }
 
-        fireCountdown -= Time.deltaTime; 
     }
 
     private void Shoot()
@@ -84,5 +104,31 @@ public class TowerDetection : MonoBehaviour
         {
             target = null;
         }
+    }
+
+    private void LaserAttackType()
+    {
+        if (!lineRenderer.enabled)
+        {
+            lineRenderer.enabled = true;
+            impactLight.enabled = true;
+            laserImpactEffect.Play();
+            
+        }
+        lineRenderer.SetPosition(0, bulletInstPoint.position);
+        lineRenderer.SetPosition(1, target.position);
+
+        Vector3 direction = bulletInstPoint.position - target.position;
+        laserImpactEffect.transform.position = target.position + direction.normalized;
+        laserImpactEffect.transform.rotation = Quaternion.LookRotation(direction);
+        
+    }
+
+    private void LockOnTarget()
+    {
+        Vector3 direction = target.position - transform.position;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        Vector3 rotation = Quaternion.Lerp(towerRotatPart.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
+        towerRotatPart.rotation = Quaternion.Euler(0, rotation.y, 0);
     }
 }
