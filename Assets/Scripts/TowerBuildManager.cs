@@ -5,8 +5,10 @@ public class TowerBuildManager : MonoBehaviour
 {
     public static TowerBuildManager Instance;
 
-    private TowerBlueprint towerToBuild;
+    private TowerUI towerUI;
 
+    private TowerBlueprint towerToBuild;
+    private GroundBehavior selectedGround;
 
     public GameObject standartTowerPrefab;
     public GameObject missileLauncherTowerPrefab;
@@ -29,11 +31,32 @@ public class TowerBuildManager : MonoBehaviour
 
         Instance = this;
 
+        towerUI = GameObject.Find("TowerUI").GetComponent<TowerUI>();
+        
     }
 
+    public void SelectedGround(GroundBehavior groundBehavior)
+    {
+        if (selectedGround == groundBehavior)
+        {
+            DeselectGround();
+            return;
+        }
+
+        selectedGround = groundBehavior;
+        towerToBuild = null;
+        towerUI.SetTargetGround(groundBehavior);
+    }
+
+    public void DeselectGround()
+    {
+        selectedGround = null;
+        towerUI.HideCanvas();
+    }
     public void SelectTowerToBuild(TowerBlueprint tower)
     {
         towerToBuild = tower;
+        DeselectGround();
     }
 
     public void BuildTowerOn(GroundBehavior groundBehavior)

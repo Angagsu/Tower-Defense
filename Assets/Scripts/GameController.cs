@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    private bool IsGameOver = false;
-    
-    
+    public static bool IsGameOver;
+    private UIManager uiManager;
+
+    private void Start()
+    {
+        IsGameOver = false;
+        uiManager = GetComponent<UIManager>();
+    }
     void Update()
     {
         if (IsGameOver)
@@ -22,6 +27,6 @@ public class GameController : MonoBehaviour
     private void GameOver()
     {
         IsGameOver = true;
-        Debug.Log("Game Over");
+        uiManager.GameOverPanel.SetActive(true);
     }
 }

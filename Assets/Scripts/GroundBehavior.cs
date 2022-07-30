@@ -55,14 +55,14 @@ public class GroundBehavior : MonoBehaviour
             return;
         }
 
-        if (!towerBuildManager.CanBuild)
+        if (tower != null)
         {
+            towerBuildManager.SelectedGround(this);
             return;
         }
 
-        if (tower != null)
+        if (!towerBuildManager.CanBuild)
         {
-            
             return;
         }
 

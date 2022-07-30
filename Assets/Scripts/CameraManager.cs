@@ -15,9 +15,21 @@ public class CameraManager : MonoBehaviour
 
     private void Update()
     {
+        if (GameController.IsGameOver)
+        {
+            this.enabled = true;
+            return;
+        }
+
+        MoveCameraWithKeyCode();
+        MoveCameraWithMouseScroll();
+    }
+
+    private void MoveCameraWithKeyCode()
+    {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            canMoveCamera = !canMoveCamera; 
+            canMoveCamera = !canMoveCamera;
         }
 
         if (!canMoveCamera)
@@ -42,9 +54,12 @@ public class CameraManager : MonoBehaviour
                 transform.Translate(Vector3.left * panSpeed * Time.deltaTime, Space.World);
             }
         }
+    }
 
+    private void MoveCameraWithMouseScroll()
+    {
         float scroll = Input.GetAxis("Mouse ScrollWheel") * 1000;
-        
+
         Vector3 pos = transform.position;
         pos.y -= scroll * scrollSpeed * Time.deltaTime;
         pos.y = Mathf.Clamp(pos.y, minY, maxY);

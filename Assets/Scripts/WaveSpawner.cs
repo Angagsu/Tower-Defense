@@ -18,6 +18,12 @@ public class WaveSpawner : MonoBehaviour
 
     private void Update()
     {
+        if (GameController.IsGameOver)
+        {
+            enabled = true;
+            return;
+        }
+
         if (countdown <= 0)
         {
             StartCoroutine(SpawnWaves());
@@ -31,6 +37,7 @@ public class WaveSpawner : MonoBehaviour
 
     private IEnumerator SpawnWaves()
     {
+        PlayerStats.Waves++;
         for (int i = 0; i < waveIndex; i++)
         {
             SpawnEnemy();
