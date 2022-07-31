@@ -15,10 +15,10 @@ public class TowerDetection : MonoBehaviour
     [Header("Use Laser")]
     [SerializeField] private int damageOverTime = 30;
     [SerializeField] private float slowAmount = 0.5f;
-    [SerializeField] bool UseLaser = false;
-    [SerializeField] LineRenderer lineRenderer;
-    [SerializeField] ParticleSystem laserImpactEffect;
-    [SerializeField] Light impactLight;
+    [SerializeField] private bool UseLaser = false;
+    [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private ParticleSystem laserImpactEffect;
+    [SerializeField] private Light impactLight;
 
     private Transform target;
     private Enemy targetEnemy;

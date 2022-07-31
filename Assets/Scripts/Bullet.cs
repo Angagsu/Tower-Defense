@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-
 	private Transform target;
 
-	public float speed = 70f;
-
-	public int damage = 50;
-	public float explosionRadius = 0f;
-	public GameObject impactEffect;
+	[SerializeField] private float speed = 70f; 
+	[SerializeField] private int damage = 50;
+	[SerializeField] private float explosionRadius = 0f;
+	[SerializeField] private GameObject impactEffect;
 
 	public void BulletSeek(Transform _target)
 	{

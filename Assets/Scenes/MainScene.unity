@@ -6737,6 +6737,7 @@ GameObject:
   - component: {fileID: 671405591}
   - component: {fileID: 671405592}
   - component: {fileID: 671405593}
+  - component: {fileID: 671405594}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6786,10 +6787,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d803e6330331eb749be96b956d6394fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standartTowerPrefab: {fileID: 1071426113212598717, guid: e54d3ba62869ac447b1deca4bd83434a,
-    type: 3}
-  missileLauncherTowerPrefab: {fileID: 5285894258423639304, guid: 6ce097923fb032749a6914cfc3333387,
-    type: 3}
   buildEffectPrefab: {fileID: 8047773921697480108, guid: d6c1f8f4221a9b9408d6d11409260c5d,
     type: 3}
   SelectMissileLauncherTower: 0
@@ -6841,6 +6838,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0e829cf5d285a488bb8f5d1f9ddda8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &671405594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671405587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee3ecd196b58cfb4f8ac65f167e93a5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  standardTower:
+    TowerPrefab: {fileID: 1071426113212598717, guid: e54d3ba62869ac447b1deca4bd83434a,
+      type: 3}
+    Cost: 100
+    UpgrateTower: {fileID: 0}
+    UpgradeCost: 0
+  missileLauncherTower:
+    TowerPrefab: {fileID: 5285894258423639304, guid: 6ce097923fb032749a6914cfc3333387,
+      type: 3}
+    Cost: 200
+    UpgrateTower: {fileID: 0}
+    UpgradeCost: 0
+  laserTower:
+    TowerPrefab: {fileID: 6660008564374663589, guid: 10869620c2f1e3d499b0b8204e682c60,
+      type: 3}
+    Cost: 300
+    UpgrateTower: {fileID: 0}
+    UpgradeCost: 0
 --- !u!4 &676911032 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6640880320671982727, guid: 4f79fac9c57fa794da2cb07cf44acb36,
@@ -8364,7 +8391,6 @@ GameObject:
   - component: {fileID: 809579913}
   - component: {fileID: 809579912}
   - component: {fileID: 809579911}
-  - component: {fileID: 809579914}
   m_Layer: 5
   m_Name: Shop
   m_TagString: Untagged
@@ -8458,30 +8484,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 809579909}
   m_CullTransparentMesh: 1
---- !u!114 &809579914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 809579909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 662819a74724eb74fb3b6668c4d48f14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  standardTower:
-    prefab: {fileID: 1071426113212598717, guid: e54d3ba62869ac447b1deca4bd83434a,
-      type: 3}
-    cost: 100
-  missileLauncherTower:
-    prefab: {fileID: 5285894258423639304, guid: 6ce097923fb032749a6914cfc3333387,
-      type: 3}
-    cost: 200
-  laserTower:
-    prefab: {fileID: 6660008564374663589, guid: 10869620c2f1e3d499b0b8204e682c60,
-      type: 3}
-    cost: 300
 --- !u!1001 &810081414
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18608,11 +18610,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 809579914}
+      objectReference: {fileID: 671405594}
     - target: {fileID: 3025347610441690717, guid: 26355d87855d1d3448010d62a54c3562,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SelectLaserTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 3025347610441690717, guid: 26355d87855d1d3448010d62a54c3562,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TowerOnBuy, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3025347610441690719, guid: 26355d87855d1d3448010d62a54c3562,
         type: 3}
@@ -18718,6 +18725,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4769706257594351240, guid: 26355d87855d1d3448010d62a54c3562,
+        type: 3}
+      propertyPath: m_Text
+      value: $ 300
       objectReference: {fileID: 0}
     - target: {fileID: 7440263869379266173, guid: 26355d87855d1d3448010d62a54c3562,
         type: 3}
@@ -21792,7 +21804,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 809579914}
+      objectReference: {fileID: 671405594}
+    - target: {fileID: 1115426231676088067, guid: 1b1cfb43cc25f2f4c932a6da89fea0bc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectStandardTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 1115426231676088067, guid: 1b1cfb43cc25f2f4c932a6da89fea0bc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TowerOnBuy, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 1115426231676088070, guid: 1b1cfb43cc25f2f4c932a6da89fea0bc,
         type: 3}
       propertyPath: m_Name
@@ -21832,7 +21854,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 809579914}
+      objectReference: {fileID: 671405594}
+    - target: {fileID: 3025347610441690717, guid: 26355d87855d1d3448010d62a54c3562,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectMissileLauncherTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 3025347610441690717, guid: 26355d87855d1d3448010d62a54c3562,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TowerOnBuy, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3025347610441690719, guid: 26355d87855d1d3448010d62a54c3562,
         type: 3}
       propertyPath: m_Pivot.x

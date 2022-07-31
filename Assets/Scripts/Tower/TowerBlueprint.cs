@@ -5,6 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class TowerBlueprint 
 {
-    public GameObject prefab;
-    public int cost;
+    public GameObject TowerPrefab;
+    public int Cost;
+
+    public GameObject UpgrateTower;
+    public int UpgradeCost;
+
 }

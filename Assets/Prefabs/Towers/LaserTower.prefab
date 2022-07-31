@@ -9661,8 +9661,8 @@ MonoBehaviour:
   bulletInstPoint: {fileID: 5909877537875386719}
   bulletPrefab: {fileID: 8482808991499655866}
   turnSpeed: 10
-  fireRate: 2
-  range: 30
+  fireRate: 1
+  range: 25
   damageOverTime: 50
   slowAmount: 0.5
   UseLaser: 1

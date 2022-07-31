@@ -10,12 +10,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     public GameObject GameOverPanel{ get { return gameOverPanel; } }
 
-    private Shop towerCost;
+    private TowerOnBuy towerCost;
     private WaveSpawner waveSpawner;
     void Start()
     {
         waveSpawner = GetComponent<WaveSpawner>();
-        towerCost = FindObjectOfType<Shop>();
+        towerCost = GetComponent<TowerOnBuy>();
 
         InvokeRepeating("TowerCostsConvetToStringOnUI", 0f, 1f);
     }
@@ -40,9 +40,9 @@ public class UIManager : MonoBehaviour
 
     private void TowerCostsConvetToStringOnUI()
     {
-        standardTowerCostText.text = "$ " + towerCost.standardTower.cost.ToString();
-        missileLauncherTowerCostText.text = "$ " + towerCost.missileLauncherTower.cost.ToString();
-        laserTowerCostText.text = "$ " + towerCost.laserTower.cost.ToString();
+        standardTowerCostText.text = "$ " + towerCost.standardTower.Cost.ToString();
+        missileLauncherTowerCostText.text = "$ " + towerCost.missileLauncherTower.Cost.ToString();
+        laserTowerCostText.text = "$ " + towerCost.laserTower.Cost.ToString();
     }
 
     public void Retry()

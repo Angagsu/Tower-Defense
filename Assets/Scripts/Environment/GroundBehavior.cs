@@ -3,14 +3,17 @@ using UnityEngine;
 
 public class GroundBehavior : MonoBehaviour
 {
+    private TowerBuildManager towerBuildManager;
     private Renderer rend;
     private Color startColor;
-    public GameObject tower;
-    private TowerBuildManager towerBuildManager;
+    private Vector3 positionOffset;
+
     [SerializeField] private Color hoverColor;
     [SerializeField] private Color cantBuildColor;
 
-    public Vector3 positionOffset;
+    [HideInInspector]
+    public GameObject tower;
+    
 
     void Start()
     {

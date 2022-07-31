@@ -6,20 +6,17 @@ public class TowerBuildManager : MonoBehaviour
     public static TowerBuildManager Instance;
 
     private TowerUI towerUI;
-
     private TowerBlueprint towerToBuild;
     private GroundBehavior selectedGround;
 
-    public GameObject standartTowerPrefab;
-    public GameObject missileLauncherTowerPrefab;
-    public GameObject buildEffectPrefab;
+    [SerializeField] private GameObject buildEffectPrefab;
 
     public bool SelectMissileLauncherTower = false;
     public bool SelectStandardTower = false;
     public bool SelectLaserTower = false;
 
     public bool CanBuild { get { return towerToBuild != null; } }
-    public bool HasManey { get { return PlayerStats.Money >= towerToBuild.cost; } }
+    public bool HasManey { get { return PlayerStats.Money >= towerToBuild.Cost; } }
 
     private void Awake()
     {
@@ -61,7 +58,7 @@ public class TowerBuildManager : MonoBehaviour
 
     public void BuildTowerOn(GroundBehavior groundBehavior)
     {
-        if (PlayerStats.Money < towerToBuild.cost)
+        if (PlayerStats.Money < towerToBuild.Cost)
         {
             Debug.Log("Not Enough Money to Build !!!");
             SelectStandardTower = false;
@@ -70,9 +67,9 @@ public class TowerBuildManager : MonoBehaviour
             return;
         }
 
-        PlayerStats.Money -= towerToBuild.cost;
+        PlayerStats.Money -= towerToBuild.Cost;
 
-        GameObject tower = Instantiate(towerToBuild.prefab, groundBehavior.GetBuildPosition(), Quaternion.identity);
+        GameObject tower = Instantiate(towerToBuild.TowerPrefab, groundBehavior.GetBuildPosition(), Quaternion.identity);
         GameObject effect = Instantiate(buildEffectPrefab, groundBehavior.GetBuildPosition(), Quaternion.identity);
         Destroy(effect.gameObject, 4f);
         groundBehavior.tower = tower;

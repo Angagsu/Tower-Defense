@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     [HideInInspector]
     public float enemySpeed = 10f;
     public float startSpeed = 10f;
+
     [SerializeField] private float enemyHealth = 100;
     [SerializeField] private int moneyGain = 50;
 

@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class Shop : MonoBehaviour
+public class TowerOnBuy : MonoBehaviour
 {
     private TowerBuildManager towerBuildManager;
 
