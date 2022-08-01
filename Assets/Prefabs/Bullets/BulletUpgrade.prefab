@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1146880770461715280}
   - component: {fileID: 1795092684486751193}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: BulletUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  damage: 30
+  damage: 50
   explosionRadius: 0
   impactEffect: {fileID: 3755426954235245332, guid: 4ac9c7196d63be242967c1803efdd13f,
     type: 3}

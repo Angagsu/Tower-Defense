@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GroundBehavior : MonoBehaviour
 {
+    
     private TowerBuildManager towerBuildManager;
     private Renderer rend;
     private Color startColor;
@@ -10,9 +11,10 @@ public class GroundBehavior : MonoBehaviour
 
     [SerializeField] private Color hoverColor;
     [SerializeField] private Color cantBuildColor;
+    [SerializeField] private GameObject buildEffectPrefab;
 
-    [HideInInspector]
-    public GameObject tower;
+    [HideInInspector] public GameObject tower;
+    [HideInInspector] public TowerBlueprint towerBlueprint;
     
 
     void Start()
@@ -72,10 +74,65 @@ public class GroundBehavior : MonoBehaviour
         //Build a tower
         if (towerBuildManager.SelectMissileLauncherTower == true || towerBuildManager.SelectStandardTower == true || towerBuildManager.SelectLaserTower == true)
         {
-            towerBuildManager.BuildTowerOn(this);
+            BuildTower(towerBuildManager.GetTowerToBuild());
+        }  
+    }
+
+    private void BuildTower(TowerBlueprint towerBlueprint)
+    {
+        if (PlayerStats.Money < towerBlueprint.Cost)
+        {
+            Debug.Log("Not Enough Money to Build !!!");
+            towerBuildManager.SelectStandardTower = false;
+            towerBuildManager.SelectMissileLauncherTower = false;
+            towerBuildManager.SelectLaserTower = false;
+            return;
+        }
+
+        PlayerStats.Money -= towerBlueprint.Cost;
+
+        GameObject tower = Instantiate(towerBlueprint.TowerPrefab, GetBuildPosition(), Quaternion.identity);
+        GameObject effect = Instantiate(buildEffectPrefab, GetBuildPosition(), Quaternion.identity);
+        Destroy(effect.gameObject, 4f);
+
+        this.tower = tower;
+        this.towerBlueprint = towerBlueprint;
+
+        towerBuildManager.SelectStandardTower = false;
+        towerBuildManager.SelectMissileLauncherTower = false;
+        towerBuildManager.SelectLaserTower = false;
+
+        Debug.Log("Tower build! Money left: " + PlayerStats.Money);
+    }
+
+    public void UpgradeTower()
+    {
+        if (PlayerStats.Money < towerBlueprint.UpgradeCost)
+        {
+            Debug.Log("Not Enough Money to Upgrade !!!");
+            towerBuildManager.SelectStandardTower = false;
+            towerBuildManager.SelectMissileLauncherTower = false;
+            towerBuildManager.SelectLaserTower = false;
+            return;
         }
         
-        
+        PlayerStats.Money -= towerBlueprint.UpgradeCost;
+
+        //Destroy Old Tower
+        Destroy(this.tower);
+
+        //Upgrade Tower
+        GameObject tower = Instantiate(towerBlueprint.UpgrateTower, GetBuildPosition(), Quaternion.identity);
+        GameObject effect = Instantiate(buildEffectPrefab, GetBuildPosition(), Quaternion.identity);
+        Destroy(effect.gameObject, 4f);
+        this.tower = tower;
+
+        towerBuildManager.IsUpgraded = true;
+        towerBuildManager.SelectStandardTower = false;
+        towerBuildManager.SelectMissileLauncherTower = false;
+        towerBuildManager.SelectLaserTower = false;
+
+        Debug.Log("Tower Upgraded! Money left: " + PlayerStats.Money);
     }
 
     public Vector3 GetBuildPosition()

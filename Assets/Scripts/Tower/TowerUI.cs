@@ -5,6 +5,7 @@ using UnityEngine;
 public class TowerUI : MonoBehaviour
 {
     private GroundBehavior targetGround;
+    
     [SerializeField] private GameObject uI;
 
     
@@ -20,5 +21,14 @@ public class TowerUI : MonoBehaviour
         uI.SetActive(false);
     }
 
-    
+    public void UpgradeButton()
+    {
+        targetGround.UpgradeTower();
+        TowerBuildManager.Instance.DeselectGround();
+    }
+
+    public void SellButton()
+    {
+
+    }
 }

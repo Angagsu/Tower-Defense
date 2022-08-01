@@ -6,14 +6,15 @@ public class TowerBuildManager : MonoBehaviour
     public static TowerBuildManager Instance;
 
     private TowerUI towerUI;
-    private TowerBlueprint towerToBuild;
     private GroundBehavior selectedGround;
 
-    [SerializeField] private GameObject buildEffectPrefab;
+    [HideInInspector]
+    public TowerBlueprint towerToBuild;
 
-    public bool SelectMissileLauncherTower = false;
-    public bool SelectStandardTower = false;
-    public bool SelectLaserTower = false;
+    [HideInInspector] public bool SelectMissileLauncherTower = false;
+    [HideInInspector] public bool SelectStandardTower = false;
+    [HideInInspector] public bool SelectLaserTower = false;
+    [HideInInspector] public bool IsUpgraded = false;
 
     public bool CanBuild { get { return towerToBuild != null; } }
     public bool HasManey { get { return PlayerStats.Money >= towerToBuild.Cost; } }
@@ -29,7 +30,6 @@ public class TowerBuildManager : MonoBehaviour
         Instance = this;
 
         towerUI = GameObject.Find("TowerUI").GetComponent<TowerUI>();
-        
     }
 
     public void SelectedGround(GroundBehavior groundBehavior)
@@ -56,27 +56,8 @@ public class TowerBuildManager : MonoBehaviour
         DeselectGround();
     }
 
-    public void BuildTowerOn(GroundBehavior groundBehavior)
+    public TowerBlueprint GetTowerToBuild()
     {
-        if (PlayerStats.Money < towerToBuild.Cost)
-        {
-            Debug.Log("Not Enough Money to Build !!!");
-            SelectStandardTower = false;
-            SelectMissileLauncherTower = false;
-            SelectLaserTower = false;
-            return;
-        }
-
-        PlayerStats.Money -= towerToBuild.Cost;
-
-        GameObject tower = Instantiate(towerToBuild.TowerPrefab, groundBehavior.GetBuildPosition(), Quaternion.identity);
-        GameObject effect = Instantiate(buildEffectPrefab, groundBehavior.GetBuildPosition(), Quaternion.identity);
-        Destroy(effect.gameObject, 4f);
-        groundBehavior.tower = tower;
-        SelectStandardTower = false;
-        SelectMissileLauncherTower = false;
-        SelectLaserTower = false;
-
-        Debug.Log("Tower build! Money left: " + PlayerStats.Money);
+        return towerToBuild;
     }
 }
