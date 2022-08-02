@@ -11,4 +11,12 @@ public class TowerBlueprint
     public GameObject UpgrateTower;
     public int UpgradeCost;
 
+    public int GetTowerSellCost()
+    {
+        return Cost / 2;
+    }
+    public int GetUpgradedTowerSellCost()
+    {
+        return (Cost / 2) + (UpgradeCost / 2);
+    }
 }

@@ -9,13 +9,17 @@ public class GroundBehavior : MonoBehaviour
     private Color startColor;
     private Vector3 positionOffset;
 
+    
+
     [SerializeField] private Color hoverColor;
     [SerializeField] private Color cantBuildColor;
     [SerializeField] private GameObject buildEffectPrefab;
 
     [HideInInspector] public GameObject tower;
+
     [HideInInspector] public TowerBlueprint towerBlueprint;
-    
+    [HideInInspector] public bool IsUpgraded { get; private set; }
+
 
     void Start()
     {
@@ -101,8 +105,6 @@ public class GroundBehavior : MonoBehaviour
         towerBuildManager.SelectStandardTower = false;
         towerBuildManager.SelectMissileLauncherTower = false;
         towerBuildManager.SelectLaserTower = false;
-
-        Debug.Log("Tower build! Money left: " + PlayerStats.Money);
     }
 
     public void UpgradeTower()
@@ -127,12 +129,25 @@ public class GroundBehavior : MonoBehaviour
         Destroy(effect.gameObject, 4f);
         this.tower = tower;
 
-        towerBuildManager.IsUpgraded = true;
+        IsUpgraded = true;
         towerBuildManager.SelectStandardTower = false;
         towerBuildManager.SelectMissileLauncherTower = false;
         towerBuildManager.SelectLaserTower = false;
+    }
 
-        Debug.Log("Tower Upgraded! Money left: " + PlayerStats.Money);
+    public void SellTower()
+    {
+        Destroy(tower);
+        if (IsUpgraded)
+        {
+            PlayerStats.Money += towerBlueprint.GetUpgradedTowerSellCost();
+            IsUpgraded = false;
+        }
+        else
+        {
+            PlayerStats.Money += towerBlueprint.GetTowerSellCost();
+        }
+
     }
 
     public Vector3 GetBuildPosition()

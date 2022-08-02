@@ -14,7 +14,7 @@ public class TowerBuildManager : MonoBehaviour
     [HideInInspector] public bool SelectMissileLauncherTower = false;
     [HideInInspector] public bool SelectStandardTower = false;
     [HideInInspector] public bool SelectLaserTower = false;
-    [HideInInspector] public bool IsUpgraded = false;
+    
 
     public bool CanBuild { get { return towerToBuild != null; } }
     public bool HasManey { get { return PlayerStats.Money >= towerToBuild.Cost; } }

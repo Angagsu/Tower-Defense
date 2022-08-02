@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -28,5 +27,37 @@ public class GameController : MonoBehaviour
     {
         IsGameOver = true;
         uiManager.GameOverPanel.SetActive(true);
+        
     }
+
+    public void RetryButtonOnPausePanel()
+    {
+        PauseOrContinueTheGame();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void RetryButtonOnGameOverPanel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void MenuButton()
+    {
+        Debug.Log("Menu");
+    }
+
+    public void PauseOrContinueTheGame()
+    {
+        uiManager.PausePanel.SetActive(!uiManager.PausePanel.activeSelf);
+        if (uiManager.PausePanel.activeSelf)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+    }
+
+    
 }

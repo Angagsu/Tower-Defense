@@ -8,7 +8,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text standardTowerCostText, missileLauncherTowerCostText, laserTowerCostText;
     [SerializeField] private Text waveSurvivedText;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject pausePanel;
     public GameObject GameOverPanel{ get { return gameOverPanel; } }
+    public GameObject PausePanel { get { return pausePanel; } }
 
     private TowerOnBuy towerCost;
     private WaveSpawner waveSpawner;
@@ -43,16 +45,5 @@ public class UIManager : MonoBehaviour
         standardTowerCostText.text = "$ " + towerCost.standardTower.Cost.ToString();
         missileLauncherTowerCostText.text = "$ " + towerCost.missileLauncherTower.Cost.ToString();
         laserTowerCostText.text = "$ " + towerCost.laserTower.Cost.ToString();
-    }
-
-    public void Retry()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        
-    }
-
-    public void Menu()
-    {
-
     }
 }
