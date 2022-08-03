@@ -1,6 +1,6 @@
 using UnityEngine.UI;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class UIManager : MonoBehaviour
 {
@@ -46,4 +46,5 @@ public class UIManager : MonoBehaviour
         missileLauncherTowerCostText.text = "$ " + towerCost.missileLauncherTower.Cost.ToString();
         laserTowerCostText.text = "$ " + towerCost.laserTower.Cost.ToString();
     }
+
 }

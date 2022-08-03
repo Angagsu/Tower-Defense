@@ -1,4 +1,4 @@
-
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -8,18 +8,24 @@ public class Enemy : MonoBehaviour
     public float enemySpeed = 10f;
     public float startSpeed = 10f;
 
-    [SerializeField] private float enemyHealth = 100;
+    [SerializeField] private Image healthBar;
     [SerializeField] private int moneyGain = 50;
+    [SerializeField] private float startHealth = 200f;
+    private float health;
+
 
     private void Start()
     {
         enemySpeed = startSpeed;
+        health = startHealth;
     }
 
     public void AmountOfDamagetoEnemy(float amount)
     {
-        enemyHealth -= amount;
-        if (enemyHealth <= 0)
+        health -= amount;
+        healthBar.fillAmount = health / startHealth;
+        
+        if (health <= 0)
         {
             
             Die();

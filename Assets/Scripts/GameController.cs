@@ -5,6 +5,8 @@ public class GameController : MonoBehaviour
 {
     public static bool IsGameOver;
     private UIManager uiManager;
+    private string menuSceneName = "MainMenu";
+    [SerializeField] private SceneFader sceneFader;
 
     private void Start()
     {
@@ -33,17 +35,23 @@ public class GameController : MonoBehaviour
     public void RetryButtonOnPausePanel()
     {
         PauseOrContinueTheGame();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        sceneFader.FadeTo(SceneManager.GetActiveScene().name);
     }
 
     public void RetryButtonOnGameOverPanel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        sceneFader.FadeTo(SceneManager.GetActiveScene().name);
     }
 
-    public void MenuButton()
+    public void MenuButtonOnPausePanel()
     {
-        Debug.Log("Menu");
+        PauseOrContinueTheGame();
+        sceneFader.FadeTo(menuSceneName);
+    }
+
+    public void MenuButtonOnGameOverPanel()
+    {
+        sceneFader.FadeTo(menuSceneName);
     }
 
     public void PauseOrContinueTheGame()
@@ -59,5 +67,4 @@ public class GameController : MonoBehaviour
         }
     }
 
-    
 }
