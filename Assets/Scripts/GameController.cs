@@ -3,14 +3,19 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    
     public static bool IsGameOver;
+
     private UIManager uiManager;
     private string menuSceneName = "MainMenu";
     [SerializeField] private SceneFader sceneFader;
 
-    private void Start()
+    private void Awake()
     {
         IsGameOver = false;
+    }
+    private void Start()
+    {
         uiManager = GetComponent<UIManager>();
     }
     void Update()

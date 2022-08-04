@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public float enemySpeed = 10f;
     public float startSpeed = 10f;
 
+    [HideInInspector]
     [SerializeField] private Image healthBar;
     [SerializeField] private int moneyGain = 50;
     [SerializeField] private float startHealth = 200f;
@@ -36,6 +37,7 @@ public class Enemy : MonoBehaviour
     {
         CalculateMoneyForKillingEnemy();
         Destroy(gameObject);
+        WaveSpawner.EnemiesAlive--;
     }
 
     private void CalculateMoneyForKillingEnemy()

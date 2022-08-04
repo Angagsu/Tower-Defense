@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -9082362421176055253}
   - component: {fileID: 8686730296655069389}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: EnemyHard
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2121b416782706644b973b519751d0b3, type: 2}
+  - {fileID: 2100000, guid: e9e4490913eb8fa4d8bcea7f3eb811d3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,10 +111,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpeed: 10
-  startSpeed: 15
+  startSpeed: 10
   healthBar: {fileID: 1588625307069702471}
-  moneyGain: 10
-  startHealth: 100
+  moneyGain: 40
+  startHealth: 400
 --- !u!114 &8686730296655069389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,7 +289,6 @@ GameObject:
   - component: {fileID: 3368713723547617018}
   - component: {fileID: 5901457569821515379}
   - component: {fileID: 6103600289696426394}
-  - component: {fileID: 7986814138395243851}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -361,20 +360,3 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
---- !u!114 &7986814138395243851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8427897706181552466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295

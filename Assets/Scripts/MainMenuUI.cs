@@ -7,7 +7,7 @@ public class MainMenuUI : MonoBehaviour
     
     public void Play()
     {
-        sceneFader.FadeTo("MainLevel");
+        sceneFader.FadeTo("LevelsMap");
     }
 
     public void Quit()
