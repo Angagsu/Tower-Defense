@@ -10,6 +10,9 @@ public class GameController : MonoBehaviour
     private string menuSceneName = "MainMenu";
     [SerializeField] private SceneFader sceneFader;
 
+    [Header("Optional settings. Dont Touch")]
+    [SerializeField] private int levelToUnlock;
+    [SerializeField] private string nextLevel;
     private void Awake()
     {
         IsGameOver = false;
@@ -35,6 +38,17 @@ public class GameController : MonoBehaviour
         IsGameOver = true;
         uiManager.GameOverPanel.SetActive(true);
         
+    }
+
+    public void LevelComplete()
+    {
+        Debug.Log("level Completed !!!");
+        if (PlayerPrefs.GetInt("levelReached") < levelToUnlock)
+        {
+            PlayerPrefs.SetInt("levelReached", levelToUnlock);
+        }
+        
+        sceneFader.FadeTo(nextLevel);
     }
 
     public void RetryButtonOnPausePanel()

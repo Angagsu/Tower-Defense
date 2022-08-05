@@ -6927,6 +6927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ced4a01451044740a62976c0b912dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 671405593}
   waves:
   - enemyPrefab: {fileID: 873742286621701047, guid: 080c9a3989c643a4baf5446c22ef2c67,
       type: 3}
@@ -7032,6 +7033,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneFader: {fileID: 1573732695}
+  levelToUnlock: 3
+  nextLevel: Level_03
 --- !u!114 &671405594
 MonoBehaviour:
   m_ObjectHideFlags: 0

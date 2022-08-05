@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
-    
+    [SerializeField] private GameController gameController;
     public static int EnemiesAlive;
 
     [SerializeField] private Wave[] waves;
@@ -50,6 +50,7 @@ public class WaveSpawner : MonoBehaviour
     {
         PlayerStats.Waves++;
         Wave wave = waves[waveIndex];
+        EnemiesAlive = wave.countOfEnemyToSpawn;
         for (int i = 0; i < wave.countOfEnemyToSpawn; i++)
         {
             SpawnEnemy(wave.enemyPrefab);
@@ -59,15 +60,14 @@ public class WaveSpawner : MonoBehaviour
 
         if (waveIndex == waves.Length)
         {
-            Debug.Log("Level Comlete!!!");
+            gameController.LevelComplete();
             this.enabled = false;
-            Debug.Log("YOU WIN!!!");
         }
     }
 
     private void SpawnEnemy(GameObject enemyPrefab)
     {
         Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
-        EnemiesAlive++;
+        
     }
 }

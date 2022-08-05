@@ -24,7 +24,7 @@ public class SceneFader : MonoBehaviour
 
         while (time > 0f)
         {
-            time -= Time.deltaTime * 0.5f;
+            time -= Time.deltaTime;
             float curve = animationCurve.Evaluate(time);
             fadeImage.color = new Color(0f, 0f, 0f, curve);
             yield return 0;
@@ -36,7 +36,7 @@ public class SceneFader : MonoBehaviour
 
         while (time < 1f)
         {
-            time += Time.deltaTime * 0.5f;
+            time += Time.deltaTime ;
             float curve = animationCurve.Evaluate(time);
             fadeImage.color = new Color(0f, 0f, 0f, curve);
             yield return 0;
