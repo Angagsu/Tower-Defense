@@ -59,7 +59,8 @@ public class WaveSpawner : MonoBehaviour
         EnemiesAlive = wave.countOfEnemyToSpawn;
         for (int i = 0; i < wave.countOfEnemyToSpawn; i++)
         {
-            SpawnEnemy(wave.enemyPrefab);
+            Instantiate(wave.enemyPrefab[i], spawnPoint.position, spawnPoint.rotation);
+            //SpawnEnemy(wave.enemyPrefab);
             yield return new WaitForSeconds(1 / wave.rateOfSpawn);
         }
         waveIndex++;

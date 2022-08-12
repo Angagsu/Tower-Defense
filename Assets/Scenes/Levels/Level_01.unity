@@ -7313,25 +7313,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameController: {fileID: 671405593}
   waves:
-  - enemyPrefab: {fileID: 873742286621701047, guid: 080c9a3989c643a4baf5446c22ef2c67,
-      type: 3}
-    countOfEnemyToSpawn: 2
+  - enemyPrefab:
+    - {fileID: 5617938643944427345, guid: 475df20e0e2fa3d409768a3c6e604885, type: 3}
+    - {fileID: 5617938643944427345, guid: 475df20e0e2fa3d409768a3c6e604885, type: 3}
+    - {fileID: 5617938643944427345, guid: 475df20e0e2fa3d409768a3c6e604885, type: 3}
+    - {fileID: 5617938643944427345, guid: 475df20e0e2fa3d409768a3c6e604885, type: 3}
+    - {fileID: 5617938643944427345, guid: 475df20e0e2fa3d409768a3c6e604885, type: 3}
+    - {fileID: 5617938643944427345, guid: 475df20e0e2fa3d409768a3c6e604885, type: 3}
+    - {fileID: 2799464789194553817, guid: 5307d8d9874d0e1468994f35a14c30dd, type: 3}
+    - {fileID: 5617938643944427345, guid: 475df20e0e2fa3d409768a3c6e604885, type: 3}
+    - {fileID: 2799464789194553817, guid: 5307d8d9874d0e1468994f35a14c30dd, type: 3}
+    - {fileID: 5617938643944427345, guid: 475df20e0e2fa3d409768a3c6e604885, type: 3}
+    countOfEnemyToSpawn: 10
     rateOfSpawn: 2
-  - enemyPrefab: {fileID: 873742286621701047, guid: 080c9a3989c643a4baf5446c22ef2c67,
-      type: 3}
-    countOfEnemyToSpawn: 2
-    rateOfSpawn: 2
-  - enemyPrefab: {fileID: 873742286621701047, guid: f8f86f3d8c7a9534b924b60a96385a73,
-      type: 3}
-    countOfEnemyToSpawn: 2
+  - enemyPrefab:
+    - {fileID: 5617938643944427345, guid: 475df20e0e2fa3d409768a3c6e604885, type: 3}
+    - {fileID: 5617938643944427345, guid: 475df20e0e2fa3d409768a3c6e604885, type: 3}
+    - {fileID: 2799464789194553817, guid: 5307d8d9874d0e1468994f35a14c30dd, type: 3}
+    - {fileID: 2799464789194553817, guid: 5307d8d9874d0e1468994f35a14c30dd, type: 3}
+    - {fileID: 2799464789194553817, guid: 5307d8d9874d0e1468994f35a14c30dd, type: 3}
+    - {fileID: 5617938643944427345, guid: 475df20e0e2fa3d409768a3c6e604885, type: 3}
+    - {fileID: 2799464789194553817, guid: 5307d8d9874d0e1468994f35a14c30dd, type: 3}
+    - {fileID: 5617938643944427345, guid: 475df20e0e2fa3d409768a3c6e604885, type: 3}
+    - {fileID: 2799464789194553817, guid: 5307d8d9874d0e1468994f35a14c30dd, type: 3}
+    - {fileID: 5617938643944427345, guid: 475df20e0e2fa3d409768a3c6e604885, type: 3}
+    countOfEnemyToSpawn: 10
     rateOfSpawn: 1
-  - enemyPrefab: {fileID: 873742286621701047, guid: f8f86f3d8c7a9534b924b60a96385a73,
-      type: 3}
-    countOfEnemyToSpawn: 2
+  - enemyPrefab:
+    - {fileID: 2799464789194553817, guid: 5307d8d9874d0e1468994f35a14c30dd, type: 3}
+    - {fileID: 5617938643944427345, guid: 475df20e0e2fa3d409768a3c6e604885, type: 3}
+    - {fileID: 5617938643944427345, guid: 475df20e0e2fa3d409768a3c6e604885, type: 3}
+    - {fileID: 2799464789194553817, guid: 5307d8d9874d0e1468994f35a14c30dd, type: 3}
+    - {fileID: 2799464789194553817, guid: 5307d8d9874d0e1468994f35a14c30dd, type: 3}
+    - {fileID: 2799464789194553817, guid: 5307d8d9874d0e1468994f35a14c30dd, type: 3}
+    - {fileID: 6018096881256364687, guid: 7ebdc8b95228c4940afa1f42b160d41a, type: 3}
+    - {fileID: 5617938643944427345, guid: 475df20e0e2fa3d409768a3c6e604885, type: 3}
+    - {fileID: 2799464789194553817, guid: 5307d8d9874d0e1468994f35a14c30dd, type: 3}
+    - {fileID: 6018096881256364687, guid: 7ebdc8b95228c4940afa1f42b160d41a, type: 3}
+    countOfEnemyToSpawn: 10
     rateOfSpawn: 1
-  - enemyPrefab: {fileID: 873742286621701047, guid: 3e6a899f2530c604ab84fccb67e44240,
-      type: 3}
-    countOfEnemyToSpawn: 2
+  - enemyPrefab:
+    - {fileID: 2799464789194553817, guid: 5307d8d9874d0e1468994f35a14c30dd, type: 3}
+    - {fileID: 2799464789194553817, guid: 5307d8d9874d0e1468994f35a14c30dd, type: 3}
+    - {fileID: 6018096881256364687, guid: 7ebdc8b95228c4940afa1f42b160d41a, type: 3}
+    - {fileID: 2799464789194553817, guid: 5307d8d9874d0e1468994f35a14c30dd, type: 3}
+    - {fileID: 6018096881256364687, guid: 7ebdc8b95228c4940afa1f42b160d41a, type: 3}
+    - {fileID: 6018096881256364687, guid: 7ebdc8b95228c4940afa1f42b160d41a, type: 3}
+    - {fileID: 2799464789194553817, guid: 5307d8d9874d0e1468994f35a14c30dd, type: 3}
+    - {fileID: 6018096881256364687, guid: 7ebdc8b95228c4940afa1f42b160d41a, type: 3}
+    - {fileID: 2799464789194553817, guid: 5307d8d9874d0e1468994f35a14c30dd, type: 3}
+    - {fileID: 6018096881256364687, guid: 7ebdc8b95228c4940afa1f42b160d41a, type: 3}
+    countOfEnemyToSpawn: 10
     rateOfSpawn: 0.8
   spawnPoint: {fileID: 1816720147}
   timeBetweenWaves: 1
@@ -7381,7 +7413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28a4f915f5f3aec4bbce454dc91a0141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMoney: 500
+  startMoney: 800
   startLives: 10
 --- !u!114 &671405592
 MonoBehaviour:
