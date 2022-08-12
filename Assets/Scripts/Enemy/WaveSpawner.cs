@@ -17,7 +17,7 @@ public class WaveSpawner : MonoBehaviour
     private void Start()
     {
         EnemiesAlive = 0;
-        Debug.Log(EnemiesAlive);
+        Debug.Log("EnemiesAlive" + EnemiesAlive);
         Debug.Log(GameController.IsGameOver);
         Debug.Log(Time.timeScale);
     }
@@ -32,6 +32,12 @@ public class WaveSpawner : MonoBehaviour
         if (EnemiesAlive > 0)
         {
             return;
+        }
+
+        if (waveIndex == waves.Length)
+        {
+            gameController.LevelComplete();
+            this.enabled = false;
         }
 
         if (countdown <= 0)
@@ -57,17 +63,10 @@ public class WaveSpawner : MonoBehaviour
             yield return new WaitForSeconds(1 / wave.rateOfSpawn);
         }
         waveIndex++;
-
-        if (waveIndex == waves.Length)
-        {
-            gameController.LevelComplete();
-            this.enabled = false;
-        }
     }
 
     private void SpawnEnemy(GameObject enemyPrefab)
-    {
+    { 
         Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
-        
     }
 }

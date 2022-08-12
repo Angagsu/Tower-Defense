@@ -1,16 +1,22 @@
 using UnityEngine.UI;
 using UnityEngine;
+using System.Collections;
 
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Text moneyText, timerText, livesText;
     [SerializeField] private Text standardTowerCostText, missileLauncherTowerCostText, laserTowerCostText;
-    [SerializeField] private Text waveSurvivedText;
-    [SerializeField] private GameObject gameOverPanel;
-    [SerializeField] private GameObject pausePanel;
-    public GameObject GameOverPanel{ get { return gameOverPanel; } }
+    [SerializeField] private Text waveSurvivedText, waveSurvivedTextOnLevelCompleted;
+    [SerializeField] private GameObject gameOverPanel, pausePanel, levelCompetePanel;
+    [SerializeField] private Sprite fastTimeRunActiveSprite, fastTimeRunDeactivatedSprite;
+    [SerializeField] private Button fastTimeRunButton;
+    private bool IsTimeRewind;
+    
+
+    public GameObject GameOverPanel { get { return gameOverPanel; } }
     public GameObject PausePanel { get { return pausePanel; } }
+    public GameObject LevelCompletePanel { get { return levelCompetePanel; } }
 
     private TowerOnBuy towerCost;
     private WaveSpawner waveSpawner;
@@ -33,7 +39,7 @@ public class UIManager : MonoBehaviour
         timerText.text = "Timer  - " + string.Format("{0:00.00}", waveSpawner.CountDown);
         moneyText.text = "Money - $" + PlayerStats.Money.ToString();
         livesText.text = "Lives   - " + PlayerStats.Lives.ToString();
-
+        
         if (GameController.IsGameOver)
         {
             waveSurvivedText.text = PlayerStats.Waves.ToString();
@@ -47,4 +53,34 @@ public class UIManager : MonoBehaviour
         laserTowerCostText.text = "$ " + towerCost.laserTower.Cost.ToString();
     }
 
+    public IEnumerator AnimateWaveSurvivedText()
+    {
+        waveSurvivedTextOnLevelCompleted.text = "0";
+        int wave = 0;
+
+        yield return new WaitForSeconds(0.5f);
+
+        while (wave < PlayerStats.Waves)
+        {
+            wave++;
+            waveSurvivedTextOnLevelCompleted.text = wave.ToString();
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+    public void TimeRewindButton()
+    {
+
+        IsTimeRewind = !IsTimeRewind;
+        if (IsTimeRewind)
+        {
+            Time.timeScale = 2f;
+            fastTimeRunButton.image.sprite = fastTimeRunActiveSprite;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            fastTimeRunButton.image.sprite = fastTimeRunDeactivatedSprite;
+        }
+
+    }
 }

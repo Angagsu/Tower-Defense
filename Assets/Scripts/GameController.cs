@@ -1,7 +1,9 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class GameController : MonoBehaviour
+
+public class GameController : MonoBehaviour 
 {
     
     public static bool IsGameOver;
@@ -13,6 +15,8 @@ public class GameController : MonoBehaviour
     [Header("Optional settings. Dont Touch")]
     [SerializeField] private int levelToUnlock;
     [SerializeField] private string nextLevel;
+
+    
     private void Awake()
     {
         IsGameOver = false;
@@ -42,13 +46,14 @@ public class GameController : MonoBehaviour
 
     public void LevelComplete()
     {
-        Debug.Log("level Completed !!!");
+        IsGameOver = true;
+        uiManager.LevelCompletePanel.SetActive(true);
         if (PlayerPrefs.GetInt("levelReached") < levelToUnlock)
         {
             PlayerPrefs.SetInt("levelReached", levelToUnlock);
         }
-        
-        sceneFader.FadeTo(nextLevel);
+        uiManager.StartCoroutine("AnimateWaveSurvivedText");
+       // sceneFader.FadeTo(nextLevel);
     }
 
     public void RetryButtonOnPausePanel()
@@ -60,6 +65,21 @@ public class GameController : MonoBehaviour
     public void RetryButtonOnGameOverPanel()
     {
         sceneFader.FadeTo(SceneManager.GetActiveScene().name);
+    }
+
+    public void RetryButtonOnLevelCompletePanel()
+    {
+        sceneFader.FadeTo(SceneManager.GetActiveScene().name);
+    }
+
+    public void MenuButtonOnLevelComletePanel()
+    {
+        sceneFader.FadeTo(menuSceneName);
+    }
+
+    public void ContinueButtonOnLevelCompletePanel()
+    {
+        sceneFader.FadeTo(nextLevel);
     }
 
     public void MenuButtonOnPausePanel()

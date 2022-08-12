@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int moneyGain = 50;
     [SerializeField] private float startHealth = 200f;
     private float health;
-
+    private bool isDead = false;
 
     private void Start()
     {
@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
         health -= amount;
         healthBar.fillAmount = health / startHealth;
         
-        if (health <= 0)
+        if (health <= 0 && !isDead)
         {
             
             Die();
@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        isDead = true;
         CalculateMoneyForKillingEnemy();
         Destroy(gameObject);
         WaveSpawner.EnemiesAlive--;
