@@ -4,12 +4,12 @@ using UnityEngine;
 public class TowerUI : MonoBehaviour
 {
     private GroundBehavior selectedGround;
-    
+    public TowerBuildManager towerBuildManager;
     [SerializeField] private GameObject uI;
     [SerializeField] private Text upgradeCostText, sellCostText;
     [SerializeField] private Button upgradeButton;
 
-
+    
     public void SetTargetGround(GroundBehavior selectedGround)
     {
         this.selectedGround = selectedGround;
@@ -22,10 +22,16 @@ public class TowerUI : MonoBehaviour
             upgradeCostText.text = "$ " + selectedGround.towerBlueprint.UpgradeCost;
             upgradeButton.interactable = true;
         }
-        else
+        if (selectedGround.IsUpgraded)
         {
             sellCostText.text = selectedGround.towerBlueprint.GetUpgradedTowerSellCost().ToString();
-            upgradeCostText.text = "";
+            upgradeCostText.text = "$ " + selectedGround.towerBlueprint.SecondTimeUpgradeCost;
+            upgradeButton.interactable = true;
+        }
+        if (selectedGround.IsUpgradedSecondTime)
+        {
+            sellCostText.text = selectedGround.towerBlueprint.GetSecondTimeUpgradedTowerSellCost().ToString();
+            upgradeCostText.text = " ";
             upgradeButton.interactable = false;
         }
     }
@@ -37,7 +43,15 @@ public class TowerUI : MonoBehaviour
 
     public void UpgradeButton()
     {
-        selectedGround.UpgradeTower();
+        if (selectedGround.IsUpgraded)
+        {
+            selectedGround.SecondTimeUpgradeTower();
+        }
+        else
+        {
+            selectedGround.UpgradeTower();
+        }
+        
         TowerBuildManager.Instance.DeselectGround();
     }
 

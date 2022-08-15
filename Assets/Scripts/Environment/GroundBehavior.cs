@@ -4,6 +4,7 @@ using UnityEngine;
 public class GroundBehavior : MonoBehaviour
 {
     
+    private TowerOnBuy towerOnBuy;
     private TowerBuildManager towerBuildManager;
     private Renderer rend;
     private Color startColor;
@@ -18,14 +19,15 @@ public class GroundBehavior : MonoBehaviour
     [HideInInspector] public GameObject tower;
 
     [HideInInspector] public TowerBlueprint towerBlueprint;
-    [HideInInspector] public bool IsUpgraded { get; private set; }
-
+    [HideInInspector] public bool IsUpgraded = false;
+    [HideInInspector] public bool IsUpgradedSecondTime = false;
 
     void Start()
     {
         rend = GetComponent<Renderer>();
         startColor = rend.material.color;
         towerBuildManager = TowerBuildManager.Instance;
+        towerOnBuy = FindObjectOfType<TowerOnBuy>();
     }
 
     private void OnMouseEnter()
@@ -79,7 +81,8 @@ public class GroundBehavior : MonoBehaviour
         if (towerBuildManager.SelectMissileLauncherTower == true || towerBuildManager.SelectStandardTower == true || towerBuildManager.SelectLaserTower == true)
         {
             BuildTower(towerBuildManager.GetTowerToBuild());
-        }  
+        }
+
     }
 
     private void BuildTower(TowerBlueprint towerBlueprint)
@@ -94,13 +97,13 @@ public class GroundBehavior : MonoBehaviour
         }
 
         PlayerStats.Money -= towerBlueprint.Cost;
-
+        this.towerBlueprint = towerBlueprint;
         GameObject tower = Instantiate(towerBlueprint.TowerPrefab, GetBuildPosition(), Quaternion.identity);
         GameObject effect = Instantiate(buildEffectPrefab, GetBuildPosition(), Quaternion.identity);
         Destroy(effect.gameObject, 4f);
 
         this.tower = tower;
-        this.towerBlueprint = towerBlueprint;
+        
 
         towerBuildManager.SelectStandardTower = false;
         towerBuildManager.SelectMissileLauncherTower = false;
@@ -124,12 +127,42 @@ public class GroundBehavior : MonoBehaviour
         Destroy(this.tower);
 
         //Upgrade Tower
-        GameObject tower = Instantiate(towerBlueprint.UpgrateTower, GetBuildPosition(), Quaternion.identity);
+        GameObject tower = Instantiate(towerBlueprint.UpgradedTower, GetBuildPosition(), Quaternion.identity);
         GameObject effect = Instantiate(buildEffectPrefab, GetBuildPosition(), Quaternion.identity);
         Destroy(effect.gameObject, 4f);
         this.tower = tower;
 
         IsUpgraded = true;
+        IsUpgradedSecondTime = false;
+
+        towerBuildManager.SelectStandardTower = false;
+        towerBuildManager.SelectMissileLauncherTower = false;
+        towerBuildManager.SelectLaserTower = false;
+    }
+
+    public void SecondTimeUpgradeTower()
+    {
+        if (PlayerStats.Money < towerBlueprint.SecondTimeUpgradeCost)
+        {
+            Debug.Log("Not Enough Money to Upgrade !!!");
+            towerBuildManager.SelectStandardTower = false;
+            towerBuildManager.SelectMissileLauncherTower = false;
+            towerBuildManager.SelectLaserTower = false;
+            return;
+        }
+        PlayerStats.Money -= towerBlueprint.SecondTimeUpgradeCost;
+
+        Destroy(this.tower);
+
+        //Upgrade Tower
+        GameObject tower = Instantiate(towerBlueprint.SecondTimeUpgradedTower, GetBuildPosition(), Quaternion.identity);
+        GameObject effect = Instantiate(buildEffectPrefab, GetBuildPosition(), Quaternion.identity);
+        Destroy(effect.gameObject, 4f);
+        this.tower = tower;
+
+        IsUpgradedSecondTime = true;
+        IsUpgraded = false;
+
         towerBuildManager.SelectStandardTower = false;
         towerBuildManager.SelectMissileLauncherTower = false;
         towerBuildManager.SelectLaserTower = false;
@@ -138,7 +171,12 @@ public class GroundBehavior : MonoBehaviour
     public void SellTower()
     {
         Destroy(tower);
-        if (IsUpgraded)
+        if (IsUpgradedSecondTime)
+        {
+            PlayerStats.Money += towerBlueprint.GetSecondTimeUpgradedTowerSellCost();
+            IsUpgradedSecondTime = false;
+        }
+        else if (IsUpgraded)
         {
             PlayerStats.Money += towerBlueprint.GetUpgradedTowerSellCost();
             IsUpgraded = false;
@@ -147,25 +185,25 @@ public class GroundBehavior : MonoBehaviour
         {
             PlayerStats.Money += towerBlueprint.GetTowerSellCost();
         }
-
     }
 
     public Vector3 GetBuildPosition()
     {
-        if (towerBuildManager.SelectStandardTower == true)
+        if (towerBlueprint == towerOnBuy.standardTower)
         {
-            positionOffset = new Vector3(0, -0.5f, 0);
+            positionOffset = new Vector3(0, -0.7f, 0);
         }
-
-        if (towerBuildManager.SelectMissileLauncherTower == true)
+        
+        if (towerBlueprint == towerOnBuy.missileLauncherTower)
         {
             positionOffset = new Vector3(0, 2f, 0);
         }
-
-        if (towerBuildManager.SelectLaserTower == true)
+        
+        if (towerBlueprint == towerOnBuy.laserTower)
         {
             positionOffset = new Vector3(0, 0.5f, 0);
         }
         return transform.position + positionOffset;
     }
+    
 }

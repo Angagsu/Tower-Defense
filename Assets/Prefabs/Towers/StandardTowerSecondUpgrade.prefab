@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3453634922542949278}
   - component: {fileID: 824125200735142385}
   m_Layer: 0
-  m_Name: StandardTowerUpgrade
+  m_Name: StandardTowerSecondUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
     type: 3}
   turnSpeed: 10
   fireRate: 5
-  range: 20
+  range: 25
   damageOverTime: 30
   slowAmount: 0.5
   UseLaser: 0
@@ -146,7 +146,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: b29d7ff11c99340e38246a09f771946f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b2ccb40b498474a4392868a8ce30dc46, type: 2}
+      objectReference: {fileID: 2100000, guid: c0a039e78e66a44f8b90ddafc2c87582, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b29d7ff11c99340e38246a09f771946f, type: 3}
 --- !u!4 &902796158995058245 stripped
@@ -213,7 +213,7 @@ PrefabInstance:
     - target: {fileID: 2300002, guid: dca1d127a63854ace99cfd10bf9916cd, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b2ccb40b498474a4392868a8ce30dc46, type: 2}
+      objectReference: {fileID: 2100000, guid: 24ed3fddb1caa449f9026ffa1db2ee43, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dca1d127a63854ace99cfd10bf9916cd, type: 3}
 --- !u!4 &1537261722122457152 stripped

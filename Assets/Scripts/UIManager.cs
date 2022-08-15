@@ -69,7 +69,6 @@ public class UIManager : MonoBehaviour
     }
     public void TimeRewindButton()
     {
-
         IsTimeRewind = !IsTimeRewind;
         if (IsTimeRewind)
         {

@@ -31,7 +31,7 @@ public class TowerBuildManager : MonoBehaviour
 
         towerUI = GameObject.Find("TowerUI").GetComponent<TowerUI>();
     }
-
+    
     public void SelectedGround(GroundBehavior groundBehavior)
     {
         if (selectedGround == groundBehavior)
@@ -43,6 +43,7 @@ public class TowerBuildManager : MonoBehaviour
         selectedGround = groundBehavior;
         towerToBuild = null;
         towerUI.SetTargetGround(groundBehavior);
+        
     }
 
     public void DeselectGround()

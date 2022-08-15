@@ -108,9 +108,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec1cdf51854a37c4998b3f851888f7bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerUpgrade: {fileID: 0}
+  towerUI: {fileID: 0}
   hoverColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 0}
   cantBuildColor: {r: 0.5849056, g: 0, b: 0, a: 0}
   buildEffectPrefab: {fileID: 8047773921697480108, guid: d6c1f8f4221a9b9408d6d11409260c5d,
     type: 3}
   tower: {fileID: 0}
+  towerBlueprint:
+    TowerPrefab: {fileID: 0}
+    Cost: 0
+    UpgradedTower: {fileID: 0}
+    UpgradeCost: 0
+    SecondTimeUpgradedTower: {fileID: 0}
+    SecondTimeUpgradeCost: 0
+  IsUpgraded: 0
+  IsUpgradedSecondTime: 0
