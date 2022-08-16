@@ -29,7 +29,7 @@ public class TowerBuildManager : MonoBehaviour
 
         Instance = this;
 
-        towerUI = GameObject.Find("TowerUI").GetComponent<TowerUI>();
+        towerUI = GameObject.Find("TowerUpgradeUI").GetComponent<TowerUI>();
     }
     
     public void SelectedGround(GroundBehavior groundBehavior)

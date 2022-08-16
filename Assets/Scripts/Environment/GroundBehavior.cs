@@ -21,6 +21,7 @@ public class GroundBehavior : MonoBehaviour
     [HideInInspector] public TowerBlueprint towerBlueprint;
     [HideInInspector] public bool IsUpgraded = false;
     [HideInInspector] public bool IsUpgradedSecondTime = false;
+    [HideInInspector] public bool IsUpgradedThirdTime = false;
 
     void Start()
     {
@@ -134,6 +135,7 @@ public class GroundBehavior : MonoBehaviour
 
         IsUpgraded = true;
         IsUpgradedSecondTime = false;
+        IsUpgradedThirdTime = false;
 
         towerBuildManager.SelectStandardTower = false;
         towerBuildManager.SelectMissileLauncherTower = false;
@@ -161,6 +163,36 @@ public class GroundBehavior : MonoBehaviour
         this.tower = tower;
 
         IsUpgradedSecondTime = true;
+        IsUpgradedThirdTime = false;
+        IsUpgraded = false;
+
+        towerBuildManager.SelectStandardTower = false;
+        towerBuildManager.SelectMissileLauncherTower = false;
+        towerBuildManager.SelectLaserTower = false;
+    }
+
+    public void ThirdTimeUpgradeTower()
+    {
+        if (PlayerStats.Money < towerBlueprint.ThirdTimeUpgradeCost)
+        {
+            Debug.Log("Not Enough Money to Upgrade !!!");
+            towerBuildManager.SelectStandardTower = false;
+            towerBuildManager.SelectMissileLauncherTower = false;
+            towerBuildManager.SelectLaserTower = false;
+            return;
+        }
+        PlayerStats.Money -= towerBlueprint.ThirdTimeUpgradeCost;
+
+        Destroy(this.tower);
+
+        //Upgrade Tower
+        GameObject tower = Instantiate(towerBlueprint.ThirdTimeUpgradedTower, GetBuildPosition(), Quaternion.identity);
+        GameObject effect = Instantiate(buildEffectPrefab, GetBuildPosition(), Quaternion.identity);
+        Destroy(effect.gameObject, 4f);
+        this.tower = tower;
+
+        IsUpgradedThirdTime = true;
+        IsUpgradedSecondTime = false;
         IsUpgraded = false;
 
         towerBuildManager.SelectStandardTower = false;
@@ -180,6 +212,11 @@ public class GroundBehavior : MonoBehaviour
         {
             PlayerStats.Money += towerBlueprint.GetUpgradedTowerSellCost();
             IsUpgraded = false;
+        }
+        else if (IsUpgradedThirdTime)
+        {
+            PlayerStats.Money += towerBlueprint.GetThirdTimeUpgradedTowerSellCost();
+            IsUpgradedThirdTime = false;
         }
         else
         {

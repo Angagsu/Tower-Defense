@@ -4,8 +4,8 @@ using UnityEngine;
 public class TowerUI : MonoBehaviour
 {
     private GroundBehavior selectedGround;
-    public TowerBuildManager towerBuildManager;
-    [SerializeField] private GameObject uI;
+    
+    [SerializeField] private GameObject towerUpgradeUI, towerBuildUI;
     [SerializeField] private Text upgradeCostText, sellCostText;
     [SerializeField] private Button upgradeButton;
 
@@ -14,9 +14,9 @@ public class TowerUI : MonoBehaviour
     {
         this.selectedGround = selectedGround;
         transform.position = selectedGround.GetBuildPosition();
-        uI.SetActive(true);
+        towerUpgradeUI.SetActive(true);
 
-        if (!selectedGround.IsUpgraded)
+        if (!selectedGround.IsUpgraded || !selectedGround.IsUpgradedSecondTime || !selectedGround.IsUpgradedThirdTime)
         {
             sellCostText.text = selectedGround.towerBlueprint.GetTowerSellCost().ToString();
             upgradeCostText.text = "$ " + selectedGround.towerBlueprint.UpgradeCost;
@@ -31,6 +31,12 @@ public class TowerUI : MonoBehaviour
         if (selectedGround.IsUpgradedSecondTime)
         {
             sellCostText.text = selectedGround.towerBlueprint.GetSecondTimeUpgradedTowerSellCost().ToString();
+            upgradeCostText.text = "$ " + selectedGround.towerBlueprint.ThirdTimeUpgradeCost;
+            upgradeButton.interactable = true;
+        }
+        if (selectedGround.IsUpgradedThirdTime)
+        {
+            sellCostText.text = selectedGround.towerBlueprint.GetThirdTimeUpgradedTowerSellCost().ToString();
             upgradeCostText.text = " ";
             upgradeButton.interactable = false;
         }
@@ -38,12 +44,16 @@ public class TowerUI : MonoBehaviour
 
     public void HideCanvas()
     {
-        uI.SetActive(false);
+        towerUpgradeUI.SetActive(false);
     }
 
     public void UpgradeButton()
     {
-        if (selectedGround.IsUpgraded)
+        if (selectedGround.IsUpgradedSecondTime && !selectedGround.IsUpgraded && !selectedGround.IsUpgradedThirdTime)
+        {
+            selectedGround.ThirdTimeUpgradeTower();
+        }
+        else if (selectedGround.IsUpgraded && !selectedGround.IsUpgradedThirdTime)
         {
             selectedGround.SecondTimeUpgradeTower();
         }

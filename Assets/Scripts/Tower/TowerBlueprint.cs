@@ -14,8 +14,12 @@ public class TowerBlueprint
     public GameObject SecondTimeUpgradedTower;
     public int SecondTimeUpgradeCost;
 
+    public GameObject ThirdTimeUpgradedTower;
+    public int ThirdTimeUpgradeCost;
+
     private int upgradedTowerSellCost;
     private int secondTimeUpgradedTowerSellCost;
+    private int thirdTimeUpgradedTowerSellCost;
     public int GetTowerSellCost()
     {
         return Cost / 2;
@@ -30,5 +34,11 @@ public class TowerBlueprint
     { 
         secondTimeUpgradedTowerSellCost = upgradedTowerSellCost + (SecondTimeUpgradeCost / 2);
         return secondTimeUpgradedTowerSellCost;
+    }
+
+    public int GetThirdTimeUpgradedTowerSellCost()
+    {
+        thirdTimeUpgradedTowerSellCost = secondTimeUpgradedTowerSellCost + (ThirdTimeUpgradeCost / 2);
+        return thirdTimeUpgradedTowerSellCost;
     }
 }
