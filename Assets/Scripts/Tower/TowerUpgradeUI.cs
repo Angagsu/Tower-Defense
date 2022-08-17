@@ -1,15 +1,16 @@
 using UnityEngine.UI;
 using UnityEngine;
 
-public class TowerUI : MonoBehaviour
+public class TowerUpgradeUI : MonoBehaviour
 {
     private GroundBehavior selectedGround;
     
-    [SerializeField] private GameObject towerUpgradeUI, towerBuildUI;
+    [SerializeField] private GameObject towerUpgradeUI;
     [SerializeField] private Text upgradeCostText, sellCostText;
     [SerializeField] private Button upgradeButton;
-
     
+
+
     public void SetTargetGround(GroundBehavior selectedGround)
     {
         this.selectedGround = selectedGround;
@@ -41,6 +42,7 @@ public class TowerUI : MonoBehaviour
             upgradeButton.interactable = false;
         }
     }
+
 
     public void HideCanvas()
     {

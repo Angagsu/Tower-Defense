@@ -4,8 +4,8 @@ using UnityEngine;
 public class TowerBuildManager : MonoBehaviour
 {
     public static TowerBuildManager Instance;
-
-    private TowerUI towerUI;
+    [SerializeField] private TowersBuildUI towersBuildUI;
+    [SerializeField] private TowerUpgradeUI towerUpgradeUI;
     private GroundBehavior selectedGround;
 
     [HideInInspector]
@@ -28,8 +28,6 @@ public class TowerBuildManager : MonoBehaviour
         }
 
         Instance = this;
-
-        towerUI = GameObject.Find("TowerUpgradeUI").GetComponent<TowerUI>();
     }
     
     public void SelectedGround(GroundBehavior groundBehavior)
@@ -42,14 +40,26 @@ public class TowerBuildManager : MonoBehaviour
 
         selectedGround = groundBehavior;
         towerToBuild = null;
-        towerUI.SetTargetGround(groundBehavior);
-        
+        towerUpgradeUI.SetTargetGround(groundBehavior);
+    }
+
+    public void SelectedGroundForBuildTowerUI(GroundBehavior groundBehavior)
+    {
+        if (selectedGround == groundBehavior)
+        {
+            DeselectGround();
+            return;
+        }
+        selectedGround = groundBehavior;
+        towerToBuild = null;
+        towersBuildUI.SetTargetGroundForBuilding(groundBehavior);
     }
 
     public void DeselectGround()
     {
         selectedGround = null;
-        towerUI.HideCanvas();
+        towerUpgradeUI.HideCanvas();
+        towersBuildUI.HideCanvas();
     }
     public void SelectTowerToBuild(TowerBlueprint tower)
     {
