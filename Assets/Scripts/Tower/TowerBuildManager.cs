@@ -38,6 +38,13 @@ public class TowerBuildManager : MonoBehaviour
             return;
         }
 
+        towersBuildUI.towerBuildUI.SetActive(!towersBuildUI.towerBuildUI.activeSelf);
+
+        if (towersBuildUI.towerBuildUI.activeSelf)
+        {
+            towersBuildUI.towerBuildUI.SetActive(false);
+        }
+
         selectedGround = groundBehavior;
         towerToBuild = null;
         towerUpgradeUI.SetTargetGround(groundBehavior);
@@ -49,6 +56,13 @@ public class TowerBuildManager : MonoBehaviour
         {
             DeselectGround();
             return;
+        }
+        
+        towerUpgradeUI.towerUpgradeUI.SetActive(!towerUpgradeUI.towerUpgradeUI.activeSelf);
+
+        if (towerUpgradeUI.towerUpgradeUI.activeSelf)
+        {
+            towerUpgradeUI.towerUpgradeUI.SetActive(false);
         }
         selectedGround = groundBehavior;
         towerToBuild = null;

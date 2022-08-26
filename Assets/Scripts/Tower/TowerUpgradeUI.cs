@@ -5,11 +5,11 @@ public class TowerUpgradeUI : MonoBehaviour
 {
     private GroundBehavior selectedGround;
     
-    [SerializeField] private GameObject towerUpgradeUI;
+    public GameObject towerUpgradeUI;
+
     [SerializeField] private Text upgradeCostText, sellCostText;
     [SerializeField] private Button upgradeButton;
     
-
 
     public void SetTargetGround(GroundBehavior selectedGround)
     {

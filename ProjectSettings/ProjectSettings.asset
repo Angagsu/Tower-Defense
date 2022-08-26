@@ -154,6 +154,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.tfbgames.towerdefense
+    Standalone: com.DefaultCompany.TowerDefense
     iPhone: com.tfbgames.towerdefense
   buildNumber:
     Standalone: 0
@@ -663,7 +664,7 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  activeInputHandler: 0
+  activeInputHandler: 1
   cloudProjectId: e58bfab0-c930-46fb-8bba-7ee02569742f
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
