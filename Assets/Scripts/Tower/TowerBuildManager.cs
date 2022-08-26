@@ -71,15 +71,13 @@ public class TowerBuildManager : MonoBehaviour
         selectedGround = groundBehavior;
         towerToBuild = null;
         towersBuildUI.SetTargetGroundForBuilding(groundBehavior);
-        towerUpgradeUI.SetTargetGround(groundBehavior);
-        
-
     }
 
     public void DeselectGround()
     {
         selectedGround = null;
         towerUpgradeUI.HideCanvas();
+        towersBuildUI.HideCanvas();
     }
     public void SelectTowerToBuild(TowerBlueprint tower)
     {

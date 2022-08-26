@@ -4,7 +4,7 @@ using UnityEngine;
 public class TowerOnBuy : MonoBehaviour
 {
     private TowerBuildManager towerBuildManager;
-
+    private GroundBehavior groundBehavior;
     public TowerBlueprint standardTower;
     public TowerBlueprint missileLauncherTower;
     public TowerBlueprint laserTower;
@@ -19,6 +19,7 @@ public class TowerOnBuy : MonoBehaviour
         towerBuildManager.SelectStandardTower = true;
         towerBuildManager.SelectMissileLauncherTower = false;
         towerBuildManager.SelectLaserTower = false;
+        groundBehavior.BuildTower(towerBuildManager.GetTowerToBuild());
     }
 
     public void SelectMissileLauncherTower()
@@ -28,6 +29,7 @@ public class TowerOnBuy : MonoBehaviour
         towerBuildManager.SelectMissileLauncherTower = true;
         towerBuildManager.SelectStandardTower = false;
         towerBuildManager.SelectLaserTower = false;
+        groundBehavior.BuildTower(towerBuildManager.GetTowerToBuild());
     }
 
     public void SelectLaserTower()
@@ -36,5 +38,11 @@ public class TowerOnBuy : MonoBehaviour
         towerBuildManager.SelectLaserTower = true;
         towerBuildManager.SelectMissileLauncherTower = false;
         towerBuildManager.SelectStandardTower = false;
+        groundBehavior.BuildTower(towerBuildManager.GetTowerToBuild());
+    }
+
+    public void SetGroundForBuilding(GroundBehavior groundBehavior)
+    {
+        this.groundBehavior = groundBehavior;
     }
 }

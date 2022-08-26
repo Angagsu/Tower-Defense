@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class GroundBehavior : MonoBehaviour
 {
-    
+    private TowerUpgradeUI towerUpgradeUI;
+    private TowersBuildUI towersBuildUI;
     private TowerOnBuy towerOnBuy;
-    private TowerBuildManager towerBuildManager;
+    public TowerBuildManager towerBuildManager;
     private Renderer rend;
     private Color startColor;
     private Vector3 positionOffset;
@@ -29,6 +30,8 @@ public class GroundBehavior : MonoBehaviour
         startColor = rend.material.color;
         towerBuildManager = TowerBuildManager.Instance;
         towerOnBuy = FindObjectOfType<TowerOnBuy>();
+        towerUpgradeUI = FindObjectOfType<TowerUpgradeUI>();
+        towersBuildUI = FindObjectOfType<TowersBuildUI>();
     }
 
     private void OnMouseEnter()
@@ -43,8 +46,7 @@ public class GroundBehavior : MonoBehaviour
             return;
         }
 
-        if (towerBuildManager.SelectMissileLauncherTower == true && towerBuildManager.HasManey ||
-            towerBuildManager.SelectStandardTower == true && towerBuildManager.HasManey || towerBuildManager.SelectLaserTower == true && towerBuildManager.HasManey)
+        if (towerBuildManager.HasManey)
         {
             rend.material.color = hoverColor;
         }
@@ -73,20 +75,15 @@ public class GroundBehavior : MonoBehaviour
             return;
         }
 
-        if (!towerBuildManager.CanBuild)
+        if (tower == null)
         {
+            towerBuildManager.SelectedGroundForBuildTowerUI(this);
+            towerOnBuy.SetGroundForBuilding(this);
             return;
         }
-
-        //Build a tower
-        if (towerBuildManager.SelectMissileLauncherTower == true || towerBuildManager.SelectStandardTower == true || towerBuildManager.SelectLaserTower == true)
-        {
-            BuildTower(towerBuildManager.GetTowerToBuild());
-        }
-
     }
 
-    private void BuildTower(TowerBlueprint towerBlueprint)
+    public void BuildTower(TowerBlueprint towerBlueprint)
     {
         if (PlayerStats.Money < towerBlueprint.Cost)
         {
