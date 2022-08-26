@@ -7388,24 +7388,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameController: {fileID: 671405593}
   waves:
-  - enemyPrefab: {fileID: 873742286621701047, guid: 080c9a3989c643a4baf5446c22ef2c67,
-      type: 3}
+  - enemyPrefab:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     countOfEnemyToSpawn: 10
     rateOfSpawn: 2
-  - enemyPrefab: {fileID: 873742286621701047, guid: 080c9a3989c643a4baf5446c22ef2c67,
-      type: 3}
+  - enemyPrefab:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     countOfEnemyToSpawn: 20
     rateOfSpawn: 2
-  - enemyPrefab: {fileID: 873742286621701047, guid: f8f86f3d8c7a9534b924b60a96385a73,
-      type: 3}
+  - enemyPrefab:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     countOfEnemyToSpawn: 20
     rateOfSpawn: 1
-  - enemyPrefab: {fileID: 873742286621701047, guid: f8f86f3d8c7a9534b924b60a96385a73,
-      type: 3}
+  - enemyPrefab:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     countOfEnemyToSpawn: 30
     rateOfSpawn: 1
-  - enemyPrefab: {fileID: 873742286621701047, guid: 3e6a899f2530c604ab84fccb67e44240,
-      type: 3}
+  - enemyPrefab:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     countOfEnemyToSpawn: 40
     rateOfSpawn: 0.8
   spawnPoint: {fileID: 1816720147}
@@ -7439,8 +7449,12 @@ MonoBehaviour:
   towerToBuild:
     TowerPrefab: {fileID: 0}
     Cost: 0
-    UpgrateTower: {fileID: 0}
+    UpgradedTower: {fileID: 0}
     UpgradeCost: 0
+    SecondTimeUpgradedTower: {fileID: 0}
+    SecondTimeUpgradeCost: 0
+    ThirdTimeUpgradedTower: {fileID: 0}
+    ThirdTimeUpgradeCost: 0
   SelectMissileLauncherTower: 0
   SelectStandardTower: 0
   SelectLaserTower: 0
@@ -7481,6 +7495,9 @@ MonoBehaviour:
   gameOverPanel: {fileID: 1709481422}
   pausePanel: {fileID: 1100700633}
   levelCompetePanel: {fileID: 175390542}
+  fastTimeRunActiveSprite: {fileID: 0}
+  fastTimeRunDeactivatedSprite: {fileID: 0}
+  fastTimeRunButton: {fileID: 0}
 --- !u!114 &671405593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7512,23 +7529,32 @@ MonoBehaviour:
     TowerPrefab: {fileID: 1071426113212598717, guid: e54d3ba62869ac447b1deca4bd83434a,
       type: 3}
     Cost: 100
-    UpgrateTower: {fileID: 1071426113212598717, guid: cdf509fce3ba44841bc34db705279558,
-      type: 3}
+    UpgradedTower: {fileID: 0}
     UpgradeCost: 50
+    SecondTimeUpgradedTower: {fileID: 0}
+    SecondTimeUpgradeCost: 0
+    ThirdTimeUpgradedTower: {fileID: 0}
+    ThirdTimeUpgradeCost: 0
   missileLauncherTower:
     TowerPrefab: {fileID: 5285894258423639304, guid: 6ce097923fb032749a6914cfc3333387,
       type: 3}
     Cost: 200
-    UpgrateTower: {fileID: 5285894258423639304, guid: 00c3fbbe0a2e9bf4a8d72a9eeff4c162,
-      type: 3}
+    UpgradedTower: {fileID: 0}
     UpgradeCost: 100
+    SecondTimeUpgradedTower: {fileID: 0}
+    SecondTimeUpgradeCost: 0
+    ThirdTimeUpgradedTower: {fileID: 0}
+    ThirdTimeUpgradeCost: 0
   laserTower:
     TowerPrefab: {fileID: 6660008564374663589, guid: 10869620c2f1e3d499b0b8204e682c60,
       type: 3}
     Cost: 300
-    UpgrateTower: {fileID: 6660008564374663589, guid: cc1e1d928f90875429d1f55eb83fc3b6,
-      type: 3}
+    UpgradedTower: {fileID: 0}
     UpgradeCost: 150
+    SecondTimeUpgradedTower: {fileID: 0}
+    SecondTimeUpgradeCost: 0
+    ThirdTimeUpgradedTower: {fileID: 0}
+    ThirdTimeUpgradeCost: 0
 --- !u!4 &676911032 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6640880320671982727, guid: 4f79fac9c57fa794da2cb07cf44acb36,
@@ -18127,7 +18153,7 @@ GameObject:
   - component: {fileID: 1621988246}
   - component: {fileID: 1621988245}
   m_Layer: 0
-  m_Name: TowerUI
+  m_Name: TowerUpgradeUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18166,7 +18192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b215d16bfad317f4f9a6bf8eccb3fee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uI: {fileID: 442046631}
+  towerUpgradeUI: {fileID: 0}
+  towerBuildUI: {fileID: 0}
   upgradeCostText: {fileID: 535185367}
   sellCostText: {fileID: 1262171302}
   upgradeButton: {fileID: 2117238498}

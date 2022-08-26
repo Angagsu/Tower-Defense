@@ -19616,6 +19616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerUpgradeUI: {fileID: 442046631}
+  towerBuildUI: {fileID: 0}
   upgradeCostText: {fileID: 535185367}
   sellCostText: {fileID: 1262171302}
   upgradeButton: {fileID: 2117238498}
@@ -22776,7 +22777,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1848645211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22789,12 +22790,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f63391c4ffaf92948868ee1596adadfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 963194227}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  heroSpeed: 10
-  heroNewPosition: {fileID: 0}
 --- !u!114 &1848645212
 MonoBehaviour:
   m_ObjectHideFlags: 0

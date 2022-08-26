@@ -5,10 +5,11 @@ public class TowerUpgradeUI : MonoBehaviour
 {
     private GroundBehavior selectedGround;
     
-    public GameObject towerUpgradeUI;
+    public GameObject towerUpgradeUI, towerBuildUI;
 
     [SerializeField] private Text upgradeCostText, sellCostText;
     [SerializeField] private Button upgradeButton;
+
     
 
     public void SetTargetGround(GroundBehavior selectedGround)
@@ -42,7 +43,6 @@ public class TowerUpgradeUI : MonoBehaviour
             upgradeButton.interactable = false;
         }
     }
-
 
     public void HideCanvas()
     {
