@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8687472501703943359}
   - component: {fileID: 4902466744366185218}
   - component: {fileID: 1926103509218959771}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Node
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec1cdf51854a37c4998b3f851888f7bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerUI: {fileID: 0}
+  towerBuildManager: {fileID: 0}
   hoverColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 0}
   cantBuildColor: {r: 0.5849056, g: 0, b: 0, a: 0}
   buildEffectPrefab: {fileID: 8047773921697480108, guid: d6c1f8f4221a9b9408d6d11409260c5d,
@@ -121,5 +121,8 @@ MonoBehaviour:
     UpgradeCost: 0
     SecondTimeUpgradedTower: {fileID: 0}
     SecondTimeUpgradeCost: 0
+    ThirdTimeUpgradedTower: {fileID: 0}
+    ThirdTimeUpgradeCost: 0
   IsUpgraded: 0
   IsUpgradedSecondTime: 0
+  IsUpgradedThirdTime: 0
