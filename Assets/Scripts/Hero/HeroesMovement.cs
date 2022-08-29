@@ -2,50 +2,65 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//[RequireComponent(typeof(CharacterController))]
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CharacterController))]
+//[RequireComponent(typeof(Rigidbody))]
 public class HeroesMovement : MonoBehaviour
 {
+    
+    
     private Camera mainCamera;
-    [SerializeField] private Vector3 heroNewPosition;
+    private Vector3 heroNewPosition;
     
     [SerializeField] private float heroSpeed = 40f;
     [SerializeField] private float rotationSpeed = 10f;
 
     private Coroutine coroutine;
     private CharacterController characterController;
-    private Rigidbody rb;
+    
+    //private Rigidbody rb;
     private int groundLayer;
-
+    
+    public bool isHeroSelected;
     private void Start()
     {
+        isHeroSelected = false;
         mainCamera = Camera.main;
         characterController = GetComponent<CharacterController>();
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
         groundLayer = LayerMask.NameToLayer("Ground");
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        GetHeroNewPosition();
+    }
+
+    private void GetHeroNewPosition()
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        
+        if (isHeroSelected)
         {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider &&
-                raycastHit.collider.gameObject.layer.CompareTo(groundLayer) == 0)
+            if (Input.GetMouseButtonDown(0))
             {
-                if (coroutine != null)
+                if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider &&
+                    raycastHit.collider.gameObject.layer.CompareTo(groundLayer) == 0)
                 {
-                    StopCoroutine(coroutine);
+                    if (coroutine != null)
+                    {
+                        StopCoroutine(coroutine);
+                    }
+                    coroutine = StartCoroutine(HeroMoveTowerds(raycastHit.point));
+                    heroNewPosition = raycastHit.point;
                 }
-                coroutine = StartCoroutine(HeroMoveTowerds(raycastHit.point));
-                heroNewPosition = raycastHit.point;
             }
         }
-         
     }
 
     private IEnumerator HeroMoveTowerds(Vector3 target)
     {
+
+        isHeroSelected = false;
         float heroDistanceToFloor = transform.position.y - target.y;
         target.y += heroDistanceToFloor;
         while (Vector3.Distance(transform.position, target) > 0.5f)
@@ -59,10 +74,10 @@ public class HeroesMovement : MonoBehaviour
             // Character Controller
             Vector3 direction = target - transform.position;
             Vector3 movement = direction.normalized * heroSpeed * Time.deltaTime;
-            //characterController.Move(movement);
+            characterController.Move(movement);
 
             // Rigidbody
-            rb.velocity = direction.normalized * heroSpeed;
+            //rb.velocity = direction.normalized * heroSpeed;
 
 
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction.normalized),
@@ -70,12 +85,19 @@ public class HeroesMovement : MonoBehaviour
 
             yield return null;
         }
-        rb.velocity = Vector3.zero;
+        //rb.velocity = Vector3.zero;
+        
     }
-
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(heroNewPosition, 1f);
     }
+
+    public void SelectHeroOnUI()
+    {
+        isHeroSelected = true;
+    }
+
+    
 }

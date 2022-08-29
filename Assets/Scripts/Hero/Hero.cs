@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public HeroesMovement heroesMovement;
+
+    private Camera mainCamera;
+    private void Start()
     {
-        
+        mainCamera = Camera.main;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider && raycastHit.collider.gameObject.CompareTag("Hero"))
+            {
+                heroesMovement = raycastHit.collider.gameObject.GetComponent<HeroesMovement>();
+                heroesMovement.isHeroSelected = true;
+            }
+            
+        }
     }
 }
