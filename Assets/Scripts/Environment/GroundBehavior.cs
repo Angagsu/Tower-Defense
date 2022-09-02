@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GroundBehavior : MonoBehaviour
 {
+    
     private TowerUpgradeUI towerUpgradeUI;
     private TowersBuildUI towersBuildUI;
     private TowerOnBuy towerOnBuy;
@@ -10,8 +11,6 @@ public class GroundBehavior : MonoBehaviour
     private Renderer rend;
     private Color startColor;
     private Vector3 positionOffset;
-
-    
 
     [SerializeField] private Color hoverColor;
     [SerializeField] private Color cantBuildColor;
@@ -68,7 +67,7 @@ public class GroundBehavior : MonoBehaviour
         {
             return;
         }
-
+        
         if (tower != null)
         {
             towerBuildManager.SelectedGround(this);
@@ -81,6 +80,7 @@ public class GroundBehavior : MonoBehaviour
             towerOnBuy.SetGroundForBuilding(this);
             return;
         }
+        
     }
 
     public void BuildTower(TowerBlueprint towerBlueprint)

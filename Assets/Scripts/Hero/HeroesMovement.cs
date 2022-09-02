@@ -1,15 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 //[RequireComponent(typeof(Rigidbody))]
 public class HeroesMovement : MonoBehaviour
 {
-    
-    
     private Camera mainCamera;
     private Vector3 heroNewPosition;
+
     
     [SerializeField] private float heroSpeed = 40f;
     [SerializeField] private float rotationSpeed = 10f;
@@ -21,8 +20,10 @@ public class HeroesMovement : MonoBehaviour
     private int groundLayer;
     
     public bool isHeroSelected;
+    public bool isHeroStoppedMove;
     private void Start()
     {
+        isHeroStoppedMove = true;
         isHeroSelected = false;
         mainCamera = Camera.main;
         characterController = GetComponent<CharacterController>();
@@ -41,7 +42,7 @@ public class HeroesMovement : MonoBehaviour
         
         if (isHeroSelected)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !IsMouseOverUI())
             {
                 if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider &&
                     raycastHit.collider.gameObject.layer.CompareTo(groundLayer) == 0)
@@ -59,7 +60,7 @@ public class HeroesMovement : MonoBehaviour
 
     private IEnumerator HeroMoveTowerds(Vector3 target)
     {
-
+        isHeroStoppedMove = false;
         isHeroSelected = false;
         float heroDistanceToFloor = transform.position.y - target.y;
         target.y += heroDistanceToFloor;
@@ -86,18 +87,17 @@ public class HeroesMovement : MonoBehaviour
             yield return null;
         }
         //rb.velocity = Vector3.zero;
-        
+        isHeroStoppedMove = true;
     }
+
+    private bool IsMouseOverUI()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(heroNewPosition, 1f);
     }
-
-    public void SelectHeroOnUI()
-    {
-        isHeroSelected = true;
-    }
-
-    
 }

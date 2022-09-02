@@ -2492,6 +2492,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f79fac9c57fa794da2cb07cf44acb36, type: 3}
+--- !u!1 &226397185
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 226397186}
+  m_Layer: 0
+  m_Name: BulletInstPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &226397186
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226397185}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.566}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1548225379}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &226546221
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5649,9 +5679,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1848645211}
-        m_TargetAssemblyTypeName: HeroesMovement, Assembly-CSharp
-        m_MethodName: SelectHeroOnUI
+      - m_Target: {fileID: 1453804667}
+        m_TargetAssemblyTypeName: Hero, Assembly-CSharp
+        m_MethodName: SelectArcherHeroOnUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6764,6 +6794,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 945914054}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &529542376 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8707874495157571703, guid: b98b188285c0217458e72085a5c7d93a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5309524643644014965}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7fe3a59ece5314a91d133d380993be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &529839958
 GameObject:
   m_ObjectHideFlags: 0
@@ -8633,6 +8675,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towersBuildUI: {fileID: 414456808}
   towerUpgradeUI: {fileID: 1621988246}
+  hero: {fileID: 529542376}
   towerToBuild:
     TowerPrefab: {fileID: 0}
     Cost: 0
@@ -8658,7 +8701,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startMoney: 2000
-  startLives: 10
+  startLives: 50
 --- !u!114 &671405592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11698,7 +11741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
+  m_BlockingObjects: 3
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -17262,6 +17305,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f79fac9c57fa794da2cb07cf44acb36, type: 3}
+--- !u!114 &1453804667 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3564508119814185482, guid: d4a5a9370a280884291101fb649e81f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 3564508119246910550}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7fe3a59ece5314a91d133d380993be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1460231935 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6640880320671982727, guid: 4f79fac9c57fa794da2cb07cf44acb36,
@@ -18747,6 +18802,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f79fac9c57fa794da2cb07cf44acb36, type: 3}
+--- !u!4 &1548225379 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3564508119814185526, guid: d4a5a9370a280884291101fb649e81f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 3564508119246910550}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1548549121
 GameObject:
   m_ObjectHideFlags: 0
@@ -23341,18 +23402,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f79fac9c57fa794da2cb07cf44acb36, type: 3}
---- !u!114 &1848645211 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3564508119814185485, guid: d4a5a9370a280884291101fb649e81f5,
-    type: 3}
-  m_PrefabInstance: {fileID: 3564508119246910550}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f63391c4ffaf92948868ee1596adadfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1851570113
 GameObject:
   m_ObjectHideFlags: 0
@@ -27170,9 +27219,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3564508119773516037}
-        m_TargetAssemblyTypeName: HeroesMovement, Assembly-CSharp
-        m_MethodName: SelectHeroOnUI
+      - m_Target: {fileID: 529542376}
+        m_TargetAssemblyTypeName: Hero, Assembly-CSharp
+        m_MethodName: SelectKnightHeroOnUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -27379,15 +27428,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3564508119814185482, guid: d4a5a9370a280884291101fb649e81f5,
+        type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 5573161876198323151, guid: 8f30d3e7eaa11f7429faf9d5c69657be,
+        type: 3}
+    - target: {fileID: 3564508119814185482, guid: d4a5a9370a280884291101fb649e81f5,
+        type: 3}
+      propertyPath: bulletInstPoint
+      value: 
+      objectReference: {fileID: 226397186}
+    - target: {fileID: 3564508119814185482, guid: d4a5a9370a280884291101fb649e81f5,
+        type: 3}
+      propertyPath: towerBuildManager
+      value: 
+      objectReference: {fileID: 671405590}
     - target: {fileID: 3564508119814185484, guid: d4a5a9370a280884291101fb649e81f5,
         type: 3}
       propertyPath: m_Name
       value: ArcherHero
       objectReference: {fileID: 0}
+    - target: {fileID: 3564508119814185484, guid: d4a5a9370a280884291101fb649e81f5,
+        type: 3}
+      propertyPath: m_TagString
+      value: ArcherHero
+      objectReference: {fileID: 0}
+    - target: {fileID: 3564508119814185485, guid: d4a5a9370a280884291101fb649e81f5,
+        type: 3}
+      propertyPath: towerBuildManager
+      value: 
+      objectReference: {fileID: 671405590}
     - target: {fileID: 3564508119814185526, guid: d4a5a9370a280884291101fb649e81f5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3564508119814185526, guid: d4a5a9370a280884291101fb649e81f5,
         type: 3}
@@ -27441,18 +27516,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4a5a9370a280884291101fb649e81f5, type: 3}
---- !u!114 &3564508119773516037 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8707874495157571696, guid: b98b188285c0217458e72085a5c7d93a,
-    type: 3}
-  m_PrefabInstance: {fileID: 5309524643644014965}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f63391c4ffaf92948868ee1596adadfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &4081587333154562961 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1115426231676088065, guid: 1b1cfb43cc25f2f4c932a6da89fea0bc,
@@ -27469,7 +27532,7 @@ PrefabInstance:
     - target: {fileID: 8707874495157571659, guid: b98b188285c0217458e72085a5c7d93a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8707874495157571659, guid: b98b188285c0217458e72085a5c7d93a,
         type: 3}
@@ -27526,11 +27589,36 @@ PrefabInstance:
       propertyPath: heroSpeed
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 8707874495157571696, guid: b98b188285c0217458e72085a5c7d93a,
+        type: 3}
+      propertyPath: towerBuildManager
+      value: 
+      objectReference: {fileID: 671405590}
     - target: {fileID: 8707874495157571697, guid: b98b188285c0217458e72085a5c7d93a,
         type: 3}
       propertyPath: m_Name
       value: KnightHero
       objectReference: {fileID: 0}
+    - target: {fileID: 8707874495157571697, guid: b98b188285c0217458e72085a5c7d93a,
+        type: 3}
+      propertyPath: m_TagString
+      value: KnightHero
+      objectReference: {fileID: 0}
+    - target: {fileID: 8707874495157571703, guid: b98b188285c0217458e72085a5c7d93a,
+        type: 3}
+      propertyPath: range
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8707874495157571703, guid: b98b188285c0217458e72085a5c7d93a,
+        type: 3}
+      propertyPath: IsSwordAttack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8707874495157571703, guid: b98b188285c0217458e72085a5c7d93a,
+        type: 3}
+      propertyPath: towerBuildManager
+      value: 
+      objectReference: {fileID: 671405590}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b98b188285c0217458e72085a5c7d93a, type: 3}
 --- !u!1001 &5675184490330311198
