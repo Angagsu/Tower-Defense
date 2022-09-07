@@ -4,7 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyMovement))]
 public class Enemy : MonoBehaviour
 {
-    
     [HideInInspector]
     public float enemySpeed = 10f;
     public float startSpeed = 10f;
@@ -145,14 +144,14 @@ public class Enemy : MonoBehaviour
         PlayerStats.Money += moneyGain;
     }
 
-    public void Slow(float amount)
-    {
-        enemySpeed = startSpeed * (1 - amount);
-    }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, range);
+    }
+
+    public void Slow(float amount)
+    {
+        enemySpeed = startSpeed * (1 - amount);
     }
 }

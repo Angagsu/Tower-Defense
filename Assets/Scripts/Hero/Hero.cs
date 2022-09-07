@@ -50,11 +50,12 @@ public class Hero : MonoBehaviour
         {
             LockOnTarget();
         }
-        
-        
-        if (heroesMovement.isHeroStoppedMove && IsSwordAttack)
+
+
+        if (heroesMovement.isHeroStoppedMove && IsSwordAttack && attackCountdown <= 0)
         {
             SwordAttack();
+            attackCountdown = 1f / attackRate;
         }
         else
         {
@@ -63,7 +64,7 @@ public class Hero : MonoBehaviour
                 ArcherAttack();
                 attackCountdown = 1f / attackRate;
             }
-        
+
             attackCountdown -= Time.deltaTime;
         }
     }

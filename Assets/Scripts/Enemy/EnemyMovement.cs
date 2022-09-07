@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+
     public bool isEnemyStoppedMove;
 
     private Enemy enemy;
     private Transform target;
     private int wayCountIndex = 0;
-    
     private float turnSpeed = 10f;
+
     [SerializeField] private Transform enemyRotatPart;
 
     private void Start()
@@ -24,6 +25,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
+
         if (isEnemyStoppedMove)
         {
             return;
@@ -34,13 +36,10 @@ public class EnemyMovement : MonoBehaviour
             LockOnTarget(target);
         }
 
-        if (Vector3.Distance(target.transform.position, transform.position) <= 0.5f)
+        if (Vector3.Distance(target.transform.position, transform.position) <= 0.5f && !isEnemyStoppedMove)
         {
-
             GetNextWayPoint();
         }
-
-
     }
     private void EnemyMove()
     {
@@ -53,12 +52,13 @@ public class EnemyMovement : MonoBehaviour
         {
             this.target = target;
         }
+
         Vector3 direction = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         Vector3 rotation = Quaternion.Lerp(enemyRotatPart.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
         enemyRotatPart.rotation = Quaternion.Euler(0, rotation.y, 0);
     }
-
+    
     private void GetNextWayPoint()
     {
         if (WayPoints.wayPoints.Length - 1 <= wayCountIndex)
