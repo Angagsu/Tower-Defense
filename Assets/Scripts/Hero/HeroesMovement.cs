@@ -12,6 +12,7 @@ public class HeroesMovement : MonoBehaviour
     
     [SerializeField] private float heroSpeed = 40f;
     [SerializeField] private float rotationSpeed = 10f;
+    [SerializeField] public Transform heroRotatPart;
 
     private Coroutine coroutine;
     private CharacterController characterController;
@@ -81,7 +82,7 @@ public class HeroesMovement : MonoBehaviour
             //rb.velocity = direction.normalized * heroSpeed;
 
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction.normalized),
+            heroRotatPart.rotation = Quaternion.Slerp(heroRotatPart.rotation, Quaternion.LookRotation(direction.normalized),
                 rotationSpeed * Time.deltaTime);
 
             yield return null;

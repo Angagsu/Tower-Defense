@@ -61,7 +61,7 @@ Transform:
   m_GameObject: {fileID: 3564508119814185484}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 20.09, y: 2.38, z: 29.59}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 226397186}
   m_Father: {fileID: 0}
@@ -125,7 +125,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 3564508119814185484}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3564508119814185484}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad7fe3a59ece5314a91d133d380993be, type: 3}
   m_Name: 
@@ -157,13 +157,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3564508119814185484}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f63391c4ffaf92948868ee1596adadfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   heroSpeed: 10
   rotationSpeed: 3
+  heroRotatPart: {fileID: 0}
   isHeroSelected: 0
   isHeroStoppedMove: 0
 --- !u!143 &3564508119814185527
@@ -175,7 +176,7 @@ CharacterController:
   m_GameObject: {fileID: 3564508119814185484}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.5

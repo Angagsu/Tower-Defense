@@ -1,14 +1,18 @@
-using UnityEngine.EventSystems;
+
 using UnityEngine;
 
 public class TowerBuildManager : MonoBehaviour
 {
     public static TowerBuildManager Instance;
 
+
     private GroundBehavior selectedGround;
     [SerializeField] private TowersBuildUI towersBuildUI;
     [SerializeField] private TowerUpgradeUI towerUpgradeUI;
-    [SerializeField] private Hero hero;
+
+    private TowerUI towerUI;
+    
+
 
     [HideInInspector]
     public TowerBlueprint towerToBuild;
@@ -16,8 +20,7 @@ public class TowerBuildManager : MonoBehaviour
     [HideInInspector] public bool SelectMissileLauncherTower = false;
     [HideInInspector] public bool SelectStandardTower = false;
     [HideInInspector] public bool SelectLaserTower = false;
-    private Camera mainCamera;
-    private int groundLayer;
+    
 
     public bool CanBuild { get { return towerToBuild != null; } }
     public bool HasManey { get { return PlayerStats.Money >= towerToBuild.Cost; } }
@@ -32,17 +35,13 @@ public class TowerBuildManager : MonoBehaviour
 
         Instance = this;
 
+
         towerUpgradeUI = GameObject.Find("TowerUpgradeUI").GetComponent<TowerUpgradeUI>();
 
-        mainCamera = Camera.main;
-        groundLayer = LayerMask.NameToLayer("Ground");
-    }
+        towerUI = GameObject.Find("TowerUpgradeUI").GetComponent<TowerUI>();
 
-    private void Update()
-    {
-        DeselectAllUIAndHeroesThenClickGround();
     }
-
+    
     public void SelectedGround(GroundBehavior groundBehavior)
     {
         if (selectedGround == groundBehavior)
@@ -50,7 +49,7 @@ public class TowerBuildManager : MonoBehaviour
             DeselectGround();
             return;
         }
-        hero.DeselectHeroes();
+
         towersBuildUI.towerBuildUI.SetActive(!towersBuildUI.towerBuildUI.activeSelf);
 
         if (towersBuildUI.towerBuildUI.activeSelf)
@@ -60,6 +59,7 @@ public class TowerBuildManager : MonoBehaviour
 
         selectedGround = groundBehavior;
         towerToBuild = null;
+
 
         towerUpgradeUI.SetTargetGround(groundBehavior);
     }
@@ -71,7 +71,7 @@ public class TowerBuildManager : MonoBehaviour
             DeselectGround();
             return;
         }
-        hero.DeselectHeroes();
+        
         towerUpgradeUI.towerUpgradeUI.SetActive(!towerUpgradeUI.towerUpgradeUI.activeSelf);
 
         if (towerUpgradeUI.towerUpgradeUI.activeSelf)
@@ -81,29 +81,23 @@ public class TowerBuildManager : MonoBehaviour
         selectedGround = groundBehavior;
         towerToBuild = null;
         towersBuildUI.SetTargetGroundForBuilding(groundBehavior);
-    }
-
-    private void DeselectAllUIAndHeroesThenClickGround()
-    {
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
-        if (Input.GetMouseButtonDown(0) && !IsMouseOverUI())
-        {
-            if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider &&
-                raycastHit.collider.gameObject.layer.CompareTo(groundLayer) == 0)
-            {
-                DeselectGround();
-                hero.DeselectHeroes();
-            }
-        }
+        towerUpgradeUI.SetTargetGround(groundBehavior);
         
+
+
+        towerUI.SetTargetGround(groundBehavior);
+        
+
     }
 
     public void DeselectGround()
     {
         selectedGround = null;
+
         towerUpgradeUI.HideCanvas();
-        towersBuildUI.HideCanvas();
+
+        towerUI.HideCanvas();
+
     }
     public void SelectTowerToBuild(TowerBlueprint tower)
     {
@@ -114,10 +108,5 @@ public class TowerBuildManager : MonoBehaviour
     public TowerBlueprint GetTowerToBuild()
     {
         return towerToBuild;
-    }
-
-    private bool IsMouseOverUI()
-    {
-        return EventSystem.current.IsPointerOverGameObject();
     }
 }

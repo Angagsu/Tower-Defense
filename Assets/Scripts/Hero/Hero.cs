@@ -153,8 +153,8 @@ public class Hero : MonoBehaviour
     {
         Vector3 direction = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(direction);
-        Vector3 rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
-        transform.rotation = Quaternion.Euler(0, rotation.y, 0);
+        Vector3 rotation = Quaternion.Lerp(heroesMovement.heroRotatPart.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
+        heroesMovement.heroRotatPart.rotation = Quaternion.Euler(0, rotation.y, 0);
     }
 
     private void OnDrawGizmosSelected()

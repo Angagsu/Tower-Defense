@@ -37,11 +37,6 @@ public class Enemy : MonoBehaviour
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
 
-    private void Update()
-    {
-        
-    }
-
     
     private void UpdateTarget()
     {
