@@ -52,10 +52,9 @@ public class Hero : MonoBehaviour
         }
         
         
-        if (heroesMovement.isHeroStoppedMove && IsSwordAttack && attackCountdown <= 0)
+        if (heroesMovement.isHeroStoppedMove && IsSwordAttack)
         {
             SwordAttack();
-            attackCountdown = 1f / attackRate;
         }
         else
         {
