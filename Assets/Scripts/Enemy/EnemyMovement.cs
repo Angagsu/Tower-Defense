@@ -15,9 +15,12 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] private Transform enemyRotatPart;
 
-    private void Start()
+    private void Awake()
     {
         isEnemyStoppedMove = false;
+    }
+    private void Start()
+    {
         enemy = GetComponent<Enemy>();
         target = WayPoints.wayPoints[0];
         enemy.enemySpeed = enemy.startSpeed;

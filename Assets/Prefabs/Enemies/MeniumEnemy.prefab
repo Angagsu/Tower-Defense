@@ -215,6 +215,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1639264894093340335, guid: 5786d213a6b41444cb4f22ef52f72a0b,
     type: 3}
   attackRate: 1
+  damage: 40
   IsEnemySwordAttack: 0
 --- !u!114 &5540715423265503119
 MonoBehaviour:

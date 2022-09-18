@@ -1,5 +1,6 @@
-using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using UnityEngine;
+using System;
 
 public class Hero : MonoBehaviour
 {
@@ -11,15 +12,26 @@ public class Hero : MonoBehaviour
     private Transform target;
     private Enemy targetEnemy;
     private float attackCountdown = 0f;
-    
+    private float health;
+    public bool isHeroDead;
+
     [SerializeField] private TowerBuildManager towerBuildManager;
+    [SerializeField] private Image healthBar;
+    [SerializeField] private float startHealth = 1000f;
     [SerializeField] private float attackRate = 1f;
     [SerializeField] private float range = 15f;
     [SerializeField] private float turnSpeed = 10f;
+    [SerializeField] private float damage = 100f;
     [SerializeField] private Transform bulletInstPoint;
     [SerializeField] private GameObject bulletPrefab;
+    
 
     public bool IsSwordAttack;
+
+    private void Awake()
+    {
+        
+    }
 
     private void Start()
     {
@@ -27,11 +39,14 @@ public class Hero : MonoBehaviour
         knightHero = GameObject.FindGameObjectWithTag("KnightHero").GetComponent<HeroesMovement>();
         heroesMovement = GetComponent<HeroesMovement>();
         mainCamera = Camera.main;
-        InvokeRepeating("UpdateTarget", 0f, 0.5f); 
+        isHeroDead = false;
+        health = startHealth;
+        //InvokeRepeating("UpdateTarget", 0f, 0.5f); 
     }
 
     private void Update()
     {
+        UpdateTarget();
         //SelectHeroOnClick();
 
         if (target == null)
@@ -46,27 +61,13 @@ public class Hero : MonoBehaviour
             return;
         }
         
-        if (heroesMovement.isHeroStoppedMove)
+        if (heroesMovement.isHeroStoppedMove && !isHeroDead)
         {
             LockOnTarget();
         }
 
+        
 
-        if (heroesMovement.isHeroStoppedMove && IsSwordAttack && attackCountdown <= 0)
-        {
-            SwordAttack();
-            attackCountdown = 1f / attackRate;
-        }
-        else
-        {
-            if (heroesMovement.isHeroStoppedMove && attackCountdown <= 0)
-            {
-                ArcherAttack();
-                attackCountdown = 1f / attackRate;
-            }
-
-            attackCountdown -= Time.deltaTime;
-        }
     }
 
     private void OnMouseDown()
@@ -123,10 +124,26 @@ public class Hero : MonoBehaviour
             }
         }
 
-        if (nearestEnemy != null && shortestDistance <= range)
+        if (nearestEnemy != null && shortestDistance <= range && !isHeroDead)
         {
             target = nearestEnemy.transform;
             targetEnemy = nearestEnemy.GetComponent<Enemy>();
+
+            if (attackCountdown <= 0)
+            {
+                attackCountdown = 1 / attackRate;
+                if (IsSwordAttack)
+                {
+                    SwordAttack(target);
+                    Debug.Log("Archer Attack");
+                }
+                else
+                {
+                    ArcherAttack();
+                }
+            }
+
+            attackCountdown -= Time.deltaTime;
         }
         else
         {
@@ -145,9 +162,13 @@ public class Hero : MonoBehaviour
         }
     }
 
-    private void SwordAttack()
+    private void SwordAttack(Transform enemy)
     {
-        Debug.Log("Attacked !!!");
+        Enemy e = enemy.GetComponent<Enemy>();
+        if (e != null)
+        {
+            e.AmountOfDamagetoEnemy(damage);
+        }
     }
     private void LockOnTarget()
     {
@@ -155,6 +176,22 @@ public class Hero : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         Vector3 rotation = Quaternion.Lerp(heroesMovement.heroRotatPart.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
         heroesMovement.heroRotatPart.rotation = Quaternion.Euler(0, rotation.y, 0);
+    }
+
+    public void AmountOfDamagetoHero(float amount)
+    {
+        health -= amount;
+        healthBar.fillAmount = health / startHealth;
+
+        if (health <= 0 && !isHeroDead)
+        {
+            HeroDie();
+        }
+    }
+
+    private void HeroDie()
+    {
+        isHeroDead = true;
     }
 
     private void OnDrawGizmosSelected()

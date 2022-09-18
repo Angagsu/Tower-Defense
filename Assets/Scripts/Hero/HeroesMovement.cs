@@ -6,9 +6,9 @@ using UnityEngine;
 //[RequireComponent(typeof(Rigidbody))]
 public class HeroesMovement : MonoBehaviour
 {
-    private Camera mainCamera;
+    [SerializeField] private Camera mainCamera;
     private Vector3 heroNewPosition;
-
+    
     
     [SerializeField] private float heroSpeed = 40f;
     [SerializeField] private float rotationSpeed = 10f;
@@ -16,20 +16,27 @@ public class HeroesMovement : MonoBehaviour
 
     private Coroutine coroutine;
     private CharacterController characterController;
-    
+    private Hero hero;
     //private Rigidbody rb;
     private int groundLayer;
     
     public bool isHeroSelected;
     public bool isHeroStoppedMove;
+
+    private void Awake()
+    {
+        
+    }
     private void Start()
     {
+        
         isHeroStoppedMove = true;
         isHeroSelected = false;
-        mainCamera = Camera.main;
         characterController = GetComponent<CharacterController>();
-        //rb = GetComponent<Rigidbody>();
+        hero = GetComponent<Hero>();
+        mainCamera = Camera.main;
         groundLayer = LayerMask.NameToLayer("Ground");
+        
     }
 
     private void Update()
@@ -41,7 +48,7 @@ public class HeroesMovement : MonoBehaviour
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         
-        if (isHeroSelected)
+        if (isHeroSelected && !hero.isHeroDead)
         {
             if (Input.GetMouseButtonDown(0) && !IsMouseOverUI())
             {
@@ -54,12 +61,13 @@ public class HeroesMovement : MonoBehaviour
                     }
                     coroutine = StartCoroutine(HeroMoveTowerds(raycastHit.point));
                     heroNewPosition = raycastHit.point;
+                    
                 }
             }
         }
     }
 
-    private IEnumerator HeroMoveTowerds(Vector3 target)
+    public IEnumerator HeroMoveTowerds(Vector3 target)
     {
         isHeroStoppedMove = false;
         isHeroSelected = false;
@@ -67,27 +75,17 @@ public class HeroesMovement : MonoBehaviour
         target.y += heroDistanceToFloor;
         while (Vector3.Distance(transform.position, target) > 0.5f)
         {
-            // Ignores Collisions
-            Vector3 destination = Vector3.MoveTowards(transform.position,
-                target, heroSpeed * Time.deltaTime);
-            //transform.position = destination;
-            
-
-            // Character Controller
             Vector3 direction = target - transform.position;
             Vector3 movement = direction.normalized * heroSpeed * Time.deltaTime;
+
             characterController.Move(movement);
-
-            // Rigidbody
-            //rb.velocity = direction.normalized * heroSpeed;
-
 
             heroRotatPart.rotation = Quaternion.Slerp(heroRotatPart.rotation, Quaternion.LookRotation(direction.normalized),
                 rotationSpeed * Time.deltaTime);
 
             yield return null;
         }
-        //rb.velocity = Vector3.zero;
+
         isHeroStoppedMove = true;
     }
 

@@ -1,4 +1,5 @@
 using UnityEngine.UI;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyMovement))]
@@ -19,6 +20,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     
     [SerializeField] private float attackRate = 1f;
+    [SerializeField] private int damage = 40;
+
     private EnemyMovement enemyMovement;
     private Transform targetArcher, targetKnight;
     private Hero targetArcherHero, targetKnightHero;
@@ -33,10 +36,17 @@ public class Enemy : MonoBehaviour
         enemyMovement = GetComponent<EnemyMovement>();
         enemySpeed = startSpeed;
         health = startHealth;
-        InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        //InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
 
-    
+    private void Update()
+    {
+
+        UpdateTarget();
+
+
+    }
+
     private void UpdateTarget()
     {
         
@@ -59,13 +69,24 @@ public class Enemy : MonoBehaviour
             targetArcherHero = nearestArcherHero.GetComponent<Hero>();
             enemyMovement.isEnemyStoppedMove = true;
             enemyMovement.LockOnTarget(targetArcher);
-            if (IsEnemySwordAttack)
+            if (!targetArcherHero.isHeroDead)
             {
-                EnemySwordAttack();
+                if (attackCountdown <= 0)
+                {
+                    attackCountdown = 1 / attackRate;
+                    if (IsEnemySwordAttack)
+                    {
+                        EnemySwordAttack(targetArcher);
+                    }
+                    else
+                    {
+                        EnemyArcherAttack(targetArcher);
+                    }
+                }
             }
             else
             {
-                EnemyArcherAttack(targetArcher);
+                enemyMovement.isEnemyStoppedMove = false;
             }
         }
         else
@@ -76,7 +97,7 @@ public class Enemy : MonoBehaviour
         }
 
 
-        if (distanceToKnightHero < shortestDistanceToKnight )
+        if (distanceToKnightHero < shortestDistanceToKnight)
         {
             shortestDistanceToKnight = distanceToKnightHero;
             nearestKnightHero = knightHero;
@@ -93,15 +114,28 @@ public class Enemy : MonoBehaviour
             targetKnightHero = nearestKnightHero.GetComponent<Hero>();
             enemyMovement.isEnemyStoppedMove = true;
             enemyMovement.LockOnTarget(targetKnight);
-            if (IsEnemySwordAttack)
+            if (!targetKnightHero.isHeroDead)
             {
-                EnemySwordAttack();
+                if (attackCountdown <= 0)
+                {
+                    attackCountdown = 1 / attackRate;
+                    if (IsEnemySwordAttack)
+                    {
+                        EnemySwordAttack(targetKnight);
+                    }
+                    else
+                    {
+                        EnemyArcherAttack(targetKnight);
+                    }
+                }
+                
             }
             else
             {
-                EnemyArcherAttack(targetKnight);
-            }   
+                enemyMovement.isEnemyStoppedMove = false;
+            }  
         }
+        attackCountdown -= Time.deltaTime;
     }
 
     private void EnemyArcherAttack(Transform target)
@@ -114,9 +148,10 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void EnemySwordAttack()
+    private void EnemySwordAttack(Transform hero)
     {
-        Debug.Log("Sword Enemy Attacked !!!");
+        Hero h = hero.GetComponent<Hero>();
+        h.AmountOfDamagetoHero(damage);
     }
 
     public void AmountOfDamagetoEnemy(float amount)
@@ -126,7 +161,6 @@ public class Enemy : MonoBehaviour
         
         if (health <= 0 && !isDead)
         {
-            
             Die();
         }
     }

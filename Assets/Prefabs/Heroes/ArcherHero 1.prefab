@@ -377,7 +377,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad7fe3a59ece5314a91d133d380993be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHeroDead: 0
   towerBuildManager: {fileID: 0}
+  healthBar: {fileID: 7159134111776134318}
+  startHealth: 1000
   attackRate: 0.6
   range: 15
   turnSpeed: 10

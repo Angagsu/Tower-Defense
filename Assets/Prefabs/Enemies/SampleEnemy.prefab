@@ -329,10 +329,11 @@ MonoBehaviour:
   healthBar: {fileID: 7576263119397115619}
   moneyGain: 10
   startHealth: 100
-  range: 10
+  range: 7
   bulletInstPoint: {fileID: 0}
   bulletPrefab: {fileID: 0}
   attackRate: 1
+  damage: 5
   IsEnemySwordAttack: 1
 --- !u!135 &7434959478913908075
 SphereCollider:

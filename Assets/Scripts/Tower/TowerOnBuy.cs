@@ -8,6 +8,7 @@ public class TowerOnBuy : MonoBehaviour
     public TowerBlueprint standardTower;
     public TowerBlueprint missileLauncherTower;
     public TowerBlueprint laserTower;
+    public TowerBlueprint defenderTower;
     private void Start()
     {
         towerBuildManager = TowerBuildManager.Instance;
@@ -36,6 +37,15 @@ public class TowerOnBuy : MonoBehaviour
     {
         towerBuildManager.SelectTowerToBuild(laserTower);
         towerBuildManager.SelectLaserTower = true;
+        towerBuildManager.SelectMissileLauncherTower = false;
+        towerBuildManager.SelectStandardTower = false;
+        groundBehavior.BuildTower(towerBuildManager.GetTowerToBuild());
+    }
+
+    public void SelectDefenderTower()
+    {
+        towerBuildManager.SelectTowerToBuild(defenderTower);
+        towerBuildManager.SelectLaserTower = false;
         towerBuildManager.SelectMissileLauncherTower = false;
         towerBuildManager.SelectStandardTower = false;
         groundBehavior.BuildTower(towerBuildManager.GetTowerToBuild());

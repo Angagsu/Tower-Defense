@@ -7,7 +7,8 @@ public class Bullet : MonoBehaviour
 	private Transform target;
 
 	[SerializeField] private float speed = 70f; 
-	[SerializeField] private int damage = 50;
+	[SerializeField] private int damageToEnemy = 50;
+	[SerializeField] private int damageToHero = 25;
 	[SerializeField] private float explosionRadius = 0f;
 	[SerializeField] private GameObject impactEffect;
 
@@ -66,6 +67,11 @@ public class Bullet : MonoBehaviour
 			{
 				Damage(collider.transform);
 			}
+
+            if (collider.tag == "ArcherHero" || collider.tag == "KnightHero")
+            {
+				DamageToHeroes(collider.transform);
+            }
 		}
 	}
 
@@ -75,9 +81,23 @@ public class Bullet : MonoBehaviour
 
 		if (e != null)
 		{
-			e.AmountOfDamagetoEnemy(damage);
+			e.AmountOfDamagetoEnemy(damageToEnemy);
+		}
+        else
+        {
+			DamageToHeroes(target);
 		}
 	}
+
+	private void DamageToHeroes(Transform hero)
+    {
+		Hero h = hero.GetComponent<Hero>();
+
+        if (h != null)
+        {
+			h.AmountOfDamagetoHero(damageToHero);
+        }
+    }
 
 	void OnDrawGizmosSelected()
 	{
