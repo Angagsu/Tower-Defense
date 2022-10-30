@@ -5,7 +5,7 @@ public class TowerBuildManager : MonoBehaviour
 {
     public static TowerBuildManager Instance;
 
-
+    
     private GroundBehavior selectedGround;
     [SerializeField] private TowersBuildUI towersBuildUI;
     [SerializeField] private TowerUpgradeUI towerUpgradeUI;
@@ -45,7 +45,7 @@ public class TowerBuildManager : MonoBehaviour
         DeselectAllUIAndHeroesThenClickGround();
     }
 
-    public void SelectedGround(GroundBehavior groundBehavior)
+    public void SelectedGroundForUpgradeTowerUI(GroundBehavior groundBehavior)
     {
         if (selectedGround == groundBehavior)
         {
@@ -64,6 +64,18 @@ public class TowerBuildManager : MonoBehaviour
         selectedGround = groundBehavior;
         towerToBuild = null;
 
+        if (selectedGround.defendersMovement == null)
+        {
+            //towerUpgradeUI.selectDefendersButton.interactable = false;
+            //towerUpgradeUI.selectDefendersButton.enabled = false;
+            towerUpgradeUI.selectDefendersButton.SetActive(false);
+        }
+        else
+        {
+            //towerUpgradeUI.selectDefendersButton.interactable = true;
+            //towerUpgradeUI.selectDefendersButton.enabled = true;
+            towerUpgradeUI.selectDefendersButton.SetActive(true);
+        }
 
         towerUpgradeUI.SetTargetGround(groundBehavior);
     }
@@ -83,8 +95,10 @@ public class TowerBuildManager : MonoBehaviour
         {
             towerUpgradeUI.towerUpgradeUI.SetActive(false);
         }
+
         selectedGround = groundBehavior;
         towerToBuild = null;
+        
         towersBuildUI.SetTargetGroundForBuilding(groundBehavior);
     }
 
@@ -99,6 +113,7 @@ public class TowerBuildManager : MonoBehaviour
             {
                 DeselectGround();
                 hero.DeselectHeroes();
+                towerUpgradeUI.DeActivateDefendersMoveZone();
             }
         }
 
@@ -124,4 +139,5 @@ public class TowerBuildManager : MonoBehaviour
     {
         return EventSystem.current.IsPointerOverGameObject();
     }
+    
 }

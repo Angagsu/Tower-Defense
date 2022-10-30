@@ -4,11 +4,12 @@ using UnityEngine;
 public class TowerOnBuy : MonoBehaviour
 {
     private TowerBuildManager towerBuildManager;
-    private GroundBehavior groundBehavior;
+    public GroundBehavior groundBehavior;
     public TowerBlueprint standardTower;
     public TowerBlueprint missileLauncherTower;
     public TowerBlueprint laserTower;
     public TowerBlueprint defenderTower;
+    
     private void Start()
     {
         towerBuildManager = TowerBuildManager.Instance;
@@ -54,5 +55,6 @@ public class TowerOnBuy : MonoBehaviour
     public void SetGroundForBuilding(GroundBehavior groundBehavior)
     {
         this.groundBehavior = groundBehavior;
+        
     }
 }

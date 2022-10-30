@@ -9,7 +9,7 @@ public class Hero : MonoBehaviour
     private HeroesMovement archerHero, knightHero;
     private Camera mainCamera;
     private string enemyTag = "Enemy";
-    private Transform target;
+    public Transform target;
     private Enemy targetEnemy;
     private float attackCountdown = 0f;
     private float health;
@@ -20,7 +20,7 @@ public class Hero : MonoBehaviour
     [SerializeField] private float startHealth = 1000f;
     [SerializeField] private float attackRate = 1f;
     [SerializeField] private float range = 15f;
-    [SerializeField] private float turnSpeed = 10f;
+    
     [SerializeField] private float damage = 100f;
     [SerializeField] private Transform bulletInstPoint;
     [SerializeField] private GameObject bulletPrefab;
@@ -61,13 +61,6 @@ public class Hero : MonoBehaviour
             return;
         }
         
-        if (heroesMovement.isHeroStoppedMove && !isHeroDead)
-        {
-            LockOnTarget();
-        }
-
-        
-
     }
 
     private void OnMouseDown()
@@ -170,14 +163,7 @@ public class Hero : MonoBehaviour
             e.AmountOfDamagetoEnemy(damage);
         }
     }
-    private void LockOnTarget()
-    {
-        Vector3 direction = target.position - transform.position;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        Vector3 rotation = Quaternion.Lerp(heroesMovement.heroRotatPart.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
-        heroesMovement.heroRotatPart.rotation = Quaternion.Euler(0, rotation.y, 0);
-    }
-
+    
     public void AmountOfDamagetoHero(float amount)
     {
         health -= amount;

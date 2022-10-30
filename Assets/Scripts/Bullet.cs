@@ -53,6 +53,7 @@ public class Bullet : MonoBehaviour
 		else
 		{
 			Damage(target);
+			DamageToDefenders(target);
 		}
 
 		Destroy(gameObject);
@@ -71,6 +72,11 @@ public class Bullet : MonoBehaviour
             if (collider.tag == "ArcherHero" || collider.tag == "KnightHero")
             {
 				DamageToHeroes(collider.transform);
+            }
+
+            if (collider.tag == "Defender")
+            {
+				DamageToDefenders(collider.transform);
             }
 		}
 	}
@@ -99,6 +105,15 @@ public class Bullet : MonoBehaviour
         }
     }
 
+	private void DamageToDefenders(Transform defender)
+    {
+		SworderDefender def = defender.GetComponent<SworderDefender>();
+
+        if (def != null)
+        {
+			def.AmountOfDamagetoDefender(damageToHero);
+        }
+    }
 	void OnDrawGizmosSelected()
 	{
 		Gizmos.color = Color.red;

@@ -8,8 +8,8 @@ public class HeroesMovement : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     private Vector3 heroNewPosition;
-    
-    
+
+    [SerializeField] private float turnSpeed = 10f;
     [SerializeField] private float heroSpeed = 40f;
     [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] public Transform heroRotatPart;
@@ -42,6 +42,11 @@ public class HeroesMovement : MonoBehaviour
     private void Update()
     {
         GetHeroNewPosition();
+
+        if (isHeroStoppedMove && !hero.isHeroDead && hero.target != null)
+        {
+            LockOnTarget();
+        }
     }
 
     private void GetHeroNewPosition()
@@ -92,6 +97,14 @@ public class HeroesMovement : MonoBehaviour
     private bool IsMouseOverUI()
     {
         return EventSystem.current.IsPointerOverGameObject();
+    }
+
+    private void LockOnTarget()
+    {
+        Vector3 direction = hero.target.position - transform.position;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        Vector3 rotation = Quaternion.Lerp(heroRotatPart.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
+        heroRotatPart.rotation = Quaternion.Euler(0, rotation.y, 0);
     }
 
     private void OnDrawGizmos()

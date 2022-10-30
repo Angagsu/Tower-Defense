@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 7159134112173179558}
   - component: {fileID: 7159134112173179557}
   m_Layer: 0
-  m_Name: ArcherHero 1
+  m_Name: ArcherHero
   m_TagString: ArcherHero
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -377,13 +377,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad7fe3a59ece5314a91d133d380993be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   isHeroDead: 0
   towerBuildManager: {fileID: 0}
   healthBar: {fileID: 7159134111776134318}
   startHealth: 1000
-  attackRate: 0.6
+  attackRate: 1
   range: 15
-  turnSpeed: 10
+  damage: 0
   bulletInstPoint: {fileID: 5921661441276018832}
   bulletPrefab: {fileID: 5573161876198323151, guid: 8f30d3e7eaa11f7429faf9d5c69657be,
     type: 3}
@@ -400,6 +401,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f63391c4ffaf92948868ee1596adadfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  turnSpeed: 10
   heroSpeed: 10
   rotationSpeed: 3
   heroRotatPart: {fileID: 7159134110883589796}

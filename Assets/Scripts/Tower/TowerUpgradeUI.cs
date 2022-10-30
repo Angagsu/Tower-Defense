@@ -4,20 +4,21 @@ using UnityEngine;
 public class TowerUpgradeUI : MonoBehaviour
 {
     private GroundBehavior selectedGround;
-    
+    private DefendersMovement defendersMovement;
+
     public GameObject towerUpgradeUI, towerBuildUI;
 
     [SerializeField] private Text upgradeCostText, sellCostText;
     [SerializeField] private Button upgradeButton;
-
-    
+    [SerializeField] private GameObject defendersMoveZone;
+    public GameObject selectDefendersButton;
 
     public void SetTargetGround(GroundBehavior selectedGround)
     {
         this.selectedGround = selectedGround;
         transform.position = selectedGround.GetBuildPosition();
         towerUpgradeUI.SetActive(true);
-
+        
         if (!selectedGround.IsUpgraded || !selectedGround.IsUpgradedSecondTime || !selectedGround.IsUpgradedThirdTime)
         {
             sellCostText.text = selectedGround.towerBlueprint.GetTowerSellCost().ToString();
@@ -72,4 +73,16 @@ public class TowerUpgradeUI : MonoBehaviour
         selectedGround.SellTower();
         TowerBuildManager.Instance.DeselectGround();
     }
+
+    public void DeActivateDefendersMoveZone()
+    {
+        defendersMoveZone.gameObject.SetActive(false);
+    }
+
+    public void SelectDefendersOnUI()
+    {
+        selectedGround.SelectDefenderTowerOnUI();
+        defendersMoveZone.gameObject.SetActive(true);
+    }
+    
 }

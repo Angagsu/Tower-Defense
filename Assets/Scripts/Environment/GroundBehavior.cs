@@ -16,6 +16,7 @@ public class GroundBehavior : MonoBehaviour
     [SerializeField] private Color cantBuildColor;
     [SerializeField] private GameObject buildEffectPrefab;
 
+    public DefendersMovement defendersMovement;
     [HideInInspector] public GameObject tower;
 
     [HideInInspector] public TowerBlueprint towerBlueprint;
@@ -23,8 +24,11 @@ public class GroundBehavior : MonoBehaviour
     [HideInInspector] public bool IsUpgradedSecondTime = false;
     [HideInInspector] public bool IsUpgradedThirdTime = false;
 
+    public Transform defendersStartPoint;
+
     void Start()
     {
+        
         rend = GetComponent<Renderer>();
         startColor = rend.material.color;
         towerBuildManager = TowerBuildManager.Instance;
@@ -70,7 +74,7 @@ public class GroundBehavior : MonoBehaviour
         
         if (tower != null)
         {
-            towerBuildManager.SelectedGround(this);
+            towerBuildManager.SelectedGroundForUpgradeTowerUI(this);
             return;
         }
 
@@ -78,6 +82,7 @@ public class GroundBehavior : MonoBehaviour
         {
             towerBuildManager.SelectedGroundForBuildTowerUI(this);
             towerOnBuy.SetGroundForBuilding(this);
+            
             return;
         }
         
@@ -101,8 +106,12 @@ public class GroundBehavior : MonoBehaviour
         Destroy(effect.gameObject, 4f);
 
         this.tower = tower;
-        
 
+        if (towerBlueprint == towerOnBuy.defenderTower)
+        {
+            defendersMovement = tower.GetComponentInChildren<DefendersMovement>();
+        }
+        
         towerBuildManager.SelectStandardTower = false;
         towerBuildManager.SelectMissileLauncherTower = false;
         towerBuildManager.SelectLaserTower = false;
@@ -237,7 +246,18 @@ public class GroundBehavior : MonoBehaviour
         {
             positionOffset = new Vector3(0, 0.5f, 0);
         }
+
+        if (towerBlueprint == towerOnBuy.defenderTower)
+        {
+            positionOffset = new Vector3(0, 2, 0);
+        }
         return transform.position + positionOffset;
+    }
+    
+    public void SelectDefenderTowerOnUI()
+    {
+        defendersMovement.isDefendersSelected = true;
+        towerBuildManager.DeselectGround();
     }
     
 }

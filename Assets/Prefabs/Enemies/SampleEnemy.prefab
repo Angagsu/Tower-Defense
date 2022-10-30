@@ -333,7 +333,7 @@ MonoBehaviour:
   bulletInstPoint: {fileID: 0}
   bulletPrefab: {fileID: 0}
   attackRate: 1
-  damage: 5
+  damage: 10
   IsEnemySwordAttack: 1
 --- !u!135 &7434959478913908075
 SphereCollider:
