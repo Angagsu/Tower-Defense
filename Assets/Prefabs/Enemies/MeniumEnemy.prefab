@@ -216,6 +216,10 @@ MonoBehaviour:
     type: 3}
   attackRate: 1
   damage: 40
+  archerHero: {fileID: 7159134112173179556, guid: 9bc9d4b712628044b841fabe12c6151f,
+    type: 3}
+  knightHero: {fileID: 384363908788544331, guid: d5f660b849059a0459e5ea8a026b7eef,
+    type: 3}
   IsEnemySwordAttack: 0
 --- !u!114 &5540715423265503119
 MonoBehaviour:

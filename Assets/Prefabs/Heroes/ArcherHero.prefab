@@ -378,8 +378,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  isHeroDead: 0
-  towerBuildManager: {fileID: 0}
   healthBar: {fileID: 7159134111776134318}
   startHealth: 1000
   attackRate: 1
@@ -388,6 +386,7 @@ MonoBehaviour:
   bulletInstPoint: {fileID: 5921661441276018832}
   bulletPrefab: {fileID: 5573161876198323151, guid: 8f30d3e7eaa11f7429faf9d5c69657be,
     type: 3}
+  isHeroDead: 0
   IsSwordAttack: 0
 --- !u!114 &7159134112173179558
 MonoBehaviour:

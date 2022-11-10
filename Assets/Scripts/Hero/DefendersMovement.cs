@@ -41,16 +41,15 @@ public class DefendersMovement : MonoBehaviour
         isDefendersStoppedMove = true;
         isDefendersSelected = false;
         defendersNewPoint = groundStartPoint.groundBehavior.defendersStartPoint.position;
-        ReviveOrMakeADeadTheDefender();
+        SetTheSworderDefenderArray();
         StartCoroutine(DefendersMoveTowerds(defendersNewPoint));
     }
 
     
     void Update()
     {
-        ReviveOrMakeADeadTheDefender();
+        DisableTheDefenderWhenDies();
         GetDefendersNewPosition();
-
     }
 
     private void GetDefendersNewPosition()
@@ -88,11 +87,18 @@ public class DefendersMovement : MonoBehaviour
         
     }
 
-    private void ReviveOrMakeADeadTheDefender()
+    private void SetTheSworderDefenderArray()
     {
         for (int i = 0; i < sworderDefendersObj.Length; i++)
         {
             sworderDefender[i] = sworderDefendersObj[i].GetComponent<SworderDefender>();
+        }
+    }
+    private void DisableTheDefenderWhenDies()
+    {
+        for (int i = 0; i < sworderDefendersObj.Length; i++)
+        {
+            
             if (sworderDefender[i].isDefenderDead)
             {
                 sworderDefendersObj[i].SetActive(false);
@@ -136,7 +142,7 @@ public class DefendersMovement : MonoBehaviour
         isDefendersSelected = false;
     }
 
-    public IEnumerator TimerForDefenderRevive(SworderDefender defender)
+    private IEnumerator TimerForDefenderRevive(SworderDefender defender)
     {
          while (defender.isDefenderDead)
          {

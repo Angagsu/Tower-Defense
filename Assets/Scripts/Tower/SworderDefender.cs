@@ -22,8 +22,6 @@ public class SworderDefender : MonoBehaviour
     [SerializeField] private Image healthBar;
     [SerializeField] private float startHealth = 1000f;
     
-
-    
     
     void Start()
     {
@@ -68,9 +66,14 @@ public class SworderDefender : MonoBehaviour
             if (attackCountdown <= 0)
             {
                 attackCountdown = 1 / attackRate;
-                enemy.EnemySwordAttackToDefenders(this.transform);
-                DefenderSwordAttack(target);
-                Debug.Log("Defender Attacked");
+                if (enemy.IsEnemySwordAttack)
+                {
+                    
+                    enemy.EnemySwordAttackToDefenders(this.transform);
+                    DefenderSwordAttack(target);
+                    Debug.Log("Defender Attacked");
+                }
+                
             }
 
             attackCountdown -= Time.deltaTime;

@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int damage = 40;
 
     private EnemyMovement enemyMovement;
-    private Transform targetArcher, targetKnight, targetDefender;
+    private Transform targetArcher, targetKnight;
     private Hero targetArcherHero, targetKnightHero;
     private SworderDefender targetSworderDefender;
     private float attackCountdown = 0;
@@ -43,70 +43,18 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        //UpdateTargetDefender();
         UpdateTargetHero();
-
-
     }
 
     private void UpdateTargetHero()
     {
-        GameObject[] defenders = GameObject.FindGameObjectsWithTag("Defender");
-        float shortestDistance = Mathf.Infinity;
-        GameObject nearestDefender = null;
-
         float shortestDistanceToArcher = Mathf.Infinity;
         float shortestDistanceToKnight = Mathf.Infinity;
         GameObject nearestArcherHero = null;
         GameObject nearestKnightHero = null;
+        
         float distanceToArcherHero = Vector3.Distance(transform.position, archerHero.transform.position);
         float distanceToKnightHero = Vector3.Distance(transform.position, knightHero.transform.position);
-
-        foreach (GameObject defender in defenders)
-        {
-            float distanceToEnemy = Vector3.Distance(transform.position, defender.transform.position);
-
-            if (distanceToEnemy < shortestDistance)
-            {
-                shortestDistance = distanceToEnemy;
-                nearestDefender = defender;
-            }
-
-        }
-
-        /*if (nearestDefender != null && shortestDistance <= range)
-        {
-            targetDefender = nearestDefender.transform;
-            targetSworderDefender = nearestDefender.GetComponent<SworderDefender>();
-            enemyMovement.isEnemyStoppedMove = true;
-            enemyMovement.LockOnTarget(targetDefender);
-            if (!targetSworderDefender.isDefenderDead)
-            {
-                if (attackCountdown <= 0)
-                {
-                    attackCountdown = 1 / attackRate;
-                    if (IsEnemySwordAttack)
-                    {
-                        EnemySwordAttackToDefenders(targetDefender);
-                        Debug.Log("Sword Attack");
-                    }
-                    else
-                    {
-                        EnemyArcherAttack(targetDefender);
-                    }
-                }
-            }
-            else
-            {
-                enemyMovement.isEnemyStoppedMove = false;
-            }
-        }
-        else
-        {
-            targetDefender = null;
-            targetSworderDefender = null;
-            enemyMovement.isEnemyStoppedMove = false;
-        }*/
 
         if (distanceToArcherHero < shortestDistanceToArcher )
         {
@@ -119,7 +67,7 @@ public class Enemy : MonoBehaviour
             targetArcherHero = nearestArcherHero.GetComponent<Hero>();
             enemyMovement.isEnemyStoppedMove = true;
             enemyMovement.LockOnTarget(targetArcher);
-            if (!targetArcherHero.isHeroDead)
+            if (!targetArcherHero.isHeroDead && targetArcherHero.gameObject.activeSelf)
             {
                 if (attackCountdown <= 0)
                 {
@@ -136,6 +84,8 @@ public class Enemy : MonoBehaviour
             }
             else
             {
+                nearestArcherHero = null;
+                targetArcherHero = null;
                 enemyMovement.isEnemyStoppedMove = false;
             }
         }
@@ -164,7 +114,7 @@ public class Enemy : MonoBehaviour
             targetKnightHero = nearestKnightHero.GetComponent<Hero>();
             enemyMovement.isEnemyStoppedMove = true;
             enemyMovement.LockOnTarget(targetKnight);
-            if (!targetKnightHero.isHeroDead)
+            if (!targetKnightHero.isHeroDead && targetKnightHero.gameObject.activeSelf)
             {
                 if (attackCountdown <= 0)
                 {
@@ -182,6 +132,8 @@ public class Enemy : MonoBehaviour
             }
             else
             {
+                targetKnightHero = null;
+                nearestKnightHero = null;
                 enemyMovement.isEnemyStoppedMove = false;
             }  
         }
@@ -189,7 +141,7 @@ public class Enemy : MonoBehaviour
     }
 
 
-    private void EnemyArcherAttack(Transform target)
+    public void EnemyArcherAttack(Transform target)
     {
         GameObject bulletObj = Instantiate(bulletPrefab, bulletInstPoint.position, bulletInstPoint.rotation);
         Bullet bullet = bulletObj.GetComponent<Bullet>();
@@ -199,7 +151,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void EnemySwordAttackToHeroes(Transform hero)
+    public void EnemySwordAttackToHeroes(Transform hero)
     {
         Hero h = hero.GetComponent<Hero>();
         h.AmountOfDamagetoHero(damage);

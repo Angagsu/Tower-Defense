@@ -351,6 +351,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 268621021}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &132413118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 132413119}
+  m_Layer: 7
+  m_Name: KnightHeroPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &132413119
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132413118}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 40.88, y: 2.5, z: 35.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 591767579}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &135978039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1438,18 +1468,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f79fac9c57fa794da2cb07cf44acb36, type: 3}
---- !u!114 &273549330 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 384363908788544328, guid: d5f660b849059a0459e5ea8a026b7eef,
-    type: 3}
-  m_PrefabInstance: {fileID: 436336256009428022}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad7fe3a59ece5314a91d133d380993be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &275662896
 GameObject:
   m_ObjectHideFlags: 0
@@ -2438,7 +2456,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 822844590}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Hero, Assembly-CSharp
         m_MethodName: SelectArcherHeroOnUI
         m_Mode: 1
@@ -3309,6 +3327,8 @@ Transform:
   - {fileID: 177634710}
   - {fileID: 1549660542}
   - {fileID: 1560663362}
+  - {fileID: 1011806948}
+  - {fileID: 132413119}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3724,6 +3744,7 @@ GameObject:
   - component: {fileID: 671405592}
   - component: {fileID: 671405593}
   - component: {fileID: 671405594}
+  - component: {fileID: 671405595}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3827,7 +3848,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towersBuildUI: {fileID: 414456808}
   towerUpgradeUI: {fileID: 1621988246}
-  hero: {fileID: 273549330}
   towerToBuild:
     TowerPrefab: {fileID: 0}
     Cost: 0
@@ -3959,6 +3979,24 @@ MonoBehaviour:
     SecondTimeUpgradeCost: 0
     ThirdTimeUpgradedTower: {fileID: 0}
     ThirdTimeUpgradeCost: 0
+--- !u!114 &671405595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671405587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05972fe2c0ac0e4ea9a9e27e07dca42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heroesPosition:
+  - {fileID: 1011806948}
+  - {fileID: 132413119}
+  heroesObj:
+  - {fileID: 7159134112173179556, guid: 9bc9d4b712628044b841fabe12c6151f, type: 3}
+  - {fileID: 384363908788544331, guid: d5f660b849059a0459e5ea8a026b7eef, type: 3}
 --- !u!1 &684849417
 GameObject:
   m_ObjectHideFlags: 0
@@ -4980,18 +5018,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821786785}
   m_CullTransparentMesh: 1
---- !u!114 &822844590 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7159134112173179559, guid: 9bc9d4b712628044b841fabe12c6151f,
-    type: 3}
-  m_PrefabInstance: {fileID: 7959928189870890770}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad7fe3a59ece5314a91d133d380993be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &838201270
 GameObject:
   m_ObjectHideFlags: 0
@@ -6012,6 +6038,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6017560837427317675}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1011806947
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1011806948}
+  m_Layer: 7
+  m_Name: ArcherHeroPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1011806948
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011806947}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 35.12, y: 2.5, z: 36.66}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 591767579}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1061407921 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6640880320671982727, guid: 4f79fac9c57fa794da2cb07cf44acb36,
@@ -12679,90 +12735,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2117238496}
   m_CullTransparentMesh: 1
---- !u!1001 &436336256009428022
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 384363908788544326, guid: d5f660b849059a0459e5ea8a026b7eef,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 384363908788544326, guid: d5f660b849059a0459e5ea8a026b7eef,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 63.16
-      objectReference: {fileID: 0}
-    - target: {fileID: 384363908788544326, guid: d5f660b849059a0459e5ea8a026b7eef,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.38
-      objectReference: {fileID: 0}
-    - target: {fileID: 384363908788544326, guid: d5f660b849059a0459e5ea8a026b7eef,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 64.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 384363908788544326, guid: d5f660b849059a0459e5ea8a026b7eef,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 384363908788544326, guid: d5f660b849059a0459e5ea8a026b7eef,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 384363908788544326, guid: d5f660b849059a0459e5ea8a026b7eef,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 384363908788544326, guid: d5f660b849059a0459e5ea8a026b7eef,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 384363908788544326, guid: d5f660b849059a0459e5ea8a026b7eef,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 384363908788544326, guid: d5f660b849059a0459e5ea8a026b7eef,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 384363908788544326, guid: d5f660b849059a0459e5ea8a026b7eef,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 384363908788544328, guid: d5f660b849059a0459e5ea8a026b7eef,
-        type: 3}
-      propertyPath: towerBuildManager
-      value: 
-      objectReference: {fileID: 671405590}
-    - target: {fileID: 384363908788544329, guid: d5f660b849059a0459e5ea8a026b7eef,
-        type: 3}
-      propertyPath: mainCamera
-      value: 
-      objectReference: {fileID: 963194227}
-    - target: {fileID: 384363908788544331, guid: d5f660b849059a0459e5ea8a026b7eef,
-        type: 3}
-      propertyPath: m_Name
-      value: KnightHero 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 384363908788544331, guid: d5f660b849059a0459e5ea8a026b7eef,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d5f660b849059a0459e5ea8a026b7eef, type: 3}
 --- !u!222 &1115426229742431147
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12999,7 +12971,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 273549330}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Hero, Assembly-CSharp
         m_MethodName: SelectKnightHeroOnUI
         m_Mode: 1
@@ -13345,87 +13317,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d349c91fbb756404194227092e9041e7, type: 3}
---- !u!1001 &7959928189870890770
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7159134112173179553, guid: 9bc9d4b712628044b841fabe12c6151f,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7159134112173179553, guid: 9bc9d4b712628044b841fabe12c6151f,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 52.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7159134112173179553, guid: 9bc9d4b712628044b841fabe12c6151f,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.38
-      objectReference: {fileID: 0}
-    - target: {fileID: 7159134112173179553, guid: 9bc9d4b712628044b841fabe12c6151f,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 45.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 7159134112173179553, guid: 9bc9d4b712628044b841fabe12c6151f,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7159134112173179553, guid: 9bc9d4b712628044b841fabe12c6151f,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7159134112173179553, guid: 9bc9d4b712628044b841fabe12c6151f,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7159134112173179553, guid: 9bc9d4b712628044b841fabe12c6151f,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7159134112173179553, guid: 9bc9d4b712628044b841fabe12c6151f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7159134112173179553, guid: 9bc9d4b712628044b841fabe12c6151f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7159134112173179553, guid: 9bc9d4b712628044b841fabe12c6151f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7159134112173179556, guid: 9bc9d4b712628044b841fabe12c6151f,
-        type: 3}
-      propertyPath: m_Name
-      value: ArcherHero 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7159134112173179556, guid: 9bc9d4b712628044b841fabe12c6151f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7159134112173179558, guid: 9bc9d4b712628044b841fabe12c6151f,
-        type: 3}
-      propertyPath: mainCamera
-      value: 
-      objectReference: {fileID: 963194227}
-    - target: {fileID: 7159134112173179559, guid: 9bc9d4b712628044b841fabe12c6151f,
-        type: 3}
-      propertyPath: towerBuildManager
-      value: 
-      objectReference: {fileID: 671405590}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9bc9d4b712628044b841fabe12c6151f, type: 3}

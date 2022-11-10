@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 2468504130447625791}
   m_Layer: 0
   m_Name: Defenders
-  m_TagString: Defender
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,8 +154,6 @@ MonoBehaviour:
   - {fileID: 5654830166170786559}
   towerTransform: {fileID: 3891353149496938687}
   defendersSpeed: 10
-  newDefender: {fileID: 7071157408416458360, guid: 5d9b329b6ad2be34e933807b96c2c050,
-    type: 3}
 --- !u!1001 &790278848216086301
 PrefabInstance:
   m_ObjectHideFlags: 0
