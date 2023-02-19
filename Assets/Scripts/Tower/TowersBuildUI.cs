@@ -1,20 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class TowersBuildUI : MonoBehaviour
 {
-    [SerializeField] private GameObject uIRotatPart;
-    [SerializeField] private Camera cameraPosition;
     private GroundBehavior selectedGround;
-    
+    private Vector3 startPosition;
     public GameObject towerBuildUI;
-    public bool IsTowerBuild = false;
-    public float turnSpeed = 60f;
 
-    private void Update()
+    private void Start()
     {
-        
+        startPosition = transform.position;
     }
     public void SetTargetGroundForBuilding(GroundBehavior selectedGround)
     {
@@ -26,6 +21,7 @@ public class TowersBuildUI : MonoBehaviour
     public void HideCanvas()
     {
         towerBuildUI.SetActive(false);
+        transform.position = startPosition;
     }
 
     

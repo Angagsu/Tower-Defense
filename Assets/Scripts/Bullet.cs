@@ -11,13 +11,19 @@ public class Bullet : MonoBehaviour
 	[SerializeField] private int damageToHero = 25;
 	[SerializeField] private float explosionRadius = 0f;
 	[SerializeField] private GameObject impactEffect;
+	private Camera cameraMain;
 
-	public void BulletSeek(Transform _target)
+    private void Start()
+    {
+		cameraMain = Camera.main;
+    }
+
+    public void BulletSeek(Transform _target)
 	{
 		target = _target;
 	}
 
-	// Update is called once per frame
+	
 	void Update()
 	{
 
@@ -43,8 +49,12 @@ public class Bullet : MonoBehaviour
 
 	void HitTarget()
 	{
-		//GameObject effectIns = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
-		//Destroy(effectIns, 5f);
+		GameObject effectIns = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
+		Vector3 direction = effectIns.transform.position - target.transform.position;
+		effectIns.transform.position = target.position + direction.normalized;
+		effectIns.transform.rotation = Quaternion.LookRotation(direction);
+		//effectIns.transform.LookAt(camera.transform);
+		Destroy(effectIns, 1f);
 
 		if (explosionRadius > 0f)
 		{

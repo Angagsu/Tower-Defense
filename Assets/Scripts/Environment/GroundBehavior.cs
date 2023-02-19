@@ -26,66 +26,115 @@ public class GroundBehavior : MonoBehaviour
 
     public Transform defendersStartPoint;
 
+    private int buildingAreaLayer;
     void Start()
     {
-        
         rend = GetComponent<Renderer>();
         startColor = rend.material.color;
         towerBuildManager = TowerBuildManager.Instance;
         towerOnBuy = FindObjectOfType<TowerOnBuy>();
         towerUpgradeUI = FindObjectOfType<TowerUpgradeUI>();
         towersBuildUI = FindObjectOfType<TowersBuildUI>();
+        buildingAreaLayer = LayerMask.NameToLayer("BuildingArea");
     }
 
-    private void OnMouseEnter()
-    {
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            return;
-        }
+    
+    //private void OnMouseEnter()
+    //{
+        //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        //{
+            //if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+            //{
+                //return;
+            //}
+        //}
 
-        if (!towerBuildManager.CanBuild)
-        {
-            return;
-        }
+        //if (!towerBuildManager.CanBuild)
+        //{
+            //return;
+        //}
 
-        if (towerBuildManager.HasManey)
-        {
-            rend.material.color = hoverColor;
-        }
-        else if(towerBuildManager.SelectMissileLauncherTower == true && !towerBuildManager.HasManey ||
-            towerBuildManager.SelectStandardTower == true && !towerBuildManager.HasManey || towerBuildManager.SelectLaserTower == true && !towerBuildManager.HasManey)
-        {
-            rend.material.color = cantBuildColor;
-        }
-    }
+        //if (towerBuildManager.HasManey)
+        //{
+            //rend.material.color = hoverColor;
+        //}
+        //else if(towerBuildManager.SelectMissileLauncherTower == true && !towerBuildManager.HasManey ||
+            //towerBuildManager.SelectStandardTower == true && !towerBuildManager.HasManey || towerBuildManager.SelectLaserTower == true && !towerBuildManager.HasManey)
+        //{
+            //rend.material.color = cantBuildColor;
+        //}
+    //}
 
-    private void OnMouseExit()
-    {
-        rend.material.color = startColor;
-    }
+    //private void OnMouseExit()
+    //{
+        //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        //{
+            //if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+            //{
+                //return;
+            //}
+        //}
+        //rend.material.color = startColor;
+    //}
+    
+    //private void OnMouseDown()
+    //{
+        //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        //{
+            //if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+            //{
+                //return;
+            //}
+        //}
 
-    private void OnMouseDown()
-    {
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            return;
-        }
-        
-        if (tower != null)
-        {
-            towerBuildManager.SelectedGroundForUpgradeTowerUI(this);
-            return;
-        }
+        //if (tower != null)
+        //{
+            //towerBuildManager.SelectedGroundForUpgradeTowerUI(this);
+            //return;
+        //}
 
-        if (tower == null)
-        {
-            towerBuildManager.SelectedGroundForBuildTowerUI(this);
-            towerOnBuy.SetGroundForBuilding(this);
+        //if (tower == null)
+        //{
+            //towerBuildManager.SelectedGroundForBuildTowerUI(this);
+            //towerOnBuy.SetGroundForBuilding(this);
             
-            return;
-        }
+            //return;
+        //}
         
+    //}
+
+    private void SelectBuildingArea()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            if (!IsMouseOverUI())
+            {
+                if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider.gameObject.layer.CompareTo(buildingAreaLayer) == 0)
+                {
+                    GroundBehavior groundBehavior = raycastHit.collider.gameObject.GetComponent<GroundBehavior>();
+                    
+                    if (groundBehavior.tower != null)
+                    {
+                        towerBuildManager.SelectedGroundForUpgradeTowerUI(groundBehavior);
+                        return;
+                    }
+
+                    if (groundBehavior.tower == null)
+                    {
+                        towerBuildManager.SelectedGroundForBuildTowerUI(groundBehavior);
+                        towerOnBuy.SetGroundForBuilding(groundBehavior);
+
+                        return;
+                    }
+                }
+            } 
+        }
+    }
+    private bool IsMouseOverUI()
+    {
+        return EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
     }
 
     public void BuildTower(TowerBlueprint towerBlueprint)

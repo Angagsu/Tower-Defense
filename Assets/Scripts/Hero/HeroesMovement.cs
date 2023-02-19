@@ -23,10 +23,7 @@ public class HeroesMovement : MonoBehaviour
     public bool isHeroSelected;
     public bool isHeroStoppedMove;
 
-    private void Awake()
-    {
-        
-    }
+    
     private void Start()
     {
         
@@ -55,18 +52,21 @@ public class HeroesMovement : MonoBehaviour
         
         if (isHeroSelected && !hero.isHeroDead)
         {
-            if (Input.GetMouseButtonDown(0) && !IsMouseOverUI())
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
-                if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider &&
-                    raycastHit.collider.gameObject.layer.CompareTo(groundLayer) == 0)
+                if (!IsMouseOverUI())
                 {
-                    if (coroutine != null)
+                    if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider &&
+                        raycastHit.collider.gameObject.layer.CompareTo(groundLayer) == 0)
                     {
-                        StopCoroutine(coroutine);
+                        if (coroutine != null)
+                        {
+                            StopCoroutine(coroutine);
+                        }
+                        coroutine = StartCoroutine(HeroMoveTowerds(raycastHit.point));
+                        heroNewPosition = raycastHit.point;
+
                     }
-                    coroutine = StartCoroutine(HeroMoveTowerds(raycastHit.point));
-                    heroNewPosition = raycastHit.point;
-                    
                 }
             }
         }
@@ -96,7 +96,7 @@ public class HeroesMovement : MonoBehaviour
 
     private bool IsMouseOverUI()
     {
-        return EventSystem.current.IsPointerOverGameObject();
+        return EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
     }
 
     private void LockOnTarget()

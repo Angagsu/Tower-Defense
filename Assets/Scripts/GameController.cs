@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour 
 {
-    
     public static bool IsGameOver;
 
     private UIManager uiManager;
@@ -15,8 +14,9 @@ public class GameController : MonoBehaviour
     [Header("Optional settings. Dont Touch")]
     [SerializeField] private int levelToUnlock;
     [SerializeField] private string nextLevel;
+    [SerializeField] private Button timeRewindButton;
 
-    
+
     private void Awake()
     {
         IsGameOver = false;
@@ -96,9 +96,14 @@ public class GameController : MonoBehaviour
     public void PauseOrContinueTheGame()
     {
         uiManager.PausePanel.SetActive(!uiManager.PausePanel.activeSelf);
+
         if (uiManager.PausePanel.activeSelf)
         {
             Time.timeScale = 0f;
+        }
+        else if (uiManager.IsTimeRewind && !IsGameOver)
+        {
+            Time.timeScale = 2f;
         }
         else
         {

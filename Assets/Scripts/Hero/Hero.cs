@@ -58,7 +58,7 @@ public class Hero : MonoBehaviour
         }
         
     }
-
+    
     private void OnMouseDown()
     {
         if (gameObject.CompareTag("ArcherHero"))

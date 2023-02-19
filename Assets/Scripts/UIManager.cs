@@ -10,8 +10,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text waveSurvivedText, waveSurvivedTextOnLevelCompleted;
     [SerializeField] private GameObject gameOverPanel, pausePanel, levelCompetePanel;
     [SerializeField] private Sprite fastTimeRunActiveSprite, fastTimeRunDeactivatedSprite;
-    [SerializeField] private Button fastTimeRunButton;
-    private bool IsTimeRewind;
+    [SerializeField] private Button timeRewindButton;
+    public bool IsTimeRewind;
     
 
     public GameObject GameOverPanel { get { return gameOverPanel; } }
@@ -27,7 +27,6 @@ public class UIManager : MonoBehaviour
 
         InvokeRepeating("TowerCostsConvetToStringOnUI", 0f, 1f);
     }
-
 
     void Update()
     {
@@ -73,13 +72,12 @@ public class UIManager : MonoBehaviour
         if (IsTimeRewind)
         {
             Time.timeScale = 2f;
-            fastTimeRunButton.image.sprite = fastTimeRunActiveSprite;
+            timeRewindButton.image.sprite = fastTimeRunActiveSprite;
         }
         else
         {
             Time.timeScale = 1f;
-            fastTimeRunButton.image.sprite = fastTimeRunDeactivatedSprite;
+            timeRewindButton.image.sprite = fastTimeRunDeactivatedSprite;
         }
-
     }
 }

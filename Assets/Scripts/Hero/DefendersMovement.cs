@@ -23,7 +23,6 @@ public class DefendersMovement : MonoBehaviour
     private Camera mainCamera;
     private TowerOnBuy groundStartPoint;
 
-    
 
     private void Awake()
     {
@@ -154,6 +153,6 @@ public class DefendersMovement : MonoBehaviour
 
     private bool IsMouseOverUI()
     {
-        return EventSystem.current.IsPointerOverGameObject();
+        return EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
     }
 }

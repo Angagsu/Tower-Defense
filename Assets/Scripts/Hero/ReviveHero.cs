@@ -61,4 +61,14 @@ public class ReviveHero : MonoBehaviour
             hero.gameObject.SetActive(true);
         }
     }
+
+    public void SelectArcherHeroOnUI()
+    {
+        hero[0].SelectArcherHeroOnUI();
+    }
+
+    public void SelectKnightHeroOnUI()
+    {
+        hero[1].SelectKnightHeroOnUI();
+    }
 }

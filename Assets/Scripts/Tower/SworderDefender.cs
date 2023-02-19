@@ -29,7 +29,6 @@ public class SworderDefender : MonoBehaviour
         isDefenderDead = false;
     }
 
-    
     void Update()
     {
         UpdateTarget();

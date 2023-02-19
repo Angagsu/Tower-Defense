@@ -272,9 +272,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3289552885620458283}
-  - component: {fileID: 5358613077187883827}
-  - component: {fileID: 8430483690710548398}
   - component: {fileID: 7434959478913908075}
+  - component: {fileID: 8430483690710548398}
+  - component: {fileID: 5358613077187883827}
   m_Layer: 0
   m_Name: SampleEnemy
   m_TagString: Enemy
@@ -298,20 +298,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5358613077187883827
-MonoBehaviour:
+--- !u!135 &7434959478913908075
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5617938643944427345}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c13d42fa4af20b84fad6a306d9fb7a1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnemyStoppedMove: 0
-  enemyRotatPart: {fileID: 2832407924651309789}
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8430483690710548398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,24 +333,21 @@ MonoBehaviour:
   bulletPrefab: {fileID: 0}
   attackRate: 1
   damage: 10
-  archerHero: {fileID: 7159134112173179556, guid: 9bc9d4b712628044b841fabe12c6151f,
-    type: 3}
-  knightHero: {fileID: 384363908788544331, guid: d5f660b849059a0459e5ea8a026b7eef,
-    type: 3}
   IsEnemySwordAttack: 1
---- !u!135 &7434959478913908075
-SphereCollider:
+--- !u!114 &5358613077187883827
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5617938643944427345}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c13d42fa4af20b84fad6a306d9fb7a1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEnemyStoppedMove: 0
+  enemyRotatPart: {fileID: 2832407924651309789}
 --- !u!1 &8290989048404231187
 GameObject:
   m_ObjectHideFlags: 0

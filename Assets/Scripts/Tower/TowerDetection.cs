@@ -1,4 +1,4 @@
-
+using System.Collections;
 using UnityEngine;
 
 public class TowerDetection : MonoBehaviour
@@ -25,8 +25,17 @@ public class TowerDetection : MonoBehaviour
     private string enemyTag = "Enemy";
     private float fireCountdown = 0f;
 
+    private Material thanderMaterial;
+    private float randomWithOffsetMax = 4f;
+    private float randomWithOffsetMin = 3f;
+
     private void Start()
     {
+        laserImpactEffect.Stop();
+        if (lineRenderer != null)
+        {
+            thanderMaterial = GetComponent<LineRenderer>().material;
+        }
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
 
@@ -76,12 +85,6 @@ public class TowerDetection : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, range);
-    }
-
     private void UpdateTarget()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
@@ -122,13 +125,22 @@ public class TowerDetection : MonoBehaviour
             laserImpactEffect.Play();
             
         }
+
         lineRenderer.SetPosition(0, bulletInstPoint.position);
         lineRenderer.SetPosition(1, target.position);
-
+        
+        thanderMaterial.mainTextureOffset = new Vector2(Random.Range(0f, 1f), 0);
+        lineRenderer.startWidth = RandomWidthOffset();
+        lineRenderer.endWidth = RandomWidthOffset();
+        
         Vector3 direction = bulletInstPoint.position - target.position;
         laserImpactEffect.transform.position = target.position + direction.normalized;
         laserImpactEffect.transform.rotation = Quaternion.LookRotation(direction);
-        
+    }
+
+    private float RandomWidthOffset()
+    {
+        return Random.Range(randomWithOffsetMin, randomWithOffsetMax);
     }
 
     private void LockOnTarget()
@@ -137,5 +149,10 @@ public class TowerDetection : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         Vector3 rotation = Quaternion.Lerp(towerRotatPart.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
         towerRotatPart.rotation = Quaternion.Euler(0, rotation.y, 0);
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 }

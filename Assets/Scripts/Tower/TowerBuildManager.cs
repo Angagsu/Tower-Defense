@@ -1,5 +1,6 @@
 using UnityEngine.EventSystems;
 using UnityEngine;
+using System.Collections;
 
 public class TowerBuildManager : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class TowerBuildManager : MonoBehaviour
         groundLayer = LayerMask.NameToLayer("Ground");
         archerHero = GameObject.FindGameObjectWithTag("ArcherHero").GetComponent<Hero>();
         knightHero = GameObject.FindGameObjectWithTag("KnightHero").GetComponent<Hero>();
+        
     }
 
     private void Update()
@@ -108,19 +110,33 @@ public class TowerBuildManager : MonoBehaviour
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if (Input.GetMouseButtonDown(0) && !IsMouseOverUI())
+        //if (Input.GetMouseButtonDown(0) && !IsMouseOverUI())
+        //{
+        //    if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider &&
+        //        raycastHit.collider.gameObject.layer.CompareTo(groundLayer) == 0)
+        //    {
+        //        Invoke("DeselectGround", 0.1f);
+        //        archerHero.DeselectHeroes();
+        //        knightHero.DeselectHeroes();
+        //        towerUpgradeUI.DeActivateDefendersMoveZone();
+        //    }
+        //}
+
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider &&
-                raycastHit.collider.gameObject.layer.CompareTo(groundLayer) == 0)
+            if (!IsMouseOverUI())
             {
-                DeselectGround();
-                archerHero.DeselectHeroes();
-                knightHero.DeselectHeroes();
-                towerUpgradeUI.DeActivateDefendersMoveZone();
+                if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider.gameObject.layer.CompareTo(groundLayer) == 0)
+                {
+                    DeselectGround();
+                    archerHero.DeselectHeroes();
+                    knightHero.DeselectHeroes();
+                    towerUpgradeUI.DeActivateDefendersMoveZone();
+                }
             }
         }
-
     }
+    
     public void DeselectGround()
     {
         selectedGround = null;
@@ -140,7 +156,7 @@ public class TowerBuildManager : MonoBehaviour
 
     private bool IsMouseOverUI()
     {
-        return EventSystem.current.IsPointerOverGameObject();
+        return EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
     }
     
 }
