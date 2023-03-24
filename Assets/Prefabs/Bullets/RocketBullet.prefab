@@ -98,5 +98,5 @@ MonoBehaviour:
   damageToEnemy: 50
   damageToHero: 25
   explosionRadius: 0
-  impactEffect: {fileID: 4946540849781154670, guid: 66fe53db8cca80e42a02c0d867270824,
+  impactEffect: {fileID: 8462262755057595137, guid: 0c4d99969289b3f45a51cbb01ae974a9,
     type: 3}

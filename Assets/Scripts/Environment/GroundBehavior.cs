@@ -156,7 +156,7 @@ public class GroundBehavior : MonoBehaviour
 
         this.tower = tower;
 
-        if (towerBlueprint == towerOnBuy.defenderTower)
+        if (towerBlueprint == towerOnBuy.DefenderTower)
         {
             defendersMovement = tower.GetComponentInChildren<DefendersMovement>();
         }
@@ -281,22 +281,22 @@ public class GroundBehavior : MonoBehaviour
 
     public Vector3 GetBuildPosition()
     {
-        if (towerBlueprint == towerOnBuy.standardTower)
+        if (towerBlueprint == towerOnBuy.ArrowTower)
         {
             positionOffset = new Vector3(0, -0.7f, 0);
         }
         
-        if (towerBlueprint == towerOnBuy.missileLauncherTower)
+        if (towerBlueprint == towerOnBuy.GolemTower || towerBlueprint == towerOnBuy.FireTower)
         {
             positionOffset = new Vector3(0, 2f, 0);
         }
         
-        if (towerBlueprint == towerOnBuy.laserTower)
+        if (towerBlueprint == towerOnBuy.ThunderTower || towerBlueprint == towerOnBuy.IceTower)
         {
             positionOffset = new Vector3(0, 0.5f, 0);
         }
 
-        if (towerBlueprint == towerOnBuy.defenderTower)
+        if (towerBlueprint == towerOnBuy.DefenderTower)
         {
             positionOffset = new Vector3(0, 2, 0);
         }

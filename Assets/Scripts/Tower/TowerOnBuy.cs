@@ -4,57 +4,77 @@ using UnityEngine;
 public class TowerOnBuy : MonoBehaviour
 {
     private TowerBuildManager towerBuildManager;
-    public GroundBehavior groundBehavior;
-    public TowerBlueprint standardTower;
-    public TowerBlueprint missileLauncherTower;
-    public TowerBlueprint laserTower;
-    public TowerBlueprint defenderTower;
+    public GroundBehavior GroundBehavior;
+    [Header("Type Of Towers")]
+    public TowerBlueprint ArrowTower;
+    public TowerBlueprint GolemTower;
+    public TowerBlueprint ThunderTower;
+    public TowerBlueprint FireTower;
+    public TowerBlueprint IceTower;
+    public TowerBlueprint DefenderTower;
     
     private void Start()
     {
         towerBuildManager = TowerBuildManager.Instance;
     }
-    public void SelectStandardTower()
+    public void SelectArrowTower()
     {
         
-        towerBuildManager.SelectTowerToBuild(standardTower);
+        towerBuildManager.SelectTowerToBuild(ArrowTower);
         towerBuildManager.SelectStandardTower = true;
         towerBuildManager.SelectMissileLauncherTower = false;
         towerBuildManager.SelectLaserTower = false;
-        groundBehavior.BuildTower(towerBuildManager.GetTowerToBuild());
+        GroundBehavior.BuildTower(towerBuildManager.GetTowerToBuild());
     }
 
-    public void SelectMissileLauncherTower()
+    public void SelectGolemTower()
     {
         
-        towerBuildManager.SelectTowerToBuild(missileLauncherTower);
+        towerBuildManager.SelectTowerToBuild(GolemTower);
         towerBuildManager.SelectMissileLauncherTower = true;
         towerBuildManager.SelectStandardTower = false;
         towerBuildManager.SelectLaserTower = false;
-        groundBehavior.BuildTower(towerBuildManager.GetTowerToBuild());
+        GroundBehavior.BuildTower(towerBuildManager.GetTowerToBuild());
+    }
+    public void SelectFireTower()
+    {
+
+        towerBuildManager.SelectTowerToBuild(FireTower);
+        towerBuildManager.SelectStandardTower = true;
+        towerBuildManager.SelectMissileLauncherTower = false;
+        towerBuildManager.SelectLaserTower = false;
+        GroundBehavior.BuildTower(towerBuildManager.GetTowerToBuild());
     }
 
-    public void SelectLaserTower()
+    public void SelectThunderTower()
     {
-        towerBuildManager.SelectTowerToBuild(laserTower);
+        towerBuildManager.SelectTowerToBuild(ThunderTower);
         towerBuildManager.SelectLaserTower = true;
         towerBuildManager.SelectMissileLauncherTower = false;
         towerBuildManager.SelectStandardTower = false;
-        groundBehavior.BuildTower(towerBuildManager.GetTowerToBuild());
+        GroundBehavior.BuildTower(towerBuildManager.GetTowerToBuild());
+    }
+    public void SelectIceTower()
+    {
+        towerBuildManager.SelectTowerToBuild(IceTower);
+        towerBuildManager.SelectLaserTower = true;
+        towerBuildManager.SelectMissileLauncherTower = false;
+        towerBuildManager.SelectStandardTower = false;
+        GroundBehavior.BuildTower(towerBuildManager.GetTowerToBuild());
     }
 
     public void SelectDefenderTower()
     {
-        towerBuildManager.SelectTowerToBuild(defenderTower);
+        towerBuildManager.SelectTowerToBuild(DefenderTower);
         towerBuildManager.SelectLaserTower = false;
         towerBuildManager.SelectMissileLauncherTower = false;
         towerBuildManager.SelectStandardTower = false;
-        groundBehavior.BuildTower(towerBuildManager.GetTowerToBuild());
+        GroundBehavior.BuildTower(towerBuildManager.GetTowerToBuild());
     }
 
     public void SetGroundForBuilding(GroundBehavior groundBehavior)
     {
-        this.groundBehavior = groundBehavior;
+        this.GroundBehavior = groundBehavior;
         
     }
 }

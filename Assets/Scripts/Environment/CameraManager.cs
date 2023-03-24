@@ -9,9 +9,9 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float UIPosZ;
 
     private Coroutine camMoveUpCor, camMoveDownCor;
-    private float minX = 44f, maxX = 44f;
-    private float minY = 40, maxY = 60f;
-    private float minZ = 0f, maxZ = 40f;
+    private float minX = 40f, maxX = 40f;
+    private float minY = 35, maxY = 60f;
+    private float minZ = 0f, maxZ = 20f;
 
     private void LateUpdate()
     {
@@ -58,7 +58,7 @@ public class CameraManager : MonoBehaviour
 
     private IEnumerator CameraMoveUp()
     {
-        while (transform.position.z < TopEdgeOfScreen - 25)
+        while (transform.position.z < TopEdgeOfScreen - 25 && transform.position.z < 19)
         {
             transform.Translate(Vector3.forward.normalized, Space.World);
             yield return null;
@@ -68,7 +68,7 @@ public class CameraManager : MonoBehaviour
 
     private IEnumerator CameraMoveDown()
     {
-        while (transform.position.z > DownEdgeOfScreen - 7)
+        while (transform.position.z > DownEdgeOfScreen - 7 && transform.position.z > 1)
         {
             transform.Translate(-Vector3.forward.normalized, Space.World);
             yield return null;

@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private SceneFader sceneFader;
 
     [Header("Optional settings. Dont Touch")]
+    [Space(10f)]
     [SerializeField] private int levelToUnlock;
     [SerializeField] private string nextLevel;
     [SerializeField] private Button timeRewindButton;
@@ -56,46 +57,28 @@ public class GameController : MonoBehaviour
        // sceneFader.FadeTo(nextLevel);
     }
 
-    public void RetryButtonOnPausePanel()
-    {
-        PauseOrContinueTheGame();
-        sceneFader.FadeTo(SceneManager.GetActiveScene().name);
-    }
-
-    public void RetryButtonOnGameOverPanel()
+    public void RetryButton()
     {
         sceneFader.FadeTo(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1;
     }
 
-    public void RetryButtonOnLevelCompletePanel()
-    {
-        sceneFader.FadeTo(SceneManager.GetActiveScene().name);
-    }
-
-    public void MenuButtonOnLevelComletePanel()
+    public void MenuButton()
     {
         sceneFader.FadeTo(menuSceneName);
+        Time.timeScale = 1;
     }
 
     public void ContinueButtonOnLevelCompletePanel()
     {
         sceneFader.FadeTo(nextLevel);
-    }
-
-    public void MenuButtonOnPausePanel()
-    {
-        PauseOrContinueTheGame();
-        sceneFader.FadeTo(menuSceneName);
-    }
-
-    public void MenuButtonOnGameOverPanel()
-    {
-        sceneFader.FadeTo(menuSceneName);
+        Time.timeScale = 1;
     }
 
     public void PauseOrContinueTheGame()
     {
         uiManager.PausePanel.SetActive(!uiManager.PausePanel.activeSelf);
+        
 
         if (uiManager.PausePanel.activeSelf)
         {

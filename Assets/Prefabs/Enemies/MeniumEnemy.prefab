@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpeed: 10
-  startSpeed: 15
+  startSpeed: 12
   healthBar: {fileID: 7348759501352773834}
   moneyGain: 20
   startHealth: 200

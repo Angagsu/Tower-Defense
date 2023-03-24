@@ -18,7 +18,8 @@ public class TowerDetection : MonoBehaviour
     [SerializeField] private bool UseLaser = false;
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private ParticleSystem laserImpactEffect;
-    [SerializeField] private Light impactLight;
+    
+    [HideInInspector] public Enemy slowedEnemy;
 
     private Transform target;
     private Enemy targetEnemy;
@@ -29,18 +30,38 @@ public class TowerDetection : MonoBehaviour
     private float randomWithOffsetMax = 4f;
     private float randomWithOffsetMin = 3f;
 
-    private void Start()
+    private void Awake()
     {
-        laserImpactEffect.Stop();
-        if (lineRenderer != null)
+        UpdateTarget();
+
+        if (lineRenderer != null && laserImpactEffect != null)
         {
             thanderMaterial = GetComponent<LineRenderer>().material;
+            if (target == null)
+            {
+                laserImpactEffect.Stop();
+            }
+             
         }
+    }
+    private void Start()
+    {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
 
     private void Update()
     {
+        if (GameController.IsGameOver)
+        {
+            enabled = false;
+            if (UseLaser && lineRenderer.enabled)
+            {
+                lineRenderer.enabled = false;
+                laserImpactEffect.Stop();
+            }
+            return;
+        }
+        
         if (target == null)
         {
             if (UseLaser)
@@ -48,7 +69,6 @@ public class TowerDetection : MonoBehaviour
                 if (lineRenderer.enabled)
                 {
                     lineRenderer.enabled = false;
-                    impactLight.enabled = false;
                     laserImpactEffect.Stop();  
                 }
             }
@@ -71,7 +91,6 @@ public class TowerDetection : MonoBehaviour
 
             fireCountdown -= Time.deltaTime;
         }
-
     }
 
     private void Shoot()
@@ -111,23 +130,24 @@ public class TowerDetection : MonoBehaviour
         {
             target = null;
         }
+        slowedEnemy = targetEnemy;
     }
 
     private void LaserAttack()
     {
+        targetEnemy.SetAttackedTower(this);
         targetEnemy.AmountOfDamagetoEnemy(damageOverTime * Time.deltaTime);
         targetEnemy.Slow(slowAmount);
 
         if (!lineRenderer.enabled)
         {
             lineRenderer.enabled = true;
-            impactLight.enabled = true;
             laserImpactEffect.Play();
-            
         }
+        
 
         lineRenderer.SetPosition(0, bulletInstPoint.position);
-        lineRenderer.SetPosition(1, target.position);
+        lineRenderer.SetPosition(1, target.localPosition);
         
         thanderMaterial.mainTextureOffset = new Vector2(Random.Range(0f, 1f), 0);
         lineRenderer.startWidth = RandomWidthOffset();

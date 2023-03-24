@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
     private SworderDefender targetSworderDefender;
     private float attackCountdown = 0;
     private GameObject archerHero, knightHero;
+    private TowerDetection tower;
 
     
     public bool IsEnemySwordAttack;
@@ -36,13 +37,22 @@ public class Enemy : MonoBehaviour
         archerHero = GameObject.FindGameObjectWithTag("ArcherHero");
         knightHero = GameObject.FindGameObjectWithTag("KnightHero");
         enemyMovement = GetComponent<EnemyMovement>();
-        enemySpeed = startSpeed;
+        SetEnemyStartSpeed();
         health = startHealth;
+        healthBar.enabled = false;
         //InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
 
     private void Update()
     {
+        if (tower != null)
+        {
+            if (tower.slowedEnemy == null || tower.slowedEnemy != this)
+            {
+                SetEnemyStartSpeed();
+            }
+        }
+        
         UpdateTargetHero();
     }
 
@@ -166,6 +176,7 @@ public class Enemy : MonoBehaviour
 
     public void AmountOfDamagetoEnemy(float amount)
     {
+        healthBar.enabled = true;
         health -= amount;
         healthBar.fillAmount = health / startHealth;
         
@@ -179,6 +190,9 @@ public class Enemy : MonoBehaviour
     {
         isDead = true;
         CalculateMoneyForKillingEnemy();
+
+        Debug.Log("EnemiesAlive " + WaveSpawner.EnemiesAlive);
+
         Destroy(gameObject);
         WaveSpawner.EnemiesAlive--;
     }
@@ -187,15 +201,23 @@ public class Enemy : MonoBehaviour
     {
         PlayerStats.Money += moneyGain;
     }
+    public void Slow(float amount)
+    {
+        enemySpeed = startSpeed * (1 - amount);
+    }
+    private void SetEnemyStartSpeed()
+    {
+        enemySpeed = startSpeed;
+    }
 
+    public void SetAttackedTower(TowerDetection tower)
+    {
+        this.tower = tower;
+    }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-    public void Slow(float amount)
-    {
-        enemySpeed = startSpeed * (1 - amount);
-    }
 }

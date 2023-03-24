@@ -39,7 +39,7 @@ public class DefendersMovement : MonoBehaviour
     {
         isDefendersStoppedMove = true;
         isDefendersSelected = false;
-        defendersNewPoint = groundStartPoint.groundBehavior.defendersStartPoint.position;
+        defendersNewPoint = groundStartPoint.GroundBehavior.defendersStartPoint.position;
         SetTheSworderDefenderArray();
         StartCoroutine(DefendersMoveTowerds(defendersNewPoint));
     }

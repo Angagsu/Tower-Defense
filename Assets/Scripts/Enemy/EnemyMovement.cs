@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
 public class EnemyMovement : MonoBehaviour
 {
 
-    public bool isEnemyStoppedMove;
+    public bool isEnemyStoppedMove = true;
 
     private Enemy enemy;
     private Transform target;
@@ -15,24 +13,49 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] private Transform enemyRotatPart;
 
+    private WaveSpawner waveSpawner;
+    private Transform[] spawnPoints;
+    private Transform[] wayPoints;
     private void Awake()
     {
+        waveSpawner = GameObject.Find("GameManager").GetComponent<WaveSpawner>();
+        enemy = GetComponent<Enemy>();
+        enemy.enemySpeed = 0;
+        spawnPoints = waveSpawner.spawnPoints;
+        if (transform.position == spawnPoints[0].position)
+        {
+            wayPoints = WayPoints.wayPoints;
+        }
+        else if(transform.position == spawnPoints[1].position)
+        {
+            wayPoints = WayPoints_2.wayPoints_2;
+        }
+        else
+        {
+            wayPoints = WayPoints_3.wayPoints_3;
+        }
         isEnemyStoppedMove = false;
     }
     private void Start()
     {
-        enemy = GetComponent<Enemy>();
-        target = WayPoints.wayPoints[0];
+        
+        target = wayPoints[0];
         enemy.enemySpeed = enemy.startSpeed;
     }
 
     private void Update()
     {
+        if (GameController.IsGameOver)
+        {
+            enabled = false;
+            return;
+        }
 
         if (isEnemyStoppedMove)
         {
             return;
         }
+
         if (!isEnemyStoppedMove)
         {
             EnemyMove();
@@ -64,14 +87,14 @@ public class EnemyMovement : MonoBehaviour
     
     private void GetNextWayPoint()
     {
-        if (WayPoints.wayPoints.Length - 1 <= wayCountIndex)
+        if (wayPoints.Length - 1 <= wayCountIndex)
         {
             PathEnd();
             return;
         }
 
         wayCountIndex++;
-        target = WayPoints.wayPoints[wayCountIndex];
+        target = wayPoints[wayCountIndex];
     }
 
     private void PathEnd()

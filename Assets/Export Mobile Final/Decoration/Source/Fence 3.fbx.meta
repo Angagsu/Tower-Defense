@@ -7,7 +7,12 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Decoration Atlas.006
+      name: Decoration Atlas
+    second: {fileID: 2100000, guid: eaa8e8ef44e0c3e489ee53479b6b3ac2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Decoration Atlas.013
     second: {fileID: 2100000, guid: eaa8e8ef44e0c3e489ee53479b6b3ac2, type: 2}
   materials:
     materialImportMode: 2
