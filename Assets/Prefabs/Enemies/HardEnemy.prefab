@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 2846718536948553163}
   - component: {fileID: 6135657423533488615}
   - component: {fileID: 5540715423265503119}
+  - component: {fileID: -6739080030703460527}
   m_Layer: 0
   m_Name: HardEnemy
   m_TagString: Enemy
@@ -223,12 +224,14 @@ MonoBehaviour:
   healthBar: {fileID: 7348759501352773834}
   moneyGain: 25
   startHealth: 400
-  range: 7
+  range: 3
+  IsDead: 0
   bulletInstPoint: {fileID: 0}
   bulletPrefab: {fileID: 0}
   attackRate: 1
   damage: 60
   IsEnemySwordAttack: 1
+  CanAttack: 0
 --- !u!114 &5540715423265503119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,6 +246,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEnemyStoppedMove: 0
   enemyRotatPart: {fileID: 3140978159071118580}
+--- !u!95 &-6739080030703460527
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799464789194553817}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3394561336572777382
 GameObject:
   m_ObjectHideFlags: 0

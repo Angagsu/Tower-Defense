@@ -5,14 +5,14 @@ using UnityEngine.EventSystems;
 
 public class DefendersMovement : MonoBehaviour
 {
-    private bool isDefendersStoppedMove;
+    public bool isDefendersStoppedMove;
     public bool isDefendersSelected;
 
     private Vector3 defendersNewPoint;
     private SworderDefender[] sworderDefender;
     
     private Coroutine coroutine;
-    private CharacterController characterController;
+    
     private int groundLayer;
 
     private TowerUpgradeUI towerUpgradeUI;
@@ -20,20 +20,24 @@ public class DefendersMovement : MonoBehaviour
     [SerializeField] private GameObject[] sworderDefendersObj;
     [SerializeField] private Transform towerTransform;
     [SerializeField] private float defendersSpeed;
+    [SerializeField] private float timeOfRevive;
     private Camera mainCamera;
     private TowerOnBuy groundStartPoint;
 
+    Animator[] defendersAnimators = new Animator[3];
+    private int isStopedMoveHash;
 
     private void Awake()
     {
         mainCamera = Camera.main;
         groundStartPoint = GameObject.Find("GameManager").GetComponent<TowerOnBuy>();
         towerUpgradeUI = GameObject.Find("TowerUpgradeUI").GetComponent<TowerUpgradeUI>();
-        characterController = GetComponent<CharacterController>();
         sworderDefender = new SworderDefender[3];
-        //sworderDefender = GetComponentsInChildren<SworderDefender>();
         
         groundLayer = LayerMask.NameToLayer("DefendersMoveZone");
+
+        isStopedMoveHash = Animator.StringToHash("isStopedMove");
+        
     }
     void Start()
     {
@@ -42,6 +46,7 @@ public class DefendersMovement : MonoBehaviour
         defendersNewPoint = groundStartPoint.GroundBehavior.defendersStartPoint.position;
         SetTheSworderDefenderArray();
         StartCoroutine(DefendersMoveTowerds(defendersNewPoint));
+        
     }
 
     
@@ -91,6 +96,8 @@ public class DefendersMovement : MonoBehaviour
         for (int i = 0; i < sworderDefendersObj.Length; i++)
         {
             sworderDefender[i] = sworderDefendersObj[i].GetComponent<SworderDefender>();
+            defendersAnimators[i] = sworderDefendersObj[i].GetComponentInChildren<Animator>();
+            defendersAnimators[i].SetBool(isStopedMoveHash, false);
         }
     }
     private void DisableTheDefenderWhenDies()
@@ -98,7 +105,7 @@ public class DefendersMovement : MonoBehaviour
         for (int i = 0; i < sworderDefendersObj.Length; i++)
         {
             
-            if (sworderDefender[i].isDefenderDead)
+            if (sworderDefender[i].IsDefenderDead)
             {
                 sworderDefendersObj[i].SetActive(false);
                 StartCoroutine(TimerForDefenderRevive(sworderDefender[i]));
@@ -133,7 +140,10 @@ public class DefendersMovement : MonoBehaviour
         }
 
         isDefendersStoppedMove = true;
-        
+        for (int i = 0; i < defendersAnimators.Length; i++)
+        {
+            defendersAnimators[i].SetBool(isStopedMoveHash, true);
+        }
     }
 
     public void DeSelectDefenders()
@@ -143,9 +153,9 @@ public class DefendersMovement : MonoBehaviour
 
     private IEnumerator TimerForDefenderRevive(SworderDefender defender)
     {
-         while (defender.isDefenderDead)
+         while (defender.IsDefenderDead)
          {
-             yield return new WaitForSeconds(8);
+             yield return new WaitForSeconds(timeOfRevive);
              defender.ReviveDefender();
              defender.gameObject.SetActive(true);
          } 

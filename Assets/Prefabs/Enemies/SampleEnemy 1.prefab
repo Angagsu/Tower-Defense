@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 768953071050994987}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.336}
+  m_LocalPosition: {x: 0, y: -0.4499998, z: 0.336}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 3289552885620458283}
@@ -188,7 +188,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.3, y: 4.5}
+  m_AnchoredPosition: {x: 0.3, y: 3.2100003}
   m_SizeDelta: {x: 450, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3371389632621799895
@@ -1011,8 +1011,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.7269833
-  m_Center: {x: 0, y: 0, z: -0.5078554}
+  m_Radius: 0.8092292
+  m_Center: {x: 0.12, y: 0.25, z: -0.5078554}
 --- !u!114 &8430483690710548398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1030,12 +1030,15 @@ MonoBehaviour:
   healthBar: {fileID: 7576263119397115619}
   moneyGain: 10
   startHealth: 100
-  range: 7
-  bulletInstPoint: {fileID: 0}
-  bulletPrefab: {fileID: 0}
+  range: 3
+  IsDead: 0
+  bulletInstPoint: {fileID: 4005911720417386232}
+  bulletPrefab: {fileID: 1639264894093340335, guid: 5786d213a6b41444cb4f22ef52f72a0b,
+    type: 3}
   attackRate: 1
   damage: 10
   IsEnemySwordAttack: 1
+  CanAttack: 0
 --- !u!114 &5358613077187883827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1231,8 +1234,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7256788613424104794}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: -4, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 0.19, y: -2.61, z: -0.05}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 3343246826025721329}
   - {fileID: 9113088288562474050}
@@ -1250,7 +1253,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: de1352eea8973c5499407b70eaf4f249, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0

@@ -1480,7 +1480,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 8234407308566504780, guid: 5f0ee30dd2dba1d4dad330f4d4e36da5,
+    - sprite: {fileID: 8234407308566504780, guid: df96120a4382b6e4e96a2040854aa20d,
         type: 3}
     flipU: 0
     flipV: 0
@@ -4759,7 +4759,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 861a90c2b15c93a41b3f1af27315bc24, type: 2}
+  - {fileID: 2100000, guid: 13b75c9e4a0e98745a0728a2cd5b4d99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6285,7 +6285,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: -6451309535973135589, guid: 5f0ee30dd2dba1d4dad330f4d4e36da5,
+    - sprite: {fileID: -1950858321607379560, guid: df96120a4382b6e4e96a2040854aa20d,
         type: 3}
     flipU: 0
     flipV: 0
@@ -9564,7 +9564,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 861a90c2b15c93a41b3f1af27315bc24, type: 2}
+  - {fileID: 2100000, guid: 13b75c9e4a0e98745a0728a2cd5b4d99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11090,7 +11090,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: -1950858321607379560, guid: 5f0ee30dd2dba1d4dad330f4d4e36da5,
+    - sprite: {fileID: -1950858321607379560, guid: df96120a4382b6e4e96a2040854aa20d,
         type: 3}
     flipU: 0
     flipV: 0
@@ -14369,7 +14369,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 861a90c2b15c93a41b3f1af27315bc24, type: 2}
+  - {fileID: 2100000, guid: 13b75c9e4a0e98745a0728a2cd5b4d99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14440,7 +14440,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8108154112769864005}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

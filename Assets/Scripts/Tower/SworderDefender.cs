@@ -6,13 +6,12 @@ using UnityEngine.UI;
 public class SworderDefender : MonoBehaviour
 {
     private string enemyTag = "Enemy";
-    private Transform target;
-    private EnemyMovement targetEnemy;
-    private Enemy enemy;
+    public Transform target;
     private float attackCountdown = 0f;
     private float health;
 
-    public bool isDefenderDead;
+    public bool IsDefenderDead;
+    public bool HasTarget;
 
     [SerializeField] private float range = 5f;
     [SerializeField] private float attackRate = 1f;
@@ -21,12 +20,29 @@ public class SworderDefender : MonoBehaviour
     [SerializeField] public Transform defenderRotatPart;
     [SerializeField] private Image healthBar;
     [SerializeField] private float startHealth = 1000f;
+
+    public Enemy targetEnemy = null;
+    public Enemy currentAttackerEnemy = null;
+    float distanceToAttackerEnemy;
+
+    #region Animation
     
-    
+    private Animator animator;
+    private int isDeadHash;
+    private int isStopedMoveHash;
+    private int isAttackHash;
+
+    #endregion
     void Start()
     {
         health = startHealth;
-        isDefenderDead = false;
+        IsDefenderDead = false;
+        HasTarget = false;
+
+        animator = GetComponentInChildren<Animator>();
+        isDeadHash = Animator.StringToHash("isDead");
+        isStopedMoveHash = Animator.StringToHash("isStopedMove");
+        isAttackHash = Animator.StringToHash("isAttack");
     }
 
     void Update()
@@ -44,43 +60,61 @@ public class SworderDefender : MonoBehaviour
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
-        
+        Enemy enemyTarget = null;
+
         foreach (GameObject enemy in enemies)
         {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            enemyTarget = enemy.GetComponent<Enemy>();
 
-            if (distanceToEnemy < shortestDistance)
+            if (distanceToEnemy < shortestDistance && enemyTarget != null && !enemyTarget.IsDead)
             {
                 shortestDistance = distanceToEnemy;
                 nearestEnemy = enemy;
             }
         }
-
-        if (nearestEnemy != null && shortestDistance <= range && !isDefenderDead)
+        
+        if (nearestEnemy != null && shortestDistance <= range && !IsDefenderDead)
         {
+            HasTarget = true;
+            targetEnemy = nearestEnemy.GetComponent<Enemy>();
             target = nearestEnemy.transform;
-            targetEnemy = nearestEnemy.GetComponent<EnemyMovement>();
-            enemy = nearestEnemy.GetComponent<Enemy>();
-            targetEnemy.isEnemyStoppedMove = true;
+
+            animator.SetBool(isAttackHash, true);
+            
             if (attackCountdown <= 0)
             {
-                attackCountdown = 1 / attackRate;
-                if (enemy.IsEnemySwordAttack)
-                {
-                    
-                    enemy.EnemySwordAttackToDefenders(this.transform);
-                    DefenderSwordAttack(target);
-                    Debug.Log("Defender Attacked");
-                }
-                
+                attackCountdown = attackRate;
+                DefenderSwordAttack(target);
+                Debug.Log("Defender Attacked");
             }
 
             attackCountdown -= Time.deltaTime;
         }
         else
         {
-            target = null;
+            HasTarget = false;
+            nearestEnemy = null;
+            targetEnemy = null;
+            animator.SetBool(isAttackHash, false);
         }
+
+        if (currentAttackerEnemy != null)
+        {
+            Transform attackerEnemyPos = currentAttackerEnemy.GetComponent<Transform>();
+            distanceToAttackerEnemy = Vector3.Distance(transform.position, attackerEnemyPos.position);
+            Debug.Log("Current Attacker Enemy Is Not Null !!!");
+            if (distanceToAttackerEnemy > range)
+            {
+                currentAttackerEnemy = null;
+            }
+        }
+
+    }
+    
+    public void SetCurrentAttackerEnemy(Enemy enemy)
+    {
+        currentAttackerEnemy = enemy;
     }
 
     private void DefenderSwordAttack(Transform target)
@@ -92,7 +126,7 @@ public class SworderDefender : MonoBehaviour
         }
     }
 
-    public void AmountOfDamagetoDefender(float amount)
+    public void AmountOfDamageToDefender(float amount)
     {
         health -= amount;
         healthBar.fillAmount = health / startHealth;
@@ -105,15 +139,18 @@ public class SworderDefender : MonoBehaviour
 
     private void DefenderDie()
     {
-        isDefenderDead = true;
+        IsDefenderDead = true;
+        animator.SetBool(isDeadHash, true);
+        
     }
 
     public void ReviveDefender()
     {
         health = startHealth;
         healthBar.fillAmount = 1f;
-        isDefenderDead = false;
-        
+        IsDefenderDead = false;
+        animator.SetBool(isDeadHash, false);
+        animator.SetBool(isStopedMoveHash, true);
     }
     
     private void LockOnTarget()

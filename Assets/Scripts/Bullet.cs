@@ -120,7 +120,7 @@ public class Bullet : MonoBehaviour
 
         if (def != null)
         {
-			def.AmountOfDamagetoDefender(damageToHero);
+			def.AmountOfDamageToDefender(damageToHero);
         }
     }
 	void OnDrawGizmosSelected()

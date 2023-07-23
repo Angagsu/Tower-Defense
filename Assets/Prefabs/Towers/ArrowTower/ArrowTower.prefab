@@ -57,6 +57,7 @@ MonoBehaviour:
   UseLaser: 0
   lineRenderer: {fileID: 0}
   laserImpactEffect: {fileID: 0}
+  slowedEnemy: {fileID: 0}
 --- !u!1 &3557080501557317368
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,8 +8,7 @@ public class Hero : MonoBehaviour
     private HeroesMovement heroesMovement;
     private HeroesMovement archerHero, knightHero;
     private Camera mainCamera;
-    private EnemyMovement targetEnemy;
-    private Enemy enemy;
+    
     public Transform target;
     private string enemyTag = "Enemy";
     private float attackCountdown = 0f;
@@ -101,12 +100,14 @@ public class Hero : MonoBehaviour
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
+        Enemy enemyTarget = null;
 
         foreach (GameObject enemy in enemies)
         {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            enemyTarget = enemy.GetComponent<Enemy>();
 
-            if (distanceToEnemy < shortestDistance)
+            if (distanceToEnemy < shortestDistance && enemyTarget != null && !enemyTarget.IsDead)
             {
                 shortestDistance = distanceToEnemy;
                 nearestEnemy = enemy;
@@ -116,8 +117,6 @@ public class Hero : MonoBehaviour
         if (nearestEnemy != null && shortestDistance <= range && !isHeroDead)
         {
             target = nearestEnemy.transform;
-            targetEnemy = nearestEnemy.GetComponent<EnemyMovement>();
-            enemy = nearestEnemy.GetComponent<Enemy>();
             
             if (attackCountdown <= 0)
             {
@@ -125,11 +124,12 @@ public class Hero : MonoBehaviour
                 if (IsSwordAttack)
                 {
                     SwordAttack(target);
-                    Debug.Log("Sword Attack");
+                    Debug.Log("Hero Sword Attack");
                 }
                 else
                 {
                     ArcherAttack();
+                    Debug.Log("Hero Archer Attack");
                 }
             }
 

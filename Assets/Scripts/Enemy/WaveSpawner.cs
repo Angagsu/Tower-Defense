@@ -92,7 +92,6 @@ public class WaveSpawner : MonoBehaviour
 
         for (int i = 0; i < currentCountOfEnemyToSpawn; i++)
         {
-
             if (waypoints_1Wave.enemyPrefab.Length != 0 && waypoints_1Wave.countOfEnemyToSpawn > i)
             {
                 Instantiate(waypoints_1Wave.enemyPrefab[i], spawnPoints[0].position, spawnPoints[0].rotation);

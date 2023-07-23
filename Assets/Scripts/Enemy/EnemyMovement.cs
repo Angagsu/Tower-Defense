@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class EnemyMovement : MonoBehaviour
 {
 
@@ -16,6 +15,9 @@ public class EnemyMovement : MonoBehaviour
     private WaveSpawner waveSpawner;
     private Transform[] spawnPoints;
     private Transform[] wayPoints;
+
+    private float offsetX;
+    private float offsetZ;
     private void Awake()
     {
         waveSpawner = GameObject.Find("GameManager").GetComponent<WaveSpawner>();
@@ -38,9 +40,10 @@ public class EnemyMovement : MonoBehaviour
     }
     private void Start()
     {
-        
         target = wayPoints[0];
         enemy.enemySpeed = enemy.startSpeed;
+        offsetX = Random.Range(-2, 2);
+        offsetZ = Random.Range(-2, 2);
     }
 
     private void Update()
@@ -55,23 +58,26 @@ public class EnemyMovement : MonoBehaviour
         {
             return;
         }
-
+        
         if (!isEnemyStoppedMove)
         {
             EnemyMove();
             LockOnTarget(target);
         }
+    }
+    private void EnemyMove()
+    {
+        Vector3 randomDir = new Vector3(target.position.x + offsetX, target.position.y, target.position.z + offsetZ);
 
-        if (Vector3.Distance(target.transform.position, transform.position) <= 0.5f && !isEnemyStoppedMove)
+        Vector3 direction = randomDir - transform.position;
+        transform.Translate(direction.normalized * enemy.enemySpeed * Time.deltaTime, Space.World);
+
+        if (Vector3.Distance(randomDir, transform.position) <= 3f && !isEnemyStoppedMove)
         {
             GetNextWayPoint();
         }
     }
-    private void EnemyMove()
-    {
-        Vector3 direction = target.position - transform.position;
-        transform.Translate(direction.normalized * enemy.enemySpeed * Time.deltaTime, Space.World);
-    }
+
     public void LockOnTarget(Transform target)
     {
         if (!isEnemyStoppedMove)
@@ -95,6 +101,8 @@ public class EnemyMovement : MonoBehaviour
 
         wayCountIndex++;
         target = wayPoints[wayCountIndex];
+        //offsetX = Random.Range(-2, 2);
+        //offsetZ = Random.Range(-2, 2);
     }
 
     private void PathEnd()

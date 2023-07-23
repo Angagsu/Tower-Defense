@@ -23,31 +23,22 @@ public class TowerDetection : MonoBehaviour
 
     private Transform target;
     private Enemy targetEnemy;
-    private string enemyTag = "Enemy";
+    private readonly string enemyTag = "Enemy";
     private float fireCountdown = 0f;
 
     private Material thanderMaterial;
-    private float randomWithOffsetMax = 4f;
-    private float randomWithOffsetMin = 3f;
+    private readonly float randomWithOffsetMax = 4f;
+    private readonly float randomWithOffsetMin = 3f;
 
     private void Awake()
     {
-        UpdateTarget();
-
         if (lineRenderer != null && laserImpactEffect != null)
         {
             thanderMaterial = GetComponent<LineRenderer>().material;
-            if (target == null)
-            {
-                laserImpactEffect.Stop();
-            }
-             
         }
+        UpdateTarget();
     }
-    private void Start()
-    {
-        InvokeRepeating("UpdateTarget", 0f, 0.5f);
-    }
+    
 
     private void Update()
     {
@@ -61,36 +52,8 @@ public class TowerDetection : MonoBehaviour
             }
             return;
         }
-        
-        if (target == null)
-        {
-            if (UseLaser)
-            {
-                if (lineRenderer.enabled)
-                {
-                    lineRenderer.enabled = false;
-                    laserImpactEffect.Stop();  
-                }
-            }
-            return;
-        }
 
-        LockOnTarget();
-
-        if (UseLaser)
-        {
-            LaserAttack();
-        }
-        else
-        {
-            if (fireCountdown <= 0)
-            {
-                Shoot();
-                fireCountdown = 1f / fireRate;
-            }
-
-            fireCountdown -= Time.deltaTime;
-        }
+        UpdateTarget();
     }
 
     private void Shoot()
@@ -109,53 +72,79 @@ public class TowerDetection : MonoBehaviour
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
-
+        Enemy enemyTarget = null;
+        
         foreach (GameObject enemy in enemies)
         {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            enemyTarget = enemy.GetComponent<Enemy>();
 
-            if (distanceToEnemy < shortestDistance)
+            if (distanceToEnemy < shortestDistance && enemyTarget != null && !enemyTarget.IsDead)
             {
                 shortestDistance = distanceToEnemy;
                 nearestEnemy = enemy;
             }
+            
         }
 
         if (nearestEnemy != null && shortestDistance <= range)
         {
             target = nearestEnemy.transform;
             targetEnemy = nearestEnemy.GetComponent<Enemy>();
+
+            LockOnTarget();
+
+            if (UseLaser)
+            {
+                LaserAttack();
+            }
+            else
+            {
+                if (fireCountdown <= 0)
+                {
+                    Shoot();
+                    fireCountdown = 1f / fireRate;
+                }
+
+                fireCountdown -= Time.deltaTime;
+            }
+            
         }
         else
         {
             target = null;
+            if (UseLaser && lineRenderer.enabled)
+            {
+                lineRenderer.enabled = false;
+                laserImpactEffect.Stop();
+            }
         }
         slowedEnemy = targetEnemy;
     }
 
     private void LaserAttack()
     {
-        targetEnemy.SetAttackedTower(this);
-        targetEnemy.AmountOfDamagetoEnemy(damageOverTime * Time.deltaTime);
-        targetEnemy.Slow(slowAmount);
-
         if (!lineRenderer.enabled)
         {
             lineRenderer.enabled = true;
             laserImpactEffect.Play();
         }
-        
+
+        targetEnemy.SetAttackedTower(this);
+        targetEnemy.AmountOfDamagetoEnemy(damageOverTime * Time.deltaTime);
+        targetEnemy.Slow(slowAmount);
 
         lineRenderer.SetPosition(0, bulletInstPoint.position);
         lineRenderer.SetPosition(1, target.localPosition);
-        
+
         thanderMaterial.mainTextureOffset = new Vector2(Random.Range(0f, 1f), 0);
         lineRenderer.startWidth = RandomWidthOffset();
         lineRenderer.endWidth = RandomWidthOffset();
-        
+
         Vector3 direction = bulletInstPoint.position - target.position;
         laserImpactEffect.transform.position = target.position + direction.normalized;
         laserImpactEffect.transform.rotation = Quaternion.LookRotation(direction);
+
     }
 
     private float RandomWidthOffset()
