@@ -16,7 +16,7 @@ public class GroundBehavior : MonoBehaviour
     [SerializeField] private Color cantBuildColor;
     [SerializeField] private GameObject buildEffectPrefab;
 
-    public DefendersMovement defendersMovement;
+    public DefenderMovement defendersMovement;
     [HideInInspector] public GameObject tower;
 
     [HideInInspector] public TowerBlueprint towerBlueprint;
@@ -63,7 +63,7 @@ public class GroundBehavior : MonoBehaviour
 
         if (towerBlueprint == towerOnBuy.DefenderTower)
         {
-            defendersMovement = tower.GetComponentInChildren<DefendersMovement>();
+            defendersMovement = tower.GetComponentInChildren<DefenderMovement>();
         }
         
         towerBuildManager.SelectStandardTower = false;
@@ -210,7 +210,7 @@ public class GroundBehavior : MonoBehaviour
     
     public void SelectDefenderTowerOnUI()
     {
-        defendersMovement.isDefendersSelected = true;
+        defendersMovement.SelectOrDeSelectDefenders(true);
         towerBuildManager.DeselectGround();
     }
     

@@ -21,13 +21,23 @@ public class UIManager : MonoBehaviour
     public GameObject LevelCompletePanel { get { return levelCompetePanel; } }
 
     private TowerOnBuy towerCost;
-    private WaveSpawner waveSpawner;
-    void Start()
-    {
-        waveSpawner = GetComponent<WaveSpawner>();
-        towerCost = GetComponent<TowerOnBuy>();
+    [SerializeField]  FactoriesService factoriesService;
 
+    private void Awake()
+    {
+        factoriesService.WaveComplited += FactoriesService_WaveComplited;
+    }
+
+    void Start()
+    {      
+        towerCost = GetComponent<TowerOnBuy>();
+        FactoriesService_WaveComplited();
         InvokeRepeating("TowerCostsConvetToStringOnUI", 0f, 1f);
+    }
+
+    private void OnDisable()
+    {
+        factoriesService.WaveComplited -= FactoriesService_WaveComplited;
     }
 
     void Update()
@@ -35,12 +45,17 @@ public class UIManager : MonoBehaviour
         FloatConvetToStringOnUI();
     }
 
+    private void FactoriesService_WaveComplited()
+    {
+        waveText.text = "Wave  - " + (factoriesService.WaveIndex + 1) + '/' + factoriesService.Wayes[0].Waves.Length;
+    }
+
     private void FloatConvetToStringOnUI()
     {
-        if (waveSpawner.WaveIndex != waveSpawner.waypoints_1Waves.Length)
-        {
-            waveText.text = "Wave  - " + (waveSpawner.WaveIndex + 1) + '/' + waveSpawner.waypoints_1Waves.Length;
-        }
+       //if (factoriesService.WaveIndex != factoriesService.waypoints_1Waves.Length)
+       //{
+       //    waveText.text = "Wave  - " + (factoriesService.WaveIndex + 1) + '/' + factoriesService.waypoints_1Waves.Length;
+       //}
         
         moneyText.text = "Money - $" + PlayerStats.Money.ToString();
         livesText.text = "Lives   - " + PlayerStats.Lives.ToString();
@@ -75,6 +90,7 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
+
     public void TimeRewindButton()
     {
         IsTimeRewind = !IsTimeRewind;

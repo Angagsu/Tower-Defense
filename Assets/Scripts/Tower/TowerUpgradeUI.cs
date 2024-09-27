@@ -5,7 +5,7 @@ using UnityEngine;
 public class TowerUpgradeUI : MonoBehaviour
 {
     private GroundBehavior selectedGround;
-    private DefendersMovement defendersMovement;
+    private DefenderMovement defendersMovement;
 
     public GameObject towerUpgradeUI, towerBuildUI;
 

@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
     private Hero targetHero;
 
     private SworderDefender targetSworderDefender;
-    private DefendersMovement targetDefenderMovement;
+    private DefendersMove targetDefenderMovement;
 
     
     private GameObject archerHero, knightHero;
@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
 
 
     private Animator animator;
-    private int isEnemyStopedMoveHash;
+    private int isMovesHash;
     private int isDeadHash;
 
     public bool IsEnemySwordAttack;
@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
         health = startHealth;
         healthBar.enabled = false;
         animator = GetComponentInChildren<Animator>();
-        isEnemyStopedMoveHash = Animator.StringToHash("isEnemyStopedMove");
+        isMovesHash = Animator.StringToHash("isMoves");
         isDeadHash = Animator.StringToHash("isDead");
         CanAttack = true;
     }
@@ -139,7 +139,7 @@ public class Enemy : MonoBehaviour
             currentShortestDistance = shortestDistanceToDefender;
             targetPos = nearestDefender.transform;
             targetSworderDefender = nearestDefender.GetComponent<SworderDefender>();
-            targetDefenderMovement = nearestDefender.GetComponentInParent<DefendersMovement>();
+            targetDefenderMovement = nearestDefender.GetComponentInParent<DefendersMove>();
             
         }
 
@@ -153,7 +153,7 @@ public class Enemy : MonoBehaviour
                 enemyMovement.isEnemyStoppedMove = true;
                 enemyMovement.LockOnTarget(targetPos);
 
-                animator.SetBool(isEnemyStopedMoveHash, true);
+                animator.SetBool(isMovesHash, true);
 
                 
 
@@ -182,7 +182,7 @@ public class Enemy : MonoBehaviour
                 targetSworderDefender = null;
                 targetDefenderMovement = null;
                 enemyMovement.isEnemyStoppedMove = false;
-                animator.SetBool(isEnemyStopedMoveHash, false);
+                animator.SetBool(isMovesHash, false);
             }
 
         }
@@ -193,7 +193,7 @@ public class Enemy : MonoBehaviour
             targetSworderDefender = null;
             targetDefenderMovement = null;
             enemyMovement.isEnemyStoppedMove = false;
-            animator.SetBool(isEnemyStopedMoveHash, false);
+            animator.SetBool(isMovesHash, false);
         }
 
         attackCountdown -= Time.deltaTime;
@@ -223,7 +223,7 @@ public class Enemy : MonoBehaviour
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         if (bullet != null)
         {
-            bullet.BulletSeek(target);
+            //bullet.SetTarget(target);
         }
         Debug.Log("Enemy Archer Attack ");
     }
@@ -233,7 +233,7 @@ public class Enemy : MonoBehaviour
         Hero h = hero.GetComponent<Hero>();
         if (h != null)
         {
-            h.AmountOfDamagetoHero(damage);
+            h.AmountOfDamageToHero(damage);
         }
 
         Debug.Log("Enemy Attacked To Hero !!! ");

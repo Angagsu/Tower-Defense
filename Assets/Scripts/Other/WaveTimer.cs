@@ -99,10 +99,10 @@ public class WaveTimer : MonoBehaviour
         waypoints_3WavesCallButton.gameObject.SetActive(false);
     }
 
-    private int CalculateMoneyForQuickStartNextWave()
+    private void CalculateMoneyForQuickStartNextWave()
     {
         moneyGain = (int)(remainingDuration) * (2 + waveSpawner.WaveIndex);
         Debug.Log("Money Gain " + moneyGain);
-        return PlayerStats.Money += moneyGain;
+        PlayerStats.Money += moneyGain;
     }
 }

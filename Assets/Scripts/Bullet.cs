@@ -1,4 +1,5 @@
-
+using Assets.Scripts;
+using Assets.Scripts.Tower;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -6,26 +7,26 @@ public class Bullet : MonoBehaviour
 	private Transform target;
 
 	[SerializeField] private float speed = 70f; 
-	[SerializeField] private int damageToEnemy = 50;
-	[SerializeField] private int damageToHero = 25;
 	[SerializeField] private float explosionRadius = 0f;
 	[SerializeField] private GameObject impactEffect;
+
 	private Camera cameraMain;
+	private float damage;
 
     private void Start()
     {
 		cameraMain = Camera.main;
     }
 
-    public void BulletSeek(Transform _target)
+    public void SetTarget(Transform _target, float damage)
 	{
 		target = _target;
+		this.damage = damage;
 	}
 
 	
 	void Update()
 	{
-
 		if (target == null)
 		{
 			Destroy(gameObject);
@@ -48,7 +49,7 @@ public class Bullet : MonoBehaviour
 
 	void HitTarget()
 	{
-		GameObject effectIns = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
+		GameObject effectIns = Instantiate(impactEffect, transform.position, transform.rotation);
 		Vector3 direction = effectIns.transform.position - target.transform.position;
 		effectIns.transform.position = target.position + direction.normalized;
 		effectIns.transform.rotation = Quaternion.LookRotation(direction);
@@ -62,7 +63,7 @@ public class Bullet : MonoBehaviour
 		else
 		{
 			Damage(target);
-			DamageToDefenders(target);
+			DamageToTower(target);
 		}
 
 		Destroy(gameObject);
@@ -73,54 +74,32 @@ public class Bullet : MonoBehaviour
 		Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
 		foreach (Collider collider in colliders)
 		{
-			if (collider.tag == "Enemy")
+			if (collider.gameObject.TryGetComponent(out BaseMonster monster))
 			{
 				Damage(collider.transform);
 			}
 
-            if (collider.tag == "ArcherHero" || collider.tag == "KnightHero")
+            if (collider.gameObject.TryGetComponent<IAttackable>(out var tower)) 
             {
-				DamageToHeroes(collider.transform);
-            }
-
-            if (collider.tag == "Defender")
-            {
-				DamageToDefenders(collider.transform);
+				tower.TakeDamage(damage);
+				DamageToTower(collider.transform);
             }
 		}
 	}
 
-	void Damage(Transform enemy)
+	void Damage(Transform target)
 	{
-		Enemy e = enemy.GetComponent<Enemy>();
-
-		if (e != null)
+		if (target.TryGetComponent<Character>(out var enemy))
 		{
-			e.AmountOfDamagetoEnemy(damageToEnemy);
-		}
-        else
-        {
-			DamageToHeroes(target);
+			enemy.TakeDamage(damage);
 		}
 	}
 
-	private void DamageToHeroes(Transform hero)
+	private void DamageToTower(Transform target)
     {
-		Hero h = hero.GetComponent<Hero>();
-
-        if (h != null)
+        if (target.TryGetComponent<IAttackableTower>(out var tower))
         {
-			h.AmountOfDamagetoHero(damageToHero);
-        }
-    }
-
-	private void DamageToDefenders(Transform defender)
-    {
-		SworderDefender def = defender.GetComponent<SworderDefender>();
-
-        if (def != null)
-        {
-			def.AmountOfDamageToDefender(damageToHero);
+			tower.TakeDamage(damage);
         }
     }
 	void OnDrawGizmosSelected()

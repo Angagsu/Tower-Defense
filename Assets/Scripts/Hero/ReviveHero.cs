@@ -27,7 +27,7 @@ public class ReviveHero : MonoBehaviour
 
     private void Update()
     {
-        DisableTheHeroWhenDies();
+        OnHeroDied();
     }
 
     private void InstantiateTheHero()
@@ -38,7 +38,7 @@ public class ReviveHero : MonoBehaviour
             
         }
     }
-    private void DisableTheHeroWhenDies()
+    private void OnHeroDied()
     {
         for (int i = 0; i < heroesObj.Length; i++)
         {

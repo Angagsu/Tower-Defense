@@ -22,7 +22,5 @@ public class TowersBuildUI : MonoBehaviour
     {
         towerBuildUI.SetActive(false);
         transform.position = startPosition;
-    }
-
-    
+    } 
 }

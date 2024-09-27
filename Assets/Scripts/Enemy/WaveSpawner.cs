@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 
+
 public class WaveSpawner : MonoBehaviour
 {
     [Space(10f)]
@@ -34,7 +35,7 @@ public class WaveSpawner : MonoBehaviour
     private int waveIndex;
     private float countdown = 5f;
     private int currentCountOfEnemyToSpawn = 0;
-    
+    private Coroutine coroutine;
 
     private void Start()
     {
@@ -109,6 +110,7 @@ public class WaveSpawner : MonoBehaviour
         }
 
         waveIndex++;
+
         if (!GameController.IsGameOver)
         {
             waveTimer.ActivateWaveTimerButtons();
@@ -116,7 +118,11 @@ public class WaveSpawner : MonoBehaviour
     }
     public void StartSpawningNextWave()
     {
-        StartCoroutine(SpawnWaves());
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+        coroutine = StartCoroutine(SpawnWaves());
     }
 
 }

@@ -4,11 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
-  - ArcherHero
-  - KnightHero
   - Hero
   - Defender
+  - Monster
+  - ArcherHero
   layers:
   - Default
   - TransparentFX
@@ -28,8 +27,8 @@ TagManager:
   - GroundEnemyTargettingProjectiles
   - DefendersMoveZone
   - BuildingArea
-  - 
-  - 
+  - Monster
+  - Hero
   - 
   - 
   - 

@@ -8,9 +8,10 @@ public class TowerBuildManager : MonoBehaviour
 
     
     private GroundBehavior selectedGround;
+    [SerializeField] private HeroesReviveHandler heroesReviveHandler;
     [SerializeField] private TowersBuildUI towersBuildUI;
     [SerializeField] private TowerUpgradeUI towerUpgradeUI;
-    private Hero archerHero, knightHero;
+    private BaseHero[] heroes;
     
     [HideInInspector]
     public TowerBlueprint towerToBuild;
@@ -39,9 +40,13 @@ public class TowerBuildManager : MonoBehaviour
         towerUpgradeUI = GameObject.Find("TowerUpgradeUI").GetComponent<TowerUpgradeUI>();
         mainCamera = Camera.main;
         groundLayer = LayerMask.NameToLayer("Ground");
-        archerHero = GameObject.FindGameObjectWithTag("ArcherHero").GetComponent<Hero>();
-        knightHero = GameObject.FindGameObjectWithTag("KnightHero").GetComponent<Hero>();
-        
+
+
+    }
+
+    private void Start()
+    {
+        heroes = heroesReviveHandler.GetHeroesOnScene();
     }
 
     private void Update()
@@ -56,8 +61,9 @@ public class TowerBuildManager : MonoBehaviour
             DeselectGround();
             return;
         }
-        knightHero.DeselectHeroes();
-        archerHero.DeselectHeroes();
+
+        DeSelectHeroes();
+
         towersBuildUI.towerBuildUI.SetActive(!towersBuildUI.towerBuildUI.activeSelf);
 
         if (towersBuildUI.towerBuildUI.activeSelf)
@@ -91,8 +97,9 @@ public class TowerBuildManager : MonoBehaviour
             DeselectGround();
             return;
         }
-        knightHero.DeselectHeroes();
-        archerHero.DeselectHeroes();
+
+        DeSelectHeroes();
+
         towerUpgradeUI.towerUpgradeUI.SetActive(!towerUpgradeUI.towerUpgradeUI.activeSelf);
 
         if (towerUpgradeUI.towerUpgradeUI.activeSelf)
@@ -129,8 +136,7 @@ public class TowerBuildManager : MonoBehaviour
                 if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider.gameObject.layer.CompareTo(groundLayer) == 0)
                 {
                     DeselectGround();
-                    archerHero.DeselectHeroes();
-                    knightHero.DeselectHeroes();
+                    DeSelectHeroes();
                     towerUpgradeUI.DeActivateDefendersMoveZone();
                 }
             }
@@ -147,6 +153,14 @@ public class TowerBuildManager : MonoBehaviour
     {
         towerToBuild = tower;
         DeselectGround();
+    }
+
+    private void DeSelectHeroes()
+    {
+        for (int i = 0; i < heroes.Length; i++)
+        {
+            heroes[i].Deselect();
+        }
     }
 
     public TowerBlueprint GetTowerToBuild()

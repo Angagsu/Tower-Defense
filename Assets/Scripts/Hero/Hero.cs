@@ -58,21 +58,6 @@ public class Hero : MonoBehaviour
         
     }
     
-    private void OnMouseDown()
-    {
-        if (gameObject.CompareTag("ArcherHero"))
-        {
-            archerHero.isHeroSelected = true;
-            knightHero.isHeroSelected = false;
-            towerBuildManager.DeselectGround();
-        }
-        else if (gameObject.CompareTag("KnightHero"))
-        {
-            knightHero.isHeroSelected = true;
-            archerHero.isHeroSelected = false;
-            towerBuildManager.DeselectGround();
-        }   
-    }
 
     private void SelectHeroOnClick()
     {
@@ -148,7 +133,7 @@ public class Hero : MonoBehaviour
 
         if (bullet != null)
         {
-            bullet.BulletSeek(target);
+            //bullet.SetTarget(target);
         }
     }
 
@@ -161,7 +146,7 @@ public class Hero : MonoBehaviour
         }
     }
     
-    public void AmountOfDamagetoHero(float amount)
+    public void AmountOfDamageToHero(float amount)
     {
         health -= amount;
         healthBar.fillAmount = health / startHealth;

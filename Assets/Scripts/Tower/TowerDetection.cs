@@ -63,7 +63,7 @@ public class TowerDetection : MonoBehaviour
 
         if (bullet != null)
         {
-            bullet.BulletSeek(target);
+            //bullet.SetTarget(target);
         }
     }
 
