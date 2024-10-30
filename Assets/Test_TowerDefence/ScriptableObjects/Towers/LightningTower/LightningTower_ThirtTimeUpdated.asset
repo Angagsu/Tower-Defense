@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f6c82c1f981274b8ec947a19aa2354, type: 3}
+  m_Name: LightningTower_ThirtTimeUpdated
+  m_EditorClassIdentifier: 
+  <TowerPrefab>k__BackingField: {fileID: 6660008564374663589, guid: 1fbcf43ffd0593c4cbb11c90cee32cbd,
+    type: 3}
+  <Cost>k__BackingField: 1000

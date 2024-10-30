@@ -1073,7 +1073,7 @@ MonoBehaviour:
   move: {fileID: 5267349236684743600}
   startHealth: 400
   moneyGain: 20
-  monsterID: 5
+  dyingAnimationDuration: 2
 --- !u!114 &1652091878299861576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1124,7 +1124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a75f40acc1ac2948a79740b13993b6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <RotatablePart>k__BackingField: {fileID: 722209367969300931}
+  rotatablePart: {fileID: 722209367969300931}
   baseMonster: {fileID: -6824531674202233935}
 --- !u!1 &5978004357459604791
 GameObject:

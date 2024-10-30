@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -20,6 +18,8 @@ public class TowerBlueprint
     private int upgradedTowerSellCost;
     private int secondTimeUpgradedTowerSellCost;
     private int thirdTimeUpgradedTowerSellCost;
+
+
     public int GetTowerSellCost()
     {
         return Cost / 2;

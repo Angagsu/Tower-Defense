@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2b388ea7185a34b9299ac6f8b875f1, type: 3}
+  m_Name: ArrowTowerBlueprint
+  m_EditorClassIdentifier: 
+  Tower: {fileID: 11400000, guid: 68c15ec9a28aab34da6a2c800db5bebd, type: 2}
+  UpgradedTower: {fileID: 11400000, guid: da5125915a51697429e214a001d81102, type: 2}
+  SecondTimeUpgradedTower: {fileID: 11400000, guid: 22a56e4570ee80544b5ceb279f36cdaa,
+    type: 2}
+  ThirdTimeUpgradedTower: {fileID: 11400000, guid: 87dc9f382be448a4fb3f13401740945e,
+    type: 2}

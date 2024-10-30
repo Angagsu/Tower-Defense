@@ -5,6 +5,7 @@ public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] SceneFader sceneFader;
     
+
     public void Play()
     {
         sceneFader.FadeTo("LevelsMap");

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1149672540297401619}
-  - component: {fileID: 7663102201211276678}
+  - component: {fileID: 8415411873639856543}
   m_Layer: 0
   m_Name: FireBall-1
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 4600916040660241123}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7663102201211276678
+--- !u!114 &8415411873639856543
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,13 +43,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4495742632413893900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06cb7b08d0495c1469c6c89a50cb872d, type: 3}
+  m_Script: {fileID: 11500000, guid: 72a50695220b1a04591eff8462d27503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
+  speed: 70
   explosionRadius: 0
-  impactEffect: {fileID: 8462262755057595137, guid: 0c4d99969289b3f45a51cbb01ae974a9,
-    type: 3}
+  impactEffect: {fileID: 0}
 --- !u!1 &6484933569986102797
 GameObject:
   m_ObjectHideFlags: 0

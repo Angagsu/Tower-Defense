@@ -244,7 +244,7 @@ MonoBehaviour:
   move: {fileID: 7356448004555315141}
   startHealth: 150
   moneyGain: 10
-  monsterID: 4
+  dyingAnimationDuration: 2
 --- !u!114 &8362899340957016016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06a2d521a36aa6141889f76ddf142917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1639264894093340335, guid: 5786d213a6b41444cb4f22ef52f72a0b,
+  bulletPrefab: {fileID: 144448654037937405, guid: 6c3c00662d8fbc142b802ba9aafd42d2,
     type: 3}
   bulletInstPoint: {fileID: 8290872309142709643}
 --- !u!114 &3855544075426928541
@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a75f40acc1ac2948a79740b13993b6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <RotatablePart>k__BackingField: {fileID: 703294189783015850}
+  rotatablePart: {fileID: 703294189783015850}
   baseMonster: {fileID: 7112752935022487662}
 --- !u!1 &3394561336572777382
 GameObject:

@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
     public GameObject PausePanel { get { return pausePanel; } }
     public GameObject LevelCompletePanel { get { return levelCompetePanel; } }
 
-    private TowerOnBuy towerCost;
+    private TowersMap towerCost;
     [SerializeField]  FactoriesService factoriesService;
 
     private void Awake()
@@ -30,9 +30,9 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {      
-        towerCost = GetComponent<TowerOnBuy>();
+        towerCost = GetComponent<TowersMap>();
         FactoriesService_WaveComplited();
-        InvokeRepeating("TowerCostsConvetToStringOnUI", 0f, 1f);
+        TowerCostsConvetToStringOnUI();
     }
 
     private void OnDisable()
@@ -52,11 +52,6 @@ public class UIManager : MonoBehaviour
 
     private void FloatConvetToStringOnUI()
     {
-       //if (factoriesService.WaveIndex != factoriesService.waypoints_1Waves.Length)
-       //{
-       //    waveText.text = "Wave  - " + (factoriesService.WaveIndex + 1) + '/' + factoriesService.waypoints_1Waves.Length;
-       //}
-        
         moneyText.text = "Money - $" + PlayerStats.Money.ToString();
         livesText.text = "Lives   - " + PlayerStats.Lives.ToString();
         
@@ -68,12 +63,12 @@ public class UIManager : MonoBehaviour
 
     private void TowerCostsConvetToStringOnUI()
     {
-        arrowTowerCostText.text = "$ " + towerCost.ArrowTower.Cost.ToString();
-        golemTowerCostText.text = "$ " + towerCost.GolemTower.Cost.ToString();
-        thunderTowerCostText.text = "$ " + towerCost.ThunderTower.Cost.ToString();
-        defenderTowerCostText.text = "$ " + towerCost.DefenderTower.Cost.ToString();
-        fireTowerCostText.text = "$ " + towerCost.FireTower.Cost.ToString();
-        iceTowerCostText.text = "$ " + towerCost.IceTower.Cost.ToString();
+        arrowTowerCostText.text = "$ " + towerCost.ArrowTower.Tower.Cost.ToString();
+        golemTowerCostText.text = "$ " + towerCost.GolemTower.Tower.Cost.ToString();
+        thunderTowerCostText.text = "$ " + towerCost.LightningTower.Tower.Cost.ToString();
+        defenderTowerCostText.text = "$ " + towerCost.DefenderTower.Tower.Cost.ToString();
+        fireTowerCostText.text = "$ " + towerCost.FireTower.Tower.Cost.ToString();
+        iceTowerCostText.text = "$ " + towerCost.IceTower.Tower.Cost.ToString();
     }
 
     public IEnumerator AnimateWaveSurvivedText()

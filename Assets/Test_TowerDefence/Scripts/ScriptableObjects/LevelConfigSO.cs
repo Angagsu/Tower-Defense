@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Level Configs/Level Config")]
+[CreateAssetMenu(fileName = "Level_1_Config", menuName = "SO/Level Config")]
 public class LevelConfigSO : ScriptableObject
 {
     public List<Wayes> Wayes;
