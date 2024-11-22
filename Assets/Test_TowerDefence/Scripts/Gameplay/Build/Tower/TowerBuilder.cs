@@ -16,32 +16,32 @@ public class TowerBuilder : MonoBehaviour
 
     public void Build()
     {
-        if (PlayerStats.Money < towerFullBlueprintSO.Tower.Cost)
+        if (PlayerStats.Money < towerFullBlueprintSO.Towers[0].Cost)
         {
             Debug.Log("Not Enough Money to Build !!!");
             return;
         }
 
-        PlayerStats.Money -= towerFullBlueprintSO.Tower.Cost;
+        PlayerStats.Money -= towerFullBlueprintSO.Towers[0].Cost;
 
-        buildingArea.SetTower(towerFullBlueprintSO, CreatTower());
+        buildingArea.SetTower(towerFullBlueprintSO, CreatTower(0));
         buildingArea.SetDefenders();
     }
 
     public void UpgradeTower()
     {
-        if (PlayerStats.Money < towerFullBlueprintSO.UpgradedTower.Cost)
+        if (PlayerStats.Money < towerFullBlueprintSO.Towers[1].Cost)
         {
             Debug.Log("Not Enough Money to Upgrade !!!");
             return;
         }
 
-        PlayerStats.Money -= towerFullBlueprintSO.UpgradedTower.Cost;
+        PlayerStats.Money -= towerFullBlueprintSO.Towers[1].Cost;
 
 
         buildingArea.DestroyTower();
 
-        buildingArea.SetTower(towerFullBlueprintSO, CreatTower());
+        buildingArea.SetTower(towerFullBlueprintSO, CreatTower(1));
         buildingArea.SetDefenders();
 
         buildingArea.IsUpgraded = true;
@@ -51,16 +51,16 @@ public class TowerBuilder : MonoBehaviour
 
     public void SecondTimeUpgradeTower()
     {
-        if (PlayerStats.Money < towerFullBlueprintSO.SecondTimeUpgradedTower.Cost)
+        if (PlayerStats.Money < towerFullBlueprintSO.Towers[2].Cost)
         {
             Debug.Log("Not Enough Money to Upgrade !!!");
             return;
         }
-        PlayerStats.Money -= towerFullBlueprintSO.SecondTimeUpgradedTower.Cost;
+        PlayerStats.Money -= towerFullBlueprintSO.Towers[2].Cost;
 
         buildingArea.DestroyTower();
 
-        buildingArea.SetTower(towerFullBlueprintSO, CreatTower());
+        buildingArea.SetTower(towerFullBlueprintSO, CreatTower(2));
         buildingArea.SetDefenders();
 
         buildingArea.IsUpgradedSecondTime = true;
@@ -70,15 +70,15 @@ public class TowerBuilder : MonoBehaviour
 
     public void ThirdTimeUpgradeTower()
     {
-        if (PlayerStats.Money < towerFullBlueprintSO.ThirdTimeUpgradedTower.Cost)
+        if (PlayerStats.Money < towerFullBlueprintSO.Towers[3].Cost)
         {
             Debug.Log("Not Enough Money to Upgrade !!!");
             return;
         }
-        PlayerStats.Money -= towerFullBlueprintSO.ThirdTimeUpgradedTower.Cost;
+        PlayerStats.Money -= towerFullBlueprintSO.Towers[3].Cost;
 
         buildingArea.DestroyTower();
-        buildingArea.SetTower(towerFullBlueprintSO, CreatTower());
+        buildingArea.SetTower(towerFullBlueprintSO, CreatTower(3));
         buildingArea.SetDefenders();
 
         buildingArea.IsUpgradedThirdTime = true;
@@ -86,9 +86,9 @@ public class TowerBuilder : MonoBehaviour
         buildingArea.IsUpgraded = false;
     }
 
-    private GameObject CreatTower()
+    private GameObject CreatTower(int towerId)
     {
-        GameObject tower = Instantiate(towerFullBlueprintSO.Tower.TowerPrefab, buildingArea.GetBuildPosition(), Quaternion.identity);
+        GameObject tower = Instantiate(towerFullBlueprintSO.Towers[towerId].TowerPrefab, buildingArea.GetBuildPosition(), Quaternion.identity);
         GameObject effect = Instantiate(buildEffectPrefab, buildingArea.GetBuildPosition(), Quaternion.identity);
         Destroy(effect, 2f);
 

@@ -12,6 +12,8 @@ public class BaseHero : Character, IAttackableHero
     [field: SerializeField] public Transform RotatPart { get; private set; }
     [field: SerializeField] public BaseHeroAnimation Anim { get; private set; }
 
+    public BaseMonster CurrentAttackerMonster { get; set; }
+    public bool IsSelected => isSelected;
 
     [SerializeField] protected BaseAttack attack;
     [SerializeField] protected BaseDetection detect;
@@ -19,32 +21,42 @@ public class BaseHero : Character, IAttackableHero
     [SerializeField] protected float reviveAnimationDuration;
     [SerializeField] protected float startHealth;
 
+    protected PlayerInputHandler playerInputHandler;
     protected Transform target;
     protected Coroutine coroutine;
     protected float attackCountdown = 0f;
     protected bool isSelected;
+    protected Vector2 touchPosition;
 
-    private HeroMovement movement;
-
-    public BaseMonster CurrentAttackerMonster { get; set; }
-    public bool IsSelected => isSelected;
-
+    private HeroMovement movement; 
 
 
     protected virtual void Awake()
     {
+        playerInputHandler = PlayerInputHandler.Instance;
         movement = move as HeroMovement;
         isSelected = false;
         health = startHealth;
     }
 
-    protected virtual void Update()
+    private void OnEnable()
     {
-        if (isSelected)
-        {
-            Move(target);
-        }
-        
+        playerInputHandler.TouchPressed += OnPlayerInputHandler_Touched;
+    }
+
+    private void OnPlayerInputHandler_Touched(Vector2 touchPosition)
+    {
+        this.touchPosition = touchPosition;
+        Move(target);
+    }
+
+    private void OnDisable()
+    {
+        playerInputHandler.TouchPressed -= OnPlayerInputHandler_Touched;
+    }
+
+    protected virtual void Update()
+    {   
         if (!move.IsMoves && !IsDead)
         {
             DetectTarget();
@@ -85,7 +97,7 @@ public class BaseHero : Character, IAttackableHero
 
     protected override void Move(Transform target)
     {
-        movement.MoveToTarget(this, moveSpeed, turnSpeed);
+        movement.MoveToTarget(this, moveSpeed, turnSpeed, touchPosition);
     }
 
     protected void LockOnTarget()

@@ -41,7 +41,7 @@ namespace Assets.Scripts.Tower
             if (target = detect.DetectTarget(attackRange, IsDead))
             {
                 trailAttack.SetTargetMonsterDefaultSpeed(target);
-                LockOnTarget();
+               // LockOnTarget();
                 AttackTarget(target);
             }
             else

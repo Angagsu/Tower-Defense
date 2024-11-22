@@ -63,12 +63,12 @@ public class UIManager : MonoBehaviour
 
     private void TowerCostsConvetToStringOnUI()
     {
-        arrowTowerCostText.text = "$ " + towerCost.ArrowTower.Tower.Cost.ToString();
-        golemTowerCostText.text = "$ " + towerCost.GolemTower.Tower.Cost.ToString();
-        thunderTowerCostText.text = "$ " + towerCost.LightningTower.Tower.Cost.ToString();
-        defenderTowerCostText.text = "$ " + towerCost.DefenderTower.Tower.Cost.ToString();
-        fireTowerCostText.text = "$ " + towerCost.FireTower.Tower.Cost.ToString();
-        iceTowerCostText.text = "$ " + towerCost.IceTower.Tower.Cost.ToString();
+        arrowTowerCostText.text = "$ " + towerCost.ArrowTower.Towers[0].Cost.ToString();
+        golemTowerCostText.text = "$ " + towerCost.GolemTower.Towers[0].Cost.ToString();
+        thunderTowerCostText.text = "$ " + towerCost.LightningTower.Towers[0].Cost.ToString();
+        defenderTowerCostText.text = "$ " + towerCost.DefenderTower.Towers[0].Cost.ToString();
+        fireTowerCostText.text = "$ " + towerCost.FireTower.Towers[0].Cost.ToString();
+        iceTowerCostText.text = "$ " + towerCost.IceTower.Towers[0].Cost.ToString();
     }
 
     public IEnumerator AnimateWaveSurvivedText()

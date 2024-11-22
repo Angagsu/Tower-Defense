@@ -1,8 +1,9 @@
 using UnityEngine;
+//using UnityEngine.InputSystem.EnhancedTouch;
 
 class CameraPiching : MonoBehaviour
 {
-#if UNITY_IOS || UNITY_ANDROID
+
     private Camera Camera;
     private bool Rotate;
     protected Plane Plane;
@@ -31,6 +32,7 @@ class CameraPiching : MonoBehaviour
         //Scroll
         if (Input.touchCount >= 1)
         {
+            //Delta1 = PlanePositionDelta();
             Delta1 = PlanePositionDelta(Input.GetTouch(0));
             if (Input.GetTouch(0).phase == TouchPhase.Moved)
                 Camera.transform.Translate(Delta1 / 2, Space.World);
@@ -90,5 +92,6 @@ class CameraPiching : MonoBehaviour
     {
         Gizmos.DrawLine(transform.position, transform.position + transform.up);
     }
+#if UNITY_IOS || UNITY_ANDROID
 #endif
 }

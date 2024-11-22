@@ -14,6 +14,7 @@ public class SelectHeroUIHandler : MonoBehaviour
 
     private PlayerInputHandler playerInputHandler;
 
+
     private void Awake()
     {
         playerInputHandler = PlayerInputHandler.Instance;
@@ -47,32 +48,34 @@ public class SelectHeroUIHandler : MonoBehaviour
         });
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        SelectHeroOnClick();
+        playerInputHandler.TouchPressed += SelectHeroOnClick;
     }
 
-    public void SelectHeroOnClick()
+    private void OnDisable()
     {
+        playerInputHandler.TouchPressed -= SelectHeroOnClick;
+    }
 
-        if (playerInputHandler.TapInput > 0)
+    public void SelectHeroOnClick(Vector2 touchPosition)
+    {
+        Ray ray = mainCamera.ScreenPointToRay(touchPosition);
+
+        if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider && raycastHit.collider.gameObject.TryGetComponent(out BaseHero hero))
         {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider && raycastHit.collider.gameObject.TryGetComponent(out BaseHero hero))
+            if (hero == heroes[0])
             {
-                if (hero == heroes[0])
-                {
-                    heroes[0].Select();
-                    heroes[1].Deselect();
-                    buildsController.DeselectGround();
-                }
-                else
-                {
-                    heroes[1].Select();
-                    heroes[0].Deselect();
-                    buildsController.DeselectGround();
-                }  
+                heroes[0].Select();
+                heroes[1].Deselect();
+                buildsController.DeselectGround();
             }
+            else
+            {
+                heroes[1].Select();
+                heroes[0].Deselect();
+                buildsController.DeselectGround();
+            }  
         }
     }
 }

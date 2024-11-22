@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f6c82c1f981274b8ec947a19aa2354, type: 3}
   m_Name: LightningTower_ThirtTimeUpdated
   m_EditorClassIdentifier: 
-  <TowerPrefab>k__BackingField: {fileID: 6660008564374663589, guid: 1fbcf43ffd0593c4cbb11c90cee32cbd,
+  <TowerPrefab>k__BackingField: {fileID: 6660008564374663589, guid: abb4aa632d868204e97516325f4c44c2,
     type: 3}
   <Cost>k__BackingField: 1000

@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 
 public class DefenderMovement : BaseMovement
@@ -22,19 +21,18 @@ public class DefenderMovement : BaseMovement
     private int groundLayer;
     private bool isSelected;
 
-
+    private PlayerInputHandler playerInputHandler;
 
     private void Awake()
     {
+        playerInputHandler = PlayerInputHandler.Instance;
         mainCamera = Camera.main;
         defendersStartPoint = GameObject.Find("GameManager").GetComponent<TouchBuildingArea>();
         towerUpgradeUI = GameObject.Find("TowerUpgradeUI").GetComponent<TowerUpgradeUI>();
         defenderUnits = new DefenderUnit[3];
 
         groundLayer = LayerMask.NameToLayer("DefendersMoveZone");
-        detectionHelper = DetectionHelper.Instance;
-
-        
+        detectionHelper = DetectionHelper.Instance;   
     }
     void Start()
     {
@@ -45,21 +43,29 @@ public class DefenderMovement : BaseMovement
         StartCoroutine(DefendersMoveTowerds(defendersNewPoint));
     }
 
+    private void OnEnable()
+    {
+        playerInputHandler.TouchPressed += GetDefendersNewPosition;
+    }
+
+    private void OnDisable()
+    {
+        playerInputHandler.TouchPressed -= GetDefendersNewPosition;
+    }
 
     void Update()
     {
         DisableTheDefenderWhenDies();
-        GetDefendersNewPosition();
     }
 
-    private void GetDefendersNewPosition()
+    private void GetDefendersNewPosition(Vector2 touchPosition)
     {
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
         if (isSelected)
         {
-            if (Input.GetMouseButtonDown(0) && !IsMouseOverUI())
+            if (true)
             {
+                Ray ray = mainCamera.ScreenPointToRay(touchPosition);
+
                 if (Physics.Raycast(ray, out RaycastHit raycastHit) &&
                     raycastHit.collider.gameObject.layer.CompareTo(groundLayer) == 0)
                 {
@@ -158,12 +164,6 @@ public class DefenderMovement : BaseMovement
     public DefenderUnit[] GetDefendersArray()
     {
         return defenderUnits;
-    }
-
-    private bool IsMouseOverUI()
-    {
-        //return EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
-        return EventSystem.current.IsPointerOverGameObject();
     }
 }
 

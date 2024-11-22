@@ -1,56 +1,101 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 
 
 public class PlayerInputHandler : MonoBehaviour
 {
     public static PlayerInputHandler Instance { get; private set; }
 
-    
-    public int TapInput { get; private set; }
-    public float SwipeInput { get; private set; }
+    private PlayerControls playerControls;
 
-    [SerializeField] private InputActionAsset playerControls;
+    [SerializeField] private PointerOverUI pointerOverUI;
 
-    private const string actionMapName = "Player";
-    private const string move = "Move";
-    private const string tap = "Tap";
-    private const string swipe = "Swipe";
-
-    private InputAction tapAction;
-    private InputAction swipeAction;
-
+    public event Action<Vector2> TouchPressed;
+    public event Action<Vector2> CameraDragingStarted;
+    public event Action<Vector2> CameraDraging;
+    public event Action CameraDragingEnded;
+    public Vector2 TouchPosition { get; private set; }
+    private bool isDraging;
 
     private void Awake()
     {
         Instance = this;
 
-        tapAction = playerControls.FindActionMap(actionMapName).FindAction(tap);
-        swipeAction = playerControls.FindActionMap(actionMapName).FindAction(swipe);
+        Application.targetFrameRate = 120;
 
-        RegisterInputActions();
+        playerControls = new PlayerControls(); 
     }
 
     private void RegisterInputActions()
     {
-        tapAction.performed += context => TapInput = context.ReadValue<int>();
-        tapAction.canceled += context => TapInput = 0;
+        playerControls.Player.TouchPosition.performed += ctx => { TouchPositionPrimary(ctx); };
 
-        swipeAction.performed += context => SwipeInput = context.ReadValue<float>();
-        swipeAction.canceled += context => SwipeInput = 0f;
+
+        playerControls.Player.TouchEnded.started += ctx => OnStartTouch(ctx);
+        playerControls.Player.TouchEnded.performed += ctx => OnTouchPerformed(ctx);
+        playerControls.Player.TouchEnded.canceled += ctx => OnTouchCanceled(ctx);
+
+
+
+        playerControls.Player.CameraDrag.performed += ctx => { OnDrag(ctx.ReadValue<Vector2>()); };
+        
+    }
+
+    private void OnTouchPerformed(InputAction.CallbackContext ctx)
+    {
+        isDraging = true;
+    }
+
+    private void OnTouchCanceled(InputAction.CallbackContext ctx)
+    {
+        isDraging = false;
+        CameraDragingEnded?.Invoke();
+    }
+
+    private void OnStartTouch(InputAction.CallbackContext ctx)
+    {
+        CameraDragingStarted?.Invoke(TouchPosition);
+    }
+
+    private void OnEndDrag()
+    {
+        CameraDragingEnded?.Invoke();
+    }
+
+    private void OnStartDrag(Vector2 fingerPosition)
+    {
+        CameraDragingStarted?.Invoke(TouchPosition);    
+    }
+
+    private void OnDrag(Vector2 fingerPosition)
+    {
+        if (isDraging)
+        {
+            CameraDraging?.Invoke(fingerPosition);
+        }
+    }
+
+    private void TouchPositionPrimary(InputAction.CallbackContext ctx)
+    {
+        TouchPosition = ctx.ReadValue<Vector2>();
+
+        if (!PointerOverUI.Instance.IsPointerOverUIObject(ctx.ReadValue<Vector2>()) && !isDraging)
+        {
+            TouchPressed?.Invoke(TouchPosition);
+        }    
     }
 
     private void OnEnable()
     {
-        tapAction.Enable();
-        swipeAction.Enable();
+        playerControls.Enable();
+
+        RegisterInputActions();
     }
 
     private void OnDisable()
     {
-        tapAction.Disable();
-        swipeAction.Disable();
+        playerControls.Disable();
     }
 }

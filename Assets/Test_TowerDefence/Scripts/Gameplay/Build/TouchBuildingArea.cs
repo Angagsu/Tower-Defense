@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
+
 
 public class TouchBuildingArea : MonoBehaviour
 {
@@ -8,57 +8,51 @@ public class TouchBuildingArea : MonoBehaviour
     [SerializeField] private BuildsController buildsController;
 
     private int buildingAreaLayer;
-    private int touchID;
 
     private PlayerInputHandler playerInputHandler;
 
+
+
+    private void Awake()
+    {
+        playerInputHandler = PlayerInputHandler.Instance;  
+    }
+
+    private void OnEnable()
+    {
+        playerInputHandler.TouchPressed += OnTouchBuildingArea;
+    }
     private void Start()
-    {
-        playerInputHandler = PlayerInputHandler.Instance;
-
+    { 
         buildingAreaLayer = LayerMask.NameToLayer("BuildingArea");
-        touchID = playerInputHandler.TapInput;
-
-
-
     }
 
-    private void Update()
+    private void OnTouchBuildingArea(Vector2 touchPosition)
     {
-        SelectBuildingArea();
-    }
-    private void SelectBuildingArea()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(touchPosition);
 
-        if (playerInputHandler.TapInput > 0)
+        if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider.gameObject.layer.CompareTo(buildingAreaLayer) == 0)
         {
-            if (!IsMouseOverUI())
+            raycastHit.collider.gameObject.TryGetComponent<BuildingArea>(out var buildingArea);
+
+            BuildingArea = buildingArea;
+
+            if (buildingArea.Tower != null)
             {
-                if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider.gameObject.layer.CompareTo(buildingAreaLayer) == 0)
-                {
-                    raycastHit.collider.gameObject.TryGetComponent<BuildingArea>(out var buildingArea);
+                buildsController.SelectedGroundForUpgradeTowerUI(buildingArea);
+                return;
+            }
 
-                    BuildingArea = buildingArea;
-
-                    if (buildingArea.Tower != null)
-                    {
-                        buildsController.SelectedGroundForUpgradeTowerUI(buildingArea);
-                        return;
-                    }
-
-                    if (buildingArea.Tower == null)
-                    {
-                        buildsController.SelectedGroundForBuildTowerUI(buildingArea);
-                        return;
-                    }
-                }
+            if (buildingArea.Tower == null)
+            {
+                buildsController.SelectedGroundForBuildTowerUI(buildingArea);
+                return;
             }
         }
     }
 
-    private bool IsMouseOverUI()
+    private void OnDisable()
     {
-        return EventSystem.current.IsPointerOverGameObject(touchID);
+        playerInputHandler.TouchPressed -= OnTouchBuildingArea;
     }
 }

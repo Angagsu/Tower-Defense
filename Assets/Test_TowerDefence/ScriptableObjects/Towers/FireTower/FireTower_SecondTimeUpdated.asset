@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f6c82c1f981274b8ec947a19aa2354, type: 3}
   m_Name: FireTower_SecondTimeUpdated
   m_EditorClassIdentifier: 
-  <TowerPrefab>k__BackingField: {fileID: 5285894258423639304, guid: 0c3bda33e49cb01459b8959c80a480c3,
+  <TowerPrefab>k__BackingField: {fileID: 5285894258423639304, guid: 79f9552afd56dbb41bcd0675fdbcfe26,
     type: 3}
   <Cost>k__BackingField: 450

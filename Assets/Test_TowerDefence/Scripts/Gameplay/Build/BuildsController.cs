@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
 public class BuildsController : MonoBehaviour
 {
     public event Action<DefenderUnit> DefendersRemoved;
@@ -16,7 +17,7 @@ public class BuildsController : MonoBehaviour
     private TowerFullBlueprintSO towerFullBlueprintSO;
 
     public bool CanBuild { get { return towerFullBlueprintSO != null; } }
-    public bool HasManey { get { return PlayerStats.Money >= towerFullBlueprintSO.Tower.Cost; } }
+    public bool HasManey { get { return PlayerStats.Money >= towerFullBlueprintSO.Towers[0].Cost; } }
 
     private BuildingArea selectedBuildingArea;
     private Camera mainCamera;
@@ -24,6 +25,8 @@ public class BuildsController : MonoBehaviour
 
 
     private PlayerInputHandler playerInputHandler;
+
+
     private void Awake()
     {
         playerInputHandler = PlayerInputHandler.Instance;
@@ -36,9 +39,14 @@ public class BuildsController : MonoBehaviour
         heroes = heroesReviveHandler.GetHeroesOnScene();
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        DeselectAllUIAndHeroesThenClickGround();
+        playerInputHandler.TouchPressed += OnTouchGroundDeselectAll;
+    }
+
+    private void OnDisable()
+    {
+        playerInputHandler.TouchPressed -= OnTouchGroundDeselectAll;
     }
 
     public void SelectedGroundForUpgradeTowerUI(BuildingArea buildingArea)
@@ -132,21 +140,15 @@ public class BuildsController : MonoBehaviour
         selectedBuildingArea.DestroyTower();
     }
 
-    private void DeselectAllUIAndHeroesThenClickGround()
+    private void OnTouchGroundDeselectAll(Vector2 touchPosition)
     {
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = mainCamera.ScreenPointToRay(touchPosition);
 
-        if (playerInputHandler.TapInput > 0)
+        if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider.gameObject.layer.CompareTo(groundLayer) == 0)
         {
-            if (!IsMouseOverUI())
-            {
-                if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider.gameObject.layer.CompareTo(groundLayer) == 0)
-                {
-                    DeselectGround();
-                    DeSelectHeroes();
-                    upgradeTowerUI.DeActivateDefendersMoveZone();
-                }
-            }
+            DeselectGround();
+            DeSelectHeroes();
+            upgradeTowerUI.DeActivateDefendersMoveZone();
         }
     }
 
@@ -180,6 +182,8 @@ public class BuildsController : MonoBehaviour
 
     private bool IsMouseOverUI()
     {
-        return EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
+        //return EventSystem.current.IsPointerOverGameObject(Touchscreen.current.primaryTouch.touchId.ReadValue());
+        //return EventSystem.current.IsPointerOverGameObject(playerInputHandler.TouchPressValue.GetHashCode());
+        return EventSystem.current.IsPointerOverGameObject();
     }
 }

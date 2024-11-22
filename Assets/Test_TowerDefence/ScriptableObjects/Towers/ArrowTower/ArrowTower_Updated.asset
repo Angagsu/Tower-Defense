@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f6c82c1f981274b8ec947a19aa2354, type: 3}
   m_Name: ArrowTower_Updated
   m_EditorClassIdentifier: 
-  <TowerPrefab>k__BackingField: {fileID: 1071426113212598717, guid: e54d3ba62869ac447b1deca4bd83434a,
+  <TowerPrefab>k__BackingField: {fileID: 1071426113212598717, guid: 02f40b3558eb37f4ab0e02293d2b9732,
     type: 3}
   <Cost>k__BackingField: 150

@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae2b388ea7185a34b9299ac6f8b875f1, type: 3}
   m_Name: GolemTowerBlueprint
   m_EditorClassIdentifier: 
-  Tower: {fileID: 11400000, guid: febb825a94fd4974ea21e09fdd98ea34, type: 2}
-  UpgradedTower: {fileID: 11400000, guid: b82f87bc6e38c6949bbc38cf12f50aff, type: 2}
-  SecondTimeUpgradedTower: {fileID: 11400000, guid: 3f39a6871be07744d9fd8fee072f3a2f,
-    type: 2}
-  ThirdTimeUpgradedTower: {fileID: 11400000, guid: 430825652d7ba014f9c496ba75ded658,
-    type: 2}
+  Towers:
+  - {fileID: 11400000, guid: febb825a94fd4974ea21e09fdd98ea34, type: 2}
+  - {fileID: 11400000, guid: b82f87bc6e38c6949bbc38cf12f50aff, type: 2}
+  - {fileID: 11400000, guid: 3f39a6871be07744d9fd8fee072f3a2f, type: 2}
+  - {fileID: 11400000, guid: 430825652d7ba014f9c496ba75ded658, type: 2}

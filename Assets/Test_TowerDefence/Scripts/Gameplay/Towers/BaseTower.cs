@@ -43,7 +43,7 @@ namespace Assets.Scripts.Tower
         {
             if ((target = detect.DetectTarget(attackRange, IsDead)))
             {
-                LockOnTarget();
+                //LockOnTarget();
 
                 if (attackCountdown <= 0)
                 {

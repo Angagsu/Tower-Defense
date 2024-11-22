@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae2b388ea7185a34b9299ac6f8b875f1, type: 3}
   m_Name: FireTowerBlueprint
   m_EditorClassIdentifier: 
-  Tower: {fileID: 11400000, guid: ee31050835363534ea16e66f2df70061, type: 2}
-  UpgradedTower: {fileID: 11400000, guid: f6d711ceb324dbe4a8175afe373b70aa, type: 2}
-  SecondTimeUpgradedTower: {fileID: 11400000, guid: 7a1901aecaf13a048aadc59537986377,
-    type: 2}
-  ThirdTimeUpgradedTower: {fileID: 11400000, guid: af2a8732b9797204097497333ffac494,
-    type: 2}
+  Towers:
+  - {fileID: 11400000, guid: ee31050835363534ea16e66f2df70061, type: 2}
+  - {fileID: 11400000, guid: f6d711ceb324dbe4a8175afe373b70aa, type: 2}
+  - {fileID: 11400000, guid: 7a1901aecaf13a048aadc59537986377, type: 2}
+  - {fileID: 11400000, guid: af2a8732b9797204097497333ffac494, type: 2}

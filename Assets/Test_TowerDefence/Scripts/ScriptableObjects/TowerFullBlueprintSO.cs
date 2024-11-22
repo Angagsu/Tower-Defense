@@ -1,15 +1,11 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "TowerBlueprint", menuName = "SO/TowerSO/TowersBlueprint")]
 public class TowerFullBlueprintSO : ScriptableObject
 {
-    [Space(10)] public TowerSO Tower;
-
-    [Space(10)] public TowerSO UpgradedTower;
-
-    [Space(10)] public TowerSO SecondTimeUpgradedTower;
-
-    [Space(10)] public TowerSO ThirdTimeUpgradedTower;
+    public List<TowerSO> Towers;
 
     private int upgradedTowerSellCost;
     private int secondTimeUpgradedTowerSellCost;
@@ -18,23 +14,23 @@ public class TowerFullBlueprintSO : ScriptableObject
 
     public int GetTowerSellCost()
     {
-        return Tower.Cost / 2;
+        return Towers[0].Cost / 2;
     }
     public int GetUpgradedTowerSellCost()
     {
-        upgradedTowerSellCost = (Tower.Cost / 2) + (UpgradedTower.Cost / 2);
+        upgradedTowerSellCost = (Towers[0].Cost / 2) + (Towers[1].Cost / 2);
         return upgradedTowerSellCost;
     }
 
     public int GetSecondTimeUpgradedTowerSellCost()
     {
-        secondTimeUpgradedTowerSellCost = upgradedTowerSellCost + (SecondTimeUpgradedTower.Cost / 2);
+        secondTimeUpgradedTowerSellCost = upgradedTowerSellCost + (Towers[2].Cost / 2);
         return secondTimeUpgradedTowerSellCost;
     }
 
     public int GetThirdTimeUpgradedTowerSellCost()
     {
-        thirdTimeUpgradedTowerSellCost = secondTimeUpgradedTowerSellCost + (ThirdTimeUpgradedTower.Cost / 2);
+        thirdTimeUpgradedTowerSellCost = secondTimeUpgradedTowerSellCost + (Towers[3].Cost / 2);
         return thirdTimeUpgradedTowerSellCost;
     }
 }

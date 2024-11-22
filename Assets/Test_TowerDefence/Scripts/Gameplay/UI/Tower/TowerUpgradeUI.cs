@@ -24,22 +24,23 @@ public class TowerUpgradeUI : MonoBehaviour
         transform.position = selectedBuildingArea.GetBuildPosition();
         gameObjectRoot.SetActive(true);
 
+
         if (!selectedBuildingArea.IsUpgraded || !selectedBuildingArea.IsUpgradedSecondTime || !selectedBuildingArea.IsUpgradedThirdTime)
         {
             sellCostText.text = selectedBuildingArea.TowerFullBlueprintSO.GetTowerSellCost().ToString();
-            upgradeCostText.text = "$ " + selectedBuildingArea.TowerFullBlueprintSO.UpgradedTower.Cost;
+            upgradeCostText.text = "$ " + selectedBuildingArea.TowerFullBlueprintSO.Towers[1].Cost;
             upgradeButton.interactable = true;
         }
         if (selectedBuildingArea.IsUpgraded)
         {
             sellCostText.text = selectedBuildingArea.TowerFullBlueprintSO.GetUpgradedTowerSellCost().ToString();
-            upgradeCostText.text = "$ " + selectedBuildingArea.TowerFullBlueprintSO.SecondTimeUpgradedTower.Cost;
+            upgradeCostText.text = "$ " + selectedBuildingArea.TowerFullBlueprintSO.Towers[2].Cost;
             upgradeButton.interactable = true;
         }
         if (selectedBuildingArea.IsUpgradedSecondTime)
         {
             sellCostText.text = selectedBuildingArea.TowerFullBlueprintSO.GetSecondTimeUpgradedTowerSellCost().ToString();
-            upgradeCostText.text = "$ " + selectedBuildingArea.TowerFullBlueprintSO.ThirdTimeUpgradedTower.Cost;
+            upgradeCostText.text = "$ " + selectedBuildingArea.TowerFullBlueprintSO.Towers[3].Cost;
             upgradeButton.interactable = true;
         }
         if (selectedBuildingArea.IsUpgradedThirdTime)
@@ -52,11 +53,11 @@ public class TowerUpgradeUI : MonoBehaviour
 
     public void UpgradeButton()
     {
-        if (selectedBuildingArea.IsUpgradedSecondTime && !selectedBuildingArea.IsUpgraded && !selectedBuildingArea.IsUpgradedThirdTime)
+        if (selectedBuildingArea.IsUpgradedSecondTime)
         {
             buildsController.UpdateThirdTime();
         }
-        else if (selectedBuildingArea.IsUpgraded && !selectedBuildingArea.IsUpgradedThirdTime)
+        else if (selectedBuildingArea.IsUpgraded)
         {
             buildsController.UpdateSecondTime();
         }
