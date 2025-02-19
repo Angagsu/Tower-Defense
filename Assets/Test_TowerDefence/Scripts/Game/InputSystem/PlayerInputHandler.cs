@@ -8,22 +8,22 @@ public class PlayerInputHandler : MonoBehaviour
 {
     public static PlayerInputHandler Instance { get; private set; }
 
-    private PlayerControls playerControls;
-
-    [SerializeField] private PointerOverUI pointerOverUI;
-
     public event Action<Vector2> TouchPressed;
     public event Action<Vector2> CameraDragingStarted;
     public event Action<Vector2> CameraDraging;
     public event Action CameraDragingEnded;
+    public event Action<Vector2> TouchedGround;
+
     public Vector2 TouchPosition { get; private set; }
+
+    private PlayerControls playerControls;
     private bool isDraging;
 
     private void Awake()
     {
         Instance = this;
 
-        Application.targetFrameRate = 120;
+       // Application.targetFrameRate = 1200;
 
         playerControls = new PlayerControls(); 
     }
@@ -37,10 +37,7 @@ public class PlayerInputHandler : MonoBehaviour
         playerControls.Player.TouchEnded.performed += ctx => OnTouchPerformed(ctx);
         playerControls.Player.TouchEnded.canceled += ctx => OnTouchCanceled(ctx);
 
-
-
-        playerControls.Player.CameraDrag.performed += ctx => { OnDrag(ctx.ReadValue<Vector2>()); };
-        
+        playerControls.Player.CameraDrag.performed += ctx => { OnDrag(ctx.ReadValue<Vector2>()); };      
     }
 
     private void OnTouchPerformed(InputAction.CallbackContext ctx)
@@ -84,6 +81,10 @@ public class PlayerInputHandler : MonoBehaviour
         if (!PointerOverUI.Instance.IsPointerOverUIObject(ctx.ReadValue<Vector2>()) && !isDraging)
         {
             TouchPressed?.Invoke(TouchPosition);
+        }
+        else if(PointerOverUI.Instance.IsPointerOverUIObject(ctx.ReadValue<Vector2>()) && !isDraging)
+        {
+            TouchedGround?.Invoke(TouchPosition);
         }    
     }
 

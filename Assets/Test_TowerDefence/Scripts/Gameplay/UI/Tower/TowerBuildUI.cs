@@ -47,7 +47,7 @@ public class TowerBuildUI : MonoBehaviour
     public void SetTargetGroundForBuilding(BuildingArea selectedBuildingArea)
     {
         this.selectedBuildingArea = selectedBuildingArea;
-        transform.position = selectedBuildingArea.GetBuildPosition() + new Vector3(0, 2, 2);
+        transform.position = selectedBuildingArea.GetBuildPosition() + new Vector3(0, -2, -5.5f);
         gameObjectRoot.SetActive(true);
     }
 

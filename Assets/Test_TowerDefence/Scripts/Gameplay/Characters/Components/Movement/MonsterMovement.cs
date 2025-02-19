@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -15,6 +16,7 @@ public class MonsterMovement : BaseMovement
     private float offsetX;
     private float offsetZ;
 
+    private Transform currentSpawnPoint;
 
     private void Awake()
     {
@@ -26,6 +28,7 @@ public class MonsterMovement : BaseMovement
             if (transform.position == spawnPoints[i].position)
             {
                 wayPoints = WaypointsService.Waypoints[i].Waypoint;
+                currentSpawnPoint = spawnPoints[i];
             }
         }
     }
@@ -36,13 +39,14 @@ public class MonsterMovement : BaseMovement
 
         for (int i = 0; i < spawnPoints.Length; i++)
         {
-            if (transform.position == spawnPoints[i].position)
-            {
-                wayPoints = WaypointsService.Waypoints[i].Waypoint;
-            }
+
+             if (transform.position == spawnPoints[i].position)
+             {
+                 wayPoints = WaypointsService.Waypoints[i].Waypoint;
+             }
         }
         
-        target = wayPoints[0];
+        target = wayPoints[wayCountIndex];
     }
 
     private void OnDisable()
@@ -54,8 +58,7 @@ public class MonsterMovement : BaseMovement
 
     private void Start()
     {
-        
-        target = wayPoints[0];
+        target = wayPoints[wayCountIndex];
  
         offsetX = Random.Range(-2, 2);
         offsetZ = Random.Range(-2, 2);
@@ -118,4 +121,28 @@ public class MonsterMovement : BaseMovement
         gameObject.SetActive(false);
         baseMonster.SetIsDead(true);
     }
+
+    public void SetWaypointsAndTarget(Transform[] waypoints, Transform currentTransform, Transform targetWaypoint, int waypointIndex)
+    {
+        wayPoints = waypoints;
+        target = targetWaypoint;
+        wayCountIndex = waypointIndex;
+        transform.position = currentTransform.position;
+    }
+
+    public void SetMinionsPositionAndTarget(List<BaseMonster> minions, Transform parentTransform, Quaternion rotation)
+    {
+        for (int i = 0; i < minions.Count; i++)
+        {
+            BaseMonster generatedMinion = factoriesService.GenerateMinions(minions[Random.Range(0, minions.Count)], currentSpawnPoint, currentSpawnPoint.rotation);
+            generatedMinion.Movement.SetWaypointsAndTarget(wayPoints, parentTransform, target, wayCountIndex);
+        }
+
+        
+    }
+
+    //private Transform MinionsRandomPosition(Transform parentTransform)
+    //{
+    //    Transform randomTransform = new Transform()
+    //}
 }

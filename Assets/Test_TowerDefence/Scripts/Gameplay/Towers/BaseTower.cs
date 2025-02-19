@@ -7,7 +7,8 @@ namespace Assets.Scripts.Tower
     public abstract class BaseTower : MonoBehaviour, IAttackableTower
     {
         [SerializeField] protected BaseDetection detect;
-        [SerializeField] protected BaseAttack attack; 
+        [SerializeField] protected BaseAttack attack;
+        [SerializeField] protected TowerSFXHandler towerSFXHandler;
 
         [Space(10)]
         [SerializeField] protected Image healthBar;
@@ -18,6 +19,7 @@ namespace Assets.Scripts.Tower
         [SerializeField] protected float attackRate;
         [SerializeField] protected float attackRange;
         [SerializeField] protected float turnSpeed;
+
 
         protected Transform target;
         protected float attackCountdown = 0f;
@@ -32,6 +34,11 @@ namespace Assets.Scripts.Tower
         protected virtual void Awake() 
         {
             DetectTarget();
+        }
+
+        protected virtual void Start()
+        {
+
         }
 
         protected virtual void Update() 
@@ -58,6 +65,7 @@ namespace Assets.Scripts.Tower
         protected virtual void AttackTarget(Transform target) 
         {
             attack.AttackTarget(target, damage);
+            towerSFXHandler.PlayAttackSFX();
         }
 
         protected virtual void Crash() { }

@@ -144,6 +144,20 @@ public class FactoriesService : MonoBehaviour
         currentCountOfEnemyToSpawn = intermediatCountOfMonstersForSpawn;
     }
 
+    public BaseMonster GenerateMinions(BaseMonster minion, Transform transform, Quaternion rotation)
+    {
+        for (int i = 0; i < monstersFactories.Length; i++)
+        {
+            if (monstersFactories[i].GetFactoryType.GetType().BaseType == minion.GetType().BaseType)
+            {
+                var generatedMinion = monstersFactories[i].GetMonsterByType(minion, transform, transform.rotation);
+                return generatedMinion;
+            }
+        }
+        
+        return default;
+    }
+
     private void OnDestroy()
     {
         for (int i = 0; i < monstersFactories.Length; i++)

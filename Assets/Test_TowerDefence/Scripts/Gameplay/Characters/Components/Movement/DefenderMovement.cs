@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 
 public class DefenderMovement : BaseMovement
@@ -128,11 +129,14 @@ public class DefenderMovement : BaseMovement
         {
             Vector3 destination = Vector3.MoveTowards(transform.position, targetPosition, defendersSpeed * Time.deltaTime);
             transform.position = destination;
+
             for (int i = 0; i < defenderUnits.Length; i++)
             {
+                Vector3 direction = targetPosition - transform.position;
+
                 defenderUnits[i].Anim.SetMoveAnimation(true);
-                defenderUnits[i].RotatPart.rotation = Quaternion.Slerp(defenderUnits[i].RotatPart.rotation, Quaternion.LookRotation(destination.normalized),
-                turnSpeed * Time.deltaTime);
+                defenderUnits[i].RotatPart.rotation = Quaternion.Slerp(defenderUnits[i].RotatPart.rotation,
+                    Quaternion.LookRotation(direction.normalized), turnSpeed);
             }
 
             yield return null;

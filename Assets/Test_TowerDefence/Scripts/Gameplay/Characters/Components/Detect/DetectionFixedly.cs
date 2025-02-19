@@ -12,7 +12,7 @@ public class DetectionFixedly : BaseDetection
 
     private DetectionHelper detectionHelper;
 
-    private void Awake()
+    private void Start()
     {
         detectionHelper = DetectionHelper.Instance;
         monsters = detectionHelper.Monsters;
@@ -20,27 +20,26 @@ public class DetectionFixedly : BaseDetection
 
     public override Transform DetectTarget(float attackRange, bool isDead)
     {
-        float shortestDistance = Mathf.Infinity;
-
         foreach (var monster in monsters)
         {
-            float distanceToEnemy = Vector3.Distance(transform.position, monster.transform.position);
-            
-
-            if (distanceToEnemy < shortestDistance)
+            if (monster.isActiveAndEnabled)
             {
-                shortestDistance = distanceToEnemy;
-                targetedMonster = monster;
-                distance = shortestDistance;
-            }         
-        }
+                float distanceToEnemy = Vector3.Distance(transform.position, monster.transform.position);
 
-        if (detectedMonster)
+                if (distanceToEnemy < attackRange)
+                {
+                    distance = distanceToEnemy;
+                    targetedMonster = monster;
+                }
+            }        
+        }
+        
+        if (detectedMonster && !detectedMonster.IsDead)
         {
             distance = Vector3.Distance(transform.position, detectedMonster.transform.position);
         }
 
-        if (distance <= attackRange && !isDead)
+        if (distance <= attackRange)
         {
             if (!detectedMonster && targetedMonster && !targetedMonster.IsDead)
             {
@@ -54,15 +53,13 @@ public class DetectionFixedly : BaseDetection
             else
             {
                 detectedMonster = null;
-                targetedMonster = null;
                 return target = null;
             }
         }
         else
         {
-            targetedMonster = null;
             detectedMonster = null;
             return target = null;
-        }
+        }  
     }
 }

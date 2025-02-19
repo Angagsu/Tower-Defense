@@ -11,6 +11,7 @@ public class BuildsController : MonoBehaviour
     [SerializeField] private HeroesReviveHandler heroesReviveHandler;
     [SerializeField] private TowerBuildUI towerBuildUI;
     [SerializeField] private TowerUpgradeUI upgradeTowerUI;
+    [SerializeField] private BuildsControllerSFXHandler builderSFXHandler;
 
     private BaseHero[] heroes;
     private DefenderUnit[] defenders;
@@ -36,6 +37,7 @@ public class BuildsController : MonoBehaviour
 
     private void Start()
     {
+        
         heroes = heroesReviveHandler.GetHeroesOnScene();
     }
 
@@ -102,6 +104,7 @@ public class BuildsController : MonoBehaviour
 
     public void BuildTowerByType(TowerFullBlueprintSO tower)
     {
+        builderSFXHandler.PlayBuildSFX();
         towerFullBlueprintSO = tower;
         selectedBuildingArea.SetTower(tower);
         towerBuilder.SetBuildingAreaAndTowerBlueprint(tower, selectedBuildingArea);
@@ -113,6 +116,8 @@ public class BuildsController : MonoBehaviour
     {
         SetDefendersBeforeDestroy();
 
+        builderSFXHandler.PlayUpgradeSFX();
+
         towerBuilder.SetBuildingAreaAndTowerBlueprint(towerFullBlueprintSO, selectedBuildingArea);
         towerBuilder.UpgradeTower();
     }
@@ -120,6 +125,7 @@ public class BuildsController : MonoBehaviour
     public void UpdateSecondTime()
     {
         SetDefendersBeforeDestroy();
+        builderSFXHandler.PlayUpgradeSFX();
 
         towerBuilder.SetBuildingAreaAndTowerBlueprint(towerFullBlueprintSO, selectedBuildingArea);
         towerBuilder.SecondTimeUpgradeTower();
@@ -129,6 +135,8 @@ public class BuildsController : MonoBehaviour
     {
         SetDefendersBeforeDestroy();
 
+        builderSFXHandler.PlayUpgradeSFX();
+
         towerBuilder.SetBuildingAreaAndTowerBlueprint(towerFullBlueprintSO, selectedBuildingArea);
         towerBuilder.ThirdTimeUpgradeTower();
     }
@@ -136,6 +144,8 @@ public class BuildsController : MonoBehaviour
     public void SellTower()
     {
         SetDefendersBeforeDestroy();
+
+        builderSFXHandler.PlayDestroySFX();
 
         selectedBuildingArea.DestroyTower();
     }

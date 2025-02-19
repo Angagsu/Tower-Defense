@@ -22,13 +22,13 @@ public class BaseMonster : Character, IAttackableMonster
     protected bool isSelected;
     protected bool canAttack;
 
-    private MonsterMovement movement;
+    public MonsterMovement Movement { get; private set; }
 
 
 
     protected virtual void Awake()
     {
-        movement = move as MonsterMovement; 
+        Movement = move as MonsterMovement; 
         health = startHealth;
         healthBar.enabled = false;
         canAttack = true;
@@ -66,7 +66,7 @@ public class BaseMonster : Character, IAttackableMonster
     {
         if ((target = detect.DetectTarget(attackRange, IsDead)) != null)
         {
-            movement.LockOnTarget(target, turnSpeed);
+            Movement.LockOnTarget(target, turnSpeed);
 
             if (attackCountdown <= 0)
             {
@@ -79,7 +79,7 @@ public class BaseMonster : Character, IAttackableMonster
         }
         else
         {
-            movement.SetIsMove(true);
+            Movement.SetIsMove(true);
             anim.SetMoveAnimation(true);
         }
 
@@ -100,7 +100,7 @@ public class BaseMonster : Character, IAttackableMonster
         coroutine = StartCoroutine(DyingAnimationDuration());
     }
 
-    protected IEnumerator DyingAnimationDuration()
+    protected virtual IEnumerator DyingAnimationDuration()
     {
         anim.SetDeadAnimation(isDead);
 
@@ -111,7 +111,7 @@ public class BaseMonster : Character, IAttackableMonster
 
     protected override void Move(Transform target)
     {
-        movement.Move(target, moveSpeed, turnSpeed);
+        Movement.Move(target, moveSpeed, turnSpeed);
     }
 
     public override void TakeDamage(float amount)
@@ -157,7 +157,7 @@ public class BaseMonster : Character, IAttackableMonster
 
     public void SetIsMoves(bool tof)
     {
-        movement.SetIsMove(tof);
+        Movement.SetIsMove(tof);
     }
 
     public void SetIsDead(bool tof)

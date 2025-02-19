@@ -7,13 +7,12 @@ public class TrailAttack : BaseAttack
     [SerializeField] private BaseTower baseTower;
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private ParticleSystem lightningImpactEffect;
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private Transform attackPoint;
     [SerializeField] private Material lightningMaterial;
     [SerializeField] private float shockSlowAmount;
-
- 
-    private readonly float randomWithOffsetMax = 4f;
-    private readonly float randomWithOffsetMin = 3f;
+    [SerializeField] private float randomWidthOffsetMax = 4f;
+    [SerializeField] private float randomWidthOffsetMin = 3f;
 
     private BaseMonster targetMonster;
     private BaseMonster previousTargetMonster;
@@ -47,6 +46,7 @@ public class TrailAttack : BaseAttack
         {
             lineRenderer.enabled = true;
             lightningImpactEffect.Play();
+            audioSource.Play();
         }
 
         previousTargetMonster = targetMonster;
@@ -80,7 +80,7 @@ public class TrailAttack : BaseAttack
 
     private float RandomWidthOffset()
     {
-        return Random.Range(randomWithOffsetMin, randomWithOffsetMax);
+        return Random.Range(randomWidthOffsetMin, randomWidthOffsetMax);
     }
 
     public void DisableTrail()
@@ -89,6 +89,7 @@ public class TrailAttack : BaseAttack
         {
             lineRenderer.enabled = false;
             lightningImpactEffect.Stop();
+            audioSource.Pause();
         }
     }
 }

@@ -4,7 +4,8 @@ using UnityEngine;
 public class DefenderUnit : BaseHero
 {
     [SerializeField] DefenderMovement defendersMove;
-   
+
+
 
     protected override void Update()
     {
@@ -12,7 +13,7 @@ public class DefenderUnit : BaseHero
         {
             DetectTarget();
         }
-
+        
         if (!defendersMove.IsMoves && target)
         {
             LockOnTarget();

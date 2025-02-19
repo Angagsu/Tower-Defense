@@ -18,9 +18,11 @@ public class BaseHero : Character, IAttackableHero
     [SerializeField] protected BaseAttack attack;
     [SerializeField] protected BaseDetection detect;
     [SerializeField] protected BaseMovement move;
+    [SerializeField] protected BaseSFXHandler baseSFX;
+
     [SerializeField] protected float reviveAnimationDuration;
     [SerializeField] protected float startHealth;
-
+    
     protected PlayerInputHandler playerInputHandler;
     protected Transform target;
     protected Coroutine coroutine;
@@ -28,12 +30,13 @@ public class BaseHero : Character, IAttackableHero
     protected bool isSelected;
     protected Vector2 touchPosition;
 
-    private HeroMovement movement; 
+    private HeroMovement movement;
 
 
     protected virtual void Awake()
     {
         playerInputHandler = PlayerInputHandler.Instance;
+
         movement = move as HeroMovement;
         isSelected = false;
         health = startHealth;
@@ -77,7 +80,7 @@ public class BaseHero : Character, IAttackableHero
             if (attackCountdown <= 0)
             {
                 attackCountdown = 1 / attackRate;
-
+                
                 Attack(target);
             }
         }
@@ -92,6 +95,7 @@ public class BaseHero : Character, IAttackableHero
 
     protected override void Attack(Transform target)
     {
+        baseSFX.PlayAttackSFX();
         attack.AttackTarget(target, damage);
     }
 
@@ -103,7 +107,7 @@ public class BaseHero : Character, IAttackableHero
     protected void LockOnTarget()
     {
         Vector3 direction = target.position - transform.position;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        Quaternion lookRotation = Quaternion.LookRotation(direction.normalized);
         Vector3 rotation = Quaternion.Lerp(RotatPart.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
         RotatPart.rotation = Quaternion.Euler(0, rotation.y, 0);
     }

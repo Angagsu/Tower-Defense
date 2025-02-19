@@ -4,7 +4,8 @@ namespace Assets.Scripts.Tower
 {
     public class LightningTower : BaseTower
     {    
-       private TrailAttack trailAttack;
+        private TrailAttack trailAttack;
+
 
         protected override void Awake()
         {
@@ -28,7 +29,7 @@ namespace Assets.Scripts.Tower
 
         protected override void AttackTarget(Transform target)
         {
-            attack.AttackTarget(target, damage);
+            attack.AttackTarget(target, damage); 
         }
 
         protected override void Crash()
@@ -41,7 +42,9 @@ namespace Assets.Scripts.Tower
             if (target = detect.DetectTarget(attackRange, IsDead))
             {
                 trailAttack.SetTargetMonsterDefaultSpeed(target);
-               // LockOnTarget();
+
+                // LockOnTarget();
+                
                 AttackTarget(target);
             }
             else

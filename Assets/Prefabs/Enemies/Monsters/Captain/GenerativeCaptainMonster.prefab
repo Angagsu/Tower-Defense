@@ -1038,10 +1038,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 525312
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 523254
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -1071,9 +1071,14 @@ MonoBehaviour:
   attack: {fileID: 6279203275460527474}
   detect: {fileID: 7074106229378764576}
   move: {fileID: 5267349236684743600}
-  startHealth: 400
+  startHealth: 500
   moneyGain: 20
   dyingAnimationDuration: 2
+  minions:
+  - {fileID: 2842426493013936178, guid: 0b7bcf0c460253f49946bee12db69f80, type: 3}
+  - {fileID: 7349926957682397905, guid: 00eb17024a8ce974a9dfdd1e1d499d1f, type: 3}
+  - {fileID: 2649663077589497456, guid: c71c76c71bc386543995611025900540, type: 3}
+  - {fileID: 7112752935022487662, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
 --- !u!114 &1652091878299861576
 MonoBehaviour:
   m_ObjectHideFlags: 0
