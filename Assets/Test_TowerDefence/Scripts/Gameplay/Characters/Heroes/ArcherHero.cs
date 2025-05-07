@@ -5,7 +5,6 @@ namespace Assets.Scripts.Hero
 {
     public class ArcherHero : BaseHero
     {
-
         protected override void Update()
         {
             base.Update();

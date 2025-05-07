@@ -101,8 +101,6 @@ MonoBehaviour:
   attackAudioClips:
   - {fileID: 8300000, guid: d08200417b2797c4597f6e695658a417, type: 3}
   - {fileID: 8300000, guid: 1e4cfc460143492488197ad96ab0ad5c, type: 3}
-  destroyAudioClip: {fileID: 0}
-  buildAudioClip: {fileID: 8300000, guid: 3c2db7d8b83e7c0489cc17f48aa3db62, type: 3}
   superAttackAudioClip: {fileID: 0}
 --- !u!82 &2252931914475178458
 AudioSource:
@@ -115,6 +113,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.05
   m_Pitch: 1
@@ -257,12 +256,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 29a5f37eb670ad04ea3fd4827245bd29,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.08
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 29a5f37eb670ad04ea3fd4827245bd29,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.8
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 29a5f37eb670ad04ea3fd4827245bd29,
         type: 3}
@@ -272,22 +271,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 29a5f37eb670ad04ea3fd4827245bd29,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.4777144
+      value: 0.21263112
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 29a5f37eb670ad04ea3fd4827245bd29,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.5213339
+      value: 0.67437977
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 29a5f37eb670ad04ea3fd4827245bd29,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.4777144
+      value: 0.21263112
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 29a5f37eb670ad04ea3fd4827245bd29,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.5213339
+      value: 0.67437977
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 29a5f37eb670ad04ea3fd4827245bd29,
         type: 3}
@@ -302,7 +301,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 29a5f37eb670ad04ea3fd4827245bd29,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 95
+      value: 145
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 29a5f37eb670ad04ea3fd4827245bd29,
         type: 3}

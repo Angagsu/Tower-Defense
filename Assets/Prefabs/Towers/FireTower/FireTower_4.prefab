@@ -134,8 +134,6 @@ MonoBehaviour:
   attackAudioClips:
   - {fileID: 8300000, guid: 2ef52f9940a6112489774a46f7009c43, type: 3}
   - {fileID: 8300000, guid: 1e522ece3a552a14ebb1211d247e2124, type: 3}
-  destroyAudioClip: {fileID: 0}
-  buildAudioClip: {fileID: 8300000, guid: 3c2db7d8b83e7c0489cc17f48aa3db62, type: 3}
   superAttackAudioClip: {fileID: 0}
 --- !u!82 &5232341249793027122
 AudioSource:
@@ -148,6 +146,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.05
   m_Pitch: 1
@@ -259,17 +258,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3dea6297159f0fd4e923f8b48ea889fb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.08
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3dea6297159f0fd4e923f8b48ea889fb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.6
+      value: -0.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3dea6297159f0fd4e923f8b48ea889fb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.067
+      value: -1.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3dea6297159f0fd4e923f8b48ea889fb,
         type: 3}

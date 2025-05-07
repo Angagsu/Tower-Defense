@@ -12,10 +12,15 @@ public class BaseMonster : Character, IAttackableMonster
     [SerializeField] protected float startHealth;
     [SerializeField] protected int moneyGain = 50;
     [SerializeField] protected float dyingAnimationDuration;
+    [SerializeField] protected GPUInstancingEnabler instancingEnabler;
 
     protected Coroutine coroutine;
     protected BaseTower tower;
     protected Transform target;
+
+    protected const string ATTAC_ANIMATION = "Attack";
+    protected const string DYING_ANIMATION = "Dying";
+    protected const string RUN_ANIMATION = "RUN";
 
     protected float startMoveSpeed;
     protected float attackCountdown = 0f;
@@ -30,7 +35,7 @@ public class BaseMonster : Character, IAttackableMonster
     {
         Movement = move as MonsterMovement; 
         health = startHealth;
-        healthBar.enabled = false;
+        //healthBar.enabled = false;
         canAttack = true;
         SetStartMoveSpeed();
     }
@@ -102,7 +107,8 @@ public class BaseMonster : Character, IAttackableMonster
 
     protected virtual IEnumerator DyingAnimationDuration()
     {
-        anim.SetDeadAnimation(isDead);
+        //anim.SetAnimation(2);
+        anim.SetDeadAnimation(true);
 
         yield return new WaitForSeconds(dyingAnimationDuration);
 
@@ -116,9 +122,11 @@ public class BaseMonster : Character, IAttackableMonster
 
     public override void TakeDamage(float amount)
     {
-        healthBar.enabled = true;
+        //healthBar.enabled = true;
         health -= amount;
-        healthBar.fillAmount = health / startHealth;
+        // healthBar.fillAmount = health / startHealth;
+
+        instancingEnabler.SetMaterialProperty((health / startHealth));
 
         if (health <= 0 && !IsDead)
         {
@@ -135,7 +143,7 @@ public class BaseMonster : Character, IAttackableMonster
     { 
         isDead = false;
         health = startHealth;
-        healthBar.enabled = false;
+        //healthBar.enabled = false;
         canAttack = true;
         SetDefaultMoveSpeed();
     }

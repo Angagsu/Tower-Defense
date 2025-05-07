@@ -57,6 +57,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -208,6 +211,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9c84af324696c58418c8dc162972e625, type: 3}
+  m_Resource: {fileID: 8300000, guid: 9c84af324696c58418c8dc162972e625, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.01
   m_Pitch: 1
@@ -350,17 +354,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 16233ada2c62fe043a9cdd9920ab63bf,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.12
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 16233ada2c62fe043a9cdd9920ab63bf,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 16233ada2c62fe043a9cdd9920ab63bf,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.95
+      value: -1.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 16233ada2c62fe043a9cdd9920ab63bf,
         type: 3}

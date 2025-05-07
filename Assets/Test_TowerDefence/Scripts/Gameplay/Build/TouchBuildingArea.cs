@@ -12,18 +12,14 @@ public class TouchBuildingArea : MonoBehaviour
     private PlayerInputHandler playerInputHandler;
 
 
-
-    private void Awake()
+    [Inject]
+    public void Construct(PlayerInputHandler playerInputHandler)
     {
-        playerInputHandler = PlayerInputHandler.Instance;  
-    }
-
-    private void OnEnable()
-    {
+        this.playerInputHandler = playerInputHandler;
         playerInputHandler.TouchPressed += OnTouchBuildingArea;
     }
     private void Start()
-    { 
+    {
         buildingAreaLayer = LayerMask.NameToLayer("BuildingArea");
     }
 

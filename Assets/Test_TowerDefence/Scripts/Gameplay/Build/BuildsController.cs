@@ -24,26 +24,25 @@ public class BuildsController : MonoBehaviour
     private Camera mainCamera;
     private int groundLayer;
 
-
     private PlayerInputHandler playerInputHandler;
 
 
+    [Inject]
+    public void Costruct(PlayerInputHandler playerInputHandler)
+    {
+        this.playerInputHandler = playerInputHandler;
+        playerInputHandler.TouchPressed += OnTouchGroundDeselectAll;
+    }
+
     private void Awake()
     {
-        playerInputHandler = PlayerInputHandler.Instance;
         mainCamera = Camera.main;
         groundLayer = LayerMask.NameToLayer("Ground");
     }
 
     private void Start()
     {
-        
         heroes = heroesReviveHandler.GetHeroesOnScene();
-    }
-
-    private void OnEnable()
-    {
-        playerInputHandler.TouchPressed += OnTouchGroundDeselectAll;
     }
 
     private void OnDisable()

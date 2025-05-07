@@ -1,14 +1,11 @@
-
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuUI : MonoBehaviour
 {
-    [SerializeField] SceneFader sceneFader;
-    
-
     public void Play()
     {
-        sceneFader.FadeTo("LevelsMap");
+        SceneManager.LoadScene("LevelsMap");
     }
 
     public void Quit()

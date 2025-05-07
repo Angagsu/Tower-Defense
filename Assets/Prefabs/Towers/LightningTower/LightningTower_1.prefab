@@ -57,6 +57,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -157,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detect: {fileID: 2962880162210522284}
   attack: {fileID: 1300567797268524758}
+  towerSFXHandler: {fileID: 0}
   healthBar: {fileID: 0}
   towerRotatPart: {fileID: 5909877537875386719}
   damage: 30
@@ -207,6 +211,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9c84af324696c58418c8dc162972e625, type: 3}
+  m_Resource: {fileID: 8300000, guid: 9c84af324696c58418c8dc162972e625, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.01
   m_Pitch: 1
@@ -349,12 +354,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: dcac2b90410c98b40a519edcac3c56fc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.12
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dcac2b90410c98b40a519edcac3c56fc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.33
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dcac2b90410c98b40a519edcac3c56fc,
         type: 3}

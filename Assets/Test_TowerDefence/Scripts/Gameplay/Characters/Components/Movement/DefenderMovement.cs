@@ -26,7 +26,8 @@ public class DefenderMovement : BaseMovement
 
     private void Awake()
     {
-        playerInputHandler = PlayerInputHandler.Instance;
+        playerInputHandler = ServiceLocator.GetService<PlayerInputHandler>();
+
         mainCamera = Camera.main;
         defendersStartPoint = GameObject.Find("GameManager").GetComponent<TouchBuildingArea>();
         towerUpgradeUI = GameObject.Find("TowerUpgradeUI").GetComponent<TowerUpgradeUI>();

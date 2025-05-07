@@ -19,6 +19,7 @@ public class BuildingArea : MonoBehaviour
 
 
 
+
     public void DestroyTower()
     {
         Destroy(Tower);
@@ -45,27 +46,27 @@ public class BuildingArea : MonoBehaviour
 
     public Vector3 GetBuildPosition()
     {
-        if (TowerFullBlueprintSO == towersMap.ArrowTower)
-        {
-            return transform.position + (positionOffset = new Vector3(0, -0.7f, 0));
-        }
+       if (TowerFullBlueprintSO == towersMap.ArrowTower)
+       {
+           return transform.position + (positionOffset = new Vector3(0, -0.7f, 0));
+       }
+       
+       if (TowerFullBlueprintSO == towersMap.GolemTower || TowerFullBlueprintSO == towersMap.FireTower)
+       {
+           return transform.position + (positionOffset = new Vector3(0, 2f, 0));
+       }
+       
+       if (TowerFullBlueprintSO == towersMap.LightningTower || TowerFullBlueprintSO == towersMap.IceTower)
+       {
+           return transform.position + (positionOffset = new Vector3(0, 0.5f, 0));
+       }
+       
+       if (TowerFullBlueprintSO == towersMap.DefenderTower)
+       {
+           return transform.position + (positionOffset = new Vector3(0, 2, 0));
+       }
 
-        if (TowerFullBlueprintSO == towersMap.GolemTower || TowerFullBlueprintSO == towersMap.FireTower)
-        {
-            return transform.position + (positionOffset = new Vector3(0, 2f, 0));
-        }
-
-        if (TowerFullBlueprintSO == towersMap.LightningTower || TowerFullBlueprintSO == towersMap.IceTower)
-        {
-            return transform.position + (positionOffset = new Vector3(0, 0.5f, 0));
-        }
-
-        if (TowerFullBlueprintSO == towersMap.DefenderTower)
-        {
-            return transform.position + (positionOffset = new Vector3(0, 2, 0));
-        }
-
-        return transform.position + (positionOffset = new Vector3(0, 2, 0));
+        return transform.position + positionOffset;
     }
 
     public void SetTower(TowerFullBlueprintSO towerFullBlueprintSO = null, GameObject tower = null)

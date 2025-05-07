@@ -323,7 +323,6 @@ CharacterController:
     serializedVersion: 2
     m_Bits: 262144
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -443,6 +442,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.05
   m_Pitch: 1
@@ -714,11 +714,21 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2549808924288848767}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -6685215567134649860, guid: a8feb3ccc566db643bc4caa1db2d88c8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2759822091547998803}
   m_SourcePrefab: {fileID: 100100000, guid: a8feb3ccc566db643bc4caa1db2d88c8, type: 3}
 --- !u!95 &742364353484593043 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: a8feb3ccc566db643bc4caa1db2d88c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 6568497701881391618}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &3545891132248632015 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1580071973541707571, guid: a8feb3ccc566db643bc4caa1db2d88c8,
     type: 3}
   m_PrefabInstance: {fileID: 6568497701881391618}
   m_PrefabAsset: {fileID: 0}
@@ -734,3 +744,22 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6568497701881391618}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8655542482212961278 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6685215567134649860, guid: a8feb3ccc566db643bc4caa1db2d88c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 6568497701881391618}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2759822091547998803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8655542482212961278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 266d6397ed6f24246ad5e63cd0c61d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skinnedMeshRenderer: {fileID: 3545891132248632015}

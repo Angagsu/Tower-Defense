@@ -113,9 +113,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""TouchEnded"",
                     ""type"": ""Button"",
                     ""id"": ""5bce866f-32ae-4460-9940-8c2566195cc5"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": ""Hold(duration=0.1)"",
                     ""initialStateCheck"": false
                 }
             ],

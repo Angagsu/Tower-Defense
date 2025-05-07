@@ -1,5 +1,5 @@
-using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -9,7 +9,6 @@ public class GameController : MonoBehaviour
 
     private UIManager uiManager;
     private string menuSceneName = "MainMenu";
-    [SerializeField] private SceneFader sceneFader;
 
     [Header("Optional settings. Dont Touch")]
     [Space(10f)]
@@ -17,6 +16,15 @@ public class GameController : MonoBehaviour
     [SerializeField] private string nextLevel;
     [SerializeField] private Button timeRewindButton;
 
+    private AsyncSceneLoadService sceneLoadService;
+    private LevelsMapDataHandler levelsDataHandler;
+
+    [Inject]
+    public void Construct(AsyncSceneLoadService sceneLoadService, LevelsMapDataHandler levelsDataHandler)
+    {
+        this.sceneLoadService = sceneLoadService;
+        this.levelsDataHandler = levelsDataHandler;
+    }
 
     private void Awake()
     {
@@ -59,19 +67,22 @@ public class GameController : MonoBehaviour
 
     public void RetryButton()
     {
-        sceneFader.FadeTo(SceneManager.GetActiveScene().name);
+        sceneLoadService.LoadSceneByName(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
     }
 
     public void MenuButton()
     {
-        sceneFader.FadeTo(menuSceneName);
+        int starCount = Random.Range(0, 4);
+        Debug.Log(starCount);
+        levelsDataHandler.SaveLevelAchievements(true, starCount);
+        sceneLoadService.LoadSceneByName(menuSceneName);
         Time.timeScale = 1;
     }
 
     public void ContinueButtonOnLevelCompletePanel()
     {
-        sceneFader.FadeTo(nextLevel);
+        SceneManager.LoadScene(nextLevel);
         Time.timeScale = 1;
     }
 
@@ -93,5 +104,4 @@ public class GameController : MonoBehaviour
             Time.timeScale = 1f;
         }
     }
-
 }

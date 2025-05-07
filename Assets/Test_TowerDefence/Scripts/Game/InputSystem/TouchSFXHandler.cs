@@ -20,7 +20,7 @@ public class TouchSFXHandler : MonoBehaviour
 
     private void Start()
     {
-        playerInputHandler = PlayerInputHandler.Instance;
+        playerInputHandler = ServiceLocator.GetService<PlayerInputHandler>();
         playerInputHandler.TouchPressed += OnPlayerInputHandler_TouchPressed;
     }
 

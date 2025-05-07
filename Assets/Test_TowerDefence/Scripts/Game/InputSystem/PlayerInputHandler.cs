@@ -1,13 +1,13 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 
 
-public class PlayerInputHandler : MonoBehaviour
+public class PlayerInputHandler : MonoBehaviour, IService
 {
-    public static PlayerInputHandler Instance { get; private set; }
-
     public event Action<Vector2> TouchPressed;
     public event Action<Vector2> CameraDragingStarted;
     public event Action<Vector2> CameraDraging;
@@ -21,11 +21,14 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-
-       // Application.targetFrameRate = 1200;
-
         playerControls = new PlayerControls(); 
+    }
+
+    private void OnEnable()
+    {
+        playerControls.Enable();
+
+        RegisterInputActions();
     }
 
     private void RegisterInputActions()
@@ -53,17 +56,10 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void OnStartTouch(InputAction.CallbackContext ctx)
     {
-        CameraDragingStarted?.Invoke(TouchPosition);
-    }
-
-    private void OnEndDrag()
-    {
-        CameraDragingEnded?.Invoke();
-    }
-
-    private void OnStartDrag(Vector2 fingerPosition)
-    {
-        CameraDragingStarted?.Invoke(TouchPosition);    
+        if (!isDraging)
+        {
+            CameraDragingStarted?.Invoke(TouchPosition);
+        }  
     }
 
     private void OnDrag(Vector2 fingerPosition)
@@ -78,21 +74,32 @@ public class PlayerInputHandler : MonoBehaviour
     {
         TouchPosition = ctx.ReadValue<Vector2>();
 
-        if (!PointerOverUI.Instance.IsPointerOverUIObject(ctx.ReadValue<Vector2>()) && !isDraging)
+        if (!IsPointerOverUIObject(ctx.ReadValue<Vector2>()) && !isDraging)
         {
             TouchPressed?.Invoke(TouchPosition);
         }
-        else if(PointerOverUI.Instance.IsPointerOverUIObject(ctx.ReadValue<Vector2>()) && !isDraging)
+        else if(IsPointerOverUIObject(ctx.ReadValue<Vector2>()) && !isDraging)
         {
             TouchedGround?.Invoke(TouchPosition);
         }    
     }
 
-    private void OnEnable()
+    public bool IsPointerOverUIObject(Vector2 touchPosition)
     {
-        playerControls.Enable();
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(touchPosition.x, touchPosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
 
-        RegisterInputActions();
+        for (int i = 0; i < results.Count; i++)
+        {
+            if (results[i].gameObject.layer == 5)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void OnDisable()

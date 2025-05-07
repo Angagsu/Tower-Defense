@@ -31,11 +31,12 @@ public class BaseHero : Character, IAttackableHero
     protected Vector2 touchPosition;
 
     private HeroMovement movement;
+        
 
 
     protected virtual void Awake()
     {
-        playerInputHandler = PlayerInputHandler.Instance;
+        playerInputHandler = ServiceLocator.GetService<PlayerInputHandler>();
 
         movement = move as HeroMovement;
         isSelected = false;
@@ -53,7 +54,7 @@ public class BaseHero : Character, IAttackableHero
         Move(target);
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         playerInputHandler.TouchPressed -= OnPlayerInputHandler_Touched;
     }

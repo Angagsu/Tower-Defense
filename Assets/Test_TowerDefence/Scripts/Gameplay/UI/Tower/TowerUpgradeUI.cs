@@ -21,7 +21,7 @@ public class TowerUpgradeUI : MonoBehaviour
     public void SetTargetGround(BuildingArea selectedBuildingArea)
     {
         this.selectedBuildingArea = selectedBuildingArea;
-        transform.position = selectedBuildingArea.GetBuildPosition();
+        transform.position = selectedBuildingArea.gameObject.transform.position;
         gameObjectRoot.SetActive(true);
 
 

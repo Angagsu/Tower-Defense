@@ -18,7 +18,7 @@ public class HeroesReviveHandler : MonoBehaviour
 
     private void Awake()
     {
-        InstantiateHeroes();
+        
     }
 
     private void InstantiateHeroes()
@@ -33,6 +33,7 @@ public class HeroesReviveHandler : MonoBehaviour
 
     private void Start()
     {
+        InstantiateHeroes();
         for (int i = 0; i < heroes.Length; i++)
         {
             HeroAdded?.Invoke(heroes[i]);

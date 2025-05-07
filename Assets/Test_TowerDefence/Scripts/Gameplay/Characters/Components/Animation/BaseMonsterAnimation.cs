@@ -3,6 +3,7 @@ using UnityEngine;
 public class BaseMonsterAnimation : MonoBehaviour
 {
     [SerializeField] private Animator animator;
+    
     private int isMovesHash;
     private int isDeadHash;
 
@@ -11,6 +12,7 @@ public class BaseMonsterAnimation : MonoBehaviour
         isMovesHash = Animator.StringToHash("isMoves");
         isDeadHash = Animator.StringToHash("isDead");
     }
+
 
     public void SetDeadAnimation(bool tf)
     {

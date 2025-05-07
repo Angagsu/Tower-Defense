@@ -14,10 +14,17 @@ public class SelectHeroUIHandler : MonoBehaviour
 
     private PlayerInputHandler playerInputHandler;
 
+    [Inject]
+    public void Costruct(PlayerInputHandler playerInputHandler)
+    {
+        this.playerInputHandler = playerInputHandler;
+        playerInputHandler.TouchPressed += SelectHeroOnClick;
+    }
 
     private void Awake()
     {
-        playerInputHandler = PlayerInputHandler.Instance;
+        //playerInputHandler = PlayerInputHandler.Instance;
+
         heroes = heroesReviveHandler.GetHeroesOnScene();
         mainCamera = Camera.main;
 
@@ -50,7 +57,7 @@ public class SelectHeroUIHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        playerInputHandler.TouchPressed += SelectHeroOnClick;
+        
     }
 
     private void OnDisable()

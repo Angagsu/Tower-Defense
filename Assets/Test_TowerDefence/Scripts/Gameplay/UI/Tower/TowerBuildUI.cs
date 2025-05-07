@@ -6,9 +6,11 @@ public class TowerBuildUI : MonoBehaviour
     [SerializeField] private GameObject gameObjectRoot;
     [SerializeField] private TowersMap towersMap;
     [SerializeField] private BuildsController buildsController;
+    [SerializeField] private Vector3 positionOffset;
 
     private BuildingArea selectedBuildingArea;
     private Vector3 startPosition;
+    
 
 
     private void Start()
@@ -47,7 +49,7 @@ public class TowerBuildUI : MonoBehaviour
     public void SetTargetGroundForBuilding(BuildingArea selectedBuildingArea)
     {
         this.selectedBuildingArea = selectedBuildingArea;
-        transform.position = selectedBuildingArea.GetBuildPosition() + new Vector3(0, -2, -5.5f);
+        transform.position = selectedBuildingArea.gameObject.transform.position + positionOffset;
         gameObjectRoot.SetActive(true);
     }
 

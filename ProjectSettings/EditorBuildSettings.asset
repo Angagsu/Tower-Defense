@@ -6,30 +6,33 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Boot.unity
+    guid: e361d91414b2b7a42b4d3ed646b2a42a
+  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
-    guid: d88afd40c857b3d4196e2d4e0bae689e
+    guid: 92349026ce4f7a94f815f2179da8e252
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: 86a671176cc764f44a70aea4de89cf4f
   - enabled: 1
     path: Assets/Scenes/LevelsMap.unity
     guid: 3d1050f40ff4f514bb74106a6d8a4352
   - enabled: 1
-    path: Assets/Test_TowerDefence/Scenes/Level_01.unity
+    path: Assets/Scenes/Level_01.unity
     guid: dae552377fe969843891ed0bb9d2db16
-  - enabled: 0
-    path: Assets/Scenes/Levels/Level_01/Level_01.unity
-    guid: f13a9d8d85c65c94db55edd5d09f153c
   - enabled: 1
-    path: Assets/Scenes/Levels/Level_02.unity
-    guid: 916ee20a850d049408ad3564a453bd7b
+    path: Assets/Scenes/Level_02.unity
+    guid: b5958f1f7b792f54aa4a28f1c11a07ca
   - enabled: 1
-    path: Assets/Scenes/Levels/Level_03.unity
-    guid: 71747b1a3d295074f81e5d643796b862
+    path: Assets/Scenes/Level_03.unity
+    guid: eaa6ba5f1a90aee4fb69447b48de4b2f
   - enabled: 1
-    path: Assets/Scenes/Levels/Level_04.unity
-    guid: 420561eac0e116e489be416ec3484bdd
+    path: Assets/Scenes/Level_04.unity
+    guid: e5905c010cd14504fb118fa6b9ecb3fd
   - enabled: 1
-    path: Assets/Scenes/Levels/Level_05.unity
-    guid: 5aaf4fe34a82d5e4d9b6f4ba74a03508
-  - enabled: 1
-    path: Assets/Scenes/Levels/Level_06.unity
-    guid: 1ffaf0827394f3e439d96b5c23efebf7
-  m_configObjects: {}
+    path: Assets/Scenes/Level_05.unity
+    guid: 5f8a023b264b8b74abdd006dcbb6d869
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 4cd26c93bd0073549984632a34c8b945,
+      type: 3}
+  m_UseUCBPForAssetBundles: 0
