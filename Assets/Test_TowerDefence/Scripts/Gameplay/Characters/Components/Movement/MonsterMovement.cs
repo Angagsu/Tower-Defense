@@ -7,76 +7,84 @@ public class MonsterMovement : BaseMovement
     [SerializeField] private Transform rotatablePart;
     [SerializeField] private BaseMonster baseMonster;
     
-    private FactoriesService factoriesService;
-    private Transform[] spawnPoints;
+    private List<Way> spawnPoints;
     private Transform[] wayPoints;
     private Transform target;
 
-    private int wayCountIndex = 0;
-    private float offsetX;
-    private float offsetZ;
+    private int waypointIndex = 0;
 
     private Transform currentSpawnPoint;
 
-    private void Awake()
-    {
-        factoriesService = GameObject.Find("GameManager").GetComponent<FactoriesService>();
-        spawnPoints = factoriesService.SpawnPoints;
+    private int currentWayesIndex;
 
-        for (int i = 0; i < spawnPoints.Length; i++)
+
+
+    public void Construct()
+    {
+        spawnPoints = baseMonster.MonstersFactoriesService.SpawnPoints;
+
+        for (int i = 0; i < spawnPoints.Count; i++)
         {
-            if (transform.position == spawnPoints[i].position)
+            for (int j = 0; j < spawnPoints[i].Waypoints.Count; j++)
             {
-                wayPoints = WaypointsService.Waypoints[i].Waypoint;
-                currentSpawnPoint = spawnPoints[i];
+                if (transform.position == spawnPoints[i].Waypoints[j].gameObject.transform.position)
+                {
+                    currentWayesIndex = i;
+                    wayPoints = spawnPoints[i].Waypoints[j].Waypoint;
+                    currentSpawnPoint = spawnPoints[i].Waypoints[j].gameObject.transform;
+                }
             }
         }
+
+        target = wayPoints[waypointIndex];
+        isMoves = true;
     }
 
     private void OnEnable()
     {
-        wayCountIndex = 0;
+        isMoves = true;
+        baseMonster.Anim.SetMoveAnimation(true);
+        waypointIndex = 0;
 
-        for (int i = 0; i < spawnPoints.Length; i++)
+        if (spawnPoints != null)
         {
+            for (int i = 0; i < spawnPoints.Count; i++)
+            {
+                for (int j = 0; j < spawnPoints[i].Waypoints.Count; j++)
+                {
+                    if (transform.position == spawnPoints[i].Waypoints[j].transform.position)
+                    {
+                        currentWayesIndex = i;
+                        wayPoints = spawnPoints[i].Waypoints[j].Waypoint;
+                        currentSpawnPoint = spawnPoints[i].Waypoints[j].gameObject.transform;
+                    }
+                }
+            }
 
-             if (transform.position == spawnPoints[i].position)
-             {
-                 wayPoints = WaypointsService.Waypoints[i].Waypoint;
-             }
-        }
-        
-        target = wayPoints[wayCountIndex];
+            target = wayPoints[waypointIndex];
+        } 
     }
 
     private void OnDisable()
     {
+        baseMonster.Anim.SetMoveAnimation(false);
         isMoves = false;
-        wayCountIndex = 0;
+        waypointIndex = 0;
         target = wayPoints[0];
-    }
-
-    private void Start()
-    {
-        target = wayPoints[wayCountIndex];
- 
-        offsetX = Random.Range(-2, 2);
-        offsetZ = Random.Range(-2, 2);
     }
 
     public void Move(Transform target, float moveSpeed, float turnSpeed)
     {
         if (target != null)
         {
-            SetTarget(target);
+            SetTargetHero(target);
         }
 
-        Vector3 randomDir = new Vector3(this.target.position.x + offsetX, this.target.position.y, this.target.position.z + offsetZ);
-        Vector3 direction = randomDir - transform.position;
+        Vector3 direction = this.target.position - transform.position;
         transform.Translate(direction.normalized * moveSpeed * Time.deltaTime, Space.World);
         LockOnTarget(this.target, turnSpeed);
 
-        if (Vector3.Distance(randomDir, transform.position) <= 3f && IsMoves)
+        if (Vector3.Distance(this.target.position, transform.position) <= 3f && IsMoves)
         {
             GetNextWayPoint();
         }
@@ -92,19 +100,17 @@ public class MonsterMovement : BaseMovement
 
     private void GetNextWayPoint()
     {
-        if (wayPoints.Length - 1 <= wayCountIndex)
+        if (wayPoints.Length - 1 <= waypointIndex)
         {
             PathEnd();
             return;
         }
 
-        wayCountIndex++;
-        target = wayPoints[wayCountIndex];
-        offsetX = Random.Range(-2, 2);
-        offsetZ = Random.Range(-2, 2);
+        waypointIndex++;
+        target = wayPoints[waypointIndex];
     }
 
-    public void SetTarget(Transform target)
+    public void SetTargetHero(Transform target)
     {
         this.target = target;
     }
@@ -116,8 +122,9 @@ public class MonsterMovement : BaseMovement
 
     private void PathEnd()
     {
-        PlayerStats.Lives--;
-        FactoriesService.EnemiesAlive--;
+        baseMonster.GameplayPlayerDataHandler.ReduceLives(1);
+        baseMonster.MonstersFactoriesService.ReduceAliveEnemiesAmount();
+
         gameObject.SetActive(false);
         baseMonster.SetIsDead(true);
     }
@@ -126,7 +133,7 @@ public class MonsterMovement : BaseMovement
     {
         wayPoints = waypoints;
         target = targetWaypoint;
-        wayCountIndex = waypointIndex;
+        this.waypointIndex = waypointIndex;
         transform.position = currentTransform.position;
     }
 
@@ -134,15 +141,13 @@ public class MonsterMovement : BaseMovement
     {
         for (int i = 0; i < minions.Count; i++)
         {
-            BaseMonster generatedMinion = factoriesService.GenerateMinions(minions[Random.Range(0, minions.Count)], currentSpawnPoint, currentSpawnPoint.rotation);
-            generatedMinion.Movement.SetWaypointsAndTarget(wayPoints, parentTransform, target, wayCountIndex);
-        }
+            var randomWaypointIndex = Random.Range(0, 3);
 
-        
+            wayPoints = spawnPoints[currentWayesIndex].Waypoints[randomWaypointIndex].Waypoint;
+            currentSpawnPoint = spawnPoints[currentWayesIndex].Waypoints[randomWaypointIndex].gameObject.transform;
+
+            BaseMonster generatedMinion = baseMonster.MonstersFactoriesService.GenerateMinions(minions[Random.Range(0, minions.Count)], currentSpawnPoint, currentSpawnPoint.rotation);
+            generatedMinion.Movement.SetWaypointsAndTarget(wayPoints, parentTransform, target, waypointIndex);
+        }  
     }
-
-    //private Transform MinionsRandomPosition(Transform parentTransform)
-    //{
-    //    Transform randomTransform = new Transform()
-    //}
 }

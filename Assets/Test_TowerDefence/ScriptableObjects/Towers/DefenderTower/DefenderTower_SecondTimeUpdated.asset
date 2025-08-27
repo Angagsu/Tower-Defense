@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f6c82c1f981274b8ec947a19aa2354, type: 3}
   m_Name: DefenderTower_SecondTimeUpdated
   m_EditorClassIdentifier: 
-  <TowerPrefab>k__BackingField: {fileID: 815381606110460285, guid: d181d9c3c00fa4d42af8df440e27c1e6,
+  <TowerPrefab>k__BackingField: {fileID: 815381606110460285, guid: 119496b8739b2f14080eda304077a2fc,
     type: 3}
   <Cost>k__BackingField: 300

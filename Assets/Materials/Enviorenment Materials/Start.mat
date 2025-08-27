@@ -41,6 +41,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Atlas:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -65,6 +69,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Emisson_Map:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -85,6 +93,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Variation_Mask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -99,6 +111,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - Alpha_Clipping: 0.5
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
@@ -106,19 +119,31 @@ Material:
     - _BlendModePreserveSpecular: 1
     - _BlendOp: 0
     - _BumpScale: 1
+    - _CastShadows: 0
+    - _Color_1: 0
+    - _Color_2: 0
+    - _Color_Global_Range_Change: 0
+    - _Color_Variation: 0
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
     - _DstBlendAlpha: 10
+    - _Global_Light_Intensity: 0
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossinessSource: 0
     - _GlossyReflections: 1
+    - _Intensity: 1
+    - _Intensity_1: 1
     - _Metallic: 0.819
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _On_Emission: 1
+    - _On_Global_Light: 0
+    - _On_Global_Saturation: 0
     - _Parallax: 0.02
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SampleGI: 0
@@ -132,11 +157,15 @@ Material:
     - _SrcBlendAlpha: 1
     - _Surface: 1
     - _UVSec: 0
+    - _ZTest: 4
     - _ZWrite: 0
+    - _ZWriteControl: 0
     m_Colors:
-    - _BaseColor: {r: 0.44663325, g: 1, b: 0.2688679, a: 0.12156863}
-    - _Color: {r: 0.44663316, g: 1, b: 0.26886788, a: 0.12156863}
+    - _: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 0}
+    - _BaseColor: {r: 0.44663304, g: 1, b: 0.26886782, a: 0}
+    - _Color: {r: 0.44663304, g: 1, b: 0.2688678, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Global_Light_Color: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 0}
     - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

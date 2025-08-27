@@ -11,8 +11,8 @@ public class MainMenuLoading : MonoBehaviour
         this.sceneLoadService = sceneLoadService;
     }
 
-    public void StartGame()
+    public void GoToLevelsMap()
     {
-        sceneLoadService.StartGame();
+        sceneLoadService.LoadSceneInStartGame(Scenes.LEVELS_MAP);
     }
 }

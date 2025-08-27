@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06a2d521a36aa6141889f76ddf142917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8786167472154575551, guid: 8f30d3e7eaa11f7429faf9d5c69657be,
+  bulletPrefab: {fileID: 8786167472154575551, guid: d2d8ed5d785c394428d1528597ee9b4a,
     type: 3}
   bulletInstPoint: {fileID: 4637962149736910963}
 --- !u!114 &4440489216918628057

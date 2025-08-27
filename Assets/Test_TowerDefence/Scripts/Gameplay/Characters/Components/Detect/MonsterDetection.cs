@@ -3,13 +3,15 @@ using UnityEngine;
 
 public class MonsterDetection : BaseDetection
 {
-    private Transform target;
     [SerializeField] private BaseMonster baseMonster;
 
+    private Transform target;
 
     private List<BaseHero> heroes = new();
 
     private DetectionHelper detectionHelper;
+
+
 
     private void Awake()
     {
@@ -35,9 +37,10 @@ public class MonsterDetection : BaseDetection
                 {
                     if (hero.CurrentAttackerMonster == null || hero.CurrentAttackerMonster == baseMonster)
                     {
-                        hero.SetCurrentAttackerEnemy(baseMonster);
+                        hero.SetCurrentAttackerMonster(baseMonster);
+                        DetectedHero = hero;
                         baseMonster.SetIsMoves(false);
-                        target = nearestHero.transform;
+                        target = hero.PartForTargeting;
                         return target;
                     }
                     else
@@ -46,8 +49,7 @@ public class MonsterDetection : BaseDetection
                         target = null;
                         return target;
                     }
-                }
-                
+                } 
             }
         }
 

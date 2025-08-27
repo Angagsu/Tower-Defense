@@ -1,33 +1,60 @@
+using Assets.Scripts;
 using System.Collections;
 using UnityEngine;
 
 public class BaseProjectile : MonoBehaviour
 {
+    public ProjectileUpgradeLevel UpgradeLevel => upgradLevel;
+
     [SerializeField] protected float speed = 70f;
     [SerializeField] protected float explosionRadius = 0f;
     [SerializeField] protected ParticleSystem impactEffect;
-    
+    [Space(15)]
+    [SerializeField] protected ProjectileUpgradeLevel upgradLevel;
 
+    protected GameplayStates gameplayStates;
     protected bool isHitted = false;
     private Transform target;
     private Coroutine coroutine;
+    private Character targetCharacter;
     private float damage;
-    
 
-    public virtual void SetTarget(Transform target, float damage)
+    protected bool isPaused;
+
+    public virtual void Construct(GameplayStates gameplayStates)
+    {
+        this.gameplayStates = gameplayStates;
+
+        this.gameplayStates.Paused += OnGameplayPause;
+        this.gameplayStates.Unpaused += OnGameplayUnpause;
+    }
+
+    public virtual void SetTarget(Character targetCharacter, Transform target, float damage)
     {
         this.target = target;
         this.damage = damage;
+        this.targetCharacter = targetCharacter; 
     }
 
+    private void OnGameplayPause() => isPaused = true;
 
-   protected virtual void Update()
+    private void OnGameplayUnpause() => isPaused = false;
+
+
+    protected virtual void Update()
     {
+        if (isPaused)
+        {
+            return;
+        }
+
         if (target == null)
         {
             gameObject.SetActive(false);
             return;
         }
+
+        
 
         Vector3 dir = target.position - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
@@ -86,9 +113,20 @@ public class BaseProjectile : MonoBehaviour
 
     protected virtual void Damage(Transform target)
     {
-        if (target.TryGetComponent<IAttackable>(out var tower))
-        {
-            tower.TakeDamage(damage);
-        }
+        targetCharacter.TakeDamage(damage);
     }
+
+    protected void OnDisable()
+    {
+        gameplayStates.Paused -= OnGameplayPause;
+        gameplayStates.Unpaused -= OnGameplayUnpause;
+    }
+}
+
+public enum ProjectileUpgradeLevel
+{
+    EntryLevel,
+    Upgraded,
+    SecondaryUpgraded,
+    ThriceUpgraded
 }

@@ -6,6 +6,21 @@ public class AsyncSceneLoadService : MonoBehaviour, IService
 {
     private LoadingScreenUI loadingScreenUI;
 
+    private void Awake()
+    {
+        SceneManager.sceneLoaded += SceneManager_SceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= SceneManager_SceneLoaded;
+    }
+
+    private void SceneManager_SceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        IsSceneLoaded();
+    }
+
     public void SetLoadingScreen(LoadingScreenUI loadingScreenUI)
     {
         this.loadingScreenUI = loadingScreenUI;
@@ -28,37 +43,55 @@ public class AsyncSceneLoadService : MonoBehaviour, IService
         yield return new WaitForSeconds(2);
     }
 
-
+    private bool IsSceneLoaded()
+    {
+        return true;
+    }
 
     public IEnumerator LoadSceneAsync(string sceneName)
     {
         loadingScreenUI.ShowLoadingScreen();
 
+        yield return new WaitForSeconds(1.5f);
+
         SceneManager.LoadSceneAsync(Scenes.LOADING);
         
         yield return SceneManager.LoadSceneAsync(sceneName);
 
-        yield return new WaitForSeconds(1);
 
-        loadingScreenUI.HideLoadingScreen();
+        yield return new WaitUntil(IsSceneLoaded);
+
+        loadingScreenUI.SetOpenGateAnimation(true);
+        loadingScreenUI.PlayOpenGateSFX(volume: 0.5f);
     }
 
     private IEnumerator LoadSceneAsyncByIndex(int index)
     {
         loadingScreenUI.ShowLoadingScreen();
 
+        yield return new WaitForSeconds(1.5f);
+
         SceneManager.LoadSceneAsync(Scenes.LOADING);
 
         yield return SceneManager.LoadSceneAsync(index);
 
-        yield return new WaitForSeconds(1);
+ 
+        yield return new WaitUntil(IsSceneLoaded);
 
-        loadingScreenUI.HideLoadingScreen();
+        loadingScreenUI.SetOpenGateAnimation(true);
+        loadingScreenUI.PlayOpenGateSFX(volume: 0.5f);
     }
 
-    public void StartGame()
+    public IEnumerator LoadSceneAsyncInStartGame(string sceneName)
     {
-        StartCoroutine(LoadSceneAsync(Scenes.LEVELS_MAP));
+        SceneManager.LoadSceneAsync(Scenes.LOADING);
+
+        yield return SceneManager.LoadSceneAsync(sceneName);
+    }
+
+    public void LoadSceneInStartGame(string sceneName)
+    {
+        StartCoroutine(LoadSceneAsyncInStartGame(sceneName));
     }
 
     public void LoadSceneByName(string sceneName)

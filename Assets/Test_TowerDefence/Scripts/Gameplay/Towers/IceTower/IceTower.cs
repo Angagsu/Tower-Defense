@@ -9,8 +9,8 @@ namespace Assets.Scripts.Tower
         protected override void Awake()
         {
             trailAttack = attack as TrailAttack;
-            base.Awake();
         }
+
         protected override void Update()
         {
             base.Update();
@@ -40,7 +40,8 @@ namespace Assets.Scripts.Tower
         {
             if (target = detect.DetectTarget(attackRange, IsDead))
             {
-                trailAttack.SetTargetMonsterDefaultSpeed(target);
+                targetedMonster = detect.DetectedMonster;
+                trailAttack.SetTargetMonsterDefaultSpeed(TargetedMonster);
 
                 //LockOnTarget();
 
@@ -48,9 +49,15 @@ namespace Assets.Scripts.Tower
             }
             else
             {
+                targetedMonster = null;
                 trailAttack.DisableTrail();
             }
         }
 
+        protected override void OnGameplayPause()
+        {
+            base.OnGameplayPause();
+            trailAttack.DisableTrail();
+        }
     }
 }

@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class DetectionFixedly : BaseDetection
 {
-    private Transform target;
-    BaseMonster detectedMonster = null;
     BaseMonster targetedMonster = null;
+
     private float distance;
+    private Transform target;
 
     private List<BaseMonster> monsters = new();
 
@@ -18,7 +18,7 @@ public class DetectionFixedly : BaseDetection
         monsters = detectionHelper.Monsters;
     }
 
-    public override Transform DetectTarget(float attackRange, bool isDead)
+    public override Transform DetectTarget(float detectionRange, bool isDead)
     {
         foreach (var monster in monsters)
         {
@@ -26,39 +26,44 @@ public class DetectionFixedly : BaseDetection
             {
                 float distanceToEnemy = Vector3.Distance(transform.position, monster.transform.position);
 
-                if (distanceToEnemy < attackRange)
+                if (distanceToEnemy < detectionRange)
                 {
                     distance = distanceToEnemy;
                     targetedMonster = monster;
                 }
-            }        
-        }
-        
-        if (detectedMonster && !detectedMonster.IsDead)
-        {
-            distance = Vector3.Distance(transform.position, detectedMonster.transform.position);
-        }
-
-        if (distance <= attackRange)
-        {
-            if (!detectedMonster && targetedMonster && !targetedMonster.IsDead)
-            {
-                detectedMonster = targetedMonster;
-                return target = detectedMonster.transform;
-            }
-            else if (detectedMonster && !detectedMonster.IsDead)
-            {
-                return target = detectedMonster.transform;
             }
             else
             {
-                detectedMonster = null;
+                //targetedMonster = null;
+            }        
+        }
+        
+        if (DetectedMonster && !DetectedMonster.IsDead)
+        {
+            distance = Vector3.Distance(transform.position, DetectedMonster.transform.position);
+        }
+
+        if (distance <= detectionRange)
+        {
+            if (!DetectedMonster && targetedMonster && !targetedMonster.IsDead)
+            {
+                DetectedMonster = targetedMonster;
+                return target = DetectedMonster.transform;
+            }
+            else if (DetectedMonster && !DetectedMonster.IsDead)
+            {
+                return target = DetectedMonster.transform;
+            }
+            else
+            {
+                DetectedMonster = null;
                 return target = null;
             }
         }
         else
         {
-            detectedMonster = null;
+            targetedMonster = null;
+            DetectedMonster = null;
             return target = null;
         }  
     }

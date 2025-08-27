@@ -7,24 +7,25 @@ public class BuildsController : MonoBehaviour
 {
     public event Action<DefenderUnit> DefendersRemoved;
 
+    [field: SerializeField] public GameplayPlayerDataHandler PlayerDataHandler {  get; private set; }
+
     [SerializeField] private TowerBuilder towerBuilder;
-    [SerializeField] private HeroesReviveHandler heroesReviveHandler;
+    [SerializeField] private HeroesSpawner heroesSpawner;
     [SerializeField] private TowerBuildUI towerBuildUI;
     [SerializeField] private TowerUpgradeUI upgradeTowerUI;
     [SerializeField] private BuildsControllerSFXHandler builderSFXHandler;
 
     private BaseHero[] heroes;
     private DefenderUnit[] defenders;
-    private TowerFullBlueprintSO towerFullBlueprintSO;
-
-    public bool CanBuild { get { return towerFullBlueprintSO != null; } }
-    public bool HasManey { get { return PlayerStats.Money >= towerFullBlueprintSO.Towers[0].Cost; } }
-
-    private BuildingArea selectedBuildingArea;
-    private Camera mainCamera;
-    private int groundLayer;
 
     private PlayerInputHandler playerInputHandler;
+    private TowerFullBlueprintSO towerFullBlueprintSO;
+    private BuildingArea selectedBuildingArea;
+    private Camera mainCamera;
+
+    private int groundLayer;
+
+    
 
 
     [Inject]
@@ -42,7 +43,7 @@ public class BuildsController : MonoBehaviour
 
     private void Start()
     {
-        heroes = heroesReviveHandler.GetHeroesOnScene();
+        heroes = heroesSpawner.GetHeroesOnScene();
     }
 
     private void OnDisable()

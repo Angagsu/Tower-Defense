@@ -5,12 +5,15 @@ namespace Assets.Scripts
 {
     public abstract class Character : MonoBehaviour
     {
+        [field: SerializeField] public Transform PartForTargeting { get; private set; }
+
         [SerializeField] protected float damage;
         [SerializeField] protected float moveSpeed;
         [SerializeField] protected float attackRate;
         [SerializeField] protected float attackRange;
         [SerializeField] protected float turnSpeed;
-        [SerializeField] protected Image healthBar;
+        [SerializeField] protected GPUInstancingEnabler instancingEnabler;
+
 
         protected float health;
         protected bool isDead;

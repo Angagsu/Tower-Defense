@@ -1,0 +1,1615 @@
+fileFormatVersion: 2
+guid: 8949f1fdfec1c734e907f73fb3b94541
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 0
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: 50
+    textureCompression: 1
+    compressionQuality: 100
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 9800
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0fa7a0b722132646b98f15677efdbfd
+      internalID: -149046831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_1
+      rect:
+        serializedVersion: 2
+        x: 1400
+        y: 9800
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 638bfeb78464bfa49ab7cc7359cee748
+      internalID: -1062089986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_2
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 9800
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 232958417b9547144b5539aa67b823e9
+      internalID: 654637503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_3
+      rect:
+        serializedVersion: 2
+        x: 4200
+        y: 9800
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a988d5900ac7cc74e8f1bc8eacd762b1
+      internalID: -2093436994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_4
+      rect:
+        serializedVersion: 2
+        x: 5600
+        y: 9800
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60b564a3dcd48ae4c97268a61b7c7082
+      internalID: -243746994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_5
+      rect:
+        serializedVersion: 2
+        x: 7000
+        y: 9800
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 886dbd85bfd5f1d4db9d9674785638a0
+      internalID: 784026053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_6
+      rect:
+        serializedVersion: 2
+        x: 8400
+        y: 9800
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 197b3cda984b16d46968ad39f94d7740
+      internalID: 498690101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_7
+      rect:
+        serializedVersion: 2
+        x: 9800
+        y: 9800
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4671f1874dc66be469045b3f61ea4754
+      internalID: -508085688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8400
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca3ae85942b9ae0479bcfa7e1637e434
+      internalID: -1748564606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_9
+      rect:
+        serializedVersion: 2
+        x: 1400
+        y: 8400
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0f3cf8b534d3ee49901ce3d51170865
+      internalID: 716427443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_10
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 8400
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5874a0c1b31df3408fbf2a45aaaac69
+      internalID: 234439675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_11
+      rect:
+        serializedVersion: 2
+        x: 4200
+        y: 8400
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a3d6f904b454c942b2c21d970fb3400
+      internalID: 1279258508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_12
+      rect:
+        serializedVersion: 2
+        x: 5600
+        y: 8400
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94a7185b692c03f44a53139a20c2b622
+      internalID: 197945733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_13
+      rect:
+        serializedVersion: 2
+        x: 7000
+        y: 8400
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d607a7374b025e47b07fdf4ac1d2975
+      internalID: 1820771267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_14
+      rect:
+        serializedVersion: 2
+        x: 8400
+        y: 8400
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1e5d4ef2065129408025d7bf150d9f2
+      internalID: 1745957498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_15
+      rect:
+        serializedVersion: 2
+        x: 9800
+        y: 8400
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba053d290c320e84c9a898b2dcd9e7e9
+      internalID: -1577981314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7000
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3250ee0af5dc8f2449f01578833b3aa5
+      internalID: 1626075524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_17
+      rect:
+        serializedVersion: 2
+        x: 1400
+        y: 7000
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5018821a425809542ade515e46812a30
+      internalID: 721030211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_18
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 7000
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc5b363070e5a2b4eac2fb660ae3e63d
+      internalID: 1642176622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_19
+      rect:
+        serializedVersion: 2
+        x: 4200
+        y: 7000
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db02ced7fd0c5154faaeb487ac0265b6
+      internalID: 249388903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_20
+      rect:
+        serializedVersion: 2
+        x: 5600
+        y: 7000
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c964fef3b4a89d84bb2fb04dc7f8f9e5
+      internalID: 1718386492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_21
+      rect:
+        serializedVersion: 2
+        x: 7000
+        y: 7000
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8b47d6f67aba034d9289bee643cc2de
+      internalID: 813752752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_22
+      rect:
+        serializedVersion: 2
+        x: 8400
+        y: 7000
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73aed3cc20bb8ae458f49105feac9bba
+      internalID: 821043231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_23
+      rect:
+        serializedVersion: 2
+        x: 9800
+        y: 7000
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2491605dd903054cac13dec2ef26e75
+      internalID: -1332921809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5600
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00feb6eadb731ff44aa65e04c3634828
+      internalID: -387794395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_25
+      rect:
+        serializedVersion: 2
+        x: 1400
+        y: 5600
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87aace3c864d35c47a924ff208416362
+      internalID: 1473493803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_26
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 5600
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82c5f5f23f4f96c4eac4e52f6b1892b3
+      internalID: -1932166549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_27
+      rect:
+        serializedVersion: 2
+        x: 4200
+        y: 5600
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25b25eafd0e7aba4bbd7a16bc7b5ead8
+      internalID: -974422596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_28
+      rect:
+        serializedVersion: 2
+        x: 5600
+        y: 5600
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c904ca93ac6f3641825c1883cfef295
+      internalID: -1349190990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_29
+      rect:
+        serializedVersion: 2
+        x: 7000
+        y: 5600
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca558b7a4a68e194b8e8c7ac5d7ed440
+      internalID: 657211970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_30
+      rect:
+        serializedVersion: 2
+        x: 8400
+        y: 5600
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a440e890b9dd5454fb2f47f322a1e62c
+      internalID: -828570288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_31
+      rect:
+        serializedVersion: 2
+        x: 9800
+        y: 5600
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92fb3372a00780c40b08f9f870651d02
+      internalID: -692137920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4200
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45e2d648ffec7824097d66a56599efc0
+      internalID: 1473178997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_33
+      rect:
+        serializedVersion: 2
+        x: 1400
+        y: 4200
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c07952bf7c0e5df46951baa3ef841048
+      internalID: 939443083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_34
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 4200
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 030b5453826c54448aaad737db94d9eb
+      internalID: -1068277459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_35
+      rect:
+        serializedVersion: 2
+        x: 4200
+        y: 4200
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc219b12f544ad94a98b2828353dea12
+      internalID: 1597718474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_36
+      rect:
+        serializedVersion: 2
+        x: 5600
+        y: 4200
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c1bbf6d6b14a564d8041c6c0d827113
+      internalID: -1894501247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_37
+      rect:
+        serializedVersion: 2
+        x: 7000
+        y: 4200
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef7907279d224ad43a2004bc4ae6232a
+      internalID: 1863655284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_38
+      rect:
+        serializedVersion: 2
+        x: 8400
+        y: 4200
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f83a497fe09a5c4ebcf3c5fdd52cd44
+      internalID: 352361452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_39
+      rect:
+        serializedVersion: 2
+        x: 9800
+        y: 4200
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30957acd668d3ed4da36d60c4b2751f8
+      internalID: -1126205228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2800
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab77601ea3abed84aa61bc618d40972a
+      internalID: 921637314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_41
+      rect:
+        serializedVersion: 2
+        x: 1400
+        y: 2800
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b89744a1f891b394f9c85de5a7bdf3bc
+      internalID: -1533844247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_42
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 2800
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d21bf9a66d64784d97e792020f1faf0
+      internalID: -448234532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_43
+      rect:
+        serializedVersion: 2
+        x: 4200
+        y: 2800
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb7e5848df73ef94ba82e564f759d105
+      internalID: -1706872351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_44
+      rect:
+        serializedVersion: 2
+        x: 5600
+        y: 2800
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7723e7b6469741f44bacf4c3e5f43432
+      internalID: 2066869749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_45
+      rect:
+        serializedVersion: 2
+        x: 7000
+        y: 2800
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1dd2ea7ff483ce4b89595abbce782d7
+      internalID: -1398379958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_46
+      rect:
+        serializedVersion: 2
+        x: 8400
+        y: 2800
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1332eb8cb85ee64897f43e40c54777e
+      internalID: -1264861022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_47
+      rect:
+        serializedVersion: 2
+        x: 9800
+        y: 2800
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c810ff5d976404147b280a711daa7f59
+      internalID: -830840113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_48
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1400
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8b39f8db9094b5459573e13dc442c48
+      internalID: -1394997180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_49
+      rect:
+        serializedVersion: 2
+        x: 1400
+        y: 1400
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afba516f7dc529541b294e9ab488a3fc
+      internalID: 2129735835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_50
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 1400
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1923b845a16992418db0c3f589a9283
+      internalID: 1485567670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_51
+      rect:
+        serializedVersion: 2
+        x: 4200
+        y: 1400
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6618487386013843b57a10dc8213a64
+      internalID: -281485238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_52
+      rect:
+        serializedVersion: 2
+        x: 5600
+        y: 1400
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0e54b5654f084848b91237b2f40b39e
+      internalID: 1895831558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_53
+      rect:
+        serializedVersion: 2
+        x: 7000
+        y: 1400
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3c0a1b820937514d99f23a55b3263e3
+      internalID: 2141265280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_54
+      rect:
+        serializedVersion: 2
+        x: 8400
+        y: 1400
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9373ebeb4a24924ab70da638e208f24
+      internalID: -812905650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_55
+      rect:
+        serializedVersion: 2
+        x: 9800
+        y: 1400
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffde3126939f957458e683981d93a3b4
+      internalID: -1483651382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_56
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1ead8cdf1adadc479ef70dd5a9908e9
+      internalID: 1555166030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_57
+      rect:
+        serializedVersion: 2
+        x: 1400
+        y: 0
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83d270e3cbb875f4684f76d3fcd93ac7
+      internalID: 272092325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_58
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 0
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7f27e1d48a2f40449fc62cb932d3819
+      internalID: -583458986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_59
+      rect:
+        serializedVersion: 2
+        x: 4200
+        y: 0
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 052e8dc8fc5abae4095d111e5fa53bff
+      internalID: -20925934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_60
+      rect:
+        serializedVersion: 2
+        x: 5600
+        y: 0
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9dcc20e95cae494198e4c453a955890
+      internalID: -1516627618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_61
+      rect:
+        serializedVersion: 2
+        x: 7000
+        y: 0
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e41d52d90ec35b246b0999bb22fe9103
+      internalID: -1264643926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_62
+      rect:
+        serializedVersion: 2
+        x: 8400
+        y: 0
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7ee769bd11367d40aca857fc73b3ffa
+      internalID: 276972866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Angagsu Logo Spritesheet-table-1400-1400 (1)_63
+      rect:
+        serializedVersion: 2
+        x: 9800
+        y: 0
+        width: 1400
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad40ebfd594ff08449605b794e0b75f0
+      internalID: 988613351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 513c13295f6e1dc4ca45d724f2d2ecb7
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_0: -149046831
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_1: -1062089986
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_10: 234439675
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_11: 1279258508
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_12: 197945733
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_13: 1820771267
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_14: 1745957498
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_15: -1577981314
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_16: 1626075524
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_17: 721030211
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_18: 1642176622
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_19: 249388903
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_2: 654637503
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_20: 1718386492
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_21: 813752752
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_22: 821043231
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_23: -1332921809
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_24: -387794395
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_25: 1473493803
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_26: -1932166549
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_27: -974422596
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_28: -1349190990
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_29: 657211970
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_3: -2093436994
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_30: -828570288
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_31: -692137920
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_32: 1473178997
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_33: 939443083
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_34: -1068277459
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_35: 1597718474
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_36: -1894501247
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_37: 1863655284
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_38: 352361452
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_39: -1126205228
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_4: -243746994
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_40: 921637314
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_41: -1533844247
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_42: -448234532
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_43: -1706872351
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_44: 2066869749
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_45: -1398379958
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_46: -1264861022
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_47: -830840113
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_48: -1394997180
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_49: 2129735835
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_5: 784026053
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_50: 1485567670
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_51: -281485238
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_52: 1895831558
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_53: 2141265280
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_54: -812905650
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_55: -1483651382
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_56: 1555166030
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_57: 272092325
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_58: -583458986
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_59: -20925934
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_6: 498690101
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_60: -1516627618
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_61: -1264643926
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_62: 276972866
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_63: 988613351
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_7: -508085688
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_8: -1748564606
+      Angagsu Logo Spritesheet-table-1400-1400 (1)_9: 716427443
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -40,16 +40,13 @@ public class TouchSFXHandler : MonoBehaviour
             switch (layerIndex)
             { 
                 case groundLayer:
-                    audioSource.PlayOneShot(touchGroudAudioClip);
-                    Debug.Log("Ground!!!");
+                    //audioSource.PlayOneShot(touchGroudAudioClip);
                     break;
                 case waterLayer:
                     audioSource.PlayOneShot(touchWaterAudioClip);
-                    Debug.Log("Water!!!");
                     break;
                 case uIlayer:
                     audioSource.PlayOneShot(uIClickAudioClip);
-                    Debug.Log("UI!!!");
                     break;
                 case uniqueEntityLayer:
                     audioSource.PlayOneShot(touchUniqueEntityAudioClip);

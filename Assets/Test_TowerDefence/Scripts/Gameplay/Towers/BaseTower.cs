@@ -6,6 +6,11 @@ namespace Assets.Scripts.Tower
 {
     public abstract class BaseTower : MonoBehaviour, IAttackableTower
     {
+        public BaseMonster TargetedMonster => targetedMonster;
+        public float Health => health;
+        public bool IsDead => isDead;
+
+
         [SerializeField] protected BaseDetection detect;
         [SerializeField] protected BaseAttack attack;
         [SerializeField] protected TowerSFXHandler towerSFXHandler;
@@ -20,43 +25,71 @@ namespace Assets.Scripts.Tower
         [SerializeField] protected float attackRange;
         [SerializeField] protected float turnSpeed;
 
-
+        
+        protected GameplayStates gameplayStateHandler;
+        protected BaseMonster targetedMonster;
         protected Transform target;
-        protected float attackCountdown = 0f;
 
+        protected float attackCountdown = 0f;
         protected float health;
         protected bool isDead;
+        protected bool isPaused;
 
-        public float Health => health;
-        public bool IsDead => isDead;
-
-
-        protected virtual void Awake() 
+        
+        public virtual void Construct(GameplayStates gameplayStateHandler, ProjectilesFactoriesService projectilesFactoriesService)
         {
-            DetectTarget();
+            this.gameplayStateHandler = gameplayStateHandler;
+
+            this.gameplayStateHandler.Unpaused += OnGameplayPlay;
+            this.gameplayStateHandler.Paused += OnGameplayPause;
+
+            ConstructAttackType(projectilesFactoriesService);
+
+            if (gameplayStateHandler.State == GameplayState.Play)
+            {
+                DetectTarget();
+            }  
         }
 
-        protected virtual void Start()
+        private void ConstructAttackType(ProjectilesFactoriesService projectilesFactoriesService)
         {
+            if (attack is RangeAttack)
+            {
+                attack.Costruct(projectilesFactoriesService);
+            }
+        }
 
+        protected virtual void Awake() { }
+        
+        protected virtual void OnGameplayPause() => isPaused = true;
+
+        protected virtual void OnGameplayPlay() => isPaused = false;
+
+        protected virtual void OnDisable()
+        {
+            gameplayStateHandler.Unpaused -= OnGameplayPlay;
+            gameplayStateHandler.Paused -= OnGameplayPause;
         }
 
         protected virtual void Update() 
         {
-            DetectTarget();
+            if (!isPaused)
+            {
+                DetectTarget();
+            }
         }
 
         protected virtual void DetectTarget()
         {
             if ((target = detect.DetectTarget(attackRange, IsDead)))
             {
-                //LockOnTarget();
+                targetedMonster = detect.DetectedMonster;
 
                 if (attackCountdown <= 0)
                 {
                     attackCountdown = 1 / attackRate;
-
-                    AttackTarget(target);
+                    
+                    AttackTarget(target);   
                 }
             }
             attackCountdown -= Time.deltaTime;
@@ -64,7 +97,7 @@ namespace Assets.Scripts.Tower
 
         protected virtual void AttackTarget(Transform target) 
         {
-            attack.AttackTarget(target, damage);
+            attack.AttackTarget(target, damage, TargetedMonster);
             towerSFXHandler.PlayAttackSFX();
         }
 
@@ -81,6 +114,7 @@ namespace Assets.Scripts.Tower
             Vector3 rotation = Quaternion.Lerp(towerRotatPart.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
             towerRotatPart.rotation = Quaternion.Euler(0, rotation.y, 0);
         }
+
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.blue;

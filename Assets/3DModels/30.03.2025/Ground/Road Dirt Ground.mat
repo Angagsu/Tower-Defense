@@ -149,10 +149,10 @@ Material:
     - _Map_Scale: {r: 0.58, g: 1.17, b: 0, a: 0}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _Offset_1: {r: 0, g: 0, b: 0, a: 0}
-    - _Road_Side_1_Location: {r: 0.02, g: 0.33, b: 0, a: 0}
-    - _Road_Side_1_Scale: {r: 1.02, g: 1, b: 0, a: 0}
-    - _Road_Side_2_Location_2: {r: -0.11, g: 0.54, b: 0, a: 0}
-    - _Road_Side_2_Scale_2: {r: 1.07, g: 0.69, b: 0, a: 0}
+    - _Road_Side_1_Location: {r: 0.17, g: 0.33, b: 0, a: 0}
+    - _Road_Side_1_Scale: {r: 0.07, g: 1, b: 0, a: 0}
+    - _Road_Side_2_Location_2: {r: -0.02, g: 0.54, b: 0, a: 0}
+    - _Road_Side_2_Scale_2: {r: 1.02, g: 0.69, b: 0, a: 0}
     - _Scale: {r: 1.02, g: 1, b: 0, a: 0}
     - _Scale_2: {r: 1.07, g: 0.69, b: 0, a: 0}
     - _Scale_and_Rotation: {r: 1.28, g: 0, b: 0, a: 0}

@@ -724,7 +724,7 @@
         "preventRotation": false
     },
     "m_Path": "Shader Graphs",
-    "m_GraphPrecision": 2,
+    "m_GraphPrecision": 0,
     "m_PreviewMode": 2,
     "m_OutputNode": {
         "m_Id": ""
@@ -4654,7 +4654,7 @@
     "m_ObjectId": "d969940ae31f4b0482c08e1d21235557",
     "m_Title": "Scrolling Alpha",
     "m_Position": {
-        "x": 2032.9998779296875,
+        "x": 2033.0,
         "y": -529.0
     }
 }
@@ -4665,7 +4665,7 @@
     "m_ObjectId": "d9f1d8f741fe47938b1ff835bb19b6ab",
     "m_Title": "Window Texture",
     "m_Position": {
-        "x": 1464.9998779296875,
+        "x": 1465.0,
         "y": -660.0
     }
 }

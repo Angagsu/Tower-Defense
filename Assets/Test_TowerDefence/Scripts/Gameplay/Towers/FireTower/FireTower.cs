@@ -5,10 +5,7 @@ public class FireTower : BaseTower
 {
     [SerializeField] private float impactRadius;
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
+
     protected override void Update()
     {
         base.Update();

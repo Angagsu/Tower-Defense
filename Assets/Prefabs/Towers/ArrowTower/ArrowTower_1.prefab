@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06a2d521a36aa6141889f76ddf142917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8786167472154575551, guid: 8f30d3e7eaa11f7429faf9d5c69657be,
+  bulletPrefab: {fileID: 8786167472154575551, guid: 2f6af123bec32d34e89c7e8681f7effb,
     type: 3}
   bulletInstPoint: {fileID: 4637962149736910963}
 --- !u!114 &2564302940741444598
@@ -116,7 +116,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.05
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0

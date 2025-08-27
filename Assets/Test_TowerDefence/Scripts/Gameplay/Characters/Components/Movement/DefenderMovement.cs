@@ -1,175 +1,193 @@
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-
 
 public class DefenderMovement : BaseMovement
 {
-    [SerializeField] private GameObject[] defendersObj;
-    [SerializeField] private Transform towerTransform;
-    [SerializeField] private float defendersSpeed;
-    [SerializeField] private float timeOfRevive;
-    [SerializeField] private float turnSpeed;
+    public Vector3 PreviousPosition { get; private set; }
+    public Vector3 DirectionOffset;
+    public bool IsOnPreviosPosition;
 
-    private TouchBuildingArea defendersStartPoint;
-    private TowerUpgradeUI towerUpgradeUI;
-    private DetectionHelper detectionHelper;
-    private DefenderUnit[] defenderUnits;
+    [SerializeField] private BaseHero defender;
 
-    private Camera mainCamera;
     private Coroutine coroutine;
-    private Vector3 defendersNewPoint;
-    private int groundLayer;
-    private bool isSelected;
+    private CharacterController characterController;
 
-    private PlayerInputHandler playerInputHandler;
+    private Vector3 newPosition;
+    private Vector3 positionOffset;
+    private Vector3 targetPositionOffset;
+    private float distance;
+
+    private bool isPaused => defender.IsPaused;
+
+
 
     private void Awake()
     {
-        playerInputHandler = ServiceLocator.GetService<PlayerInputHandler>();
+        isMoves = false;
 
-        mainCamera = Camera.main;
-        defendersStartPoint = GameObject.Find("GameManager").GetComponent<TouchBuildingArea>();
-        towerUpgradeUI = GameObject.Find("TowerUpgradeUI").GetComponent<TowerUpgradeUI>();
-        defenderUnits = new DefenderUnit[3];
+        characterController = GetComponent<CharacterController>();
 
-        groundLayer = LayerMask.NameToLayer("DefendersMoveZone");
-        detectionHelper = DetectionHelper.Instance;   
+        PreviousPosition = transform.position;
+        IsOnPreviosPosition = true;
     }
-    void Start()
+
+    public void MoveToTarget(float moveSpeed, float turnSpeed, Vector3 touchPosition, Transform towerTransform)
     {
+
+        if (!IsOnPreviosPosition)
+        {
+            return;
+        }
+
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+
+        coroutine = StartCoroutine(HeroMoveTowerds(touchPosition, moveSpeed, turnSpeed, towerTransform));
+    }
+
+    public void MoveToTargetMonster(float moveSpeed, float turnSpeed, Vector3 targetPosition)
+    {
+        if (isMoves)
+        {
+            return;
+        }
+
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+
+        coroutine = StartCoroutine(MoveToTargetedMonster(targetPosition, moveSpeed, turnSpeed));
+    }
+
+    public void ReturnToPreviousPosition(float moveSpeed, float turnSpeed, Vector3 targetPosition)
+    {
+        if (IsOnPreviosPosition)
+        {
+            Debug.Log("Yaqu Arraaa");
+            return;
+        }
+
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+
+        coroutine = StartCoroutine(GoToPreviousPosition(targetPosition, moveSpeed, turnSpeed));
+    }
+
+    private IEnumerator HeroMoveTowerds(Vector3 targetPosition, float moveSpeed, float turnSpeed, Transform towerTransform)
+    {
+        IsOnPreviosPosition = false;
         isMoves = true;
-        isSelected = false;
-        defendersNewPoint = defendersStartPoint.BuildingArea.GetDefendersStartPoint().position;
-        SetTheSworderDefenderArray();
-        StartCoroutine(DefendersMoveTowerds(defendersNewPoint));
-    }
-
-    private void OnEnable()
-    {
-        playerInputHandler.TouchPressed += GetDefendersNewPosition;
-    }
-
-    private void OnDisable()
-    {
-        playerInputHandler.TouchPressed -= GetDefendersNewPosition;
-    }
-
-    void Update()
-    {
-        DisableTheDefenderWhenDies();
-    }
-
-    private void GetDefendersNewPosition(Vector2 touchPosition)
-    {
-        if (isSelected)
-        {
-            if (true)
-            {
-                Ray ray = mainCamera.ScreenPointToRay(touchPosition);
-
-                if (Physics.Raycast(ray, out RaycastHit raycastHit) &&
-                    raycastHit.collider.gameObject.layer.CompareTo(groundLayer) == 0)
-                {
-                    if (coroutine != null)
-                    {
-                        StopCoroutine(coroutine);
-                    }
-                    isSelected = false;
-                    coroutine = StartCoroutine(DefendersMoveTowerds(raycastHit.point));
-                    defendersNewPoint = raycastHit.point;
-                }
-                else
-                {
-                    if (coroutine != null)
-                    {
-                        StopCoroutine(coroutine);
-                    }
-
-                    isSelected = false;
-                    isMoves = false;
-                    towerUpgradeUI.DeActivateDefendersMoveZone();
-                }
-            }
-        }
-
-    }
-
-    private void SetTheSworderDefenderArray()
-    {
-        for (int i = 0; i < defendersObj.Length; i++)
-        {
-            defenderUnits[i] = defendersObj[i].GetComponent<DefenderUnit>();
-            detectionHelper.OnHeroesCountIncreased(defenderUnits[i]);
-        }
-    }
-    private void DisableTheDefenderWhenDies()
-    {
-        for (int i = 0; i < defendersObj.Length; i++)
-        {
-            if (defenderUnits[i].IsDead)
-            {
-                defenderUnits[i].enabled = false;
-                defenderUnits[i].Anim.SetDeadAnimation(true);
-                //sworderDefendersObj[i].SetActive(false);
-                StartCoroutine(TimerForDefenderRevive(defenderUnits[i]));
-            }
-        }
-
-    }
-    public IEnumerator DefendersMoveTowerds(Vector3 targetPosition)
-    {
-        isMoves = true;
-
-        towerUpgradeUI.DeActivateDefendersMoveZone();
+        defender.Deselect();
+        defender.SetCanAttack(false);
+        defender.Anim.SetMoveAnimation(true);
 
         float heroDistanceToFloor = transform.position.y - targetPosition.y;
         targetPosition.y += heroDistanceToFloor;
 
-        while (Vector3.Distance(transform.position, targetPosition) > 0.5f && Vector3.Distance(towerTransform.position, targetPosition) < 12f && IsMoves)
+        positionOffset = new Vector3(transform.position.x - DirectionOffset.x, transform.position.y - DirectionOffset.y, transform.position.z - DirectionOffset.z);
+        targetPositionOffset = new Vector3(DirectionOffset.x + targetPosition.x, DirectionOffset.y + targetPosition.y, DirectionOffset.z + targetPosition.z);
+
+
+        while (Vector3.Distance(positionOffset, targetPositionOffset) > 0.1f)
         {
-            Vector3 destination = Vector3.MoveTowards(transform.position, targetPosition, defendersSpeed * Time.deltaTime);
-            transform.position = destination;
+            while (isPaused) yield return null;
 
-            for (int i = 0; i < defenderUnits.Length; i++)
-            {
-                Vector3 direction = targetPosition - transform.position;
+            Vector3 direction = targetPositionOffset - positionOffset;
+            
 
-                defenderUnits[i].Anim.SetMoveAnimation(true);
-                defenderUnits[i].RotatPart.rotation = Quaternion.Slerp(defenderUnits[i].RotatPart.rotation,
-                    Quaternion.LookRotation(direction.normalized), turnSpeed);
-            }
+            Vector3 movement = direction.normalized * moveSpeed * Time.deltaTime;
+            
+            characterController.Move(movement);
+
+            defender.RotatPart.rotation = Quaternion.Slerp(defender.RotatPart.rotation, Quaternion.LookRotation(direction.normalized),
+                turnSpeed * Time.deltaTime);
+
+            
+            positionOffset = new Vector3(transform.position.x - DirectionOffset.x, transform.position.y - DirectionOffset.y, transform.position.z - DirectionOffset.z);
+            distance = Vector3.Distance(positionOffset, targetPositionOffset);
+ 
+            yield return null;
+        }
+
+        positionOffset = Vector3.zero;
+        targetPositionOffset = Vector3.zero;
+        
+        IsOnPreviosPosition = true;
+
+        newPosition = transform.position;
+        PreviousPosition = newPosition;
+        
+        isMoves = false;
+        defender.SetCanAttack(true);
+        defender.Anim.SetMoveAnimation(false);
+    }
+
+    private IEnumerator MoveToTargetedMonster(Vector3 targetPosition, float moveSpeed, float turnSpeed)
+    {
+        IsOnPreviosPosition = false;
+        isMoves = true;
+        defender.SetCanAttack(false);
+        defender.Anim.SetMoveAnimation(true);
+
+
+        float heroDistanceToFloor = transform.position.y - targetPosition.y;
+        targetPosition.y += heroDistanceToFloor;
+
+        while (Vector3.Distance(transform.position, targetPosition) > defender.AttackRange)
+        {
+            while(isPaused) yield return null;
+
+            Vector3 direction = targetPosition - transform.position;
+            Vector3 movement = direction.normalized * moveSpeed * Time.deltaTime;
+
+            characterController.Move(movement);
+
+            defender.RotatPart.rotation = Quaternion.Slerp(defender.RotatPart.rotation, Quaternion.LookRotation(direction.normalized),
+                turnSpeed * Time.deltaTime);
 
             yield return null;
         }
 
+        newPosition = targetPosition;
         isMoves = false;
-        for (int i = 0; i < defenderUnits.Length; i++)
+        defender.SetCanAttack(true);
+        defender.Anim.SetMoveAnimation(false);
+    }
+
+    private IEnumerator GoToPreviousPosition(Vector3 targetPosition, float moveSpeed, float turnSpeed)
+    {
+        isMoves = true;
+        defender.SetCanAttack(false);
+        defender.Anim.SetMoveAnimation(true);
+
+
+        float heroDistanceToFloor = transform.position.y - targetPosition.y;
+        targetPosition.y += heroDistanceToFloor;
+
+        while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
         {
-            defenderUnits[i].Anim.SetMoveAnimation(false);
+            while (isPaused) yield return null;
+
+            Vector3 direction = targetPosition - transform.position;
+            Vector3 movement = direction.normalized * moveSpeed * Time.deltaTime;
+
+            characterController.Move(movement);
+
+            defender.RotatPart.rotation = Quaternion.Slerp(defender.RotatPart.rotation, Quaternion.LookRotation(direction.normalized),
+                turnSpeed * Time.deltaTime);
+
+            yield return null;
         }
-    }
 
-    public void SelectOrDeSelectDefenders(bool tof)
-    {
-        isSelected = tof;
-    }
-
-    private IEnumerator TimerForDefenderRevive(DefenderUnit defender)
-    {
-        while (defender.IsDead)
-        {
-            yield return new WaitForSeconds(timeOfRevive);
-            defender.OnRevive();
-            defender.enabled = true;
-            defender.gameObject.SetActive(true);
-        }
-    }
-
-    public DefenderUnit[] GetDefendersArray()
-    {
-        return defenderUnits;
+        IsOnPreviosPosition = true;
+        newPosition = targetPosition;
+        isMoves = false;
+        defender.SetCanAttack(true);
+        defender.Anim.SetMoveAnimation(false);
     }
 }
-
-

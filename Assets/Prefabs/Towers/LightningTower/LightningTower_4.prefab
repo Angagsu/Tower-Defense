@@ -158,6 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3286c23465433741992c9aa979783c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <TargetedMonster>k__BackingField: {fileID: 0}
   detect: {fileID: 2962880162210522284}
   attack: {fileID: 1300567797268524758}
   towerSFXHandler: {fileID: 0}

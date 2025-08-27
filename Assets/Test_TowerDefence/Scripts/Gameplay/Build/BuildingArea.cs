@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BuildingArea : MonoBehaviour
 {
-    public DefenderMovement DefenderMovement { get; private set; }
+    public DefendersController DefenderMovement { get; private set; }
     public TowerFullBlueprintSO TowerFullBlueprintSO { get; private set; }
     public GameObject Tower { get; set; }
 
@@ -25,23 +25,28 @@ public class BuildingArea : MonoBehaviour
         Destroy(Tower);
         if (IsUpgradedSecondTime)
         {
-            PlayerStats.Money += TowerFullBlueprintSO.GetSecondTimeUpgradedTowerSellCost();
+            buildsController.PlayerDataHandler.IncreaseMoney(TowerFullBlueprintSO.GetSecondTimeUpgradedTowerSellCost());
             IsUpgradedSecondTime = false;
         }
         else if (IsUpgraded)
         {
-            PlayerStats.Money += TowerFullBlueprintSO.GetUpgradedTowerSellCost();
+            buildsController.PlayerDataHandler.IncreaseMoney(TowerFullBlueprintSO.GetUpgradedTowerSellCost());
             IsUpgraded = false;
         }
         else if (IsUpgradedThirdTime)
         {
-            PlayerStats.Money += TowerFullBlueprintSO.GetThirdTimeUpgradedTowerSellCost();
+            buildsController.PlayerDataHandler.IncreaseMoney(TowerFullBlueprintSO.GetThirdTimeUpgradedTowerSellCost());
             IsUpgradedThirdTime = false;
         }
         else
         {
-            PlayerStats.Money += TowerFullBlueprintSO.GetTowerSellCost();
+            buildsController.PlayerDataHandler.IncreaseMoney(TowerFullBlueprintSO.GetTowerSellCost());
         }
+    }
+
+    public void DestroyTowerForUpgrade()
+    {
+        Destroy(Tower);
     }
 
     public Vector3 GetBuildPosition()
@@ -79,7 +84,7 @@ public class BuildingArea : MonoBehaviour
     {
         if (TowerFullBlueprintSO == towersMap.DefenderTower)
         {
-            DefenderMovement = Tower.GetComponentInChildren<DefenderMovement>();
+            DefenderMovement = Tower.GetComponentInChildren<DefendersController>();
         }
     }
 

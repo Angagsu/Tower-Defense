@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class WaypointsService : MonoBehaviour
 {
-    public static  List<Waypoints>  Waypoints { get; private set; }
+    public static  List<Way>  Ways { get; private set; }
 
     private void Awake()
     {
-        Waypoints = new List<Waypoints>();
-
+        Ways = new List<Way>();
+        
         for (int i = 0; i < transform.childCount; i++)
         {
-            Waypoints.Add(transform.GetChild(i).GetComponent<Waypoints>());
+            Ways.Add(transform.GetChild(i).GetComponent<Way>());
         }
     }
 }

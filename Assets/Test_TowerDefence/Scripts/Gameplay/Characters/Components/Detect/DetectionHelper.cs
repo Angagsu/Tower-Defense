@@ -8,16 +8,17 @@ public class DetectionHelper : MonoBehaviour
     public List<BaseMonster> Monsters { get; private set; } = new();
     public List<BaseHero> Heroes { get; private set; } = new();
 
-    [SerializeField] private FactoriesService factoriesService;
-    [SerializeField] private HeroesReviveHandler heroesReviveHandler;
+    [SerializeField] private MonstersFactoriesService monstersFactoriesService;
+    [SerializeField] private HeroesSpawner heroesSpawner;
     [SerializeField] private BuildsController buildsController;
+
+
 
     private void Awake()
     {
         Instance = this;
-
-        factoriesService.MonsterCountChanged += OnMonstersCountChanged;
-        heroesReviveHandler.HeroAdded += OnHeroesCountIncreased;
+        monstersFactoriesService.MonsterCountChanged += OnMonstersCountChanged;
+        heroesSpawner.HeroAdded += OnHeroesCountIncreased;
         buildsController.DefendersRemoved += OnDefendersRemoved;
     }
 
@@ -38,8 +39,8 @@ public class DetectionHelper : MonoBehaviour
 
     private void OnDestroy()
     {
-        factoriesService.MonsterCountChanged -= OnMonstersCountChanged;
-        heroesReviveHandler.HeroAdded -= OnHeroesCountIncreased;
+        monstersFactoriesService.MonsterCountChanged -= OnMonstersCountChanged;
+        heroesSpawner.HeroAdded -= OnHeroesCountIncreased;
         buildsController.DefendersRemoved -= OnDefendersRemoved;
     }
 }

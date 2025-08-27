@@ -5,14 +5,16 @@ public class SelectHeroUIHandler : MonoBehaviour
 {
     [SerializeField] private Button archerHeroButton;
     [SerializeField] private Button knightHeroButton;
-    [SerializeField] private HeroesReviveHandler heroesReviveHandler;
+    [Space(10)]
+    [SerializeField] private Image[] heroesHealthBars;
+
+
     [SerializeField] private BuildsController buildsController;
 
     private BaseHero[] heroes;    
     private Camera mainCamera;
-
-
     private PlayerInputHandler playerInputHandler;
+
 
     [Inject]
     public void Costruct(PlayerInputHandler playerInputHandler)
@@ -23,10 +25,13 @@ public class SelectHeroUIHandler : MonoBehaviour
 
     private void Awake()
     {
-        //playerInputHandler = PlayerInputHandler.Instance;
-
-        heroes = heroesReviveHandler.GetHeroesOnScene();
         mainCamera = Camera.main;
+    }
+
+
+    public void SetHeroes(BaseHero[] heroes)
+    {
+        this.heroes = heroes;
 
         archerHeroButton.onClick.AddListener(() =>
         {
@@ -38,7 +43,7 @@ public class SelectHeroUIHandler : MonoBehaviour
             {
                 heroes[0].Select();
                 heroes[1].Deselect();
-            }     
+            }
         });
 
         knightHeroButton.onClick.AddListener(() =>
@@ -53,16 +58,22 @@ public class SelectHeroUIHandler : MonoBehaviour
                 heroes[0].Deselect();
             }
         });
+
+        for (int i = 0; i < heroes.Length; i++)
+        {
+            heroes[i].DamageTaked += OnHeroDamageTaked;
+        }
     }
 
-    private void OnEnable()
+    private void OnHeroDamageTaked(BaseHero hero, float health, float startHealth)
     {
-        
-    }
-
-    private void OnDisable()
-    {
-        playerInputHandler.TouchPressed -= SelectHeroOnClick;
+        for (int i = 0; i < heroes.Length; i++)
+        {
+            if (heroes[i] == hero)
+            {
+                heroesHealthBars[i].fillAmount = health / startHealth;
+            }
+        }
     }
 
     public void SelectHeroOnClick(Vector2 touchPosition)
@@ -84,5 +95,10 @@ public class SelectHeroUIHandler : MonoBehaviour
                 buildsController.DeselectGround();
             }  
         }
+    }
+
+    private void OnDisable()
+    {
+        playerInputHandler.TouchPressed -= SelectHeroOnClick;
     }
 }

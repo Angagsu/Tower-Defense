@@ -1,14 +1,17 @@
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 public class TowerUpgradeUI : MonoBehaviour
 {
-    [SerializeField] private Text upgradeCostText, sellCostText;
+    [SerializeField] private TextMeshProUGUI upgradeCostText, sellCostText;
     [SerializeField] private Button upgradeButton;
     [SerializeField] private GameObject defendersMoveZone;
     [SerializeField] private GameObject selectDefendersButton;
     [SerializeField] private GameObject gameObjectRoot;
     [SerializeField] private BuildsController buildsController;
+    [SerializeField] private Vector3 positionOffset;
+
 
     private BuildingArea selectedBuildingArea;
 
@@ -22,25 +25,27 @@ public class TowerUpgradeUI : MonoBehaviour
     {
         this.selectedBuildingArea = selectedBuildingArea;
         transform.position = selectedBuildingArea.gameObject.transform.position;
+        gameObjectRoot.transform.position = selectedBuildingArea.gameObject.transform.position + positionOffset;
+        
         gameObjectRoot.SetActive(true);
 
 
         if (!selectedBuildingArea.IsUpgraded || !selectedBuildingArea.IsUpgradedSecondTime || !selectedBuildingArea.IsUpgradedThirdTime)
         {
             sellCostText.text = selectedBuildingArea.TowerFullBlueprintSO.GetTowerSellCost().ToString();
-            upgradeCostText.text = "$ " + selectedBuildingArea.TowerFullBlueprintSO.Towers[1].Cost;
+            upgradeCostText.text = "" + selectedBuildingArea.TowerFullBlueprintSO.Towers[1].Cost;
             upgradeButton.interactable = true;
         }
         if (selectedBuildingArea.IsUpgraded)
         {
             sellCostText.text = selectedBuildingArea.TowerFullBlueprintSO.GetUpgradedTowerSellCost().ToString();
-            upgradeCostText.text = "$ " + selectedBuildingArea.TowerFullBlueprintSO.Towers[2].Cost;
+            upgradeCostText.text = "" + selectedBuildingArea.TowerFullBlueprintSO.Towers[2].Cost;
             upgradeButton.interactable = true;
         }
         if (selectedBuildingArea.IsUpgradedSecondTime)
         {
             sellCostText.text = selectedBuildingArea.TowerFullBlueprintSO.GetSecondTimeUpgradedTowerSellCost().ToString();
-            upgradeCostText.text = "$ " + selectedBuildingArea.TowerFullBlueprintSO.Towers[3].Cost;
+            upgradeCostText.text = "" + selectedBuildingArea.TowerFullBlueprintSO.Towers[3].Cost;
             upgradeButton.interactable = true;
         }
         if (selectedBuildingArea.IsUpgradedThirdTime)

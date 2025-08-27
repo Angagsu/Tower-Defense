@@ -31,7 +31,7 @@ public class GameEntryPoint
 
         var loadingScreenUIPrefab = Resources.Load<LoadingScreenUI>("LoadingScreenUI");
         loadingScreenUI = Object.Instantiate(loadingScreenUIPrefab);
-        Object.DontDestroyOnLoad(loadingScreenUI.gameObject);
+        Object.DontDestroyOnLoad(loadingScreenUI.gameObject); 
         SceneLoader.SetLoadingScreen(loadingScreenUI);
     }
 
@@ -47,13 +47,37 @@ public class GameEntryPoint
 
     private IEnumerator LoadScene(string sceneName)
     {
+        loadingScreenUI.ShowLogo();
+        loadingScreenUI.PlayLogoSFX(volume: 0.5f);
+
+        yield return new WaitForSeconds(3.3f);
+
+        loadingScreenUI.HideLogo();
+        loadingScreenUI.ShowSplashScreen();
+
+        yield return new WaitForSeconds(4);
+
+        loadingScreenUI.HideSplashScreen();
+
         yield return SceneManager.LoadSceneAsync(Scenes.BOOT);
-        coroutines.StartCoroutine(SceneLoader.LoadSceneAsync(sceneName));
+        coroutines.StartCoroutine(SceneLoader.LoadSceneAsyncInStartGame(sceneName));
     }
 
     private IEnumerator LoadSceneInEditor(string sceneName)
     {
+        //loadingScreenUI.ShowLogo();
+        //loadingScreenUI.PlayLogoSFX(volume: 0.3f);
+        //
+        //yield return new WaitForSeconds(3.3f);
+        //
+        //loadingScreenUI.HideLogo();
+        //loadingScreenUI.ShowSplashScreen();
+        //
+        //yield return new WaitForSeconds(4);
+        //
+        //loadingScreenUI.HideSplashScreen();
+        
         yield return SceneManager.LoadSceneAsync(Scenes.BOOT);
-        coroutines.StartCoroutine(SceneLoader.LoadSceneAsync(sceneName));
+        coroutines.StartCoroutine(SceneLoader.LoadSceneAsyncInStartGame(sceneName));
     }
 }

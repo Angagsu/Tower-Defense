@@ -6,8 +6,8 @@ public class GPUInstancingEnabler : MonoBehaviour
     private MaterialPropertyBlock materialPropertyBlock;
 
     [SerializeField] private MeshRenderer meshRenderer;
-    
 
+    
     private void Awake()
     {
         materialPropertyBlock = new();
@@ -16,8 +16,10 @@ public class GPUInstancingEnabler : MonoBehaviour
 
     public void SetMaterialProperty(float amount)
     {
-        materialPropertyBlock.SetFloat("_Slider", amount);
-
-        meshRenderer.SetPropertyBlock(materialPropertyBlock);
+        if (materialPropertyBlock != null)
+        {
+            materialPropertyBlock.SetFloat("_Slider", amount);
+            meshRenderer.SetPropertyBlock(materialPropertyBlock);
+        }
     }
 }

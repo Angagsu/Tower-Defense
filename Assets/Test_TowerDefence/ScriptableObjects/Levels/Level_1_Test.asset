@@ -1,0 +1,157 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d65871eaebbfb4d9fe56d3bc1571cc, type: 3}
+  m_Name: Level_1_Test
+  m_EditorClassIdentifier: 
+  Wayes:
+  - Waves:
+    - Patways:
+      - EnemyPrefab:
+        - {fileID: 5617938643944427345, guid: 9c8b91e299bb37846904e7fcb275e504, type: 3}
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+        - {fileID: 5617938643944427345, guid: e77e0c82bea9090429dd4bd1c3a82238, type: 3}
+        - {fileID: 5617938643944427345, guid: 610f11846b690d7499ee395c01fbd0e8, type: 3}
+        - {fileID: 5617938643944427345, guid: e77e0c82bea9090429dd4bd1c3a82238, type: 3}
+      - EnemyPrefab:
+        - {fileID: 0}
+        - {fileID: 5617938643944427345, guid: d435a4789c4c8d0488ed6ce7b2e216a9, type: 3}
+        - {fileID: 5617938643944427345, guid: 00eb17024a8ce974a9dfdd1e1d499d1f, type: 3}
+        - {fileID: 5617938643944427345, guid: 00eb17024a8ce974a9dfdd1e1d499d1f, type: 3}
+        - {fileID: 5617938643944427345, guid: 07cdb19232c0eee41b69ada11eab6186, type: 3}
+      - EnemyPrefab:
+        - {fileID: 0}
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+        - {fileID: 5617938643944427345, guid: 807fe243da591f24b9c9e5d0776e93b1, type: 3}
+        - {fileID: 5617938643944427345, guid: f26bec6db6759a347921be7c750c9142, type: 3}
+        - {fileID: 5617938643944427345, guid: f26bec6db6759a347921be7c750c9142, type: 3}
+      CountOfEnemyToSpawn: 5
+      RateOfSpawn: 5
+    - Patways:
+      - EnemyPrefab:
+        - {fileID: 5617938643944427345, guid: de7a9396f5237914784334e2c7eb1189, type: 3}
+        - {fileID: 5617938643944427345, guid: 00eb17024a8ce974a9dfdd1e1d499d1f, type: 3}
+        - {fileID: 5617938643944427345, guid: 807fe243da591f24b9c9e5d0776e93b1, type: 3}
+        - {fileID: 2799464789194553817, guid: c71c76c71bc386543995611025900540, type: 3}
+        - {fileID: 5617938643944427345, guid: 07cdb19232c0eee41b69ada11eab6186, type: 3}
+      - EnemyPrefab:
+        - {fileID: 2799464789194553817, guid: e1eee7267537ade44bfa1dc69b29aa4d, type: 3}
+        - {fileID: 5617938643944427345, guid: d435a4789c4c8d0488ed6ce7b2e216a9, type: 3}
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+        - {fileID: 5617938643944427345, guid: 610f11846b690d7499ee395c01fbd0e8, type: 3}
+        - {fileID: 5617938643944427345, guid: 00eb17024a8ce974a9dfdd1e1d499d1f, type: 3}
+      CountOfEnemyToSpawn: 5
+      RateOfSpawn: 5
+    - Patways: []
+      CountOfEnemyToSpawn: 0
+      RateOfSpawn: 1
+    - Patways:
+      - EnemyPrefab:
+        - {fileID: 5617938643944427345, guid: 681d0064669e18e4e9cbcd80c92575f4, type: 3}
+        - {fileID: 5617938643944427345, guid: 7bed8dcab71b9814a9e2513c51ec7c74, type: 3}
+        - {fileID: 5617938643944427345, guid: 681d0064669e18e4e9cbcd80c92575f4, type: 3}
+        - {fileID: 5617938643944427345, guid: d4f88f50dfd8fe741a84f3a4d7598281, type: 3}
+        - {fileID: 5617938643944427345, guid: 681d0064669e18e4e9cbcd80c92575f4, type: 3}
+      - EnemyPrefab:
+        - {fileID: 5617938643944427345, guid: 9c8b91e299bb37846904e7fcb275e504, type: 3}
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+        - {fileID: 5617938643944427345, guid: f607e00a66636e54fb25444e842de608, type: 3}
+        - {fileID: 5617938643944427345, guid: 681d0064669e18e4e9cbcd80c92575f4, type: 3}
+        - {fileID: 5617938643944427345, guid: 65978873f112557429e0fc97d351c3d9, type: 3}
+      - EnemyPrefab:
+        - {fileID: 5617938643944427345, guid: 681d0064669e18e4e9cbcd80c92575f4, type: 3}
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+        - {fileID: 5617938643944427345, guid: 681d0064669e18e4e9cbcd80c92575f4, type: 3}
+        - {fileID: 5617938643944427345, guid: 681d0064669e18e4e9cbcd80c92575f4, type: 3}
+        - {fileID: 5617938643944427345, guid: 681d0064669e18e4e9cbcd80c92575f4, type: 3}
+      CountOfEnemyToSpawn: 5
+      RateOfSpawn: 5
+    - Patways:
+      - EnemyPrefab: []
+      - EnemyPrefab:
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+      CountOfEnemyToSpawn: 4
+      RateOfSpawn: 10
+  - Waves:
+    - Patways:
+      - EnemyPrefab:
+        - {fileID: 5617938643944427345, guid: 6baca79c4aee4ae43b40d8d81a4eb9e9, type: 3}
+        - {fileID: 5617938643944427345, guid: f26bec6db6759a347921be7c750c9142, type: 3}
+        - {fileID: 2799464789194553817, guid: e1eee7267537ade44bfa1dc69b29aa4d, type: 3}
+        - {fileID: 5617938643944427345, guid: e77e0c82bea9090429dd4bd1c3a82238, type: 3}
+        - {fileID: 2799464789194553817, guid: b4bfaeea6bc2e424080ba148dfb4ce15, type: 3}
+      - EnemyPrefab:
+        - {fileID: 5617938643944427345, guid: df4278a54b3ba6344a44e58efcf8beb2, type: 3}
+        - {fileID: 5617938643944427345, guid: 681d0064669e18e4e9cbcd80c92575f4, type: 3}
+        - {fileID: 5617938643944427345, guid: 0b7bcf0c460253f49946bee12db69f80, type: 3}
+        - {fileID: 5617938643944427345, guid: cd4a172ce270cb249a5ae09559ae90a7, type: 3}
+        - {fileID: 5617938643944427345, guid: 0b7bcf0c460253f49946bee12db69f80, type: 3}
+      CountOfEnemyToSpawn: 5
+      RateOfSpawn: 10
+    - Patways:
+      - EnemyPrefab:
+        - {fileID: 5617938643944427345, guid: 9c8b91e299bb37846904e7fcb275e504, type: 3}
+        - {fileID: 5617938643944427345, guid: 0b7bcf0c460253f49946bee12db69f80, type: 3}
+        - {fileID: 5617938643944427345, guid: f607e00a66636e54fb25444e842de608, type: 3}
+        - {fileID: 5617938643944427345, guid: 681d0064669e18e4e9cbcd80c92575f4, type: 3}
+        - {fileID: 5617938643944427345, guid: 00eb17024a8ce974a9dfdd1e1d499d1f, type: 3}
+        - {fileID: 5617938643944427345, guid: 65978873f112557429e0fc97d351c3d9, type: 3}
+      - EnemyPrefab:
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+        - {fileID: 5617938643944427345, guid: 7bed8dcab71b9814a9e2513c51ec7c74, type: 3}
+        - {fileID: 5617938643944427345, guid: 00eb17024a8ce974a9dfdd1e1d499d1f, type: 3}
+        - {fileID: 5617938643944427345, guid: d4f88f50dfd8fe741a84f3a4d7598281, type: 3}
+        - {fileID: 5617938643944427345, guid: 0b7bcf0c460253f49946bee12db69f80, type: 3}
+        - {fileID: 2799464789194553817, guid: c71c76c71bc386543995611025900540, type: 3}
+      - EnemyPrefab:
+        - {fileID: 5617938643944427345, guid: df4278a54b3ba6344a44e58efcf8beb2, type: 3}
+        - {fileID: 5617938643944427345, guid: 00eb17024a8ce974a9dfdd1e1d499d1f, type: 3}
+        - {fileID: 5617938643944427345, guid: f26bec6db6759a347921be7c750c9142, type: 3}
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+        - {fileID: 5617938643944427345, guid: 0b7bcf0c460253f49946bee12db69f80, type: 3}
+        - {fileID: 2799464789194553817, guid: c71c76c71bc386543995611025900540, type: 3}
+      CountOfEnemyToSpawn: 6
+      RateOfSpawn: 10
+    - Patways:
+      - EnemyPrefab:
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+        - {fileID: 5617938643944427345, guid: 681d0064669e18e4e9cbcd80c92575f4, type: 3}
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+        - {fileID: 5617938643944427345, guid: 681d0064669e18e4e9cbcd80c92575f4, type: 3}
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+      - EnemyPrefab:
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+        - {fileID: 5617938643944427345, guid: 681d0064669e18e4e9cbcd80c92575f4, type: 3}
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+        - {fileID: 5617938643944427345, guid: 681d0064669e18e4e9cbcd80c92575f4, type: 3}
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+      CountOfEnemyToSpawn: 5
+      RateOfSpawn: 1.5
+    - Patways: []
+      CountOfEnemyToSpawn: 0
+      RateOfSpawn: 1
+    - Patways:
+      - EnemyPrefab:
+        - {fileID: 5617938643944427345, guid: 681d0064669e18e4e9cbcd80c92575f4, type: 3}
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+        - {fileID: 5617938643944427345, guid: 681d0064669e18e4e9cbcd80c92575f4, type: 3}
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+      - EnemyPrefab:
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+        - {fileID: 5617938643944427345, guid: 681d0064669e18e4e9cbcd80c92575f4, type: 3}
+        - {fileID: 5617938643944427345, guid: 681d0064669e18e4e9cbcd80c92575f4, type: 3}
+        - {fileID: 2799464789194553817, guid: a169fc6282f6fb54eb6134e1762be29c, type: 3}
+      CountOfEnemyToSpawn: 4
+      RateOfSpawn: 0.5

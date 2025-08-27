@@ -314,8 +314,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 94170d7c2ee7e8f47b5913276b6e1eed, type: 2}
+  m_sharedMaterial: {fileID: -4197303545416417049, guid: 94170d7c2ee7e8f47b5913276b6e1eed,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -503,7 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49571ac765cdc9a4e96c0e805fd1d53d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelDataToStor:
+  <LevelDataToStor>k__BackingField:
     StarCount: 0
     LevelID: 0
     IsLevelAchieved: 0

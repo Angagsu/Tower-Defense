@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoldierMonsterFactory : MonsterFactory
+public class SoldierMonsterFactory : BaseMonsterFactory
 {
     public override event Action<BaseMonster> PoolChanged;
     public override BaseMonster GetFactoryType { get => factorieType; }

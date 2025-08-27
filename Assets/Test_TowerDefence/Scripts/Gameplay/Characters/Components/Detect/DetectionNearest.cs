@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class DetectionNearest : BaseDetection
 {
-    BaseMonster enemyTarget = null;
     private Transform target;
 
     private List<BaseMonster> monsters = new();
@@ -22,24 +21,26 @@ public class DetectionNearest : BaseDetection
 
         foreach (BaseMonster monster in monsters)
         {
-            float distanceToEnemy = Vector3.Distance(transform.position, monster.transform.position);
-
-
-            if (distanceToEnemy < shortestDistance && monster && !monster.IsDead)
+            if (monster.isActiveAndEnabled)
             {
-                shortestDistance = distanceToEnemy;
-                enemyTarget = monster;
-            } 
+                float distanceToEnemy = Vector3.Distance(transform.position, monster.transform.position);
+
+                if (distanceToEnemy < shortestDistance && monster && !monster.IsDead)
+                {
+                    shortestDistance = distanceToEnemy;
+                    DetectedMonster = monster;
+                }
+            }   
         }
 
-        if (enemyTarget != null && shortestDistance <= attackRange && !isDead)
+        if (DetectedMonster != null && shortestDistance <= attackRange && !isDead)
         {
-            target = enemyTarget.transform;
+            target = DetectedMonster.PartForTargeting;
             return target;
         }
         else
         {
-            enemyTarget = null;
+            DetectedMonster = null;
             target = null;
             return null;
         }

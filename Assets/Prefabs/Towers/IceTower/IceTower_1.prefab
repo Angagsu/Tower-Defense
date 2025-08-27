@@ -158,6 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 526f582a01af333468599bed34c27dbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <TargetedMonster>k__BackingField: {fileID: 0}
   detect: {fileID: 6027848468330942683}
   attack: {fileID: 3243047285083312488}
   towerSFXHandler: {fileID: 0}
@@ -185,7 +186,7 @@ MonoBehaviour:
   audioSource: {fileID: 3693820544304868419}
   attackPoint: {fileID: 5349098021462648497}
   lightningMaterial: {fileID: 2100000, guid: ff9c07816d12d724daf199bab63c3ad5, type: 2}
-  shockSlowAmount: 0.8
+  shockSlowAmount: 0.3
   randomWidthOffsetMax: 3
   randomWidthOffsetMin: 2
 --- !u!114 &6027848468330942683
@@ -213,7 +214,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 9d4ed491c9cb66843b62d3456c4705df, type: 3}
   m_Resource: {fileID: 8300000, guid: 9d4ed491c9cb66843b62d3456c4705df, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.01
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0

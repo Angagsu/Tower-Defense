@@ -1,21 +1,24 @@
+using Assets.Scripts;
 using UnityEngine;
 
 public class RangeAttack : BaseAttack
 {
+
     [SerializeField] private BaseProjectile bulletPrefab;
     [SerializeField] private Transform bulletInstPoint;
+    
 
-    private ProjectilesFactory projectilesFactory;
+    private ProjectilesFactoriesService projectilesFactoryService;
     private BaseProjectile projectile;
 
-    private void Awake()
+    public override void Costruct(ProjectilesFactoriesService projectilesFactoriesService)
     {
-        projectilesFactory = FindAnyObjectByType<ProjectilesFactory>();
+        this.projectilesFactoryService = projectilesFactoriesService;
     }
 
-    public override void AttackTarget(Transform target, float damage)
+    public override void AttackTarget(Transform target, float damage, Character targetCharacter = null)
     {
-        projectile = projectilesFactory.GetProjectileByType(bulletPrefab, bulletInstPoint, bulletInstPoint.rotation);
-        projectile.SetTarget(target, damage);
+        projectile = projectilesFactoryService.GetProjectileByType(bulletPrefab, bulletInstPoint, bulletInstPoint.rotation);
+        projectile.SetTarget(targetCharacter, target, damage);
     }
 }

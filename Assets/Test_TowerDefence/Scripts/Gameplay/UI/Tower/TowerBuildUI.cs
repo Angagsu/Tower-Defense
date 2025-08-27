@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 
 public class TowerBuildUI : MonoBehaviour
 {
@@ -7,15 +8,24 @@ public class TowerBuildUI : MonoBehaviour
     [SerializeField] private TowersMap towersMap;
     [SerializeField] private BuildsController buildsController;
     [SerializeField] private Vector3 positionOffset;
+    [SerializeField] private TextMeshProUGUI[] towerCostTexts;
 
     private BuildingArea selectedBuildingArea;
     private Vector3 startPosition;
-    
 
+    
+    private void SetTowersCostText()
+    {
+        for (int i = 0; i < towerCostTexts.Length; i++)
+        {
+            towerCostTexts[i].text = towersMap.Towers[i].Towers[0].Cost.ToString();
+        }
+    }
 
     private void Start()
     {
         startPosition = transform.position;
+        SetTowersCostText();
     }
 
     public void SelectArrowTower()

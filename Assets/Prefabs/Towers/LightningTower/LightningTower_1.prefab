@@ -167,6 +167,8 @@ MonoBehaviour:
   attackRate: 1
   attackRange: 15
   turnSpeed: 10
+  <TargetedMonster>k__BackingField: {fileID: 0}
+  audioSource: {fileID: 3302546239013934822}
 --- !u!114 &1300567797268524758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,7 +187,7 @@ MonoBehaviour:
   audioSource: {fileID: 3302546239013934822}
   attackPoint: {fileID: 5909877537875386719}
   lightningMaterial: {fileID: 2100000, guid: 2ced5f19649b72c4baba61f5e287f527, type: 2}
-  shockSlowAmount: 0.4
+  shockSlowAmount: 0.3
   randomWidthOffsetMax: 4
   randomWidthOffsetMin: 3
 --- !u!114 &2962880162210522284
@@ -213,7 +215,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 9c84af324696c58418c8dc162972e625, type: 3}
   m_Resource: {fileID: 8300000, guid: 9c84af324696c58418c8dc162972e625, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.01
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0

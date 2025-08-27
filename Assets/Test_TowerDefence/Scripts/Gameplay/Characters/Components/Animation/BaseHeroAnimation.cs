@@ -51,4 +51,14 @@ public class BaseHeroAnimation : MonoBehaviour
         animator.SetBool(isSuperAttackHash, false);
         animator.SetBool(isReviveHash, false);
     }
+
+    public void Pause()
+    {
+        animator.speed = 0;
+    }
+
+    public void Unpause()
+    {
+        animator.speed = 1;
+    }
 }
