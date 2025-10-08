@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,7 +16,7 @@ public class BuildsController : MonoBehaviour
     [SerializeField] private TowerUpgradeUI upgradeTowerUI;
     [SerializeField] private BuildsControllerSFXHandler builderSFXHandler;
 
-    private BaseHero[] heroes;
+    private List<BaseHero> heroes;
     private DefenderUnit[] defenders;
 
     private PlayerInputHandler playerInputHandler;
@@ -184,7 +185,7 @@ public class BuildsController : MonoBehaviour
 
     private void DeSelectHeroes()
     {
-        for (int i = 0; i < heroes.Length; i++)
+        for (int i = 0; i < heroes.Count; i++)
         {
             heroes[i].Deselect();
         }

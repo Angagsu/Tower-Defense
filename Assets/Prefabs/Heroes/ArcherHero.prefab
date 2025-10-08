@@ -160,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hero: {fileID: 3073217194499311935}
   IsOnPreviosPosition: 0
+  IsOnLockedPosition: 0
 --- !u!114 &8945637575376214888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,6 +411,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cyrcle Radius
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d8afc5726a43d2c41befce92d531d86f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

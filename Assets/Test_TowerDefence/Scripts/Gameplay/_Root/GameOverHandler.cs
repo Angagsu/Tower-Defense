@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class GameOverHandler : MonoBehaviour 
 {
+    public event Action<int[], List<Card>> ExtraLootReceived;
+
     [SerializeField] private GameplayMainUI gameplayMainUI;
     [SerializeField] private GameplayPlayerDataHandler gameplayPlayerDataHandler;
     [SerializeField] private GameplayStates gameplayStates;
@@ -13,17 +17,24 @@ public class GameOverHandler : MonoBehaviour
     [SerializeField] private ReachedStarsUI reachedStarsUI;
 
     private AsyncSceneLoadService sceneLoadService;
-    private LevelsMapDataHandler levelsDataHandler;
+    private LevelsMapDataStoreService levelsDataStoreService;
+    private GamePlayerDataHandler playerDataHandler;
+    private HeroesDataStoreService heroesDataStoreService;
     private GameplayAchievements gameplayAchievements;
+    private GameplayExtraLoot extraLoot;
 
 
     [Inject]
-    public void Construct(AsyncSceneLoadService sceneLoadService, LevelsMapDataHandler levelsDataHandler)
+    public void Construct(AsyncSceneLoadService sceneLoadService, LevelsMapDataStoreService levelsDataStoreService, GamePlayerDataHandler playerDataHandler, HeroesDataStoreService heroesDataStoreService)
     {
         this.sceneLoadService = sceneLoadService;
-        this.levelsDataHandler = levelsDataHandler;
+        this.levelsDataStoreService = levelsDataStoreService;
+        this.playerDataHandler = playerDataHandler;
+        this.heroesDataStoreService = heroesDataStoreService;
 
         gameplayAchievements = new();
+        extraLoot = new();
+
         gameplayAchievements.SetPlayerStartLives(gameplayPlayerDataHandler.Lives);
     }
 
@@ -50,7 +61,7 @@ public class GameOverHandler : MonoBehaviour
     {
         gameplayStates.SetGameplaySpeed(timeScale: 1);
         gameplayStates.SetStateDefeat();
-        gameplayMainUI.GameOverPanel.SetActive(true);
+        gameplayMainUI.DefeatPanel.SetActive(true);
     }
 
     [ContextMenu("LevelComplete")]
@@ -58,17 +69,28 @@ public class GameOverHandler : MonoBehaviour
     {
         gameplayStates.SetGameplaySpeed(timeScale: 1);
 
-        int reachedStarsAmount = gameplayAchievements.CalculateStars(gameplayPlayerDataHandler.Lives);
+        //int reachedStarsAmount = gameplayAchievements.CalculateStars(gameplayPlayerDataHandler.Lives);
+        int reachedStarsAmount = UnityEngine.Random.Range(1, 4);
+        var loot = extraLoot.CalculateExtraLoot(reachedStarsAmount);
+        List<Card>  lootedCards = extraLoot.CalculateHeroCardLoot(3);
+        
 
         reachedStarsUI.ShowStars(reachedStarsAmount);
 
         gameplayMainUI.LevelCompletePanel.SetActive(true);
 
+        ExtraLootReceived?.Invoke(loot, lootedCards);
+
         gameplayStates.SetStateComplete();
 
-        gameplayMainUI.StartCoroutine(gameplayMainUI.AnimateWaveSurvivedText());
+       // gameplayMainUI.StartCoroutine(gameplayMainUI.AnimateWaveSurvivedText());
 
-        //levelsDataHandler.SaveLevelAchievements(true, reachedStarsAmount);
+        playerDataHandler.AddEnergy(extraLoot.Energy);
+        playerDataHandler.AddGold(extraLoot.Gold);
+        if (lootedCards != null) heroesDataStoreService.AddCard(lootedCards);
+                
+
+        levelsDataStoreService.SaveLevelAchievements(isLevelAchieved: true, reachedStarsAmount);
     }
 
     public void RetryButton()

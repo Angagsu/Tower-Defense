@@ -14,8 +14,9 @@ public class HeroDependenciesInjector : MonoBehaviour
         playerInputHandler = ServiceLocator.GetService<PlayerInputHandler>();
     }
 
-    public void SetHeroDependencies(BaseHero hero)
+    public void SetHeroDependencies(BaseHero hero, HeroSO heroSO)
     {
         hero.Construct(playerInputHandler, gameplayStates, projectilesFactoriesService);
+        hero.SetHeroParams(heroSO);
     }
 }

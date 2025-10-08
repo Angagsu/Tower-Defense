@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class HeroButtonFade : MonoBehaviour
 {
+    [SerializeField] private Image heroImage;
+    [SerializeField] private Image healthBarImage;
     [SerializeField] private Image fadeImage;
     [SerializeField] private Button heroButton;
 
@@ -46,6 +48,16 @@ public class HeroButtonFade : MonoBehaviour
 
         heroButton.enabled = true;
         fadeImage.gameObject.SetActive(false);
+    }
+
+    public void SetHeroImageSprite(Sprite sprite)
+    {
+        heroImage.sprite = sprite;
+    }
+
+    public Image GetHealthBarImage()
+    {
+        return healthBarImage;
     }
 
     private void OnDisable()

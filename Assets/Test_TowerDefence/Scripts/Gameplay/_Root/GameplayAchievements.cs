@@ -1,12 +1,11 @@
+[System.Serializable]
 public class GameplayAchievements 
 {
     private double lowScoreThreshold;
     private double highScoreThreshold;
 
     private int lives;
-    private int starAmount;
-
-
+     
 
     public void SetPlayerStartLives(int lives)
     {
@@ -24,15 +23,15 @@ public class GameplayAchievements
     {
         if (lives < lowScoreThreshold)
         {
-            return starAmount = 1;
+            return 1;
         }
         else if (lives >= highScoreThreshold) 
         {
-            return starAmount = 3;
+            return 3;
         }
         else
         {
-            return starAmount = 2;
+            return 2;
         }
     }
 }

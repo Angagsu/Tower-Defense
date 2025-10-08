@@ -1,23 +1,25 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SelectHeroUIHandler : MonoBehaviour
 {
-    [SerializeField] private Button archerHeroButton;
-    [SerializeField] private Button knightHeroButton;
+    private Button firstHeroButton;
+    private Button secondHeroButton;
+    private List<Button> heroesButtons = new();
     [Space(10)]
     [SerializeField] private Image[] heroesHealthBars;
 
-
+    [SerializeField] private HeroesButtonsUI heroesButtonsUI;
     [SerializeField] private BuildsController buildsController;
 
-    private BaseHero[] heroes;    
+    private List<BaseHero> heroes;    
     private Camera mainCamera;
     private PlayerInputHandler playerInputHandler;
-
+    private List<HeroButtonFade> herosButtonsFades;
 
     [Inject]
-    public void Costruct(PlayerInputHandler playerInputHandler)
+    public void Construct(PlayerInputHandler playerInputHandler)
     {
         this.playerInputHandler = playerInputHandler;
         playerInputHandler.TouchPressed += SelectHeroOnClick;
@@ -28,12 +30,19 @@ public class SelectHeroUIHandler : MonoBehaviour
         mainCamera = Camera.main;
     }
 
-
-    public void SetHeroes(BaseHero[] heroes)
+    public void SetHeroesButtons()
     {
-        this.heroes = heroes;
+        herosButtonsFades = heroesButtonsUI.GetHeroButtons();
+        for (int i = 0; i < herosButtonsFades.Count; i++)
+        {
+            heroesButtons.Add(herosButtonsFades[i].gameObject.GetComponent<Button>());
+            heroesHealthBars[i] = herosButtonsFades[i].GetHealthBarImage();
+        }
 
-        archerHeroButton.onClick.AddListener(() =>
+        firstHeroButton = heroesButtons[0];
+        secondHeroButton = heroesButtons[1];
+
+        firstHeroButton.onClick.AddListener(() =>
         {
             if (heroes[0].IsSelected)
             {
@@ -45,8 +54,8 @@ public class SelectHeroUIHandler : MonoBehaviour
                 heroes[1].Deselect();
             }
         });
-
-        knightHeroButton.onClick.AddListener(() =>
+        
+        secondHeroButton.onClick.AddListener(() =>
         {
             if (heroes[1].IsSelected)
             {
@@ -58,16 +67,21 @@ public class SelectHeroUIHandler : MonoBehaviour
                 heroes[0].Deselect();
             }
         });
-
-        for (int i = 0; i < heroes.Length; i++)
+        
+        for (int i = 0; i < heroes.Count; i++)
         {
             heroes[i].DamageTaked += OnHeroDamageTaked;
         }
     }
 
+    public void SetHeroes(List<BaseHero> heroes)
+    {
+        this.heroes = heroes;
+    }
+
     private void OnHeroDamageTaked(BaseHero hero, float health, float startHealth)
     {
-        for (int i = 0; i < heroes.Length; i++)
+        for (int i = 0; i < heroes.Count; i++)
         {
             if (heroes[i] == hero)
             {

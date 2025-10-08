@@ -1,21 +1,37 @@
 using UnityEngine;
-using UnityEngine.UI;
+using System.Collections.Generic;
+
 
 
 public class HeroesButtonsUI : MonoBehaviour
 {
-    [SerializeField] private HeroButtonFade[] heroButtonFades;
+    [SerializeField] private HeroButtonFade prefab;
+    [SerializeField] private RectTransform[] spawnPoints;
+    [SerializeField] private RectTransform parentContainer;
     [SerializeField] private HeroesSpawner heroesSpawner;
 
-    private BaseHero[] heroes;
+    private List<HeroButtonFade> heroButtonFades = new();
+    private List<BaseHero> heroes;
 
-    private void Start()
+    public void SetDependencies(HeroesSpawner heroesSpawner, SelectHeroUIHandler selectHeroUIHandler)
     {
-        heroes = heroesSpawner.GetHeroesOnScene();
+        this.heroesSpawner = heroesSpawner;
 
-        for (int i = 0; i < heroes.Length; i++)
+        heroes = heroesSpawner.GetHeroesOnScene();
+        var heroSOs = heroesSpawner.GetHeroSOs();
+
+        for (int i = 0; i < heroes.Count; i++)
         {
+            heroButtonFades.Add(Instantiate(prefab, spawnPoints[i].position, Quaternion.identity, parentContainer));
             heroButtonFades[i].SetHero(heroes[i]);
+            heroButtonFades[i].SetHeroImageSprite(heroSOs[i].Sprite);
         }
-    }  
+
+        selectHeroUIHandler.SetHeroesButtons();
+    }
+    
+    public List<HeroButtonFade> GetHeroButtons()
+    {
+        return heroButtonFades;
+    } 
 }

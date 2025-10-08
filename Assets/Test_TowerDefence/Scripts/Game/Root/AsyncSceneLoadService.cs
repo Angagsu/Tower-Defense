@@ -25,23 +25,6 @@ public class AsyncSceneLoadService : MonoBehaviour, IService
     {
         this.loadingScreenUI = loadingScreenUI;
     }
-    
-    private IEnumerator LoadAndStartGameplay()
-    {
-        yield return LoadSceneAsync(Scenes.BOOT);
-        yield return LoadSceneAsync(Scenes.LOADING);
-
-        yield return new WaitForSeconds(2);
-
-    }
-
-    private IEnumerator LoadAndStartMainMenu()
-    {
-        yield return LoadSceneAsync(Scenes.BOOT);
-        yield return LoadSceneAsync(Scenes.MAIN_MENU);
-
-        yield return new WaitForSeconds(2);
-    }
 
     private bool IsSceneLoaded()
     {

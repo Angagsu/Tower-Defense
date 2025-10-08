@@ -32,6 +32,7 @@ public class BaseHero : Character, IAttackableHero
     [SerializeField] protected float detectionRange;
     [SerializeField] protected GameObject selectionZone;
 
+    protected HeroUpgradeLevelSO upgradeLevel;
     protected PlayerInputHandler playerInputHandler;
     protected GameplayStates gameplayStates;
     protected BaseMonster currentTargetedMonster;
@@ -68,6 +69,14 @@ public class BaseHero : Character, IAttackableHero
         }
     }
 
+    public virtual void SetHeroParams(HeroSO heroSO)
+    {
+        upgradeLevel = heroSO.CurrentUpgradeLevel;
+        damage = upgradeLevel.Damage;
+        startHealth = upgradeLevel.Health;
+        health = startHealth;
+        moveSpeed = upgradeLevel.MoveSpeed;
+    }
 
     protected virtual void Awake()
     {

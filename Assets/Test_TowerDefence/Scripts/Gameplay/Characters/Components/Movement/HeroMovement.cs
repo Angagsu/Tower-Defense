@@ -37,7 +37,7 @@ public class HeroMovement : BaseMovement
         if (hero.IsSelected && !hero.IsDead)
         {
             Ray ray = mainCamera.ScreenPointToRay(touchPosition);
-
+            
             if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider &&
                 raycastHit.collider.gameObject.layer.CompareTo(groundLayer) == 0)
             {

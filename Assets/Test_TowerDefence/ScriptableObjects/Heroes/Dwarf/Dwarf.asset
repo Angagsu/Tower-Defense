@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e728543fc3a92394ba9d47852d0a635a, type: 3}
+  m_Name: Dwarf
+  m_EditorClassIdentifier: 
+  <CurrentUpgradeLevel>k__BackingField: {fileID: 11400000, guid: ad680ff1536e87a4ab9ff925d1a8c491,
+    type: 2}
+  <UpgradeLevelsSO>k__BackingField: {fileID: 11400000, guid: eb4a3305017dd944c9a1729235788382,
+    type: 2}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 253d18f8c4e746941bd6c5cc06d68c45,
+    type: 3}
+  <Prefab>k__BackingField: {fileID: 3073217194499311935, guid: 02b40aa2074ce974c8c96d0457996f78,
+    type: 3}
+  <HeroData>k__BackingField:
+    HeroType: 2
+    UpgradeLevel: 1
+    CardType: 2
+    IsAcquired: 0
+    Price: 100
+    ReseivedCards: []

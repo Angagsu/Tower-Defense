@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 623efe6f8d7922649b11041e970e0b97, type: 3}
+  m_Name: ArcherUpgradeLevels
+  m_EditorClassIdentifier: 
+  HeroUpgradeLevelSOs:
+  - {fileID: 11400000, guid: ce217533c681965439a90fe35e496dde, type: 2}
+  - {fileID: 11400000, guid: 67cf82e00c3ab7e47abc533c7109206b, type: 2}
+  - {fileID: 11400000, guid: 5c993e3d4fdc83544ac61302cd8ed7b5, type: 2}
+  - {fileID: 11400000, guid: 7b82d83f6dd6c9645a10f941d19940c6, type: 2}
+  - {fileID: 11400000, guid: 5bb9454f99025e746ab00b807fa50f58, type: 2}
+  - {fileID: 11400000, guid: 3501b0fa6cac06342bb7bd9b92333b76, type: 2}

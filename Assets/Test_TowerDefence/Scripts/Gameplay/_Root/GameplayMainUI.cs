@@ -6,29 +6,46 @@ using TMPro;
 
 public class GameplayMainUI : MonoBehaviour
 {
-    public GameObject GameOverPanel { get { return gameOverPanel; } }
+    public GameObject DefeatPanel { get { return defeatPanel; } }
     public GameObject PausePanel { get { return pausePanel; } }
     public GameObject LevelCompletePanel { get { return levelCompetePanel; } }
+
+    [SerializeField] private GameOverHandler gameOverHandler;
+    [SerializeField] private GameplayPlayerDataHandler playerDataHandler;  
+    [SerializeField] private GameplayStates gameplayStates;
+    [SerializeField] private MonstersFactoriesService monstersFactoriesService;
+
+
+    [Header("Player Stats")]
+    [Space(5)]
+    [SerializeField] private TextMeshProUGUI moneyText;
+    [SerializeField] private TextMeshProUGUI waveText;
+    [SerializeField] private TextMeshProUGUI livesText;
+
+
+    [Header("DefeatPanel")]
+    [Space(5)]
+    [SerializeField] private GameObject defeatPanel;
+    [SerializeField] private TextMeshProUGUI waveSurvivedText;
+
+
+    [Space(5)]
+    [SerializeField] private GameObject levelCompetePanel;
+    [SerializeField] private GameObject pausePanel;
+
+
+    [Space(10)]
+    [SerializeField] private Button timeRewindButton;
+    [SerializeField] private Sprite fastTimeRunActiveSprite;
+    [SerializeField] private Sprite fastTimeRunDeactivatedSprite;
+
 
     private bool IsTimeRewind;
 
 
-    [SerializeField] private GameplayPlayerDataHandler playerDataHandler;  
-    [SerializeField] private GameplayStates gameplayStates;
-    [SerializeField] private MonstersFactoriesService monstersFactoriesService;
-    [Space(10)]
-    [SerializeField] private TextMeshProUGUI moneyText, waveText, livesText;
-    [SerializeField] private TextMeshProUGUI waveSurvivedText, waveSurvivedTextOnLevelComplete;
-
-    [SerializeField] private GameObject gameOverPanel, pausePanel, levelCompetePanel;
-    [SerializeField] private Sprite fastTimeRunActiveSprite, fastTimeRunDeactivatedSprite;
-    [SerializeField] private Button timeRewindButton;
-    
-    
-
 
     private void Awake()
-    {      
+    {
         monstersFactoriesService.WaveComplited += FactoriesService_WaveComplited;
         playerDataHandler.MoneyAmountChanged += PlayerDataHandler_OnMoneyAmountChanged;
         playerDataHandler.LivesAmountChanged += PlayerDataHandler_OnLivesAmountChanged;
@@ -77,7 +94,6 @@ public class GameplayMainUI : MonoBehaviour
 
     public IEnumerator AnimateWaveSurvivedText()
     {
-        waveSurvivedTextOnLevelComplete.text = "0";
         int wave = 0;
 
         yield return new WaitForSeconds(0.5f);
@@ -85,7 +101,6 @@ public class GameplayMainUI : MonoBehaviour
         while (wave < playerDataHandler.Waves)
         {
             wave++;
-            waveSurvivedTextOnLevelComplete.text = wave.ToString();
             yield return new WaitForSeconds(0.1f);
         }
     }

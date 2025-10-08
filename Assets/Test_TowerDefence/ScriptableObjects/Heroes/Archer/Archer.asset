@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e728543fc3a92394ba9d47852d0a635a, type: 3}
+  m_Name: Archer
+  m_EditorClassIdentifier: 
+  <CurrentUpgradeLevel>k__BackingField: {fileID: 11400000, guid: ce217533c681965439a90fe35e496dde,
+    type: 2}
+  <UpgradeLevelsSO>k__BackingField: {fileID: 11400000, guid: 1a061e853fbae744d989ad0157ee9185,
+    type: 2}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: d2eedf5076fc81b4ea28fa7cc3c38643,
+    type: 3}
+  <Prefab>k__BackingField: {fileID: 3073217194499311935, guid: 02b40aa2074ce974c8c96d0457996f78,
+    type: 3}
+  <HeroData>k__BackingField:
+    HeroType: 1
+    UpgradeLevel: 1
+    CardType: 1
+    IsAcquired: 1
+    Price: 0
+    ReseivedCards: []

@@ -16,7 +16,7 @@ MonoBehaviour:
   - Waves:
     - Patways:
       - EnemyPrefab:
-        - {fileID: 5617938643944427345, guid: 9c8b91e299bb37846904e7fcb275e504, type: 3}
+        - {fileID: 5617938643944427345, guid: f26bec6db6759a347921be7c750c9142, type: 3}
       CountOfEnemyToSpawn: 1
       RateOfSpawn: 1
   - Waves:

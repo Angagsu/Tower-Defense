@@ -22,7 +22,7 @@ public class CameraControllerLevelsMap : MonoBehaviour
 
 
     [Inject]
-    public void Costruct(PlayerInputHandler playerInputHandler)
+    public void Construct(PlayerInputHandler playerInputHandler)
     {
         this.playerInputHandler = playerInputHandler;
     }
