@@ -5,11 +5,11 @@ using System.Collections.Generic;
 public class HeroCardData 
 {
     public HeroCardType CardType;
-    public List<Card> ReceivedCards;
+    public List<HeroCard> ReceivedCards;
 
     public HeroCardData(HeroCardType cardType)
     {
         CardType = cardType;
-        ReceivedCards = new List<Card>();
+        ReceivedCards = new List<HeroCard>();
     }
 }

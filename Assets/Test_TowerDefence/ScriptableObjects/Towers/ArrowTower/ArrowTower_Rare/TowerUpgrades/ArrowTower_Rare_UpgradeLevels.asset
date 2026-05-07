@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c68b215d4d2e041acd5d1f71fbc6d5, type: 3}
+  m_Name: ArrowTower_Rare_UpgradeLevels
+  m_EditorClassIdentifier: 
+  TowerUpgradeLevelSOs:
+  - {fileID: 11400000, guid: a1bcdeb77d672ea439b0e4855e00c2db, type: 2}
+  - {fileID: 11400000, guid: 2459f013fbd34764aa0a1df21c132af4, type: 2}
+  - {fileID: 11400000, guid: fd9777f63266b3645927a9a1c89a6801, type: 2}
+  - {fileID: 11400000, guid: 8e6cc87cbaee21d45be239accb9280c7, type: 2}
+  - {fileID: 11400000, guid: 943acfa60be20f443aa8abe6a7270879, type: 2}
+  - {fileID: 11400000, guid: 04eecce1e32aa7a4db577c9f3fd39a4e, type: 2}
+  - {fileID: 11400000, guid: 27cdc89ba5ad1924082b884e8fea9d3b, type: 2}
+  - {fileID: 11400000, guid: 5b979c92655dc1544a7cdf8ce8c206cf, type: 2}
+  - {fileID: 11400000, guid: a13370f1b9b2d4541b72286770d8ceb4, type: 2}
+  - {fileID: 11400000, guid: e30f35abde1a9d84d91783dc45477dd3, type: 2}

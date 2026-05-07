@@ -34,8 +34,4 @@ public class ArmoredSoldierMonster : SoldierMonster
         base.Move(target);
     }
 
-    public override void TakeDamage(float amount)
-    {
-        base.TakeDamage(amount);
-    }
 }

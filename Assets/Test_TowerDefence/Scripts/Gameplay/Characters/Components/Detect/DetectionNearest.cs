@@ -21,19 +21,16 @@ public class DetectionNearest : BaseDetection
 
         foreach (BaseMonster monster in monsters)
         {
-            if (monster.isActiveAndEnabled)
-            {
-                float distanceToEnemy = Vector3.Distance(transform.position, monster.transform.position);
+            float sqrDistanceToEnemy = (transform.position - monster.transform.position).sqrMagnitude;
 
-                if (distanceToEnemy < shortestDistance && monster && !monster.IsDead)
-                {
-                    shortestDistance = distanceToEnemy;
-                    DetectedMonster = monster;
-                }
-            }   
+            if (sqrDistanceToEnemy < shortestDistance && monster && !monster.IsDead)
+            {
+                shortestDistance = sqrDistanceToEnemy;
+                DetectedMonster = monster;
+            }
         }
 
-        if (DetectedMonster != null && shortestDistance <= attackRange && !isDead)
+        if (DetectedMonster != null && shortestDistance <= (attackRange * attackRange) && !isDead)
         {
             target = DetectedMonster.PartForTargeting;
             return target;

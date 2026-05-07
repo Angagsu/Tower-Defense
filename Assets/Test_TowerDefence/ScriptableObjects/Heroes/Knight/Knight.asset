@@ -12,16 +12,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e728543fc3a92394ba9d47852d0a635a, type: 3}
   m_Name: Knight
   m_EditorClassIdentifier: 
-  <CurrentUpgradeLevel>k__BackingField: {fileID: 11400000, guid: c77a457a841242542a8c563ef15e7037,
-    type: 2}
-  <UpgradeLevelsSO>k__BackingField: {fileID: 11400000, guid: 18c7a89dc9811db40bf7e142671cb819,
-    type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: a858b0544ec2a2845a189c59c7c2eadf,
+  <HeroName>k__BackingField: Knight
+  <HeroDescription>k__BackingField: Bozi txen Mec Danakov
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 906ed545fb9dac042aef990c4a9c686d,
+    type: 3}
+  <BigSprite>k__BackingField: {fileID: 21300000, guid: 155eaf0d17656a54cb1c63ee61b19a59,
+    type: 3}
+  <CardSprite>k__BackingField: {fileID: 21300000, guid: 0b402ad4139bca74d861b8e8c0500195,
     type: 3}
   <Prefab>k__BackingField: {fileID: 5295874118075029163, guid: 4d13be4bdb07c5d46a41a226689708e1,
     type: 3}
+  <CurrentUpgradeLevel>k__BackingField: {fileID: 11400000, guid: 8a5f496a983068e46913b6eb5f31f88a,
+    type: 2}
+  <UpgradeLevelsSO>k__BackingField: {fileID: 11400000, guid: 18c7a89dc9811db40bf7e142671cb819,
+    type: 2}
+  <ActiveSkillSprite>k__BackingField: {fileID: 21300000, guid: 963667f040f3c024c8cae05d7891da61,
+    type: 3}
+  <ActiveSkillUnlockLevel>k__BackingField: 2
+  <ActiveSkillMaxValue>k__BackingField: 500
+  <ActiveSkillName>k__BackingField: Mormsh
+  <ActiveSkillDescripsion>k__BackingField: Xzarma aber@
+  <PassivSkillsSprites>k__BackingField:
+  - {fileID: 21300000, guid: 963667f040f3c024c8cae05d7891da61, type: 3}
+  - {fileID: 21300000, guid: e47b14ba3519424489332d0ad76eee15, type: 3}
+  <PassiveSkillsAmount>k__BackingField: 2
+  <PassiveSkillsUnlockLevels>k__BackingField: 0300000003000000
+  <PassiveSkillsNames>k__BackingField:
+  - 'Blast Attack '
+  - 'Stun '
+  <PassiveSkillsDescripsions>k__BackingField:
+  - The knight's attacks deal area-of-effect damage. Upgrade the hero to increase
+    blast radius
+  - The knight's attacks stun targets. Upgrad the hero to increase stun duration
   <HeroData>k__BackingField:
     HeroType: 0
-    UpgradeLevel: 1
+    UpgradeLevel: 3
+    CardType: 0
     IsAcquired: 1
     Price: 0
+    ReseivedCards: []

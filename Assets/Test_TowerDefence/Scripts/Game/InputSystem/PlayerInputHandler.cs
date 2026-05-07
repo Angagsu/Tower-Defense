@@ -14,10 +14,12 @@ public class PlayerInputHandler : MonoBehaviour, IService
     public event Action CameraDragingEnded;
     public event Action<Vector2> TouchedGround;
 
+
     public Vector2 TouchPosition { get; private set; }
 
     private PlayerControls playerControls;
     private bool isDraging;
+
 
     private void Awake()
     {
@@ -40,7 +42,7 @@ public class PlayerInputHandler : MonoBehaviour, IService
         playerControls.Player.TouchEnded.performed += ctx => OnTouchPerformed(ctx);
         playerControls.Player.TouchEnded.canceled += ctx => OnTouchCanceled(ctx);
 
-        playerControls.Player.CameraDrag.performed += ctx => { OnDrag(ctx.ReadValue<Vector2>()); };      
+        playerControls.Player.CameraDrag.performed += ctx => { OnDrag(ctx.ReadValue<Vector2>()); };
     }
 
     private void OnTouchPerformed(InputAction.CallbackContext ctx)

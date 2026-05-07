@@ -1,9 +1,43 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Scripts.Hero
 {
     public class KnightHero : BaseHero
     {
+        private float blastAttack;
+        private float stunAttack;
+
+
+
+        public override void SetHeroParams(HeroSO heroSO)
+        {
+            base.SetHeroParams(heroSO);
+
+            passiveSkillsList = new()
+            {
+                blastAttack,
+                stunAttack
+            };
+
+            if (hasPassiveSkill)
+            {
+                for (int i = 0; i < upgradeLevel.PassiveSkillsAccessibility.Count; i++)
+                {
+                    passiveSkillsList[i] = upgradeLevel.PassiveSkillsValues[i];
+                }
+            }
+        }
+
+        public override void SuperAttack(Action skillCooldown)
+        {
+            if (movement.IsMoves) return;
+
+            Debug.Log($"Hero: {this} Super Attack");
+            superAttack.AreaEffect(AttackStats, superAttackRadius, superAttackEffectDuration);
+            skillCooldown?.Invoke();
+        }
+ 
         protected override void Awake()
         {
             base.Awake();
@@ -32,11 +66,6 @@ namespace Assets.Scripts.Hero
         public override void OnRevive()
         {
             base.OnRevive();
-        }
-
-        public override void TakeDamage(float amount)
-        {
-            base.TakeDamage(amount);
         }
     }
 }

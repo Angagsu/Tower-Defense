@@ -6,11 +6,15 @@ public class GameplayExtraLoot
 {
     public int Energy {  get; private set; }
     public int Gold {  get; private set; }
-    public List<Card> Cards { get; private set; }
 
+    public List<HeroCard> HeroCards { get; private set; } = new List<HeroCard>();
+    public List<TowerCard> TowerCards { get; private set; } = new List<TowerCard>();
+
+    private int starAmount;
 
     public int[] CalculateExtraLoot(int starsAmount)
     {
+        this.starAmount = starsAmount;
         if (starsAmount == 3) 
         {
             return new int[] { Gold = Random.Range(10, 15), Energy = Random.Range(1, 3)};
@@ -27,24 +31,56 @@ public class GameplayExtraLoot
         return default;
     }
 
-    public List<Card> CalculateHeroCardLoot(int starsAmount)
+
+    public List<HeroCard> GetHeroCardLoot()
     {
-        if (starsAmount < 3)
+        if (starAmount < 3)
         {
             return null;
         }
+
         int minValue = (int)HeroType.Knight;
         int maxValue = (int)HeroType.Mage + 1;
         int result = Random.Range(minValue, maxValue);
-        Cards = new List<Card>();
-        Cards.Add(new Card((HeroType)result));
-        result = Random.Range(0, maxValue);
-        Cards.Add(new Card((HeroType)result));
-        return Cards;
+
+        HeroCards.Add(new HeroCard((HeroType)result));
+
+        return HeroCards;
     } 
 
-    private List<Card> CalculateTowerCardLoot()
+    public List<TowerCard> GetTowerCardLoot()
     {
-        return null;
+        if (starAmount < 2) return null;
+
+        int minValue = (int)TowerType.Arrow;
+        int maxValue = (int)TowerType.Lightning + 1;
+        int towerResult = Random.Range(minValue, maxValue);
+
+        int minCardRarityValue = (int)TowerCardType.Common;
+        int maxCardRarityValue = (int)TowerCardType.Rare + 1;
+        int cardResult = Random.Range(minCardRarityValue, maxCardRarityValue);
+
+        TowerCards.Add(new TowerCard((TowerType)towerResult, (TowerCardType)cardResult));
+
+
+        towerResult = Random.Range(minValue, maxValue);
+        cardResult = Random.Range(minCardRarityValue, maxCardRarityValue);
+
+        TowerCards.Add(new TowerCard((TowerType)towerResult, (TowerCardType)cardResult));
+
+        if(starAmount == 3)
+        {
+            towerResult = Random.Range(minValue, maxValue);
+            cardResult = Random.Range(minCardRarityValue, maxCardRarityValue);
+
+            TowerCards.Add(new TowerCard((TowerType)towerResult, (TowerCardType)cardResult));
+
+            towerResult = Random.Range(minValue, maxValue);
+            cardResult = Random.Range(minCardRarityValue, maxCardRarityValue);
+
+            TowerCards.Add(new TowerCard((TowerType)towerResult, (TowerCardType)cardResult));
+        }
+
+        return TowerCards;
     }
 }

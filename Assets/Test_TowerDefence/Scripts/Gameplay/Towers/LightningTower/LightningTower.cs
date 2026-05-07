@@ -5,6 +5,12 @@ namespace Assets.Scripts.Tower
     public class LightningTower : BaseTower
     {    
         private TrailAttack trailAttack;
+        private float decelerationMultiplier;
+        private float overTimeDamageMultiplier;
+        private float[] passiveSkills;
+
+
+
 
         protected override void Awake()
         {
@@ -16,34 +22,48 @@ namespace Assets.Scripts.Tower
             base.Update();
         }
 
-        public override void ReBuild()
+        public override void SetParams(TowerSO towerSO)
         {
-            base.ReBuild();
+            base.SetParams(towerSO);
+
+            passiveSkills = new float[] { decelerationMultiplier, overTimeDamageMultiplier };
+            passiveSkillsList = new();
+            passiveSkillsList.Add(decelerationMultiplier);
+            passiveSkillsList.Add(overTimeDamageMultiplier);
+
+            if (hasPassiveSkill)
+            {
+                for (int i = 0; i < upgradeLevel.PassiveSkillsAccessibility.Count; i++)
+                {
+                    passiveSkillsList[i] = upgradeLevel.PassiveSkillsValues[i];
+                }
+            }
+
+            trailAttack.SetAttackRate(attackRate);
         }
 
-        public override void TakeDamage(float damageAmount)
+        public override void Repair()
         {
-            base.TakeDamage(damageAmount);
+            base.Repair();
         }
 
         protected override void AttackTarget(Transform target)
         {
-            attack.AttackTarget(target, damage); 
+            attack.AttackWithPassiveSkill(AttackStats, target, damage, hasPassiveSkill, passiveValue_1: passiveSkillsList[0], passiveValue_2: passiveSkillsList[1], TargetedMonster);
         }
 
         protected override void Crash()
         {
             base.Crash();
+            trailAttack.DisableTrail();
         }
 
         protected override void DetectTarget()
         {
-            if (target = detect.DetectTarget(attackRange, IsDead))
+            if (target = detect.DetectTarget(attackRange, IsCrashed))
             {
                 targetedMonster = detect.DetectedMonster;
                 trailAttack.SetTargetMonsterDefaultSpeed(TargetedMonster);
-
-                // LockOnTarget();
                 
                 AttackTarget(target);
             }

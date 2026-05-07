@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2630256736322761726}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.005, y: 1.71, z: -0.037}
+  m_LocalPosition: {x: -0.005, y: 1.71, z: -0.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,8 +44,8 @@ GameObject:
   - component: {fileID: -5328142918741704265}
   - component: {fileID: 1158013652245338384}
   - component: {fileID: 400650751183508738}
-  - component: {fileID: 6424288974788720225}
   - component: {fileID: 2633337498257772553}
+  - component: {fileID: -7296451536016925984}
   m_Layer: 18
   m_Name: SpeedsterCaptainMonster
   m_TagString: Monster
@@ -106,19 +106,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PartForTargeting>k__BackingField: {fileID: 2701255483371244064}
+  <AttackStats>k__BackingField:
+    Health: 600
+    MaxHealth: 600
+    Armor: 0
+    MaxArmor: 0
+    PhysicalResistance: 8
+    MagicalResistance: 8
+    DamageData:
+      DamageAmount: 250
+      DamageType: 0
+      PhysicalPenetration: 10
+      MagicalPenetration: 0
+      ArmorPercent: 0.7
+      HealthPercent: 0.3
+      HasPassiveSkill: 0
+      PassiveSkills: []
   damage: 40
   moveSpeed: 5
   attackRate: 1
-  attackRange: 3
+  attackRange: 2.7
   turnSpeed: 10
-  instancingEnabler: {fileID: 8274616373664893163}
+  healthBarInstance: {fileID: 8274616373664893163}
+  armorBar: {fileID: 0}
   anim: {fileID: 1158013652245338384}
   attack: {fileID: 400650751183508738}
-  detect: {fileID: 6424288974788720225}
+  detect: {fileID: -7296451536016925984}
   move: {fileID: 2633337498257772553}
   startHealth: 350
   moneyGain: 40
   dyingAnimationDuration: 2
+  detectionRange: 15
 --- !u!114 &1158013652245338384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,19 +162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e42f60134dd2c347940d9326e745dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6424288974788720225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2799464789194553817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c98335b2ea91f57478d59b8d384415dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseMonster: {fileID: -5328142918741704265}
 --- !u!114 &2633337498257772553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,6 +175,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotatablePart: {fileID: 9154238843130079727}
+  baseMonster: {fileID: -5328142918741704265}
+--- !u!114 &-7296451536016925984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799464789194553817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbe1844db29ca3745a1723a192b5f583, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   baseMonster: {fileID: -5328142918741704265}
 --- !u!1001 &4170756092932719195
 PrefabInstance:

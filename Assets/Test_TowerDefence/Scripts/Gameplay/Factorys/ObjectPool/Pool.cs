@@ -5,7 +5,6 @@ using Object = UnityEngine.Object;
 
 public class Pool<T> where T : MonoBehaviour
 {
-    public event Action<T> PoolChanged; 
     public List<T> Prefabs { get; }
     public bool AutoExpand { get; set; }
     public Transform Container { get; }
@@ -32,11 +31,6 @@ public class Pool<T> where T : MonoBehaviour
     private void CreatPool(int count)
     {
         pool = new List<T>();
-
-       // for (int i = 0; i < count; i++)
-       // {
-       //     CreatObject(false, Container, Container.transform.rotation);
-       // }
     }
 
     private T CreatObject(T type, bool isActiveByDefault = false, Transform transform = default, Quaternion rotation = default) 
@@ -48,7 +42,7 @@ public class Pool<T> where T : MonoBehaviour
                 var createdObject = Object.Instantiate(item, transform.position, rotation, Container);
                 createdObject.gameObject.SetActive(isActiveByDefault);
                 pool.Add(createdObject);
-                PoolChanged?.Invoke(createdObject);
+
                 return createdObject;
             }
         }

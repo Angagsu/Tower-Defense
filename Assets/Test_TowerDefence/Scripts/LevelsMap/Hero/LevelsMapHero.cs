@@ -12,8 +12,9 @@ public class LevelsMapHero : MonoBehaviour
     [SerializeField] private Image heroImage;
     [SerializeField] private Image selectImage;
     [SerializeField] private Image lockImage;
-    
-    [SerializeField] private GameObject priceObj;
+    [SerializeField] private Image deSelectImage;
+
+   // [SerializeField] private GameObject priceObj;
     [SerializeField] TextMeshProUGUI priceText;
 
     private HeroesDataHandler heroesDataHandler;
@@ -42,8 +43,13 @@ public class LevelsMapHero : MonoBehaviour
 
         if (isAcquired)
         {
-            priceObj.SetActive(false);
+            //priceObj.SetActive(false);
             lockImage.gameObject.SetActive(false);
+        }
+        else
+        {
+           // priceObj.SetActive(true);
+            lockImage.gameObject.SetActive(true);
         }
     }
 
@@ -60,8 +66,13 @@ public class LevelsMapHero : MonoBehaviour
 
         if (isAcquired)
         {
-            priceObj.SetActive(false);
+            //priceObj.SetActive(false);
             lockImage.gameObject.SetActive(false);
+        }
+        else
+        {
+           // priceObj.SetActive(true);
+            lockImage.gameObject.SetActive(true);
         }
     }
 
@@ -71,7 +82,15 @@ public class LevelsMapHero : MonoBehaviour
         heroesDataHandler.SetCurrentSelectedHero(this, ID);
     }
 
-    public void Select() => selectImage.gameObject.SetActive(true);
+    public void Select()
+    {
+        selectImage.gameObject.SetActive(true);
+        deSelectImage.gameObject.SetActive(false);
+    }
 
-    public void UnSelect() => selectImage.gameObject.SetActive(false);
+    public void UnSelect() 
+    {
+        selectImage.gameObject.SetActive(false);
+        deSelectImage.gameObject.SetActive(true);
+    }
 }

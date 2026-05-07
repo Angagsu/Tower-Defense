@@ -107,12 +107,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PartForTargeting>k__BackingField: {fileID: 1155690392026094645}
-  damage: 10
+  <AttackStats>k__BackingField:
+    Health: 150
+    MaxHealth: 150
+    Armor: 0
+    MaxArmor: 0
+    PhysicalResistance: 3
+    MagicalResistance: 0
+    DamageData:
+      DamageAmount: 35
+      DamageType: 0
+      PhysicalPenetration: 4
+      MagicalPenetration: 0
+  damage: 20
   moveSpeed: 6
   attackRate: 1
   attackRange: 3
   turnSpeed: 10
-  instancingEnabler: {fileID: 4817564664251142203}
+  healthBarInstance: {fileID: 4817564664251142203}
   anim: {fileID: 1158013652245338384}
   attack: {fileID: 400650751183508738}
   detect: {fileID: 6424288974788720225}

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HeroesDataStoreService : MonoBehaviour, IService
 {
+    public event Action<HeroesDataToStore> HeroesDataToStoreChanged;
     public List<int> SelectedAcquiredHeroesByIndex => selectedAcquiredHeroesByIndex;
     [field: SerializeField] public HeroesFullBlueprintSO AllHeroes { get; private set; }
 
@@ -47,24 +48,36 @@ public class HeroesDataStoreService : MonoBehaviour, IService
         }
     }
 
-    private void OnLoad(HeroesDataToStore heroDataToStore)
+    private void OnLoad(HeroesDataToStore heroesDataToStore)
     {
-        this.heroesDataToStore = heroDataToStore;
-        this.selectedAcquiredHeroesByIndex = heroDataToStore.SelectedAcquiredHeroesByIndex;
+        this.heroesDataToStore = heroesDataToStore;
+        this.selectedAcquiredHeroesByIndex = heroesDataToStore.SelectedAcquiredHeroesByIndex;
 
-        for (int i = 0; i < heroesDataToStore.AllHeroes.Count; i++)
+        if (this.heroesDataToStore.AllHeroes.Count < AllHeroAndTowerTypes.HeroTypes.Count)
         {
-            heroesDataToStore.AllHeroes.TryGetValue((HeroType)i, out var heroData);
+            Debug.Log("Eheeey");
+            for (int i = 0; i < AllHeroAndTowerTypes.HeroTypes.Count; i++)
+            {
+                if (this.heroesDataToStore.AllHeroes.ContainsKey(AllHeroAndTowerTypes.HeroTypes[i]))
+                {
+                    continue;
+                }
+                else
+                {
+                    this.heroesDataToStore.AllHeroes.Add((HeroType)i, new HeroData(AllHeroAndTowerTypes.HeroTypes[i], HeroUpgradeLevel.Level_1, AllHeroAndTowerTypes.HeroCards[i], isAcquired: false, price: default));
 
-            heroesDataHandler.SetSavedHeroData(heroData, i);
+                    this.heroesDataToStore.AllCards.Add((HeroType)i, new HeroCardData(AllHeroAndTowerTypes.HeroCards[i]));
+                }
+            }
         }
 
+        HeroesDataToStoreChanged?.Invoke(this.heroesDataToStore);
         heroesDataHandler.SetSelectedHeroesByIndex(this.selectedAcquiredHeroesByIndex);
     }
 
     private void OnSave(bool isSaved)
     {
-        Debug.Log("Hero Data Saved" + isSaved);
+        HeroesDataToStoreChanged?.Invoke(heroesDataToStore);
     }
 
     public void StoreChangedHeroData(HeroData changedHeroData, List<int> selectedAcquirdHeroesByIndex)
@@ -82,7 +95,7 @@ public class HeroesDataStoreService : MonoBehaviour, IService
         Save();
     }
 
-    public void AddCard(List<Card> cards)
+    public void AddCard(List<HeroCard> cards)
     {
         for (int i = 0; i < cards.Count; i++)
         {
@@ -94,6 +107,11 @@ public class HeroesDataStoreService : MonoBehaviour, IService
         }
         
         Save();
+    }
+
+    public void ReduceCard(HeroData heroData, int cards)
+    {
+        heroesDataToStore.AllCards[heroData.HeroType].ReceivedCards.RemoveRange(0, cards);
     }
 
     public HeroCardData HeroCardData { get { return heroCardData; } }

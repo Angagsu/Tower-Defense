@@ -1,7 +1,8 @@
+using Assets.Scripts.Tower;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
+
 
 
 public class BuildsController : MonoBehaviour
@@ -26,7 +27,6 @@ public class BuildsController : MonoBehaviour
 
     private int groundLayer;
 
-    
 
 
     [Inject]
@@ -69,8 +69,9 @@ public class BuildsController : MonoBehaviour
 
         selectedBuildingArea = buildingArea;
         towerFullBlueprintSO = selectedBuildingArea.GetTowerBlueprint();
+        towerBuilder.SetBuildingAreaAndTowerBlueprint(towerFullBlueprintSO, selectedBuildingArea);
 
-        if (selectedBuildingArea.DefenderMovement == null)
+        if (selectedBuildingArea.DefendersController == null)
         {
             upgradeTowerUI.ActivateOrDeactivateSelectDefendersButton(false);
         }
@@ -79,7 +80,7 @@ public class BuildsController : MonoBehaviour
             upgradeTowerUI.ActivateOrDeactivateSelectDefendersButton(true);
         }
 
-        upgradeTowerUI.SetTargetGround(buildingArea);
+        upgradeTowerUI.SetTargetGround(towerFullBlueprintSO, buildingArea);
     }
 
     public void SelectedGroundForBuildTowerUI(BuildingArea buildingArea)
@@ -103,13 +104,15 @@ public class BuildsController : MonoBehaviour
         towerBuildUI.SetTargetGroundForBuilding(buildingArea);
     }
 
-    public void BuildTowerByType(TowerFullBlueprintSO tower)
+    public void BuildTowerByType(TowerFullBlueprintSO towerFullBlueprintSO, TowerSO towerSO)
     {
         builderSFXHandler.PlayBuildSFX();
-        towerFullBlueprintSO = tower;
-        selectedBuildingArea.SetTower(tower);
-        towerBuilder.SetBuildingAreaAndTowerBlueprint(tower, selectedBuildingArea);
+        this.towerFullBlueprintSO = towerFullBlueprintSO;
+        selectedBuildingArea.SetTower(towerSO,towerFullBlueprintSO);
+
+        towerBuilder.SetBuildingAreaAndTowerBlueprint(towerFullBlueprintSO, selectedBuildingArea);
         towerBuilder.Build();
+
         DeselectGround();
     }
 
@@ -119,16 +122,15 @@ public class BuildsController : MonoBehaviour
 
         builderSFXHandler.PlayUpgradeSFX();
 
-        towerBuilder.SetBuildingAreaAndTowerBlueprint(towerFullBlueprintSO, selectedBuildingArea);
         towerBuilder.UpgradeTower();
     }
 
     public void UpdateSecondTime()
     {
         SetDefendersBeforeDestroy();
+
         builderSFXHandler.PlayUpgradeSFX();
 
-        towerBuilder.SetBuildingAreaAndTowerBlueprint(towerFullBlueprintSO, selectedBuildingArea);
         towerBuilder.SecondTimeUpgradeTower();
     }
 
@@ -138,7 +140,6 @@ public class BuildsController : MonoBehaviour
 
         builderSFXHandler.PlayUpgradeSFX();
 
-        towerBuilder.SetBuildingAreaAndTowerBlueprint(towerFullBlueprintSO, selectedBuildingArea);
         towerBuilder.ThirdTimeUpgradeTower();
     }
 
@@ -148,7 +149,20 @@ public class BuildsController : MonoBehaviour
 
         builderSFXHandler.PlayDestroySFX();
 
-        selectedBuildingArea.DestroyTower();
+        towerBuilder.SellTower();
+    }
+
+    public void Repair()
+    {
+        if (PlayerDataHandler.Money >= selectedBuildingArea.CurrentTower.GetRepairCost())
+        {
+            PlayerDataHandler.ReduceMoney(selectedBuildingArea.CurrentTower.GetRepairCost());
+            selectedBuildingArea.CurrentTower.Repair();
+        }
+        else
+        {
+            Debug.Log("Not Enough Money to Repair !!!");
+        }
     }
 
     private void OnTouchGroundDeselectAll(Vector2 touchPosition)
@@ -165,9 +179,9 @@ public class BuildsController : MonoBehaviour
 
     private void SetDefendersBeforeDestroy()
     {
-        if (selectedBuildingArea.DefenderMovement)
+        if (selectedBuildingArea.DefendersController)
         {
-            defenders = selectedBuildingArea.DefenderMovement.GetDefendersArray();
+            defenders = selectedBuildingArea.DefendersController.GetDefendersArray();
 
             for (int i = 0; i < defenders.Length; i++)
             {
@@ -183,18 +197,21 @@ public class BuildsController : MonoBehaviour
         towerBuildUI.Hide();
     }
 
+    public void DeselectTowerUpgradeUIObject()
+    {
+        upgradeTowerUI.Hide();
+    }
+
+    public void DeselectTowerBuilUIObject()
+    {
+        towerBuildUI.Hide();
+    }
+
     private void DeSelectHeroes()
     {
         for (int i = 0; i < heroes.Count; i++)
         {
             heroes[i].Deselect();
         }
-    }
-
-    private bool IsMouseOverUI()
-    {
-        //return EventSystem.current.IsPointerOverGameObject(Touchscreen.current.primaryTouch.touchId.ReadValue());
-        //return EventSystem.current.IsPointerOverGameObject(playerInputHandler.TouchPressValue.GetHashCode());
-        return EventSystem.current.IsPointerOverGameObject();
     }
 }

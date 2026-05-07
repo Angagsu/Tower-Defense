@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c68b215d4d2e041acd5d1f71fbc6d5, type: 3}
+  m_Name: GolemTower_Rare_UpgradeLevels
+  m_EditorClassIdentifier: 
+  TowerUpgradeLevelSOs:
+  - {fileID: 11400000, guid: e809d3e1811c91946ac8ac71880f98a5, type: 2}
+  - {fileID: 11400000, guid: 17b2ef5c5d60a66479686055734cde58, type: 2}
+  - {fileID: 11400000, guid: f367f57ca7e2f994bafa0f7606d5faa8, type: 2}
+  - {fileID: 11400000, guid: f0b071ffe9d7d424c8cf2032806fb802, type: 2}
+  - {fileID: 11400000, guid: 66018d358e8369d4793c83d8afd9b8e7, type: 2}
+  - {fileID: 11400000, guid: 2c621528ca1f62147a9bb134c7738a3e, type: 2}
+  - {fileID: 11400000, guid: a77c75506c9304346bd1f161167fdd7d, type: 2}
+  - {fileID: 11400000, guid: b823ce3570f116645be9b8addfe7f70b, type: 2}
+  - {fileID: 11400000, guid: b58679eeeaa2cc347a7fd5f0cf81fe04, type: 2}
+  - {fileID: 11400000, guid: b7b3bc6135584e746b02f9315431e605, type: 2}

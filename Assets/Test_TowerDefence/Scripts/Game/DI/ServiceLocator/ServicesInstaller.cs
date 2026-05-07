@@ -10,6 +10,8 @@ public class ServicesInstaller : MonoBehaviour
     [SerializeField] private GamePlayerDataStoreService playerDataStorService;
     [SerializeField] private GamePlayerDataHandler playerDataHandler;
     [SerializeField] private HeroesDataStoreService heroesDataStoreService;
+    [SerializeField] private TowersDataStoreService towersDataStoreService;
+    [SerializeField] private VideoDownloadHandler videoDownloadHandler;
 
     private AsyncSceneLoadService loadService;
 
@@ -28,5 +30,7 @@ public class ServicesInstaller : MonoBehaviour
         ServiceLocator.AddService(playerDataStorService);
         ServiceLocator.AddService(playerDataHandler);
         ServiceLocator.AddService(heroesDataStoreService);
+        ServiceLocator.AddService(towersDataStoreService);
+        ServiceLocator.AddService(videoDownloadHandler);
     }
 }

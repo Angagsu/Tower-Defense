@@ -268,8 +268,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Button
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 94170d7c2ee7e8f47b5913276b6e1eed, type: 2}
+  m_sharedMaterial: {fileID: -4197303545416417049, guid: 94170d7c2ee7e8f47b5913276b6e1eed,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -832,7 +833,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2062651387
 MonoBehaviour:
@@ -880,7 +881,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1414253202}
         m_TargetAssemblyTypeName: MainMenuLoading, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: GoToLevelsMap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

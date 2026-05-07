@@ -17,18 +17,15 @@ public class HeroesDataToStore
 
     public HeroesDataToStore()
     {
-        for (int i = 0; i < AllHeroTypes.HeroType.Count; i++)
+        for (int i = 0; i < AllHeroAndTowerTypes.HeroTypes.Count; i++)
         {           
-            AllHeroes.Add((HeroType)i, new HeroData(AllHeroTypes.HeroType[i], HeroUpgradeLevel.Level_1, AllHeroTypes.HeroCards[i], isAcquired: false, price: default));
+            AllHeroes.Add((HeroType)i, new HeroData(AllHeroAndTowerTypes.HeroTypes[i], HeroUpgradeLevel.Level_1, AllHeroAndTowerTypes.HeroCards[i], isAcquired: false, price: default));
+            AllCards.Add((HeroType)i, new HeroCardData(AllHeroAndTowerTypes.HeroCards[i]));
         }
+
         AllHeroes[HeroType.Knight].IsAcquired = true;
         AllHeroes[HeroType.Archer].IsAcquired = true;
 
         SelectedAcquiredHeroesByIndex = new List<int>();
-
-        for (int i = 0; i < AllHeroTypes.HeroCards.Count; i++)
-        {
-            AllCards.Add((HeroType)i, new HeroCardData(AllHeroTypes.HeroCards[i]));
-        }
     }
 }

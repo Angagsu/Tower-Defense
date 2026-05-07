@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0ff822fbca405499bf8977fd7b8c2d, type: 3}
+  m_Name: FireTowerUpgradeLevel 10
+  m_EditorClassIdentifier: 
+  <AttackStats>k__BackingField:
+    Health: 500
+    MaxHealth: 500
+    Armor: 0
+    MaxArmor: 0
+    PhysicalResistance: 6
+    MagicalResistance: 10
+    ArmorType: 1
+    DamageData:
+      DamageAmount: 30
+      DamageType: 1
+      PhysicalPenetration: 0
+      MagicalPenetration: 11
+      ArmorPercent: 0.3
+      HealthPercent: 0.7
+  <AttackRange>k__BackingField: 16
+  <AttackRate>k__BackingField: 1.4
+  <BuyCost>k__BackingField: 130
+  <UpgradeCostByGold>k__BackingField: 1000
+  <UpgradeCostByCard>k__BackingField: 10
+  <StatsValues>k__BackingField:
+  - 500
+  - 30
+  - 16
+  - 1.4
+  - 130
+  <PassiveSkillsValues>k__BackingField:
+  - 15
+  - 2
+  <PassiveSkillsAccessibility>k__BackingField: 0101
+  <PeriodicDamage>k__BackingField: 15
+  <PeriodicDamageDuration>k__BackingField: 2

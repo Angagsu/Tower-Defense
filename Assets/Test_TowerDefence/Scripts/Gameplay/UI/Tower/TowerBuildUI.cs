@@ -1,63 +1,78 @@
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+using System.Collections.Generic;
+
 
 public class TowerBuildUI : MonoBehaviour
 {
     [SerializeField] private GameObject gameObjectRoot;
-    [SerializeField] private TowersMap towersMap;
     [SerializeField] private BuildsController buildsController;
-    [SerializeField] private Vector3 positionOffset;
-    [SerializeField] private TextMeshProUGUI[] towerCostTexts;
+    [SerializeField] private TowerBuildInformPopupUI popupUI;
+    [SerializeField] private TowerAttackRangeView attackRangeView;
+    [SerializeField] private GameObject attackRangeViewObj;
 
+    [Header("Acquired Selected Towers To Build")]
+    [Space(5)]
+    [SerializeField] private List<AcquiredSelectedTowerUI> towersToBuild;
+
+    [Header("Tower Build Panel Position Offset")]
+    [SerializeField] private Vector3 positionOffset;
+
+
+    private List<TowerFullBlueprintSO> acquiredSelectedTowers = new();
+    private TowersDataStoreService towersDataStoreService;
+    private AcquiredSelectedTowerUI currentSelectedTower;
     private BuildingArea selectedBuildingArea;
+
     private Vector3 startPosition;
 
-    
-    private void SetTowersCostText()
+
+    [Inject]
+    public void Construct(TowersDataStoreService towersDataStoreService)
     {
-        for (int i = 0; i < towerCostTexts.Length; i++)
+        this.towersDataStoreService = towersDataStoreService;
+
+        for (int i = 0; i < towersDataStoreService.SelectedAcquiredTowerByIndex.Count; i++)
         {
-            towerCostTexts[i].text = towersMap.Towers[i].Towers[0].Cost.ToString();
+            acquiredSelectedTowers.Add(towersDataStoreService.AllTowers.AcquiredTowers[towersDataStoreService.SelectedAcquiredTowerByIndex[i]]);
+            towersToBuild[i].SetTowerBuildUI(this);
+            towersToBuild[i].SetParams(acquiredSelectedTowers[i], i);
         }
     }
+
 
     private void Start()
     {
         startPosition = transform.position;
-        SetTowersCostText();
     }
 
-    public void SelectArrowTower()
+    public void SetCurrentSelectedTower(AcquiredSelectedTowerUI currentSelectedTower)
     {
-        buildsController.BuildTowerByType(towersMap.ArrowTower);
-    }
-
-    public void SelectGolemTower()
-    {
-        buildsController.BuildTowerByType(towersMap.GolemTower);
-    }
-    public void SelectFireTower()
-    {
-        buildsController.BuildTowerByType(towersMap.FireTower);
-    }
-
-    public void SelectThunderTower()
-    {
-        buildsController.BuildTowerByType(towersMap.LightningTower);
-    }
-    public void SelectIceTower()
-    {
-        buildsController.BuildTowerByType(towersMap.IceTower);
-    }
-
-    public void SelectDefenderTower()
-    {
-        buildsController.BuildTowerByType(towersMap.DefenderTower);
+        if (this.currentSelectedTower != null && this.currentSelectedTower == currentSelectedTower)
+        {
+            buildsController.BuildTowerByType(currentSelectedTower.TowerFullBlueprintSO, currentSelectedTower.TowerSO);
+            popupUI.DisablePopup();
+            attackRangeViewObj.gameObject.SetActive(false);
+        }
+        else if (this.currentSelectedTower != null && this.currentSelectedTower != currentSelectedTower)
+        {
+            this.currentSelectedTower.UnSelect();
+            this.currentSelectedTower = currentSelectedTower;
+            popupUI.EnablePopup(currentSelectedTower.TowerSO);
+            attackRangeViewObj.SetActive(true);
+            attackRangeView.SetAttackRange(currentSelectedTower.TowerSO.CurrentUpgradeLevel.AttackRange);
+        }
+        else if (this.currentSelectedTower == null)
+        {
+            this.currentSelectedTower = currentSelectedTower;
+            popupUI.EnablePopup(currentSelectedTower.TowerSO);
+            attackRangeViewObj.SetActive(true);
+            attackRangeView.SetAttackRange(currentSelectedTower.TowerSO.CurrentUpgradeLevel.AttackRange);
+        }  
     }
 
     public void SetTargetGroundForBuilding(BuildingArea selectedBuildingArea)
     {
+        Hide();
         this.selectedBuildingArea = selectedBuildingArea;
         transform.position = selectedBuildingArea.gameObject.transform.position + positionOffset;
         gameObjectRoot.SetActive(true);
@@ -65,8 +80,16 @@ public class TowerBuildUI : MonoBehaviour
 
     public void Hide()
     {
+        if (currentSelectedTower)
+        {
+            currentSelectedTower.UnSelect();
+            currentSelectedTower = null;
+            popupUI.DisablePopup();
+        }
+        
         gameObjectRoot.SetActive(false);
         transform.position = startPosition;
+        attackRangeViewObj.SetActive(false);
     }
 
     public bool IsGameObjectActive()

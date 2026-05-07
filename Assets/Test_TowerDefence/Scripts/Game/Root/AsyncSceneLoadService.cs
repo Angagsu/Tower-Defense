@@ -65,6 +65,23 @@ public class AsyncSceneLoadService : MonoBehaviour, IService
         loadingScreenUI.PlayOpenGateSFX(volume: 0.5f);
     }
 
+    private IEnumerator LoadLevelMapSceneAsync(string sceneName)
+    {
+        loadingScreenUI.ShowLoadingScreen();
+
+        yield return new WaitForSeconds(1.5f);
+
+        SceneManager.LoadSceneAsync(Scenes.LOADING);
+
+        yield return SceneManager.LoadSceneAsync(sceneName);
+
+
+        yield return new WaitUntil(IsSceneLoaded);
+
+        loadingScreenUI.SetOpenGateAnimation(true);
+        loadingScreenUI.PlayOpenGateSFX(volume: 0.5f);
+    }
+
     public IEnumerator LoadSceneAsyncInStartGame(string sceneName)
     {
         SceneManager.LoadSceneAsync(Scenes.LOADING);
@@ -85,5 +102,10 @@ public class AsyncSceneLoadService : MonoBehaviour, IService
     public void LoadSceneByIndex(int sceneIndex)
     {
         StartCoroutine(LoadSceneAsyncByIndex(sceneIndex));
+    }
+
+    public void LevelMapSceneLoader(string sceneName)
+    {
+        StartCoroutine(LoadLevelMapSceneAsync(sceneName));
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameOverHandler : MonoBehaviour 
 {
-    public event Action<int[], List<Card>> ExtraLootReceived;
+    public event Action<int[], List<TowerCard>, List<HeroCard>> ExtraLootReceived;
 
     [SerializeField] private GameplayMainUI gameplayMainUI;
     [SerializeField] private GameplayPlayerDataHandler gameplayPlayerDataHandler;
@@ -20,17 +20,19 @@ public class GameOverHandler : MonoBehaviour
     private LevelsMapDataStoreService levelsDataStoreService;
     private GamePlayerDataHandler playerDataHandler;
     private HeroesDataStoreService heroesDataStoreService;
+    private TowersDataStoreService towersDataStoreService;
     private GameplayAchievements gameplayAchievements;
     private GameplayExtraLoot extraLoot;
 
 
     [Inject]
-    public void Construct(AsyncSceneLoadService sceneLoadService, LevelsMapDataStoreService levelsDataStoreService, GamePlayerDataHandler playerDataHandler, HeroesDataStoreService heroesDataStoreService)
+    public void Construct(AsyncSceneLoadService sceneLoadService, LevelsMapDataStoreService levelsDataStoreService, GamePlayerDataHandler playerDataHandler, HeroesDataStoreService heroesDataStoreService, TowersDataStoreService towersDataStoreService)
     {
         this.sceneLoadService = sceneLoadService;
         this.levelsDataStoreService = levelsDataStoreService;
         this.playerDataHandler = playerDataHandler;
         this.heroesDataStoreService = heroesDataStoreService;
+        this.towersDataStoreService = towersDataStoreService;
 
         gameplayAchievements = new();
         extraLoot = new();
@@ -70,16 +72,17 @@ public class GameOverHandler : MonoBehaviour
         gameplayStates.SetGameplaySpeed(timeScale: 1);
 
         //int reachedStarsAmount = gameplayAchievements.CalculateStars(gameplayPlayerDataHandler.Lives);
-        int reachedStarsAmount = UnityEngine.Random.Range(1, 4);
+        int reachedStarsAmount = 3;
         var loot = extraLoot.CalculateExtraLoot(reachedStarsAmount);
-        List<Card>  lootedCards = extraLoot.CalculateHeroCardLoot(3);
-        
+
+        List<HeroCard>  lootedHeroCards = extraLoot.GetHeroCardLoot();
+        List<TowerCard> lootedTowerCards = extraLoot.GetTowerCardLoot();
 
         reachedStarsUI.ShowStars(reachedStarsAmount);
 
         gameplayMainUI.LevelCompletePanel.SetActive(true);
 
-        ExtraLootReceived?.Invoke(loot, lootedCards);
+        ExtraLootReceived?.Invoke(loot, lootedTowerCards, lootedHeroCards);
 
         gameplayStates.SetStateComplete();
 
@@ -87,8 +90,8 @@ public class GameOverHandler : MonoBehaviour
 
         playerDataHandler.AddEnergy(extraLoot.Energy);
         playerDataHandler.AddGold(extraLoot.Gold);
-        if (lootedCards != null) heroesDataStoreService.AddCard(lootedCards);
-                
+        if (lootedHeroCards != null) heroesDataStoreService.AddCard(lootedHeroCards);
+        if (lootedTowerCards != null) towersDataStoreService.AddCard(lootedTowerCards);        
 
         levelsDataStoreService.SaveLevelAchievements(isLevelAchieved: true, reachedStarsAmount);
     }

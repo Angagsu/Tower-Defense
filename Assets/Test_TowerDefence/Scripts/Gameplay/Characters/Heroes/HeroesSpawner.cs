@@ -7,7 +7,7 @@ public class HeroesSpawner : MonoBehaviour
     public event Action<BaseHero> HeroAdded;
 
     [SerializeField] private HeroDependenciesInjector dependenciesInjector;
-    [SerializeField] private SelectHeroUIHandler selectHeroOnUIHandler;
+    [SerializeField] private SelectHeroOnUI selectHeroOnUIHandler;
     [SerializeField] private HeroesButtonsUI heroesButtonsUI;
     [SerializeField] private Transform[] heroesPosition;
     [SerializeField] private BaseHero[] heroesPrefab;

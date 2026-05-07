@@ -4,40 +4,46 @@ namespace Assets.Test_TowerDefence.Scripts.Monster.Captain
 {
     public class SpeedsterCaptainMonster : CaptainMonster
     {
-
         protected override void Awake()
         {
             base.Awake();
-        }
 
-        protected override void Update()
-        {
-            base.Update();
-        }
-
-        protected override void Attack(Transform target)
-        {
-            base.Attack(target);
+            IsTowerAttacker = true;
+            IsKamikaze = true;
         }
 
         protected override void DetectTarget()
         {
-            base.DetectTarget();
+            if (target = detect.DetectTarget(detectionRange, IsDead))
+            {
+
+                Movement.LockOnTarget(target, turnSpeed);
+
+                float sqrDistance = (transform.position - target.position).sqrMagnitude;
+
+                if (sqrDistance <= attackRange * attackRange)
+                {
+                    Movement.SetIsMove(false);
+                    Attack(target);
+
+                    if (!isDead)
+                    {
+                        OnDie();
+                    }
+                }
+            }
+            else
+            {
+                anim.SetAttackAnimation(false);
+                RejectCurrentAttackerHero();
+            }
+
+            attackCountdown -= Time.deltaTime;
         }
 
-        protected override void OnDie()
+        protected override void Attack(Transform target)
         {
-            base.OnDie();
-        }
-
-        protected override void Move(Transform target)
-        {
-            base.Move(target);
-        }
-
-        public override void TakeDamage(float amount)
-        {
-            base.TakeDamage(amount);
+            attack.AttackTarget(AttackStats, target, AttackStats.DamageData.DamageAmount, CurrentTargetedHero, detect.AttackableTarget);
         }
     }
 }

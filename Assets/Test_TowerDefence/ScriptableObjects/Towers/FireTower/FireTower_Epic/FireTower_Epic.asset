@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f6c82c1f981274b8ec947a19aa2354, type: 3}
+  m_Name: FireTower_Epic
+  m_EditorClassIdentifier: 
+  <TowerName>k__BackingField: Fire
+  <TowerDescription>k__BackingField: Bari or Brat jan es tower@ bomba karas arnes
+    xzares axpers top tazaya hamarya qshac chi
+  <Cost>k__BackingField: 300
+  <TowerPrefab>k__BackingField: {fileID: 5285894258423639304, guid: bfc49eadeb262c340b665ed1e2ab9b3f,
+    type: 3}
+  <TowerSprite>k__BackingField: {fileID: 21300000, guid: 7d8f9d74b1773db4ea6a6f7e704ff01a,
+    type: 3}
+  <CurrentUpgradeLevel>k__BackingField: {fileID: 11400000, guid: aa0ddffe69df40e4eb9fa9b0da57f131,
+    type: 2}
+  <UpgradeLevelsSO>k__BackingField: {fileID: 11400000, guid: d647be5a10b8a1a469d1149014cbf760,
+    type: 2}
+  <PassivSkilleSprites>k__BackingField:
+  - {fileID: 2931393693215362090, guid: df96120a4382b6e4e96a2040854aa20d, type: 3}
+  - {fileID: 8457403692380297554, guid: 4d9da0b8ecb790a4e8e04a51c422991b, type: 3}
+  <PassiveSkillsAmount>k__BackingField: 2
+  <PassiveSkillsUnlockLevels>k__BackingField: 0300000003000000
+  <StatsMaxValues>k__BackingField:
+  - 30
+  - 18
+  - 0.9
+  - 230
+  <PassiveSkillsMaxValues>k__BackingField:
+  - 25
+  - 3
+  <PassiveSkillsDescripsions>k__BackingField:
+  - Fireball attack deals periodic damage  to enemies
+  - Periodic damage duration. Upgrad the tower to increase periodic damage duration
+  <PassiveSkillsNames>k__BackingField:
+  - Periodic Damage
+  - P. D.  Duration
+  <TowerData>k__BackingField:
+    TowerType: 2
+    UpgradeLevel: 3
+    CardType: 1
+    IsAcquired: 1
+    Price: 200
+    ReseivedCards: []

@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f6c82c1f981274b8ec947a19aa2354, type: 3}
+  m_Name: IceTower_Mythic
+  m_EditorClassIdentifier: 
+  <TowerName>k__BackingField: Ice
+  <TowerDescription>k__BackingField: Bari or Brat jan esigel Saruci tower e  karas 
+    arnes xzares axpers top tazaya hamarya qshac chi
+  <Cost>k__BackingField: 600
+  <TowerPrefab>k__BackingField: {fileID: 4923226593151006283, guid: f18eda3b57f1a454287de9fe9b96657c,
+    type: 3}
+  <TowerSprite>k__BackingField: {fileID: 21300000, guid: 6d5944d07754f574289b964179cf83a2,
+    type: 3}
+  <CurrentUpgradeLevel>k__BackingField: {fileID: 11400000, guid: 73e254d706f09844998ce12ce0404b35,
+    type: 2}
+  <UpgradeLevelsSO>k__BackingField: {fileID: 11400000, guid: 2a8cf579b3bb604438b28fe45dbd6af6,
+    type: 2}
+  <PassivSkilleSprites>k__BackingField:
+  - {fileID: 8298595041802712825, guid: df96120a4382b6e4e96a2040854aa20d, type: 3}
+  - {fileID: -6057946083672911389, guid: 4d9da0b8ecb790a4e8e04a51c422991b, type: 3}
+  <PassiveSkillsAmount>k__BackingField: 2
+  <PassiveSkillsUnlockLevels>k__BackingField: 0300000003000000
+  <StatsMaxValues>k__BackingField:
+  - 50
+  - 20
+  - 0.3
+  - 440
+  <PassiveSkillsMaxValues>k__BackingField:
+  - 0.5
+  - 3
+  <PassiveSkillsDescripsions>k__BackingField:
+  - The Ice Tower slows down targets during attacks.Upgrade the tower to increase
+    the deceleration factor
+  - The Ice Tower damage increases while continuously attacking a single target.
+    Upgrade the tower to increase the damage-over-time effect
+  <PassiveSkillsNames>k__BackingField:
+  - Deceleration Multiplier
+  - Damage Multiplier
+  <TowerData>k__BackingField:
+    TowerType: 4
+    UpgradeLevel: 3
+    CardType: 2
+    IsAcquired: 1
+    Price: 600
+    ReseivedCards: []

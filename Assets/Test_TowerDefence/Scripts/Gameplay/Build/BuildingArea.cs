@@ -1,11 +1,14 @@
+using Assets.Scripts.Tower;
 using UnityEngine;
 
 
 public class BuildingArea : MonoBehaviour
 {
-    public DefendersController DefenderMovement { get; private set; }
+    public DefendersController DefendersController { get; private set; }
     public TowerFullBlueprintSO TowerFullBlueprintSO { get; private set; }
-    public GameObject Tower { get; set; }
+
+    public TowerSO CurrentTowerSO { get; private set; }
+    public BaseTower CurrentTower { get; private set; }
 
     public bool IsUpgraded { get; set; } 
     public bool IsUpgradedSecondTime { get; set; } 
@@ -18,35 +21,40 @@ public class BuildingArea : MonoBehaviour
     private Vector3 positionOffset;
 
 
-
-
     public void DestroyTower()
-    {
-        Destroy(Tower);
+    {   
+        if(CurrentTower.IsCrashed)
+        {
+            Destroy(CurrentTower.gameObject);
+            return;
+        }
+
         if (IsUpgradedSecondTime)
         {
-            buildsController.PlayerDataHandler.IncreaseMoney(TowerFullBlueprintSO.GetSecondTimeUpgradedTowerSellCost());
+            buildsController.PlayerDataHandler.IncreaseMoney(TowerFullBlueprintSO.GetMythicTowerSellCost());
             IsUpgradedSecondTime = false;
         }
         else if (IsUpgraded)
         {
-            buildsController.PlayerDataHandler.IncreaseMoney(TowerFullBlueprintSO.GetUpgradedTowerSellCost());
+            buildsController.PlayerDataHandler.IncreaseMoney(TowerFullBlueprintSO.GetEpicTowerSellCost());
             IsUpgraded = false;
         }
         else if (IsUpgradedThirdTime)
         {
-            buildsController.PlayerDataHandler.IncreaseMoney(TowerFullBlueprintSO.GetThirdTimeUpgradedTowerSellCost());
+            buildsController.PlayerDataHandler.IncreaseMoney(TowerFullBlueprintSO.GetRareTowerSellCost());
             IsUpgradedThirdTime = false;
         }
         else
         {
-            buildsController.PlayerDataHandler.IncreaseMoney(TowerFullBlueprintSO.GetTowerSellCost());
+            buildsController.PlayerDataHandler.IncreaseMoney(TowerFullBlueprintSO.GetCommonTowerSellCost());
         }
+
+        Destroy(CurrentTower.gameObject);
     }
 
     public void DestroyTowerForUpgrade()
     {
-        Destroy(Tower);
+        Destroy(CurrentTower.gameObject);
     }
 
     public Vector3 GetBuildPosition()
@@ -68,23 +76,24 @@ public class BuildingArea : MonoBehaviour
        
        if (TowerFullBlueprintSO == towersMap.DefenderTower)
        {
-           return transform.position + (positionOffset = new Vector3(0, 2, 0));
+           return transform.position + (positionOffset = new Vector3(0, 2, 0.7f));
        }
 
         return transform.position + positionOffset;
     }
 
-    public void SetTower(TowerFullBlueprintSO towerFullBlueprintSO = null, GameObject tower = null)
+    public void SetTower(TowerSO currentTower, TowerFullBlueprintSO towerFullBlueprintSO = null, BaseTower tower = null)
     {
-        this.Tower = tower;
-        this.TowerFullBlueprintSO = towerFullBlueprintSO;
+        CurrentTower = tower;
+        TowerFullBlueprintSO = towerFullBlueprintSO;
+        CurrentTowerSO = currentTower;
     }
 
     public void SetDefenders()
     {
         if (TowerFullBlueprintSO == towersMap.DefenderTower)
         {
-            DefenderMovement = Tower.GetComponentInChildren<DefendersController>();
+            DefendersController = CurrentTower.gameObject.GetComponentInChildren<DefendersController>();
         }
     }
 
@@ -94,7 +103,7 @@ public class BuildingArea : MonoBehaviour
 
     public void SelectDefenderTowerOnUI()
     {
-        DefenderMovement.SelectOrDeSelectDefenders(true);
+        DefendersController.SelectOrDeSelectDefenders(true);
         buildsController.DeselectGround();
     }
 }

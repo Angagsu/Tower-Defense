@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f6c82c1f981274b8ec947a19aa2354, type: 3}
+  m_Name: ArrowTower_Rare
+  m_EditorClassIdentifier: 
+  <TowerName>k__BackingField: Arrow
+  <TowerDescription>k__BackingField: Bari or Brat jan es tower@ bomba karas arnes
+    xzares axpers top tazaya hamarya qshac chi
+  <Cost>k__BackingField: 600
+  <TowerPrefab>k__BackingField: {fileID: 1071426113212598717, guid: 7325ff0363ed8dd4181e6080ab43a480,
+    type: 3}
+  <TowerSprite>k__BackingField: {fileID: 21300000, guid: 88864e505764e5a4c806400007a63cfa,
+    type: 3}
+  <CurrentUpgradeLevel>k__BackingField: {fileID: 11400000, guid: a1bcdeb77d672ea439b0e4855e00c2db,
+    type: 2}
+  <UpgradeLevelsSO>k__BackingField: {fileID: 11400000, guid: 521ee2cccf228cd47bf863e9004ab5a7,
+    type: 2}
+  <PassivSkilleSprites>k__BackingField:
+  - {fileID: -6100777497441454335, guid: df96120a4382b6e4e96a2040854aa20d, type: 3}
+  - {fileID: 8234407308566504780, guid: df96120a4382b6e4e96a2040854aa20d, type: 3}
+  <PassiveSkillsAmount>k__BackingField: 2
+  <PassiveSkillsUnlockLevels>k__BackingField: 0200000002000000
+  <StatsMaxValues>k__BackingField:
+  - 35
+  - 20
+  - 1.1
+  - 430
+  <PassiveSkillsMaxValues>k__BackingField:
+  - 100
+  - 35
+  <PassiveSkillsDescripsions>k__BackingField:
+  - Attacks have chance to apply critical damage
+  - Critical damage chance
+  <PassiveSkillsNames>k__BackingField:
+  - Critical Damage
+  - Critical Hit Chance
+  <TowerData>k__BackingField:
+    TowerType: 0
+    UpgradeLevel: 1
+    CardType: 3
+    IsAcquired: 1
+    Price: 800
+    ReseivedCards: []

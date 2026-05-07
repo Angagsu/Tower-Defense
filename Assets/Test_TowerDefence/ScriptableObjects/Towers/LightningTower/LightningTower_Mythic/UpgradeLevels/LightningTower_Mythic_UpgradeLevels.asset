@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c68b215d4d2e041acd5d1f71fbc6d5, type: 3}
+  m_Name: LightningTower_Mythic_UpgradeLevels
+  m_EditorClassIdentifier: 
+  TowerUpgradeLevelSOs:
+  - {fileID: 11400000, guid: 5a0aa22184568ac46aa2d8630fc9464f, type: 2}
+  - {fileID: 11400000, guid: 325e4f3af53287942b9ac445fb7fb030, type: 2}
+  - {fileID: 11400000, guid: 910d3ee5ff722024a957ba18dcaa6261, type: 2}
+  - {fileID: 11400000, guid: 20b33a054688e50478967c3eb6c3a1ee, type: 2}
+  - {fileID: 11400000, guid: 3c53eacec462c674aa658075e06740c4, type: 2}
+  - {fileID: 11400000, guid: a5a2eabc48bd5a1479270c6af679892b, type: 2}
+  - {fileID: 11400000, guid: ff5ff4df3ddc90d4fa067bfa74aef634, type: 2}
+  - {fileID: 11400000, guid: 5ab5ef2c8cd6b5145a4892bfc227c7d4, type: 2}
+  - {fileID: 11400000, guid: 416b40a4016319c4ab6ac24cc396dfcc, type: 2}
+  - {fileID: 11400000, guid: dccc02e3319fd00489595253c5aabc65, type: 2}

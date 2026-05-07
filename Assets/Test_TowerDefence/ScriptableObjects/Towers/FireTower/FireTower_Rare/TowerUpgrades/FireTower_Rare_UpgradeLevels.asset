@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c68b215d4d2e041acd5d1f71fbc6d5, type: 3}
+  m_Name: FireTower_Rare_UpgradeLevels
+  m_EditorClassIdentifier: 
+  TowerUpgradeLevelSOs:
+  - {fileID: 11400000, guid: bce863d46cdba494a89a7de7afe95c7f, type: 2}
+  - {fileID: 11400000, guid: ec261bf46f3348945b8c6fabc06fabb5, type: 2}
+  - {fileID: 11400000, guid: 591ea79883ed514419c3be70158ff1c2, type: 2}
+  - {fileID: 11400000, guid: 3c53e6a6108980744932fc6d1a11bbc8, type: 2}
+  - {fileID: 11400000, guid: 99149f8434fa16c45932a7e28843425b, type: 2}
+  - {fileID: 11400000, guid: 4649efd7604940b4eb25e34429dc673a, type: 2}
+  - {fileID: 11400000, guid: f6c55736a7578f9469e1e28c09aa215a, type: 2}
+  - {fileID: 11400000, guid: f03cc953172efd749973feb05ab467f3, type: 2}
+  - {fileID: 11400000, guid: b577abbca153b05468bc0e2842a062ca, type: 2}
+  - {fileID: 11400000, guid: 50f67f61d2837c5418aca8f9b913a85d, type: 2}

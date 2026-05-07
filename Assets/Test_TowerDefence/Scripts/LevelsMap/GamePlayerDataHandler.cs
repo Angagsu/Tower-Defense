@@ -139,8 +139,11 @@ public class GamePlayerDataHandler : MonoBehaviour, IService
 
     private void OnApplicationPause(bool pause)
     {
-        if (pause) energyCounter.SaveEnergyState();
-        else energyCounter.ApplyOfflineProgress();
+        if(energyCounter != null)
+        {
+            if (pause) energyCounter.SaveEnergyState();
+            else energyCounter.ApplyOfflineProgress();
+        }  
     }
 
     private void OnApplicationQuit()

@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f6c82c1f981274b8ec947a19aa2354, type: 3}
+  m_Name: LightningTower_Epic
+  m_EditorClassIdentifier: 
+  <TowerName>k__BackingField: Lightning
+  <TowerDescription>k__BackingField: Bari or Brat jan es tower@ bomba karas arnes
+    xzares axpers top tazaya hamarya qshac chi
+  <Cost>k__BackingField: 400
+  <TowerPrefab>k__BackingField: {fileID: 6660008564374663589, guid: a7dfa49e9449d624ebf0524ccf183512,
+    type: 3}
+  <TowerSprite>k__BackingField: {fileID: 21300000, guid: 6d4ebf55577f1c542b7df1f2733a59dc,
+    type: 3}
+  <CurrentUpgradeLevel>k__BackingField: {fileID: 11400000, guid: 7459d6db0ead7b948a01e5f6898184fe,
+    type: 2}
+  <UpgradeLevelsSO>k__BackingField: {fileID: 11400000, guid: b4003b1501b3fa542a34f58cadcbf485,
+    type: 2}
+  <PassivSkilleSprites>k__BackingField:
+  - {fileID: 8298595041802712825, guid: 4d9da0b8ecb790a4e8e04a51c422991b, type: 3}
+  - {fileID: -6057946083672911389, guid: 4d9da0b8ecb790a4e8e04a51c422991b, type: 3}
+  <PassiveSkillsAmount>k__BackingField: 2
+  <PassiveSkillsUnlockLevels>k__BackingField: 0200000002000000
+  <StatsMaxValues>k__BackingField:
+  - 45
+  - 19
+  - 0.35
+  - 280
+  <PassiveSkillsMaxValues>k__BackingField:
+  - 0.4
+  - 20
+  <PassiveSkillsDescripsions>k__BackingField:
+  - The Lightning Tower slows down targets during attacks.Upgrade the tower to increase
+    the deceleration factor
+  - The Lightning Tower damage increases while continuously attacking a single target.
+    Upgrade the tower to increase the damage-over-time effect
+  <PassiveSkillsNames>k__BackingField:
+  - Deceleration Multiplier
+  - Damage Multiplier
+  <TowerData>k__BackingField:
+    TowerType: 5
+    UpgradeLevel: 2
+    CardType: 1
+    IsAcquired: 1
+    Price: 300
+    ReseivedCards: []

@@ -13,8 +13,13 @@ MonoBehaviour:
   m_Name: MageUpgradeLevels
   m_EditorClassIdentifier: 
   HeroUpgradeLevelSOs:
-  - {fileID: 11400000, guid: 60744a5b18d97494fbc3843f4f0f2670, type: 2}
-  - {fileID: 11400000, guid: a32e7f2892a704642b07430df446528c, type: 2}
-  - {fileID: 11400000, guid: 04ac80f9d2c5ef648a8b99a51652696b, type: 2}
-  - {fileID: 11400000, guid: 8b8dbfa76c2d2cc4b80b0364f41f0e75, type: 2}
-  - {fileID: 11400000, guid: 2c8885ba2b524ca479e490249fe56ddc, type: 2}
+  - {fileID: 11400000, guid: 773752fdadf066949b15917c0cc6cb6c, type: 2}
+  - {fileID: 11400000, guid: fa2e3a6ccb5926340afb1e1d5e0ac306, type: 2}
+  - {fileID: 11400000, guid: 51fa829230b0b514f990e3ec2aba7f27, type: 2}
+  - {fileID: 11400000, guid: 4f8e7f32b3986e94c8d758ad0b69a221, type: 2}
+  - {fileID: 11400000, guid: bd6117e239c8a774e8b7d513618cc904, type: 2}
+  - {fileID: 11400000, guid: f201718da52d10c45a417c4b703b7642, type: 2}
+  - {fileID: 11400000, guid: 74225c1c148721845afa00b586e01213, type: 2}
+  - {fileID: 11400000, guid: 0579e6b9cbc050d479b51d1d964555e4, type: 2}
+  - {fileID: 11400000, guid: 0159252fe4d7ed142a97158eaecef829, type: 2}
+  - {fileID: 11400000, guid: fee2288a5e8d8ca468e129b389153f37, type: 2}

@@ -1,10 +1,35 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 namespace Assets.Scripts.Hero
 {
     public class ArcherHero : BaseHero
     {
+        private float criticalDamage;
+        private float criticalDamageChance;
+
+
+
+        public override void SetHeroParams(HeroSO heroSO)
+        {
+            base.SetHeroParams(heroSO);
+
+            passiveSkillsList = new()
+            {
+                criticalDamage,
+                criticalDamageChance
+            };
+
+            if (hasPassiveSkill)
+            {
+                for (int i = 0; i < upgradeLevel.PassiveSkillsAccessibility.Count; i++)
+                {
+                    passiveSkillsList[i] = upgradeLevel.PassiveSkillsValues[i];
+                }
+            }
+        }
+
         protected override void Update()
         {
             base.Update();
@@ -14,21 +39,24 @@ namespace Assets.Scripts.Hero
         {
             if ((target = detect.DetectTarget(detectionRange, IsDead)))
             {
-                var distance = Vector3.Distance(movement.PreviousPosition, target.position);
+                var distance = (movement.PreviousPosition - target.position).sqrMagnitude;
 
-                if (distance < detectionRange && !movement.IsMoves)
+                if (distance < (detectionRange * detectionRange) && !movement.IsMoves)
                 {
                     currentTargetedMonster = detect.DetectedMonster;
 
-                    if (currentTargetedMonster.CurrentAttackerHero == null && currentTargetedMonster.AttackRange >= distance)
+                    if (currentTargetedMonster.CurrentAttackerHero == null || currentTargetedMonster.CurrentAttackerHero == this)
                     {
                         currentTargetedMonster.SetCurrentAttackerHero(this);
-                        currentTargetedMonster.Movement.SetIsMove(false); 
-                        currentTargetedMonster.Anim.StopAllAnimations();
-                        movement.MoveToTargetMonster(moveSpeed, turnSpeed, target.position);
                     }
 
-                    
+                    if (!currentTargetedMonster.IsKamikaze && currentTargetedMonster.IsMoving && (currentTargetedMonster.AttackRange * currentTargetedMonster.AttackRange) >= distance)
+                    {
+                        currentTargetedMonster.SetCurrentTargetedHero();
+                        currentTargetedMonster.Movement.SetIsMove(false); 
+                        currentTargetedMonster.Anim.StopAllAnimations();
+                        movement.MoveToTargetMonster(currentTargetedMonster, moveSpeed, turnSpeed, target.position);
+                    }
 
                     LockOnTarget();
 
@@ -84,6 +112,14 @@ namespace Assets.Scripts.Hero
             attackCountdown -= Time.deltaTime;
         }
 
+        public override void SuperAttack(Action skillCooldown)
+        {
+            if (movement.IsMoves) return;
+
+            superAttack.SetIsSuperAttackStarted(true);
+            superAttack.OnSuperAttackPerformed(skillCooldown);
+        }
+
         protected override void Attack(Transform target)
         {
             base.Attack(target);
@@ -97,11 +133,6 @@ namespace Assets.Scripts.Hero
         public override void OnRevive()
         {
             base.OnRevive();
-        }
-
-        public override void TakeDamage(float amount)
-        {
-            base.TakeDamage(amount);
         }
     }
 }

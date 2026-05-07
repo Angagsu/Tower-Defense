@@ -23,10 +23,16 @@ public class HeroDetection : BaseDetection
 
         if (DetectedMonster != null && DetectedMonster.IsDead == false && DetectedMonster.CurrentAttackerHero == hero)
         {
-            if (Vector3.Distance(transform.position, DetectedMonster.transform.position) < detectionRange)
+            float sqrDistance = (transform.position - DetectedMonster.transform.position).sqrMagnitude;
+
+            if (sqrDistance <= (detectionRange * detectionRange))
             {
-                
                 return target = DetectedMonster.PartForTargeting;
+            }
+            else
+            {
+                DetectedMonster = null;
+                target = null;
             }
         }
         else
@@ -37,19 +43,16 @@ public class HeroDetection : BaseDetection
 
         foreach (BaseMonster monster in monsters)
         {
-            if (monster.isActiveAndEnabled)
-            {
-                float distanceToEnemy = Vector3.Distance(transform.position, monster.transform.position);
+            float sqrDistanceToEnemy = (transform.position - monster.transform.position).sqrMagnitude;
 
-                if (distanceToEnemy < shortestDistance && monster && !monster.IsDead)
-                {
-                    shortestDistance = distanceToEnemy;
-                    DetectedMonster = monster;
-                }
+            if (sqrDistanceToEnemy < shortestDistance && monster && !monster.IsDead)
+            {
+                shortestDistance = sqrDistanceToEnemy;
+                DetectedMonster = monster;
             }
         }
 
-        if (DetectedMonster != null && shortestDistance <= detectionRange && DetectedMonster.CurrentAttackerHero == null)
+        if (DetectedMonster != null && shortestDistance <= (detectionRange * detectionRange) && (DetectedMonster.CurrentAttackerHero == null || DetectedMonster.CurrentAttackerHero == hero))
         {
             target = DetectedMonster.PartForTargeting;
             return target;
@@ -60,5 +63,11 @@ public class HeroDetection : BaseDetection
             target = null;
             return null;
         }
+    }
+
+    public override void ResetDetectedTarget()
+    {
+        DetectedMonster = null;
+        target = null;
     }
 }

@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 238922d24b0a10844933128ace53e475, type: 3}
+  m_Name: MageUpgradeLevel 7
+  m_EditorClassIdentifier: 
+  <UpgradeCostByGold>k__BackingField: 6400
+  <UpgradeCostByCard>k__BackingField: 20
+  <AttackStats>k__BackingField:
+    Health: 450
+    MaxHealth: 450
+    Armor: 0
+    MaxArmor: 0
+    PhysicalResistance: 4
+    MagicalResistance: 8
+    ArmorType: 1
+    DamageData:
+      DamageAmount: 42
+      DamageType: 1
+      PhysicalPenetration: 0
+      MagicalPenetration: 11
+      ArmorPercent: 0.3
+      HealthPercent: 0.7
+  <MoveSpeed>k__BackingField: 6.5
+  <ActiveSkillValue>k__BackingField: 250
+  <ActiveSkillAccessibility>k__BackingField: 1
+  <PassiveSkillsValues>k__BackingField:
+  - 25
+  - 3
+  <PassiveSkillsAccessibility>k__BackingField: 0101
+  <StatsValues>k__BackingField:
+  - 450
+  - 42
+  - 6.5
+  <PeriodicDamage>k__BackingField: 25
+  <PeriodicDamageDuration>k__BackingField: 3

@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f6c82c1f981274b8ec947a19aa2354, type: 3}
+  m_Name: DefenderTower_Epic
+  m_EditorClassIdentifier: 
+  <TowerName>k__BackingField: Defender
+  <TowerDescription>k__BackingField: Bari or Brat jan es tower@ bomba karas arnes
+    xzares axpers top tazaya hamarya qshac chi
+  <Cost>k__BackingField: 150
+  <TowerPrefab>k__BackingField: {fileID: 815381606110460285, guid: 59601ebdcdc921048b5455115763feb6,
+    type: 3}
+  <TowerSprite>k__BackingField: {fileID: 21300000, guid: f5b39f3ba50a4cf48bdc87e7739030eb,
+    type: 3}
+  <CurrentUpgradeLevel>k__BackingField: {fileID: 11400000, guid: 42620fb1ef603a04faba353c7e5468fe,
+    type: 2}
+  <UpgradeLevelsSO>k__BackingField: {fileID: 11400000, guid: 20f7bbe420d203d489c389350d674af3,
+    type: 2}
+  <PassivSkilleSprites>k__BackingField:
+  - {fileID: 21300000, guid: 851ce813ae68af642a4c9410ab7de7cd, type: 3}
+  - {fileID: 8234407308566504780, guid: df96120a4382b6e4e96a2040854aa20d, type: 3}
+  <PassiveSkillsAmount>k__BackingField: 1
+  <PassiveSkillsUnlockLevels>k__BackingField: 03000000
+  <StatsMaxValues>k__BackingField:
+  - 25
+  - 18
+  - 0
+  - 130
+  - 350
+  <PassiveSkillsNames>k__BackingField:
+  - Stun Chance
+  <PassiveSkillsDescripsions>k__BackingField:
+  - 'Attacks have chance to stun enemies. Upgrade tower to increase stun chance.
+    Default stun duration: 0,2 seconds.'
+  <TowerData>k__BackingField:
+    TowerType: 1
+    UpgradeLevel: 3
+    CardType: 1
+    IsAcquired: 1
+    Price: 200
+    ReseivedCards: []

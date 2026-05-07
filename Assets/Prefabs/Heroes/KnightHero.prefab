@@ -13,10 +13,11 @@ GameObject:
   - component: {fileID: 5295874118075029163}
   - component: {fileID: 6790143868847952377}
   - component: {fileID: 6076620235328718186}
-  - component: {fileID: -5868522961215454169}
+  - component: {fileID: 6724451049059817934}
   - component: {fileID: 3332321557980653826}
   - component: {fileID: -5715458620650857273}
   - component: {fileID: -4962234938672308683}
+  - component: {fileID: -1646394880803995494}
   m_Layer: 19
   m_Name: KnightHero
   m_TagString: Hero
@@ -57,10 +58,10 @@ CharacterController:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 262144
+    m_Bits: 786432
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Height: 1.87
   m_Radius: 0.53
@@ -82,16 +83,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PartForTargeting>k__BackingField: {fileID: 2671242747117179672}
+  <AttackStats>k__BackingField:
+    Health: 0
+    MaxHealth: 0
+    Armor: 0
+    MaxArmor: 0
+    PhysicalResistance: 20
+    MagicalResistance: 20
+    ArmorType: 0
+    DamageData:
+      DamageAmount: 80
+      DamageType: 0
+      PhysicalPenetration: 5
+      MagicalPenetration: 0
+      ArmorPercent: 0.7
+      HealthPercent: 0.3
   damage: 50
   moveSpeed: 10
-  attackRate: 1
+  attackRate: 0.5
   attackRange: 3
   turnSpeed: 10
-  instancingEnabler: {fileID: 1425669700172546894}
+  healthBarInstance: {fileID: 1425669700172546894}
+  armorBar: {fileID: 0}
   <ReviveTimer>k__BackingField: 10
   <RotatPart>k__BackingField: {fileID: 4869045808799075750}
   <Anim>k__BackingField: {fileID: 6076620235328718186}
-  attack: {fileID: -5868522961215454169}
+  <ActiveSkillCooldown>k__BackingField: 30
+  superAttack: {fileID: -1646394880803995494}
+  attack: {fileID: 6724451049059817934}
   detect: {fileID: -4962234938672308683}
   move: {fileID: 6790143868847952377}
   baseSFX: {fileID: 3332321557980653826}
@@ -99,6 +118,8 @@ MonoBehaviour:
   dyingAnimationDuration: 3
   startHealth: 1000
   detectionRange: 10
+  superAttackRadius: 20
+  superAttackEffectDuration: 2
   selectionZone: {fileID: 3995275625162132098}
 --- !u!114 &6790143868847952377
 MonoBehaviour:
@@ -128,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1545437849098065884}
---- !u!114 &-5868522961215454169
+--- !u!114 &6724451049059817934
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,7 +158,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4876133543299635271}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e42f60134dd2c347940d9326e745dd9, type: 3}
+  m_Script: {fileID: 11500000, guid: c9e242a52518e244ab0f9b570a8c5c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &3332321557980653826
@@ -270,6 +291,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hero: {fileID: 5295874118075029163}
+--- !u!114 &-1646394880803995494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4876133543299635271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d54c0cec0b178b42832c4856d5027d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  superAttackDamage: 250
 --- !u!1 &5958388831559236381
 GameObject:
   m_ObjectHideFlags: 0

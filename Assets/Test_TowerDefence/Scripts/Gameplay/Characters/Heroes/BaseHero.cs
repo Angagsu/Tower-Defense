@@ -1,26 +1,29 @@
 using Assets.Scripts;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
-public class BaseHero : Character, IAttackableHero
+public class BaseHero : Character
 {
-    public event Action Died;
+    public event Action<bool> Died;
     public event Action<BaseHero, float, float> DamageTaked;
 
     [field: SerializeField] public int ReviveTimer { get; private set; }
     [field: SerializeField] public Transform RotatPart { get; private set; }
     [field: SerializeField] public BaseHeroAnimation Anim { get; private set; }
-
+    [field: SerializeField] public float ActiveSkillCooldown { get; private set; }
     public BaseMonster CurrentTargetedMonster => currentTargetedMonster;
     public BaseMonster CurrentAttackerMonster => currentAttackerMonster;
 
     public bool IsSelected => isSelected;
-    public bool CanAttack => canAttack;
-    public float AttackRange => attackRange;
+    public bool CanAttack => canAttack;    
+   // public bool IsMoves => movement.IsMoves;
     public bool IsPaused => isPaused;
+    public float AttackRange => attackRange;
 
+    [SerializeField] protected HeroSuperAttack superAttack;
     [SerializeField] protected BaseAttack attack;
     [SerializeField] protected BaseDetection detect;
     [SerializeField] protected BaseMovement move;
@@ -30,6 +33,8 @@ public class BaseHero : Character, IAttackableHero
     [SerializeField] protected float dyingAnimationDuration;
     [SerializeField] protected float startHealth;
     [SerializeField] protected float detectionRange;
+    [SerializeField] protected float superAttackRadius;
+    [SerializeField] protected float superAttackEffectDuration;
     [SerializeField] protected GameObject selectionZone;
 
     protected HeroUpgradeLevelSO upgradeLevel;
@@ -38,7 +43,14 @@ public class BaseHero : Character, IAttackableHero
     protected BaseMonster currentTargetedMonster;
     protected BaseMonster currentAttackerMonster;
     protected Transform target;
+
     protected Coroutine coroutine;
+    protected Coroutine buffCoroutine;
+    protected WaitForSeconds waitUntilReviveAnimationEnd;
+    protected WaitForSeconds waitUntilRevive;
+    protected WaitForSeconds waitUntilDyingAnimationEnd;
+
+
     protected float attackCountdown = 0f;
     protected bool isSelected;
     protected bool isPaused;
@@ -46,8 +58,17 @@ public class BaseHero : Character, IAttackableHero
     protected Vector2 touchPosition;
 
     protected HeroMovement movement;
-        
+    protected List<float> passiveSkillsList;
+    protected bool hasPassiveSkill;
+    protected bool hasActiveSkill;
 
+
+    protected float magicResistStartValue;
+    protected float physicResistStartValue;
+
+    public HeroUpgradeLevelSO UpgradeLevel => upgradeLevel;
+    public List<float> PassiveSkills => passiveSkillsList;
+    public GameplayStates GameplayStates => gameplayStates;
 
     public virtual void Construct(PlayerInputHandler playerInputHandler,GameplayStates gameplayStates, ProjectilesFactoriesService projectilesFactoriesService)
     {
@@ -72,10 +93,35 @@ public class BaseHero : Character, IAttackableHero
     public virtual void SetHeroParams(HeroSO heroSO)
     {
         upgradeLevel = heroSO.CurrentUpgradeLevel;
-        damage = upgradeLevel.Damage;
-        startHealth = upgradeLevel.Health;
-        health = startHealth;
+
+        SetupAttackStats(heroSO.CurrentUpgradeLevel.AttackStats);
+
         moveSpeed = upgradeLevel.MoveSpeed;
+
+        if (upgradeLevel.PassiveSkillsAccessibility.Capacity != 0)
+        {
+            hasPassiveSkill = true;
+        }
+        if (upgradeLevel.ActiveSkillAccessibility == true)
+        {
+            hasActiveSkill = true;
+        }
+
+        superAttack.SetDependencies(this, playerInputHandler);
+    }
+
+    protected virtual void SetupAttackStats(AttackStats attackStats)
+    {
+        AttackStats.Health = attackStats.Health;
+        AttackStats.MaxHealth = attackStats.MaxHealth;
+
+        AttackStats.DamageData = attackStats.DamageData;
+
+        AttackStats.PhysicalResistance = attackStats.PhysicalResistance;
+        AttackStats.MagicalResistance = attackStats.MagicalResistance;
+
+        physicResistStartValue = AttackStats.PhysicalResistance;
+        magicResistStartValue = AttackStats.MagicalResistance;
     }
 
     protected virtual void Awake()
@@ -84,9 +130,12 @@ public class BaseHero : Character, IAttackableHero
         isSelected = false;
         canAttack = true;
         health = startHealth;
-        instancingEnabler.gameObject.SetActive(false);
+        healthBarInstance.gameObject.SetActive(false);
         selectionZone.SetActive(false);
 
+        waitUntilRevive = new WaitForSeconds(ReviveTimer);
+        waitUntilReviveAnimationEnd = new WaitForSeconds(reviveAnimationDuration);
+        waitUntilDyingAnimationEnd = new WaitForSeconds(dyingAnimationDuration);
         //DamageTaked?.Invoke(this, health, startHealth);
     }
 
@@ -131,25 +180,32 @@ public class BaseHero : Character, IAttackableHero
             target = null;
             currentTargetedMonster.RejectCurrentAttackerHero();
             currentTargetedMonster = null;
+            //detect.ResetDetectedTarget();
         }
+    }
+
+    public virtual void ResetTarget()
+    {
+        detect.ResetDetectedTarget();
     }
 
     protected override void DetectTarget()
     {
         if ((target = detect.DetectTarget(detectionRange, IsDead)))
         {
-            var distance = Vector3.Distance(movement.PreviousPosition, target.position);
+            var distance = (movement.PreviousPosition - target.position).sqrMagnitude;
 
-            if (distance < detectionRange && !movement.IsMoves)
+            if (distance < (detectionRange * detectionRange) && !movement.IsMoves && !detect.DetectedMonster.IsKamikaze)
             {
                 currentTargetedMonster = detect.DetectedMonster;
 
-                if (currentTargetedMonster.CurrentAttackerHero == null)
+                if (currentTargetedMonster.CurrentAttackerHero == null) 
                 {
                     currentTargetedMonster.SetCurrentAttackerHero(this);
+                    currentTargetedMonster.SetCurrentTargetedHero();
                     currentTargetedMonster.Movement.SetIsMove(false);
                     currentTargetedMonster.Anim.StopAllAnimations();
-                    movement.MoveToTargetMonster(moveSpeed, turnSpeed, target.position);
+                    movement.MoveToTargetMonster(currentTargetedMonster, moveSpeed, turnSpeed, target.position);
                 }
 
                 LockOnTarget();
@@ -160,7 +216,7 @@ public class BaseHero : Character, IAttackableHero
 
                     if (attackCountdown <= 0)
                     {
-                        attackCountdown = 1 / attackRate;
+                        attackCountdown =  attackRate;
 
                         Attack(target);
                     }
@@ -206,10 +262,45 @@ public class BaseHero : Character, IAttackableHero
         attackCountdown -= Time.deltaTime;
     }
 
+    public virtual void SuperAttack(Action skillCooldown) { }
+
+    public void IncreaseResistance(DamageType damageType, float amount, float effectDuration)
+    {
+        if (isDead) return;
+
+        if (damageType == DamageType.Physical)
+        {
+            float resist = physicResistStartValue;
+            float increaseValue = resist + amount;
+            AttackStats.PhysicalResistance = Mathf.Max(physicResistStartValue, increaseValue);
+        }
+        else
+        {
+            float resist = magicResistStartValue;
+            float increaseValue = resist + amount;
+            AttackStats.MagicalResistance = Mathf.Max(magicResistStartValue, increaseValue);
+        }
+
+        buffCoroutine = StartCoroutine(BuffDurationCounter(effectDuration));
+    }
+
+    private IEnumerator BuffDurationCounter(float effectDuration)
+    {
+        yield return new WaitForSeconds(effectDuration);
+
+        SetDefaultResistence();
+    }
+
+    public void SetDefaultResistence()
+    {
+        AttackStats.PhysicalResistance = physicResistStartValue;
+        AttackStats.MagicalResistance = magicResistStartValue;
+    }
+
     protected override void Attack(Transform target)
     {
         baseSFX.PlayAttackSFX();
-        attack.AttackTarget(target, damage, currentTargetedMonster);
+        attack.AttackWithPassiveSkill(AttackStats,target, AttackStats.DamageData.DamageAmount, hasPassiveSkill, passiveValue_1: passiveSkillsList[0], passiveValue_2: passiveSkillsList[1], currentTargetedMonster, currentTargetedMonster);
     }
 
     protected override void Move(Transform target)
@@ -225,14 +316,20 @@ public class BaseHero : Character, IAttackableHero
         RotatPart.rotation = Quaternion.Euler(0, rotation.y, 0);
     } 
 
-    public override void TakeDamage(float amount)
-    {
-        instancingEnabler.gameObject.SetActive(true);
-        health -= amount;
-        instancingEnabler.SetMaterialProperty((health / startHealth));
-        DamageTaked?.Invoke(this, health, startHealth);
 
-        if (health <= 0 && !isDead)
+    public override void TakeDamage(AttackStats enemy)
+    {
+        DoDamage.ApplyDamage(AttackStats, enemy.DamageData);
+
+        healthBarInstance.gameObject.SetActive(true);
+        //health -= amount;
+        //healthBarInstance.SetMaterialProperty((health / startHealth));
+        //DamageTaked?.Invoke(this, health, startHealth);
+
+        healthBarInstance.SetMaterialProperty((AttackStats.Health / AttackStats.MaxHealth));
+        DamageTaked?.Invoke(this, AttackStats.Health, AttackStats.MaxHealth);
+
+        if (AttackStats.Health <= 0 && !isDead)
         {
             OnDie();
         }
@@ -240,12 +337,12 @@ public class BaseHero : Character, IAttackableHero
 
     protected override void OnDie()
     {
-        instancingEnabler.gameObject.SetActive(false);
+        healthBarInstance.gameObject.SetActive(false);
         isDead = true;
         Anim.SetAttackAnimation(false);
         Anim.SetMoveAnimation(false);
         Anim.SetDeadAnimation(true);
-        Died?.Invoke();
+        Died?.Invoke(isDead);
 
         if (currentTargetedMonster)
         {
@@ -260,6 +357,13 @@ public class BaseHero : Character, IAttackableHero
         }
 
         coroutine = StartCoroutine(OnDyingAnimationStarted());
+
+        if(buffCoroutine  != null)
+        {
+            StopCoroutine(buffCoroutine);
+        }
+        
+        SetDefaultResistence();
     }
 
     public override void OnRevive()
@@ -277,7 +381,7 @@ public class BaseHero : Character, IAttackableHero
 
     protected virtual IEnumerator OnDyingAnimationStarted()
     {
-        yield return new WaitForSeconds(dyingAnimationDuration);
+        yield return waitUntilDyingAnimationEnd;
 
         if (coroutine != null)
         {
@@ -289,22 +393,23 @@ public class BaseHero : Character, IAttackableHero
 
     protected virtual IEnumerator TimerBeforeRevive()
     {
-        yield return new WaitForSeconds(ReviveTimer);
+        yield return waitUntilRevive;
 
         OnRevive();
     }
 
     protected virtual IEnumerator OnRevivingAnimationStarted()
     { 
-        yield return new WaitForSeconds(reviveAnimationDuration);
+        yield return waitUntilReviveAnimationEnd;
 
         Anim.SetReviveAnimation(false);
-        health = startHealth;
+        AttackStats.Health = AttackStats.MaxHealth;
 
-        instancingEnabler.gameObject.SetActive(true);
-        instancingEnabler.SetMaterialProperty((health / startHealth));
-        DamageTaked?.Invoke(this, health, startHealth);
-        isDead = false;  
+        healthBarInstance.gameObject.SetActive(true);
+        healthBarInstance.SetMaterialProperty((AttackStats.Health / AttackStats.MaxHealth));
+        DamageTaked?.Invoke(this, AttackStats.Health, AttackStats.MaxHealth);
+        isDead = false;
+        Died?.Invoke(isDead);
     }
 
     public void SetCanAttack(bool tof)
@@ -329,11 +434,28 @@ public class BaseHero : Character, IAttackableHero
         currentAttackerMonster = monster;
     }
 
-    private void OnDrawGizmos()
+    public virtual void ResetTargetedMonster()
     {
-        //Gizmos.color = Color.green;
-        //Gizmos.DrawWireSphere(transform.position, attackRange);
-        //Gizmos.color = Color.red;
-        //Gizmos.DrawWireSphere(transform.position, detectionRange);
+        if (currentTargetedMonster)
+        {
+            currentTargetedMonster.RejectCurrentAttackerHero();
+            Anim.SetAttackAnimation(false);
+            currentTargetedMonster = null;
+            target = null;
+        }
+        ResetTarget();
     }
+
+    public bool IsMove()
+    {
+        return movement.IsMoves;
+    }
+
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.green;
+    //    Gizmos.DrawWireSphere(transform.position, attackRange);
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(transform.position, detectionRange);
+    //}
 }

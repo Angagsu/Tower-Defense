@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e728543fc3a92394ba9d47852d0a635a, type: 3}
+  m_Name: Unknown
+  m_EditorClassIdentifier: 
+  <HeroName>k__BackingField: 
+  <HeroDescription>k__BackingField: 
+  <Sprite>k__BackingField: {fileID: 8234407308566504780, guid: df96120a4382b6e4e96a2040854aa20d,
+    type: 3}
+  <Prefab>k__BackingField: {fileID: 0}
+  <CurrentUpgradeLevel>k__BackingField: {fileID: 11400000, guid: fe3cd336df6f6704985e5830e7e63899,
+    type: 2}
+  <UpgradeLevelsSO>k__BackingField: {fileID: 11400000, guid: 0fc0c023f9d169c4b845bb74082e2252,
+    type: 2}
+  <ActiveSkillsSprites>k__BackingField: []
+  <ActiveSkillsAmount>k__BackingField: 0
+  <ActiveSkillsUnlockLevels>k__BackingField: 
+  <ActiveSkillsMaxValues>k__BackingField: []
+  <ActiveSkillsDescripsions>k__BackingField: []
+  <PassivSkillsSprites>k__BackingField: []
+  <PassiveSkillsAmount>k__BackingField: 0
+  <PassiveSkillsUnlockLevels>k__BackingField: 
+  <PassiveSkillsMaxValues>k__BackingField: []
+  <PassiveSkillsDescripsions>k__BackingField: []
+  <StatsMaxValues>k__BackingField: []
+  <HeroData>k__BackingField:
+    HeroType: 4
+    UpgradeLevel: 1
+    CardType: 4
+    IsAcquired: 0
+    Price: 200
+    ReseivedCards: []

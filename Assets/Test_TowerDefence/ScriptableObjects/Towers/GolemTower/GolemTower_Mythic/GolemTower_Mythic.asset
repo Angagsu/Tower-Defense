@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f6c82c1f981274b8ec947a19aa2354, type: 3}
+  m_Name: GolemTower_Mythic
+  m_EditorClassIdentifier: 
+  <TowerName>k__BackingField: Golem
+  <TowerDescription>k__BackingField: Bari or Brat jan es tower@ bomba karas arnes
+    xzares axpers top tazaya hamarya qshac chi
+  <Cost>k__BackingField: 450
+  <TowerPrefab>k__BackingField: {fileID: 2724521772159033027, guid: 6ce097923fb032749a6914cfc3333387,
+    type: 3}
+  <TowerSprite>k__BackingField: {fileID: 21300000, guid: 40aecb7d56393a84a8ad19e100faa064,
+    type: 3}
+  <CurrentUpgradeLevel>k__BackingField: {fileID: 11400000, guid: 41b4b157c36fb164fb41360f261b847e,
+    type: 2}
+  <UpgradeLevelsSO>k__BackingField: {fileID: 11400000, guid: 702f76e6dea899f42a8d7109c9f30ffd,
+    type: 2}
+  <PassivSkilleSprites>k__BackingField:
+  - {fileID: 5146418623631894615, guid: df96120a4382b6e4e96a2040854aa20d, type: 3}
+  - {fileID: 21300000, guid: 64b547c3432c3d343a4a3face9946cd5, type: 3}
+  <PassiveSkillsAmount>k__BackingField: 2
+  <PassiveSkillsUnlockLevels>k__BackingField: 0000000002000000
+  <StatsMaxValues>k__BackingField:
+  - 45
+  - 22
+  - 1
+  - 430
+  <PassiveSkillsNames>k__BackingField:
+  - Blast Radius
+  - Stun Duration
+  <PassiveSkillsDescripsions>k__BackingField:
+  - The golem's attacks deal area-of-effect damage. Upgrade the tower to increase
+    blast radius
+  - The golem's attacks stun targets. Upgrad the tower to increase stun duration
+  <TowerData>k__BackingField:
+    TowerType: 3
+    UpgradeLevel: 1
+    CardType: 2
+    IsAcquired: 0
+    Price: 600
+    ReseivedCards: []

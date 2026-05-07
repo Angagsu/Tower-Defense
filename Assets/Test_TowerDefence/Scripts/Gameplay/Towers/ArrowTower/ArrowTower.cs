@@ -1,19 +1,38 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Tower
 {
     public class ArrowTower : BaseTower
     {
-
-        public override void ReBuild()
+        private float criticalDamage;
+        private float criticalDamageChance;
+        private float[] passiveSkills;
+        
+ 
+        public override void SetParams(TowerSO towerSO)
         {
-            base.ReBuild();
+            base.SetParams(towerSO);
+
+            passiveSkills = new float[] { criticalDamage, criticalDamageChance };
+
+            passiveSkillsList = new()
+            {
+                criticalDamage,
+                criticalDamageChance
+            };
+
+            if (hasPassiveSkill)
+            {
+                for (int i = 0; i < upgradeLevel.PassiveSkillsAccessibility.Count; i++)
+                {
+                    passiveSkillsList[i] = upgradeLevel.PassiveSkillsValues[i];
+                }
+            }
         }
 
-        public override void TakeDamage(float damageAmount)
+        public override void Repair()
         {
-            base.TakeDamage(damageAmount);
+            base.Repair();
         }
 
         protected override void AttackTarget(Transform target)

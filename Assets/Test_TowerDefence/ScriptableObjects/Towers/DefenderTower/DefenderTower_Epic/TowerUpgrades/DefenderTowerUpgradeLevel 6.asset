@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56ed996fe88ccd74789234a92e502f1b, type: 3}
+  m_Name: DefenderTowerUpgradeLevel 6
+  m_EditorClassIdentifier: 
+  <AttackStats>k__BackingField:
+    Health: 350
+    MaxHealth: 350
+    Armor: 0
+    MaxArmor: 0
+    PhysicalResistance: 10
+    MagicalResistance: 8
+    ArmorType: 1
+    DamageData:
+      DamageAmount: 21
+      DamageType: 0
+      PhysicalPenetration: 8
+      MagicalPenetration: 0
+      ArmorPercent: 0.7
+      HealthPercent: 0.3
+  <AttackRange>k__BackingField: 16
+  <AttackRate>k__BackingField: 0
+  <BuyCost>k__BackingField: 140
+  <UpgradeCostByGold>k__BackingField: 500
+  <UpgradeCostByCard>k__BackingField: 6
+  <StatsValues>k__BackingField:
+  - 350
+  - 21
+  - 16
+  - 0
+  - 140
+  - 310
+  <PassiveSkillsValues>k__BackingField:
+  - 15
+  <PassiveSkillsAccessibility>k__BackingField: 01
+  <TroopsHealth>k__BackingField: 310
+  <StunChance>k__BackingField: 15
+  <StunDuration>k__BackingField: 0

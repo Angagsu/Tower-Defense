@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: ArcherUpgradeLevels
   m_EditorClassIdentifier: 
   HeroUpgradeLevelSOs:
-  - {fileID: 11400000, guid: ce217533c681965439a90fe35e496dde, type: 2}
-  - {fileID: 11400000, guid: 67cf82e00c3ab7e47abc533c7109206b, type: 2}
-  - {fileID: 11400000, guid: 5c993e3d4fdc83544ac61302cd8ed7b5, type: 2}
-  - {fileID: 11400000, guid: 7b82d83f6dd6c9645a10f941d19940c6, type: 2}
-  - {fileID: 11400000, guid: 5bb9454f99025e746ab00b807fa50f58, type: 2}
-  - {fileID: 11400000, guid: 3501b0fa6cac06342bb7bd9b92333b76, type: 2}
+  - {fileID: 11400000, guid: 20feaa5173c79c3429ddb21be8204694, type: 2}
+  - {fileID: 11400000, guid: ad6faa37b2f154e47b69b34dd22b32ce, type: 2}
+  - {fileID: 11400000, guid: 6b28f1cb000a55f4ca5bc5304fbaec17, type: 2}
+  - {fileID: 11400000, guid: 51c520ba6d5ceb241a85a2409a970022, type: 2}
+  - {fileID: 11400000, guid: 3398a97c18e7018428187eedd2f8e4fd, type: 2}
+  - {fileID: 11400000, guid: 44da2baa2d097394ab28f81d57fbc7e0, type: 2}
+  - {fileID: 11400000, guid: 9e9b6867a63eee44eaa2c5ffb6bbd335, type: 2}
+  - {fileID: 11400000, guid: bc5188bf56aa40744a76ac16b82ec302, type: 2}
+  - {fileID: 11400000, guid: 9cc086a82a76d284790f239978393caf, type: 2}
+  - {fileID: 11400000, guid: 692e050ea50feee41ba5fb45e84dcbb1, type: 2}

@@ -5,15 +5,23 @@ using System.Collections.Generic;
 
 public class HeroesButtonsUI : MonoBehaviour
 {
-    [SerializeField] private HeroButtonFade prefab;
-    [SerializeField] private RectTransform[] spawnPoints;
-    [SerializeField] private RectTransform parentContainer;
-    [SerializeField] private HeroesSpawner heroesSpawner;
+    [Header("Heroes Buttons")]
+    [SerializeField] private GameplayHeroButton HeroButtonPrefab;
+    [SerializeField] private RectTransform[] heroesButtonsSpawnPoints;
+    [SerializeField] private RectTransform heroesButtonsParentContainer;
 
-    private List<HeroButtonFade> heroButtonFades = new();
+    [Header("Heroes Active Skill Buttons")]
+    [SerializeField] private GameplayHeroActiveSkillUI activeSkillButtonPrefab;
+    [SerializeField] private RectTransform[] activeSkillsSpawnPoints;
+    [SerializeField] private RectTransform activeSkillsParentContainer;
+
+
+    private HeroesSpawner heroesSpawner;
+    private List<GameplayHeroButton> heroButtons = new();
+    private List<GameplayHeroActiveSkillUI> heroActiveSkillsButtons = new();
     private List<BaseHero> heroes;
 
-    public void SetDependencies(HeroesSpawner heroesSpawner, SelectHeroUIHandler selectHeroUIHandler)
+    public void SetDependencies(HeroesSpawner heroesSpawner, SelectHeroOnUI selectHeroUIHandler)
     {
         this.heroesSpawner = heroesSpawner;
 
@@ -22,16 +30,23 @@ public class HeroesButtonsUI : MonoBehaviour
 
         for (int i = 0; i < heroes.Count; i++)
         {
-            heroButtonFades.Add(Instantiate(prefab, spawnPoints[i].position, Quaternion.identity, parentContainer));
-            heroButtonFades[i].SetHero(heroes[i]);
-            heroButtonFades[i].SetHeroImageSprite(heroSOs[i].Sprite);
+            heroButtons.Add(Instantiate(HeroButtonPrefab, heroesButtonsSpawnPoints[i].position, Quaternion.identity, heroesButtonsParentContainer));
+            heroActiveSkillsButtons.Add(Instantiate(activeSkillButtonPrefab, activeSkillsSpawnPoints[i].position, Quaternion.identity, activeSkillsParentContainer));
+
+            heroButtons[i].SetHero(heroSOs[i], heroes[i]);
+            heroActiveSkillsButtons[i].SetHero(heroSOs[i], heroes[i]);
         }
 
-        selectHeroUIHandler.SetHeroesButtons();
+        selectHeroUIHandler.SetHeroesButtons(this);
     }
     
-    public List<HeroButtonFade> GetHeroButtons()
+    public List<GameplayHeroButton> GetHeroButtons()
     {
-        return heroButtonFades;
+        return heroButtons;
     } 
+
+    public List<GameplayHeroActiveSkillUI> GetHeroActiveSkillsButtons()
+    {
+        return heroActiveSkillsButtons;
+    }
 }

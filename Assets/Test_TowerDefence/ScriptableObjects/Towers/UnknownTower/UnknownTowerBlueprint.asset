@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2b388ea7185a34b9299ac6f8b875f1, type: 3}
+  m_Name: UnknownTowerBlueprint
+  m_EditorClassIdentifier: 
+  TowerType: 6
+  TowerUpgrades:
+  - {fileID: 11400000, guid: cd7cec55803d0204fb1f864d755963b8, type: 2}
+  - {fileID: 11400000, guid: 767a093ab77a4ae4e9583558edcb5f6b, type: 2}
+  - {fileID: 11400000, guid: fd33facc593dddb489f7f733688f2c6b, type: 2}
+  - {fileID: 11400000, guid: c2adc296bc04b5c45aca7f2d28092f7a, type: 2}

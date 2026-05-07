@@ -12,18 +12,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e728543fc3a92394ba9d47852d0a635a, type: 3}
   m_Name: Dwarf
   m_EditorClassIdentifier: 
-  <CurrentUpgradeLevel>k__BackingField: {fileID: 11400000, guid: ad680ff1536e87a4ab9ff925d1a8c491,
+  <HeroName>k__BackingField: Dwarf
+  <HeroDescription>k__BackingField: 
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 516437d5764187e4f9c160d412bfa1ec,
+    type: 3}
+  <BigSprite>k__BackingField: {fileID: 21300000, guid: ff206dbb6aaa16843bd127f1fc8342bd,
+    type: 3}
+  <CardSprite>k__BackingField: {fileID: 21300000, guid: 31346a53797d60f43aed42c7f2bf7c63,
+    type: 3}
+  <Prefab>k__BackingField: {fileID: 181044548034098152, guid: 5aaf1cee9d9e22c40b59019f990f0973,
+    type: 3}
+  <CurrentUpgradeLevel>k__BackingField: {fileID: 11400000, guid: c6d114c68d6e01642be42fbea4b5d5e3,
     type: 2}
   <UpgradeLevelsSO>k__BackingField: {fileID: 11400000, guid: eb4a3305017dd944c9a1729235788382,
     type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 253d18f8c4e746941bd6c5cc06d68c45,
+  <ActiveSkillSprite>k__BackingField: {fileID: 21300000, guid: a189c799af57ed54e8d222cb1f62463c,
     type: 3}
-  <Prefab>k__BackingField: {fileID: 3073217194499311935, guid: 02b40aa2074ce974c8c96d0457996f78,
-    type: 3}
+  <ActiveSkillUnlockLevel>k__BackingField: 2
+  <ActiveSkillMaxValue>k__BackingField: 50
+  <ActiveSkillName>k__BackingField: Bubulululu
+  <ActiveSkillDescripsion>k__BackingField: Asfsdkfjasdgaijgasdg aasdfkjasdf sdsdfffasd
+  <PassivSkillsSprites>k__BackingField:
+  - {fileID: 21300000, guid: 6bc8847b0b06eba4bb8b35cd4d4f9d0f, type: 3}
+  - {fileID: 21300000, guid: 8a2d14ad315f77746b39370f9c554800, type: 3}
+  <PassiveSkillsAmount>k__BackingField: 2
+  <PassiveSkillsUnlockLevels>k__BackingField: 0200000002000000
+  <PassiveSkillsNames>k__BackingField:
+  - Physical Penetration
+  - Penetration Inflict Radius
+  <PassiveSkillsDescripsions>k__BackingField:
+  - Attacks have chance to stun enemies. Upgrade tower to improve stun chance.
+  - 'Stun duration. Default stun duration: 0,2 seconds. Upgrade tower to increase
+    stun duration.'
   <HeroData>k__BackingField:
     HeroType: 2
     UpgradeLevel: 1
     CardType: 2
     IsAcquired: 0
     Price: 100
-    ReseivedCards: []
+    ReseivedCards:
+    - CardType: 2

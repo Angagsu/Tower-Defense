@@ -9,8 +9,8 @@ public class GamePlayerData
 
     public GamePlayerData() 
     {
-        Diamonds = 0;
-        Gold = 0;
+        Diamonds = 1000;
+        Gold = 90000;
         Energy = 20;
     }
 

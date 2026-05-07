@@ -6,7 +6,8 @@ using UnityEngine;
 public class MonstersFactoriesService : MonoBehaviour
 {
     public event Action WaveComplited;
-    public event Action<BaseMonster> MonsterCountChanged;
+    public event Action<BaseMonster> MonsterCountIncreased;
+    public event Action<BaseMonster> MonsterCountDecreased;
 
     public List<Wayes> Wayes { get; private set; }
 
@@ -48,11 +49,6 @@ public class MonstersFactoriesService : MonoBehaviour
 
     private void OnEnable()
     {
-        for (int i = 0; i < monstersFactories.Length; i++)
-        {
-            monstersFactories[i].PoolChanged += OnPoolChanged;
-        }
-
         gameplayStates.Paused += OnGameplayPause;
         gameplayStates.Unpaused += OnGameplayPlay;
     }
@@ -61,18 +57,14 @@ public class MonstersFactoriesService : MonoBehaviour
 
     private void OnGameplayPause() => isPaused = true;
 
-    private void OnPoolChanged(BaseMonster obj)
+    public void DecreaseMonsterCount(BaseMonster monster)
     {
-        MonsterCountChanged?.Invoke(obj);
+        enemiesAlive--;
+        MonsterCountDecreased?.Invoke(monster);
     }
 
     private void OnDisable()
     {
-        for (int i = 0; i < monstersFactories.Length; i++)
-        {
-            monstersFactories[i].PoolChanged -= OnPoolChanged;
-        }
-
         gameplayStates.Paused -= OnGameplayPause;
         gameplayStates.Unpaused -= OnGameplayPlay;
     }
@@ -129,6 +121,7 @@ public class MonstersFactoriesService : MonoBehaviour
                                 var generatedMinion = monstersFactories[u].GetMonsterByType(monsterPrefab, SpawnPoints[j].Waypoints[k].transform, SpawnPoints[j].Waypoints[k].transform.rotation);
                                 monsterDependencyInjecter.SetMonsterDependencies(generatedMinion);
                                 enemiesAlive++;
+                                MonsterCountIncreased?.Invoke(generatedMinion);
                             }
                         }
                     }
@@ -190,19 +183,13 @@ public class MonstersFactoriesService : MonoBehaviour
                 var generatedMinion = monstersFactories[i].GetMonsterByType(minion, transform, transform.rotation);
                 monsterDependencyInjecter.SetMonsterDependencies(generatedMinion);
                 enemiesAlive++;
+                MonsterCountIncreased?.Invoke(generatedMinion);
                 return generatedMinion;
             }
         }
         
         return default;
-    }
-
-    public void ReduceAliveEnemiesAmount()
-    {
-        enemiesAlive--;
-    }
-
-    
+    } 
 }
 
 [Serializable]

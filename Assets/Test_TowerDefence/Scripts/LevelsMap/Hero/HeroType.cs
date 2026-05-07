@@ -4,6 +4,6 @@ public enum HeroType
     Archer,
     Dwarf,
     Mage,
-    NotReached,
-    Unknown
+    Unknown,
+    ComingSoon
 }

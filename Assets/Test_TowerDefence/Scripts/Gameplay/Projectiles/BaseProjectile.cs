@@ -4,22 +4,31 @@ using UnityEngine;
 
 public class BaseProjectile : MonoBehaviour
 {
-    public ProjectileUpgradeLevel UpgradeLevel => upgradLevel;
+    public ProjectileType UpgradeLevel => upgradLevel;
 
     [SerializeField] protected float speed = 70f;
     [SerializeField] protected float explosionRadius = 0f;
     [SerializeField] protected ParticleSystem impactEffect;
     [Space(15)]
-    [SerializeField] protected ProjectileUpgradeLevel upgradLevel;
+    [SerializeField] protected ProjectileType upgradLevel;
 
     protected GameplayStates gameplayStates;
     protected bool isHitted = false;
-    private Transform target;
-    private Coroutine coroutine;
-    private Character targetCharacter;
-    private float damage;
+    protected Transform target;
+    protected Coroutine coroutine;
+    protected Character targetCharacter;
+    protected IAttackable attackableTarget;
+    protected float damage;
 
     protected bool isPaused;
+    protected bool hasPassiveSkill;
+    protected float passiveSkill_1;
+    protected float passiveSkill_2;
+
+    protected readonly Collider[] overlapResults = new Collider[32];
+    protected AttackStats attackStats;
+    protected WaitForSeconds waitForSeconds;
+
 
     public virtual void Construct(GameplayStates gameplayStates)
     {
@@ -29,17 +38,40 @@ public class BaseProjectile : MonoBehaviour
         this.gameplayStates.Unpaused += OnGameplayUnpause;
     }
 
-    public virtual void SetTarget(Character targetCharacter, Transform target, float damage)
+    public virtual void SetTarget(AttackStats attackStats, Character targetCharacter, Transform target, float damage, IAttackable attackableTargert = null)
     {
         this.target = target;
         this.damage = damage;
-        this.targetCharacter = targetCharacter; 
+        this.attackableTarget = attackableTargert;
+        this.targetCharacter = targetCharacter;
+        this.attackStats = attackStats;
+    }
+
+    public virtual void SetTarget(AttackStats attackStats, Character targetCharacter, Transform target, float damage, bool hasPassiveSkill, float passiveSkill_1, float passiveSkill_2, IAttackable attackableTarget = null)
+    {
+        this.target = target;
+        this.damage = damage;
+        this.attackableTarget = attackableTarget;
+        this.targetCharacter = targetCharacter;
+        this.attackStats = attackStats;
+
+        if (hasPassiveSkill)
+        {
+            this.hasPassiveSkill = hasPassiveSkill;
+            this.passiveSkill_1 = passiveSkill_1;
+            this.passiveSkill_2 = passiveSkill_2;
+        }     
     }
 
     private void OnGameplayPause() => isPaused = true;
 
     private void OnGameplayUnpause() => isPaused = false;
 
+
+    protected virtual void Start()
+    {
+        waitForSeconds = new WaitForSeconds(0.2f);
+    }
 
     protected virtual void Update()
     {
@@ -53,8 +85,6 @@ public class BaseProjectile : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
-
-        
 
         Vector3 dir = target.position - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
@@ -76,13 +106,13 @@ public class BaseProjectile : MonoBehaviour
             isHitted = true;
             impactEffect.gameObject.SetActive(true);
 
-            if (explosionRadius > 0f)
+            if (hasPassiveSkill)
             {
-                Explode();
+                DoDamageWithPassiveSkill(attackStats, targetCharacter, target, damage, passiveSkill_1, passiveSkill_2);
             }
             else
             {
-                Damage(target);
+                ApplyDamage(attackStats);
             }
 
             if (coroutine != null)
@@ -101,19 +131,27 @@ public class BaseProjectile : MonoBehaviour
 
     protected virtual void Explode()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
-        foreach (Collider collider in colliders)
+        int hitCount = Physics.OverlapSphereNonAlloc(transform.position, explosionRadius, overlapResults);
+
+        for (int i = 0; i < hitCount; i++)
         {
-            if (collider.gameObject.TryGetComponent<IAttackable>(out var target))
+            var collider = overlapResults[i];
+
+            if (collider != null && collider.gameObject.TryGetComponent<BaseMonster>(out var monster))
             {
-                target.TakeDamage(damage);
+                monster.TakeDamage(attackStats);
             }
         }
     }
 
-    protected virtual void Damage(Transform target)
+    protected virtual void ApplyDamage(AttackStats attackStats)
     {
-        targetCharacter.TakeDamage(damage);
+        attackableTarget.TakeDamage(attackStats);
+    }
+
+    protected virtual void DoDamageWithPassiveSkill(AttackStats attackStats, Character targetCharacter, Transform target, float damage, float passiveSkill_1, float passiveSkill_2)
+    {
+        attackableTarget.TakeDamage(attackStats);
     }
 
     protected void OnDisable()
@@ -123,10 +161,11 @@ public class BaseProjectile : MonoBehaviour
     }
 }
 
-public enum ProjectileUpgradeLevel
+public enum ProjectileType
 {
     EntryLevel,
     Upgraded,
     SecondaryUpgraded,
-    ThriceUpgraded
+    ThriceUpgraded,
+    Monster
 }

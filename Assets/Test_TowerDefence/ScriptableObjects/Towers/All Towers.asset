@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05ce24400c4fb3648a80df303901c57c, type: 3}
+  m_Name: All Towers
+  m_EditorClassIdentifier: 
+  <AllTowers>k__BackingField:
+  - {fileID: 11400000, guid: 28d9e52d8bb8a204d9ed752b009f5072, type: 2}
+  - {fileID: 11400000, guid: 2367b095d750ce2498899a038cd943bb, type: 2}
+  - {fileID: 11400000, guid: ea23b84fe715d5d4ab2afd9f380bf402, type: 2}
+  - {fileID: 11400000, guid: 9b8154d628be9ba4baced9ec64f6d474, type: 2}
+  - {fileID: 11400000, guid: 73583491b44bfd843a7e7ac48501e2ed, type: 2}
+  - {fileID: 11400000, guid: dd23eaecce569f84983b1c24caadeafb, type: 2}
+  <TowerTypes>k__BackingField: 000000000100000002000000030000000400000005000000
+  <AcquiredTowers>k__BackingField:
+  - {fileID: 11400000, guid: 28d9e52d8bb8a204d9ed752b009f5072, type: 2}
+  - {fileID: 11400000, guid: 2367b095d750ce2498899a038cd943bb, type: 2}
+  - {fileID: 11400000, guid: ea23b84fe715d5d4ab2afd9f380bf402, type: 2}
+  - {fileID: 11400000, guid: 9b8154d628be9ba4baced9ec64f6d474, type: 2}

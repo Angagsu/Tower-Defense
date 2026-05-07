@@ -40,8 +40,9 @@ public class GameEntryPoint
 #if UNITY_EDITOR
         var sceneName = SceneManager.GetActiveScene().name;
         coroutines.StartCoroutine(LoadSceneInEditor(sceneName));
+
 #else
-        coroutines.StartCoroutine(LoadScene(Scenes.LEVELS_MAP));
+        coroutines.StartCoroutine(LoadScene(Scenes.MAIN_MENU));
 #endif
     }
 

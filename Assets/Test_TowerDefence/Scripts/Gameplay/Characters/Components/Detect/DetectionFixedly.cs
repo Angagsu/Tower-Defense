@@ -3,14 +3,12 @@ using UnityEngine;
 
 public class DetectionFixedly : BaseDetection
 {
-    BaseMonster targetedMonster = null;
-
-    private float distance;
     private Transform target;
 
     private List<BaseMonster> monsters = new();
 
     private DetectionHelper detectionHelper;
+
 
     private void Start()
     {
@@ -19,52 +17,45 @@ public class DetectionFixedly : BaseDetection
     }
 
     public override Transform DetectTarget(float detectionRange, bool isDead)
-    {
-        foreach (var monster in monsters)
+    {    
+        if (DetectedMonster && DetectedMonster.IsDead == false)
         {
-            if (monster.isActiveAndEnabled)
-            {
-                float distanceToEnemy = Vector3.Distance(transform.position, monster.transform.position);
+            float sqrDistance = (transform.position - DetectedMonster.transform.position).sqrMagnitude;
 
-                if (distanceToEnemy < detectionRange)
-                {
-                    distance = distanceToEnemy;
-                    targetedMonster = monster;
-                }
-            }
-            else
-            {
-                //targetedMonster = null;
-            }        
-        }
-        
-        if (DetectedMonster && !DetectedMonster.IsDead)
-        {
-            distance = Vector3.Distance(transform.position, DetectedMonster.transform.position);
-        }
-
-        if (distance <= detectionRange)
-        {
-            if (!DetectedMonster && targetedMonster && !targetedMonster.IsDead)
-            {
-                DetectedMonster = targetedMonster;
-                return target = DetectedMonster.transform;
-            }
-            else if (DetectedMonster && !DetectedMonster.IsDead)
+            if (sqrDistance <= detectionRange * detectionRange)
             {
                 return target = DetectedMonster.transform;
-            }
-            else
-            {
-                DetectedMonster = null;
-                return target = null;
             }
         }
         else
         {
-            targetedMonster = null;
             DetectedMonster = null;
-            return target = null;
-        }  
+            target = null;
+        }
+
+        float shortestDistance = Mathf.Infinity;
+
+        foreach (BaseMonster monster in monsters)
+        {
+            float sqrDistanceToEnemy = (transform.position - monster.transform.position).sqrMagnitude;
+
+            if (sqrDistanceToEnemy < shortestDistance && monster && !monster.IsDead)
+            {
+                shortestDistance = sqrDistanceToEnemy;
+                DetectedMonster = monster;
+            }
+        }
+        
+        if (DetectedMonster != null && shortestDistance <= (detectionRange * detectionRange) && DetectedMonster.CurrentAttackerHero == null)
+        {
+            target = DetectedMonster.transform;
+            return target;
+        }
+        else
+        {
+            DetectedMonster = null;
+            target = null;
+            return null;
+        }
     }
 }

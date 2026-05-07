@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c68b215d4d2e041acd5d1f71fbc6d5, type: 3}
+  m_Name: FireTower_Mythic_UpgradeLevels
+  m_EditorClassIdentifier: 
+  TowerUpgradeLevelSOs:
+  - {fileID: 11400000, guid: 584bb04ccfada824a8f465b3e91bb183, type: 2}
+  - {fileID: 11400000, guid: 3f2749bd597bceb4f94f387a02908636, type: 2}
+  - {fileID: 11400000, guid: 28d61d8c960478d49a2b4247d627971d, type: 2}
+  - {fileID: 11400000, guid: 9e7f0cec4eb6f584e9d8bc768ef6c357, type: 2}
+  - {fileID: 11400000, guid: 519206a572bf4df45ad90a9db4a15c59, type: 2}
+  - {fileID: 11400000, guid: ffa1ed6f4bfb93e41b2ef706092a926e, type: 2}
+  - {fileID: 11400000, guid: 6ef3522e56a126044bed1b1940d5f21f, type: 2}
+  - {fileID: 11400000, guid: 43e927cbb75c1b843830b9fad113aac2, type: 2}
+  - {fileID: 11400000, guid: d26c9f222dae84a44ba10f99bd327643, type: 2}
+  - {fileID: 11400000, guid: 53668f20fd209db4cb6093a836983291, type: 2}

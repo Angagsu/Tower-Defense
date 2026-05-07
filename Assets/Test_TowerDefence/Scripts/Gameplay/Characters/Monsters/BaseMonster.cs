@@ -4,7 +4,7 @@ using Assets.Scripts.Tower;
 using System.Collections;
 
 
-public class BaseMonster : Character, IAttackableMonster
+public class BaseMonster : Character
 {
     public GameplayPlayerDataHandler GameplayPlayerDataHandler { get; private set; }
     public MonstersFactoriesService MonstersFactoriesService { get; private set; }
@@ -15,6 +15,10 @@ public class BaseMonster : Character, IAttackableMonster
     public BaseHero CurrentAttackerHero => currentAttackerHero;
     public BaseHero CurrentTargetedHero => currentTargetedHero;
 
+    public bool IsTowerAttacker { get; protected set; }
+    public bool IsKamikaze { get; protected set; }
+    public bool IsMoving => Movement.IsMoves;
+
     [SerializeField] protected BaseMonsterAnimation anim;
     [SerializeField] protected BaseAttack attack;
     [SerializeField] protected BaseDetection detect;
@@ -22,9 +26,12 @@ public class BaseMonster : Character, IAttackableMonster
     [SerializeField] protected float startHealth;
     [SerializeField] protected int moneyGain = 50;
     [SerializeField] protected float dyingAnimationDuration;
+    [SerializeField] protected float detectionRange;
 
     protected GameplayStates gameplayStates;
     protected Coroutine coroutine;
+    protected Coroutine stunCoroutine;
+    protected Coroutine periodicDamageCoroutine;
     protected BaseTower tower;
     protected Transform target;
 
@@ -35,8 +42,11 @@ public class BaseMonster : Character, IAttackableMonster
     protected bool isSelected;
     protected bool canAttack;
     protected bool isPaused;
+    protected bool isStunned;
 
-
+    protected AttackStats currentAttackerAttackStats;
+    protected float magicResistStartValue;
+    protected float physicResistStartValue;
 
     public virtual void Construct(GameplayPlayerDataHandler gameplayPlayerDataHandler,
         GameplayStates gameplayStates, MonstersFactoriesService monstersFactoriesService,
@@ -66,8 +76,11 @@ public class BaseMonster : Character, IAttackableMonster
     { 
         Movement = move as MonsterMovement; 
         health = startHealth;
-        instancingEnabler.gameObject.SetActive(false);
+        healthBarInstance.gameObject.SetActive(false);
         canAttack = true;
+
+        magicResistStartValue = AttackStats.MagicalResistance;
+        physicResistStartValue = AttackStats.PhysicalResistance;
         
         SetStartMoveSpeed();
     }
@@ -97,7 +110,7 @@ public class BaseMonster : Character, IAttackableMonster
 
     protected virtual void Update()
     {
-        if (isDead || isPaused)
+        if (isDead || isPaused || isStunned)
         {
             return;
         }
@@ -114,18 +127,18 @@ public class BaseMonster : Character, IAttackableMonster
 
     protected override void DetectTarget()
     {
-        if (currentAttackerHero && currentAttackerHero.CanAttack && Vector3.Distance(target.position, transform.position) <= attackRange + 1)
+        if (currentTargetedHero && currentTargetedHero.CanAttack)
         {
             Movement.LockOnTarget(target, turnSpeed);
 
             if (attackCountdown <= 0)
             {
-                attackCountdown = 1 / attackRate;
+                attackCountdown =  attackRate;
         
-                Attack(target);
+                Attack(target); 
+            }
 
-                anim.SetAttackAnimation(true);
-            } 
+            anim.SetAttackAnimation(true);
         }
         else 
         {
@@ -137,26 +150,139 @@ public class BaseMonster : Character, IAttackableMonster
 
     protected override void Attack(Transform target)
     {
-        attack.AttackTarget(target, damage, CurrentTargetedHero);
+        attack.AttackTarget(AttackStats,target, AttackStats.DamageData.DamageAmount, CurrentTargetedHero);
     }
 
-    public override void TakeDamage(float amount)
+    public void ReduceResistance(DamageType damageType, float amount)
     {
-        instancingEnabler.gameObject.SetActive(true);
-        health -= amount;
+        if(damageType == DamageType.Physical)
+        {
+            float resist = physicResistStartValue;
+            float reduceValue = Mathf.Max(0f, resist - amount);
+            AttackStats.PhysicalResistance = Mathf.Min(physicResistStartValue, reduceValue);
+        }
+        else
+        {
+            float resist = magicResistStartValue;
+            float reduceValue = Mathf.Max(0f, resist - amount);
+            AttackStats.MagicalResistance = Mathf.Min(magicResistStartValue, reduceValue);
+        }
+    }
 
-        instancingEnabler.SetMaterialProperty((health / startHealth));
+    public void SetDefaultResistence()
+    {
+        AttackStats.PhysicalResistance = physicResistStartValue;
+        AttackStats.MagicalResistance = magicResistStartValue;
+    }
 
-        if (health <= 0 && !IsDead)
+    public override void TakeDamage(AttackStats enemy)
+    {
+        currentAttackerAttackStats = enemy;
+        DoDamage.ApplyDamage(AttackStats, enemy.DamageData);
+
+        healthBarInstance.gameObject.SetActive(true);
+       // armorBar.gameObject.SetActive(true);
+        //health -= stats.Health;
+        // Debug.Log("Damage: " + enemy.DamageData.DamageAmount);
+        //healthBarInstance.SetMaterialProperty((health / startHealth));
+       //armorBar.SetMaterialProperty((AttackStats.Armor / AttackStats.MaxArmor));
+        healthBarInstance.SetMaterialProperty((AttackStats.Health / AttackStats.MaxHealth));
+        
+
+        if (AttackStats.Health <= 0 && !IsDead)
+        {
+            OnDie();
+        }
+    }
+    public override void TakePureDamage(float amount)
+    {
+        //AttackStats.Health -= amount;
+        AttackStats.Health = Mathf.Max(0, AttackStats.Health - amount);
+        //armorBar.SetMaterialProperty((AttackStats.Armor / AttackStats.MaxArmor));
+        healthBarInstance.gameObject.SetActive(true);
+        healthBarInstance.SetMaterialProperty((AttackStats.Health / AttackStats.MaxHealth));
+
+        if (AttackStats.Health <= 0 && !IsDead)
         {
             OnDie();
         }
     }
 
+    public override void TakePeriodicDamage(AttackStats attackerStats, float periodicDamage, float periodicDamageDuration)
+    {
+        if(periodicDamageCoroutine != null)
+        {
+            StopCoroutine(periodicDamageCoroutine);
+        }
+
+        periodicDamageCoroutine = StartCoroutine(ApplyPeriodicDamage(attackerStats, periodicDamage, periodicDamageDuration));
+    }
+
+    public override void Decelerate(float passiveSkill_1, float passiveSkill_2)
+    {
+        
+    }
+
+    public override void GetStun(float stunDuration)
+    {
+        if (stunCoroutine != null)
+        {
+            StopCoroutine(stunCoroutine);
+        }
+
+        stunCoroutine = StartCoroutine(ApplyStun(stunDuration));
+    }
+
+    private IEnumerator ApplyStun(float stunDuration)
+    {
+        isStunned = true;
+        anim.SetAttackAnimation(false);
+        anim.SetMoveAnimation(false);
+
+        yield return new WaitForSeconds(stunDuration);
+
+        isStunned = false;
+
+        if (target)
+        {
+            anim.SetAttackAnimation(true);
+        }
+        else
+        {
+            anim.SetMoveAnimation(true);
+        }  
+    }
+
+    private IEnumerator ApplyPeriodicDamage(AttackStats attackerStats, float periodicDamage, float periodicDamageDuration)
+    {
+        float timer = periodicDamageDuration;
+        float second = 0f;
+        float finalDamage = DoDamage.CalculateDamage(AttackStats, attackerStats.DamageData, periodicDamage);
+        Debug.Log("Periodic Damage: " + finalDamage);
+
+        while (timer > 0 && !isDead)
+        {
+            if (second <= 0)
+            {
+                TakePureDamage(finalDamage);
+                second = 1f;
+            }
+            
+            timer -= Time.deltaTime;
+            second -= Time.deltaTime;
+
+            yield return null;
+        }    
+    }
+
     protected override void OnDie()
     {
         isDead = true;
-        MonstersFactoriesService.ReduceAliveEnemiesAmount();
+        
+        healthBarInstance.gameObject.SetActive(false);
+        MonstersFactoriesService.DecreaseMonsterCount(this);
+
+        RejectCurrentAttackerHero();
         CalculateMoneyForKillingEnemy();
 
         if (coroutine != null)
@@ -164,9 +290,9 @@ public class BaseMonster : Character, IAttackableMonster
             StopCoroutine(coroutine);
         }
 
-        target = null;
-        currentAttackerHero = null;
-        currentTargetedHero = null;
+        //target = null;
+        //currentAttackerHero = null;
+        //currentTargetedHero = null;
 
         coroutine = StartCoroutine(DyingAnimationDuration());
     }
@@ -185,12 +311,17 @@ public class BaseMonster : Character, IAttackableMonster
             yield return null;
         }
 
+        //stunCoroutine = null;
+        //coroutine = null;
+        //periodicDamageCoroutine = null;
+        StopAllCoroutines();
+
         gameObject.SetActive(false);
     }
 
     protected override void Move(Transform target)
     {
-        Movement.Move(target, startMoveSpeed, turnSpeed);
+        Movement.Move(target, moveSpeed, turnSpeed);
     }    
 
     private void CalculateMoneyForKillingEnemy()
@@ -201,11 +332,15 @@ public class BaseMonster : Character, IAttackableMonster
     public override void OnRevive()
     { 
         isDead = false;
-        health = startHealth;
+        isStunned = false;
+        //health = startHealth;
+        //healthBarInstance.SetMaterialProperty((health / startHealth));
 
-        instancingEnabler.SetMaterialProperty((health / startHealth));
+        AttackStats.Health = AttackStats.MaxHealth;
+        //healthBarInstance.gameObject.SetActive(true);
+        healthBarInstance.SetMaterialProperty((AttackStats.Health / AttackStats.MaxHealth));
         canAttack = true;
-
+        
         SetDefaultMoveSpeed();
     }
 
@@ -242,22 +377,34 @@ public class BaseMonster : Character, IAttackableMonster
     public void SetCurrentAttackerHero(BaseHero currentAttackerHero)
     {
         this.currentAttackerHero = currentAttackerHero;
-        currentTargetedHero = currentAttackerHero;
-        target = this.currentAttackerHero.PartForTargeting;
+        //currentTargetedHero = currentAttackerHero;
+        //target = this.currentAttackerHero.PartForTargeting;
     }
 
+    public void SetCurrentTargetedHero()
+    {
+        currentTargetedHero = currentAttackerHero;
+        target = currentTargetedHero.PartForTargeting;
+    }
     public void RejectCurrentAttackerHero()
     {
         target = null;
         currentTargetedHero = null;
         currentAttackerHero = null;
+
+        if (tower)
+        {
+            tower.ClearCurrentAttackerMonster(this);
+            tower = null;
+        }
+
         Movement.SetIsMove(true);
         anim.SetMoveAnimation(true);
     }
 
-    private void OnDrawGizmos()
-    {
-        //Gizmos.color = Color.blue;
-        //Gizmos.DrawWireSphere(transform.position, attackRange);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.blue;
+    //    Gizmos.DrawWireSphere(transform.position, attackRange);
+    //}
 }

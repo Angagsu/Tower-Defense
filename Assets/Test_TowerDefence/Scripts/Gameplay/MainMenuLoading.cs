@@ -13,6 +13,6 @@ public class MainMenuLoading : MonoBehaviour
 
     public void GoToLevelsMap()
     {
-        sceneLoadService.LoadSceneInStartGame(Scenes.LEVELS_MAP);
+        sceneLoadService.LevelMapSceneLoader(Scenes.LEVELS_MAP);
     }
 }

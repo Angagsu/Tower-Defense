@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f6c82c1f981274b8ec947a19aa2354, type: 3}
+  m_Name: IceTower_Rare
+  m_EditorClassIdentifier: 
+  <TowerName>k__BackingField: Ice
+  <TowerDescription>k__BackingField: Bari or Brat jan es tower@ bomba karas arnes
+    xzares axpers top tazaya hamarya qshac chi
+  <Cost>k__BackingField: 1000
+  <TowerPrefab>k__BackingField: {fileID: 4923226593151006283, guid: 1f1b27d841cb52d4184ef1d8cdb204ca,
+    type: 3}
+  <TowerSprite>k__BackingField: {fileID: 21300000, guid: 6d5944d07754f574289b964179cf83a2,
+    type: 3}
+  <CurrentUpgradeLevel>k__BackingField: {fileID: 11400000, guid: 49725ed66733ade439115293c5222d5f,
+    type: 2}
+  <UpgradeLevelsSO>k__BackingField: {fileID: 11400000, guid: 6e59dee1e8c719741b5fa319cfb9a999,
+    type: 2}
+  <PassivSkilleSprites>k__BackingField:
+  - {fileID: -6451309535973135589, guid: df96120a4382b6e4e96a2040854aa20d, type: 3}
+  - {fileID: -280748038705977316, guid: df96120a4382b6e4e96a2040854aa20d, type: 3}
+  <PassiveSkillsAmount>k__BackingField: 2
+  <PassiveSkillsUnlockLevels>k__BackingField: 0200000002000000
+  <StatsMaxValues>k__BackingField:
+  - 55
+  - 22
+  - 0.25
+  - 680
+  <PassiveSkillsNames>k__BackingField:
+  - Deceleration Multiplier
+  - Damage Multiplier
+  <PassiveSkillsDescripsions>k__BackingField:
+  - The Ice Tower slows down targets during attacks.Upgrade the tower to increase
+    the deceleration factor
+  - The Ice Tower damage increases while continuously attacking a single target.
+    Upgrade the tower to increase the damage-over-time effect
+  <TowerData>k__BackingField:
+    TowerType: 4
+    UpgradeLevel: 2
+    CardType: 3
+    IsAcquired: 1
+    Price: 900
+    ReseivedCards:
+    - TowerType: 4
+      CardType: 3
+    - TowerType: 4
+      CardType: 3

@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 607671109515974821}
   - component: {fileID: -3169207504160919718}
   - component: {fileID: 4307176021028549481}
+  - component: {fileID: -7879320953590434797}
   m_Layer: 19
   m_Name: ArcherHero
   m_TagString: ArcherHero
@@ -113,15 +114,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PartForTargeting>k__BackingField: {fileID: 5361647140949031586}
+  <AttackStats>k__BackingField:
+    Health: 500
+    MaxHealth: 500
+    Armor: 0
+    MaxArmor: 0
+    PhysicalResistance: 10
+    MagicalResistance: 10
+    ArmorType: 0
+    DamageData:
+      DamageAmount: 100
+      DamageType: 0
+      PhysicalPenetration: 5
+      MagicalPenetration: 0
+      ArmorPercent: 0.7
+      HealthPercent: 0.3
   damage: 20
   moveSpeed: 10
-  attackRate: 1
+  attackRate: 0.5
   attackRange: 15
   turnSpeed: 10
-  instancingEnabler: {fileID: 1546220195435717734}
+  healthBarInstance: {fileID: 1546220195435717734}
+  armorBar: {fileID: 0}
   <ReviveTimer>k__BackingField: 5
   <RotatPart>k__BackingField: {fileID: 4097323005000386063}
   <Anim>k__BackingField: {fileID: 8945637575376214888}
+  <ActiveSkillCooldown>k__BackingField: 30
+  superAttack: {fileID: -7879320953590434797}
   attack: {fileID: 2366083804998803738}
   detect: {fileID: 4307176021028549481}
   move: {fileID: 4917897518465217744}
@@ -130,6 +149,8 @@ MonoBehaviour:
   dyingAnimationDuration: 3
   startHealth: 1000
   detectionRange: 10
+  superAttackRadius: 0
+  superAttackEffectDuration: 0
   selectionZone: {fileID: 1623278775038682095}
 --- !u!114 &2366083804998803738
 MonoBehaviour:
@@ -146,6 +167,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8786167472154575551, guid: 8f30d3e7eaa11f7429faf9d5c69657be,
     type: 3}
   bulletInstPoint: {fileID: 4957063229981168035}
+  bulletInstPoint1: {fileID: 0}
+  bulletInstPoint2: {fileID: 0}
+  hasTwoInstantiatePoint: 0
 --- !u!114 &4917897518465217744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,6 +327,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hero: {fileID: 3073217194499311935}
+--- !u!114 &-7879320953590434797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7159134112173179556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01094c219b625cd4d81cd3cabcfe7946, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireProjectile: {fileID: 503586543611671082, guid: a2e2045cca11f78409bc32b7d44330ce,
+    type: 3}
 --- !u!1 &9145535840668837265
 GameObject:
   m_ObjectHideFlags: 0

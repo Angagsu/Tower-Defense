@@ -36,14 +36,19 @@ public class CameraControllerLevelsMap : MonoBehaviour
 
     private void OnStartDrag(Vector2 touchPosition)
     {
+        if (playerInputHandler.IsPointerOverUIObject(touchPosition))
+        {
+            isStartDraging = false;
+            return;
+        }
+
         lastTouchPosition = touchPosition;
         isStartDraging = true;
     }
 
     private void OnDrag(Vector2 touchPosition)
-    {
-        isDragging = true;
-        if (!isDragging && isStartDraging) return;
+    { 
+        if (!isStartDraging) return;
 
         this.touchPosition = touchPosition;
         delta = touchPosition - lastTouchPosition;

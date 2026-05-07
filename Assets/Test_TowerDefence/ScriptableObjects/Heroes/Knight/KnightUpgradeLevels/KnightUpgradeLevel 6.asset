@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 527fd541bed3a904484d0e5be24126ee, type: 3}
+  m_Name: KnightUpgradeLevel 6
+  m_EditorClassIdentifier: 
+  <UpgradeCostByGold>k__BackingField: 1600
+  <UpgradeCostByCard>k__BackingField: 10
+  <AttackStats>k__BackingField:
+    Health: 500
+    MaxHealth: 500
+    Armor: 0
+    MaxArmor: 0
+    PhysicalResistance: 10
+    MagicalResistance: 9
+    ArmorType: 2
+    DamageData:
+      DamageAmount: 32
+      DamageType: 0
+      PhysicalPenetration: 6
+      MagicalPenetration: 0
+      ArmorPercent: 0.7
+      HealthPercent: 0.3
+  <MoveSpeed>k__BackingField: 5
+  <ActiveSkillValue>k__BackingField: 200
+  <ActiveSkillAccessibility>k__BackingField: 1
+  <PassiveSkillsValues>k__BackingField:
+  - 25
+  - 0.75
+  <PassiveSkillsAccessibility>k__BackingField: 0101
+  <StatsValues>k__BackingField:
+  - 500
+  - 32
+  - 5
+  <BlastAttackChance>k__BackingField: 25
+  <StunDuration>k__BackingField: 0.75

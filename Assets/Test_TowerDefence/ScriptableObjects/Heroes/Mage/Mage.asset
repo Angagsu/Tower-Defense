@@ -12,18 +12,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e728543fc3a92394ba9d47852d0a635a, type: 3}
   m_Name: Mage
   m_EditorClassIdentifier: 
-  <CurrentUpgradeLevel>k__BackingField: {fileID: 11400000, guid: 60744a5b18d97494fbc3843f4f0f2670,
+  <HeroName>k__BackingField: Mage
+  <HeroDescription>k__BackingField: Mage
+  <Sprite>k__BackingField: {fileID: 21300000, guid: e1db5d4664eda56419cc8b5db45b740a,
+    type: 3}
+  <BigSprite>k__BackingField: {fileID: 21300000, guid: 17d34557aec264b438159f25ee898ab7,
+    type: 3}
+  <CardSprite>k__BackingField: {fileID: 21300000, guid: c71e2d78f3fd6fe408dbc9d341d6e6ed,
+    type: 3}
+  <Prefab>k__BackingField: {fileID: 2918971119291250067, guid: fd2e492b0c80244458f57485f569b698,
+    type: 3}
+  <CurrentUpgradeLevel>k__BackingField: {fileID: 11400000, guid: fa2e3a6ccb5926340afb1e1d5e0ac306,
     type: 2}
   <UpgradeLevelsSO>k__BackingField: {fileID: 11400000, guid: 9f07684c47329bf4caccb2a078cbda04,
     type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 6dcb1fd0332d5be4ea04b9a8e306929e,
+  <ActiveSkillSprite>k__BackingField: {fileID: 21300000, guid: a189c799af57ed54e8d222cb1f62463c,
     type: 3}
-  <Prefab>k__BackingField: {fileID: 3073217194499311935, guid: 02b40aa2074ce974c8c96d0457996f78,
-    type: 3}
+  <ActiveSkillUnlockLevel>k__BackingField: 2
+  <ActiveSkillMaxValue>k__BackingField: 0
+  <ActiveSkillName>k__BackingField: 
+  <ActiveSkillDescripsion>k__BackingField: 
+  <PassivSkillsSprites>k__BackingField:
+  - {fileID: 21300000, guid: 8a2d14ad315f77746b39370f9c554800, type: 3}
+  - {fileID: 21300000, guid: e47b14ba3519424489332d0ad76eee15, type: 3}
+  <PassiveSkillsAmount>k__BackingField: 2
+  <PassiveSkillsUnlockLevels>k__BackingField: 0200000002000000
+  <PassiveSkillsNames>k__BackingField:
+  - Periodic Damage
+  - P. D. Duration
+  <PassiveSkillsDescripsions>k__BackingField:
+  - The mage's attacks deal periodic damage  to enemies
+  - Periodic damage duration. Upgrad the hero to increase periodic damage duration
   <HeroData>k__BackingField:
     HeroType: 3
-    UpgradeLevel: 1
+    UpgradeLevel: 2
     CardType: 3
-    IsAcquired: 0
+    IsAcquired: 1
     Price: 100
     ReseivedCards: []

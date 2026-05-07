@@ -4,32 +4,54 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TowerBlueprint", menuName = "SO/TowerSO/TowersBlueprint")]
 public class TowerFullBlueprintSO : ScriptableObject
 {
-    public List<TowerSO> Towers;
+    public TowerType TowerType;
+    [Space(10)]
+    public List<TowerSO> TowerUpgrades;
+    
+    private int epicTowerSellCost;
+    private int mythicTowerSellCost;
+    private int rareTowerSellCost;
 
-    private int upgradedTowerSellCost;
-    private int secondTimeUpgradedTowerSellCost;
-    private int thirdTimeUpgradedTowerSellCost;
 
-
-    public int GetTowerSellCost()
+    public int GetCommonTowerSellCost()
     {
-        return Towers[0].Cost / 2;
+        return TowerUpgrades[0].Cost / 2;
     }
-    public int GetUpgradedTowerSellCost()
+    public int GetEpicTowerSellCost()
     {
-        upgradedTowerSellCost = (Towers[0].Cost / 2) + (Towers[1].Cost / 2);
-        return upgradedTowerSellCost;
-    }
-
-    public int GetSecondTimeUpgradedTowerSellCost()
-    {
-        secondTimeUpgradedTowerSellCost = upgradedTowerSellCost + (Towers[2].Cost / 2);
-        return secondTimeUpgradedTowerSellCost;
+        epicTowerSellCost = (TowerUpgrades[0].Cost / 2) + (TowerUpgrades[1].Cost / 2);
+        return epicTowerSellCost;
     }
 
-    public int GetThirdTimeUpgradedTowerSellCost()
+    public int GetMythicTowerSellCost()
     {
-        thirdTimeUpgradedTowerSellCost = secondTimeUpgradedTowerSellCost + (Towers[3].Cost / 2);
-        return thirdTimeUpgradedTowerSellCost;
+        mythicTowerSellCost = epicTowerSellCost + (TowerUpgrades[2].Cost / 2);
+        return mythicTowerSellCost;
+    }
+
+    public int GetRareTowerSellCost()
+    {
+        rareTowerSellCost = mythicTowerSellCost + (TowerUpgrades[3].Cost / 2);
+        return rareTowerSellCost;
+    }
+
+    public int GetTowerSellCostByIndex(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                return GetCommonTowerSellCost();
+
+            case 1:
+                return GetEpicTowerSellCost();
+  
+            case 2:
+                return GetMythicTowerSellCost();
+
+            case 3:
+                return GetRareTowerSellCost();
+
+        }
+        return default;
     }
 }

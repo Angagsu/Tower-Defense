@@ -108,12 +108,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PartForTargeting>k__BackingField: {fileID: 2552653059350460225}
+  <AttackStats>k__BackingField:
+    Health: 250
+    MaxHealth: 250
+    Armor: 0
+    MaxArmor: 0
+    PhysicalResistance: 5
+    MagicalResistance: 0
+    DamageData:
+      DamageAmount: 30
+      DamageType: 0
+      PhysicalPenetration: 4
+      MagicalPenetration: 0
   damage: 10
   moveSpeed: 4
   attackRate: 1
   attackRange: 3
   turnSpeed: 10
-  instancingEnabler: {fileID: 4278434101697180862}
+  healthBarInstance: {fileID: 4278434101697180862}
   anim: {fileID: 1652091878299861576}
   attack: {fileID: 6279203275460527474}
   detect: {fileID: 7074106229378764576}
@@ -188,6 +200,21 @@ MonoBehaviour:
   bulletPrefab: {fileID: -6690776902444206140, guid: bef8ea47213305a458cf730d0819be33,
     type: 3}
   bulletInstPoint: {fileID: 4005911720417386232}
+  bulletInstPoint1: {fileID: 0}
+  bulletInstPoint2: {fileID: 0}
+  hasTwoInstantiatePoint: 0
+  attackStats:
+    Health: 0
+    MaxHealth: 0
+    Armor: 0
+    MaxArmor: 0
+    PhysicalResistance: 0
+    MagicalResistance: 0
+    DamageData:
+      DamageAmount: 0
+      DamageType: 0
+      PhysicalPenetration: 0
+      MagicalPenetration: 0
 --- !u!1 &6598273955862494493
 GameObject:
   m_ObjectHideFlags: 0

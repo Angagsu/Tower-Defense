@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae2b388ea7185a34b9299ac6f8b875f1, type: 3}
   m_Name: DefenderTowerBlueprint
   m_EditorClassIdentifier: 
-  Towers:
+  TowerType: 1
+  TowerUpgrades:
   - {fileID: 11400000, guid: a836553cbc8b9d847a8d03541d05555f, type: 2}
   - {fileID: 11400000, guid: e974374792a98f64f8cfaf3a0f3d6566, type: 2}
   - {fileID: 11400000, guid: 8176b4faf467af14a9005e0eded7584c, type: 2}

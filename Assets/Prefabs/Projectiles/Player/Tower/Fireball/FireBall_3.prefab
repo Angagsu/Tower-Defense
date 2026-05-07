@@ -9776,7 +9776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aedbb29f829366648b23cb9965d3772c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 75
+  speed: 25
   explosionRadius: 3
   impactEffect: {fileID: 4678067695592014871}
   upgradLevel: 2

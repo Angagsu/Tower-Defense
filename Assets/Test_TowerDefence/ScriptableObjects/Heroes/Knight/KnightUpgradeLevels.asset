@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: KnightUpgradeLevels
   m_EditorClassIdentifier: 
   HeroUpgradeLevelSOs:
-  - {fileID: 11400000, guid: c77a457a841242542a8c563ef15e7037, type: 2}
-  - {fileID: 11400000, guid: edcd7f4679f3cf94c9b4e8d09c8bcae0, type: 2}
-  - {fileID: 11400000, guid: 7a76154f244e9c14e9eb94cf792347a4, type: 2}
-  - {fileID: 11400000, guid: ce5166c35fc2e4d40a7bb8605b8d6d8e, type: 2}
-  - {fileID: 11400000, guid: 0acf812ea5e683b4f9c9b72580593913, type: 2}
-  - {fileID: 11400000, guid: 056499ed3044e5c4fa155884ccb85841, type: 2}
+  - {fileID: 11400000, guid: 204e4fd4be2988744befaa02bf62f280, type: 2}
+  - {fileID: 11400000, guid: efa4e5c40df0ea345a485b9f5610fb9c, type: 2}
+  - {fileID: 11400000, guid: 8a5f496a983068e46913b6eb5f31f88a, type: 2}
+  - {fileID: 11400000, guid: bd959c91574f25148a0fa4b3bbfca8de, type: 2}
+  - {fileID: 11400000, guid: 4274ee99207c77940b83161ac44e369b, type: 2}
+  - {fileID: 11400000, guid: bf3de832a4004434ca70a5052cc5d414, type: 2}
+  - {fileID: 11400000, guid: e8c26df5b29b0e94c935504a6e5b99ab, type: 2}
+  - {fileID: 11400000, guid: c82c39c8a813aa14c9001ccabba16f66, type: 2}
+  - {fileID: 11400000, guid: a966d4fe3abb7874cb02f3b9163461a1, type: 2}
+  - {fileID: 11400000, guid: 7234ebf6fee961c409505524ed3dc40e, type: 2}

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c68b215d4d2e041acd5d1f71fbc6d5, type: 3}
+  m_Name: FireTower_Epic_UpgradeLevels
+  m_EditorClassIdentifier: 
+  TowerUpgradeLevelSOs:
+  - {fileID: 11400000, guid: 8f993da065d687f419d06993bfd892a3, type: 2}
+  - {fileID: 11400000, guid: 0177b0b75e7726f459900118f110c35a, type: 2}
+  - {fileID: 11400000, guid: aa0ddffe69df40e4eb9fa9b0da57f131, type: 2}
+  - {fileID: 11400000, guid: 561e819485047184d9bf9537f7b444fd, type: 2}
+  - {fileID: 11400000, guid: 4669251e9975c12478218a78354237f7, type: 2}
+  - {fileID: 11400000, guid: 96ab9e91a7170234483c36e8136999f2, type: 2}
+  - {fileID: 11400000, guid: ed5b2322af154f54eb7b4802b6d9afe2, type: 2}
+  - {fileID: 11400000, guid: 63ec8e50b613068458bd05ecbf102d32, type: 2}
+  - {fileID: 11400000, guid: 4c2f16721298f2e43a36c187ebefffc6, type: 2}
+  - {fileID: 11400000, guid: d7900953d2b676643a675e83703ee0d6, type: 2}

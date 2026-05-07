@@ -1,3 +1,4 @@
+using Assets.Scripts.Tower;
 using System;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class DefendersController : BaseMovement
 {
     public Action<Vector3> DefendersPositionChanged;
 
+    [SerializeField] private BaseTower baseTower;
     [SerializeField] private DefenderUnit[] defenderUnits;
     [SerializeField] private Transform towerTransform;
     [SerializeField] private float defendersSpeed;
@@ -17,23 +19,27 @@ public class DefendersController : BaseMovement
     private TouchBuildingArea touchBuildingArea;
     private TowerUpgradeUI towerUpgradeUI;
     private DetectionHelper detectionHelper;
-    
+
+    private TowerUpgradeLevelSO upgradeLevel;
     private Camera mainCamera;
     private Vector3 defendersNewPoint;
+    private Vector3 defendersStartPoint;
+    private float movementRandiusRange;
     private int groundLayer;
     private bool isSelected;
 
     
 
-    public void Construct(PlayerInputHandler playerInputHandler, GameplayStates gameplayStates, TowerUpgradeUI towerUpgradeUI, TouchBuildingArea touchBuildingArea, ProjectilesFactoriesService projectilesFactoriesService)
+    public void Construct(PlayerInputHandler playerInputHandler, GameplayStates gameplayStates, TowerUpgradeUI towerUpgradeUI, TouchBuildingArea touchBuildingArea, ProjectilesFactoriesService projectilesFactoriesService, TowerSO towerSO)
     {
         this.playerInputHandler = playerInputHandler;
         this.towerUpgradeUI = towerUpgradeUI;
         this.touchBuildingArea = touchBuildingArea;
-
+        movementRandiusRange = towerSO.CurrentUpgradeLevel.AttackRange;
         for (int i = 0; i < defenderUnits.Length; i++)
         {
             defenderUnits[i].Construct(playerInputHandler, gameplayStates, projectilesFactoriesService);
+            defenderUnits[i].SetDefenderParams(towerSO);
         }
 
         this.playerInputHandler.TouchPressed += GetDefendersNewPosition;
@@ -47,6 +53,27 @@ public class DefendersController : BaseMovement
         detectionHelper = DetectionHelper.Instance;
 
         SetTheSworderDefenderArray();
+
+        baseTower.TowerCrashed += OnTowerCrashed;
+        baseTower.TowerRepaired += OnTowerRepaired;
+    }
+
+    private void OnTowerRepaired()
+    {
+        for (int i = 0; i < defenderUnits.Length; i++)
+        {
+            defenderUnits[i].OnTowerRepair();
+            //DefendersPositionChanged?.Invoke(defendersStartPoint);
+        }
+    }
+
+    private void OnTowerCrashed()
+    {
+        for (int i = 0; i < defenderUnits.Length; i++)
+        {
+            defenderUnits[i].OnTowerCrush(defendersStartPoint);
+           // defenderUnits[i].StopAllCoroutines();
+        }
     }
 
     void Start()
@@ -54,9 +81,9 @@ public class DefendersController : BaseMovement
         isMoves = true;
         isSelected = false;
 
-        defendersNewPoint = touchBuildingArea.BuildingArea.GetDefendersStartPoint().position;
+        defendersStartPoint = touchBuildingArea.BuildingArea.GetDefendersStartPoint().position;
         
-        DefendersPositionChanged?.Invoke(defendersNewPoint);
+        DefendersPositionChanged?.Invoke(defendersStartPoint);
     }
 
     private void OnDisable()
@@ -70,13 +97,11 @@ public class DefendersController : BaseMovement
         {
             Ray ray = mainCamera.ScreenPointToRay(touchPosition);
 
-            if (Physics.Raycast(ray, out RaycastHit raycastHit) &&
-                raycastHit.collider.gameObject.layer.CompareTo(groundLayer) == 0)
+            if (Physics.Raycast(ray, out RaycastHit raycastHit) && Vector3.Distance(raycastHit.point, transform.position) <= movementRandiusRange)
             {
                 isSelected = false;
 
                 DefendersPositionChanged?.Invoke(raycastHit.point);
-                towerUpgradeUI.DeActivateDefendersMoveZone();
 
                 defendersNewPoint = raycastHit.point;
             }
@@ -84,7 +109,6 @@ public class DefendersController : BaseMovement
             {
                 isSelected = false;
                 isMoves = false;
-                towerUpgradeUI.DeActivateDefendersMoveZone();
             }
         }
     }

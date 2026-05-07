@@ -34,9 +34,4 @@ public class GeneralMonster : BaseMonster
     {
         base.Move(target);
     }
-
-    public override void TakeDamage(float amount)
-    {
-        base.TakeDamage(amount);
-    }
 }

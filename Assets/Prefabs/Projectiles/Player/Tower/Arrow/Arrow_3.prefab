@@ -156,8 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b99ebaa23c32494bbc176e06078d217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 80
-  explosionRadius: 2
+  speed: 60
+  explosionRadius: 0
   impactEffect: {fileID: 8285088622179701823}
   upgradLevel: 2
   meshRenderer: {fileID: 4365168879358527980}

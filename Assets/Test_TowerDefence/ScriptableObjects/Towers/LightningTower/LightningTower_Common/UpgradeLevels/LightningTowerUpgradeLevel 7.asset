@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65fd92d871dc7b4bb1efa0eb91c5623, type: 3}
+  m_Name: LightningTowerUpgradeLevel 7
+  m_EditorClassIdentifier: 
+  <AttackStats>k__BackingField:
+    Health: 450
+    MaxHealth: 450
+    Armor: 0
+    MaxArmor: 0
+    PhysicalResistance: 7
+    MagicalResistance: 7
+    ArmorType: 1
+    DamageData:
+      DamageAmount: 37
+      DamageType: 2
+      PhysicalPenetration: 0
+      MagicalPenetration: 0
+      ArmorPercent: 0
+      HealthPercent: 1
+  <AttackRange>k__BackingField: 16
+  <AttackRate>k__BackingField: 0.45
+  <BuyCost>k__BackingField: 190
+  <UpgradeCostByGold>k__BackingField: 800
+  <UpgradeCostByCard>k__BackingField: 7
+  <StatsValues>k__BackingField:
+  - 450
+  - 37
+  - 16
+  - 0.45
+  - 190
+  <PassiveSkillsValues>k__BackingField:
+  - 0.25
+  - 1.75
+  <PassiveSkillsAccessibility>k__BackingField: 0101
+  <DecelerationMultiplier>k__BackingField: 0.25
+  <OverTimeDamageMultiplier>k__BackingField: 1.75

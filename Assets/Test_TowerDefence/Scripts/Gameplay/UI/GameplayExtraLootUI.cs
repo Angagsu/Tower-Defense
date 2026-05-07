@@ -12,14 +12,16 @@ public class GameplayExtraLootUI : MonoBehaviour
     [SerializeField] private RectTransform energyTransform;
     [SerializeField] private TextMeshProUGUI energyText;
     [Header("Card Setup")]
-    [SerializeField] private CardUI cardPrefab;
+    [SerializeField] private HeroCardUI heroCardPrefab;
+    [SerializeField] private TowerCardUI towerCardPrefab;
     [SerializeField] private RectTransform cardsContainer;
     [SerializeField] private RectTransform[] cardsInstantiatePoints;
 
     private HeroesDataStoreService heroesDataStoreService;
+    private TowersDataStoreService towersDataStoreService;
     private int[] loot;
 
-
+    private int cardIndex;
 
     private void OnEnable()
     {
@@ -27,20 +29,25 @@ public class GameplayExtraLootUI : MonoBehaviour
     }
 
     [Inject]
-    public void Construct(HeroesDataStoreService heroesDataStoreService)
+    public void Construct(HeroesDataStoreService heroesDataStoreService, TowersDataStoreService towersDataStoreService)
     {
         this.heroesDataStoreService = heroesDataStoreService;
+        this.towersDataStoreService = towersDataStoreService;
     }
 
-    private void OnExtraLootRecieve(int[] loots, List<Card> cards)
+    private void OnExtraLootRecieve(int[] loots, List<TowerCard> towerCard, List<HeroCard> heroCards)
     {
         this.loot = loots;
 
-        if (cards != null)
+        if (towerCard != null)
         {
-            CreatCards(cards);
+            CreatTowerCards(towerCard);
         }
-        
+
+        if (heroCards != null)
+        {
+            CreatHeroCards(heroCards);
+        }
 
         if (loots.Length == 2)
         {
@@ -62,13 +69,25 @@ public class GameplayExtraLootUI : MonoBehaviour
         }
     }
 
-    private void CreatCards(List<Card> cards)
+    private void CreatTowerCards(List<TowerCard> TowerCards)
     {
-        for (int i = 0; i < cards.Count; i++)
+        for (int i = 0; i < TowerCards.Count; i++)
         {
-            var cardUI = Instantiate(cardPrefab, cardsInstantiatePoints[i].transform.position, Quaternion.identity, cardsContainer);
-            HeroSO cardConfig = heroesDataStoreService.AllHeroes.Heroes[(int)cards[i].CardType];
+            var cardUI = Instantiate(towerCardPrefab, cardsInstantiatePoints[i].transform.position, Quaternion.identity, cardsContainer);
+            TowerSO cardConfig = towersDataStoreService.AllTowers.AllTowers[(int)TowerCards[i].TowerType].TowerUpgrades[(int)TowerCards[i].CardType];
             cardUI.SetParams(cardConfig);
+
+            cardIndex = i + 1;
+        }
+    }
+
+    private void CreatHeroCards(List<HeroCard> heroCards)
+    {
+        for (int i = 0; i < heroCards.Count; i++)
+        {
+            var cardUI = Instantiate(heroCardPrefab, cardsInstantiatePoints[i + cardIndex].transform.position, Quaternion.identity, cardsContainer);
+            HeroSO cardConfig = heroesDataStoreService.AllHeroes.Heroes[(int)heroCards[i].CardType];
+            cardUI.SetCardSprite(cardConfig);
         }
     }
 

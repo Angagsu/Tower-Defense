@@ -135,6 +135,8 @@ GameObject:
   - component: {fileID: 698779960}
   - component: {fileID: 698779961}
   - component: {fileID: 698779962}
+  - component: {fileID: 698779963}
+  - component: {fileID: 698779964}
   m_Layer: 0
   m_Name: '[CONTAINER]'
   m_TagString: Untagged
@@ -175,6 +177,8 @@ MonoBehaviour:
   playerDataStorService: {fileID: 698779960}
   playerDataHandler: {fileID: 698779961}
   heroesDataStoreService: {fileID: 698779962}
+  towersDataStoreService: {fileID: 698779963}
+  videoDownloadHandler: {fileID: 698779964}
 --- !u!114 &698779957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,6 +259,44 @@ MonoBehaviour:
   storageService: {fileID: 698779958}
   heroesDataToStore:
     SelectedAcquiredHeroesByIndex: 
+--- !u!114 &698779963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698779951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aee5a41818b772469989e13532a722d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <AllTowers>k__BackingField: {fileID: 11400000, guid: 57a2d6c0e129e4a4191fc50b6c6cf891,
+    type: 2}
+  storageService: {fileID: 698779958}
+  towersDataToStore:
+    SelectedAcquiredTowersByIndex: 
+--- !u!114 &698779964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698779951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34baa7f3398d6f4418478185115131a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  versionJsonUrl: https://pub-4f027770d64d489bbf0f2da17068f7a0.r2.dev/LevelMapVideos
+  maxConcurrentDownloads: 4
+  maxRetries: 3
+  retryBaseDelayMs: 800
+  requestTimeoutSeconds: 60
+  videosFolderName: LevelMapVideos
+  videoPlayer: {fileID: 0}
+  localManifest:
+    LevelMapVideos: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

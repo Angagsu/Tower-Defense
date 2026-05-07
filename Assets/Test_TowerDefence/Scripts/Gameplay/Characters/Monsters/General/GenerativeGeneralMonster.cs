@@ -38,11 +38,6 @@ namespace Assets.Test_TowerDefence.Scripts.Monster.General
             base.Move(target);
         }
 
-        public override void TakeDamage(float amount)
-        {
-            base.TakeDamage(amount);
-        }
-
         protected override IEnumerator DyingAnimationDuration()
         {
             anim.SetDeadAnimation(isDead);

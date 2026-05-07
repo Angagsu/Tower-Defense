@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a02d88c01f055468e45497490c11e0, type: 3}
+  m_Name: ArrowTowerUpgradeLevel 8
+  m_EditorClassIdentifier: 
+  <AttackStats>k__BackingField:
+    Health: 325
+    MaxHealth: 325
+    Armor: 0
+    MaxArmor: 0
+    PhysicalResistance: 9
+    MagicalResistance: 7
+    ArmorType: 1
+    DamageData:
+      DamageAmount: 23
+      DamageType: 0
+      PhysicalPenetration: 10
+      MagicalPenetration: 0
+      ArmorPercent: 0.7
+      HealthPercent: 0.3
+  <AttackRange>k__BackingField: 15.5
+  <AttackRate>k__BackingField: 1.5
+  <BuyCost>k__BackingField: 140
+  <UpgradeCostByGold>k__BackingField: 800
+  <UpgradeCostByCard>k__BackingField: 6
+  <StatsValues>k__BackingField:
+  - 325
+  - 23
+  - 15.5
+  - 1.5
+  - 140
+  <PassiveSkillsValues>k__BackingField:
+  - 170
+  - 20
+  <PassiveSkillsAccessibility>k__BackingField: 0101
+  <CriticalDamage>k__BackingField: 170
+  <CriticalDamageChance>k__BackingField: 20

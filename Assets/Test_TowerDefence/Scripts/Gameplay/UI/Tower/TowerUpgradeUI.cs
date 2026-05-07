@@ -1,19 +1,28 @@
-using UnityEngine.UI;
 using UnityEngine;
-using TMPro;
+
 
 public class TowerUpgradeUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI upgradeCostText, sellCostText;
-    [SerializeField] private Button upgradeButton;
+    [SerializeField] private BuildsController buildsController;
+    [SerializeField] private TowerUpgradeButtonUI upgradeButtonUI;
+    [SerializeField] private TowerSellButtonUI sellButtonUI;
+    [SerializeField] private TowerRepairButtonUI repairButtonUI;
+    [SerializeField] private TowerUpgradeInformPopupUI upgradeInformPopupUI;
+
+    [Space(10)]
+    [SerializeField] private TowerAttackRangeView attackRangeView;
     [SerializeField] private GameObject defendersMoveZone;
     [SerializeField] private GameObject selectDefendersButton;
     [SerializeField] private GameObject gameObjectRoot;
-    [SerializeField] private BuildsController buildsController;
+    [SerializeField] private GameObject repairUI;
+
+    [Header("Upgrade Panel Position Offset")]
     [SerializeField] private Vector3 positionOffset;
 
 
     private BuildingArea selectedBuildingArea;
+    private TowerSO nextUpgradeTowerSO;
+
 
 
     private void Awake()
@@ -21,42 +30,51 @@ public class TowerUpgradeUI : MonoBehaviour
         DeActivateDefendersMoveZone();
     }
 
-    public void SetTargetGround(BuildingArea selectedBuildingArea)
+    public void SetTargetGround(TowerFullBlueprintSO towerFullBlueprintSO, BuildingArea selectedBuildingArea)
     {
         this.selectedBuildingArea = selectedBuildingArea;
+
+        Hide();
+
         transform.position = selectedBuildingArea.gameObject.transform.position;
         gameObjectRoot.transform.position = selectedBuildingArea.gameObject.transform.position + positionOffset;
         
         gameObjectRoot.SetActive(true);
 
+        nextUpgradeTowerSO = upgradeButtonUI.SetParams(selectedBuildingArea);
 
-        if (!selectedBuildingArea.IsUpgraded || !selectedBuildingArea.IsUpgradedSecondTime || !selectedBuildingArea.IsUpgradedThirdTime)
+        sellButtonUI.SetParams(selectedBuildingArea, upgradeButtonUI.CurrentTowerSOIndex);
+
+        defendersMoveZone.SetActive(true);
+        attackRangeView.SetAttackRange(selectedBuildingArea.CurrentTowerSO.CurrentUpgradeLevel.AttackRange);
+
+        if (selectedBuildingArea.CurrentTower.IsDamaged)
         {
-            sellCostText.text = selectedBuildingArea.TowerFullBlueprintSO.GetTowerSellCost().ToString();
-            upgradeCostText.text = "" + selectedBuildingArea.TowerFullBlueprintSO.Towers[1].Cost;
-            upgradeButton.interactable = true;
+            repairUI.SetActive(true);
+            repairButtonUI.SetParams(selectedBuildingArea);
         }
-        if (selectedBuildingArea.IsUpgraded)
+        else
         {
-            sellCostText.text = selectedBuildingArea.TowerFullBlueprintSO.GetUpgradedTowerSellCost().ToString();
-            upgradeCostText.text = "" + selectedBuildingArea.TowerFullBlueprintSO.Towers[2].Cost;
-            upgradeButton.interactable = true;
-        }
-        if (selectedBuildingArea.IsUpgradedSecondTime)
-        {
-            sellCostText.text = selectedBuildingArea.TowerFullBlueprintSO.GetSecondTimeUpgradedTowerSellCost().ToString();
-            upgradeCostText.text = "" + selectedBuildingArea.TowerFullBlueprintSO.Towers[3].Cost;
-            upgradeButton.interactable = true;
-        }
-        if (selectedBuildingArea.IsUpgradedThirdTime)
-        {
-            sellCostText.text = selectedBuildingArea.TowerFullBlueprintSO.GetThirdTimeUpgradedTowerSellCost().ToString();
-            upgradeCostText.text = " ";
-            upgradeButton.interactable = false;
+            repairUI.SetActive(false);
         }
     }
 
-    public void UpgradeButton()
+    public void OnUpgradeButtonClick()
+    {
+        if (!upgradeButtonUI.IsSelected)
+        {
+            upgradeInformPopupUI.DisablePopup();
+            UpgradeTower();   
+        }
+        else
+        {
+            upgradeInformPopupUI.EnablePopup(selectedBuildingArea.CurrentTowerSO, nextUpgradeTowerSO);
+            defendersMoveZone.SetActive(true);
+            attackRangeView.SetAttackRange(nextUpgradeTowerSO.CurrentUpgradeLevel.AttackRange);
+        }
+    }
+
+    public void UpgradeTower()
     {
         if (selectedBuildingArea.IsUpgradedSecondTime)
         {
@@ -74,22 +92,46 @@ public class TowerUpgradeUI : MonoBehaviour
         buildsController.DeselectGround();
     }
 
-    public void SellButton()
+    public void OnSellButtonClick()
+    {
+        if(!sellButtonUI.IsSelected)
+        {
+            SellTower();
+        }
+    }
+
+    private void SellTower()
     {
         buildsController.SellTower();
         buildsController.DeselectGround();
     }
 
+    public void OnRepairButtonClick()
+    {
+        if (!repairButtonUI.IsSelected)
+        {
+            RepairTower();
+        }
+    }
+
+    private void RepairTower()
+    {
+        buildsController.Repair();
+        Hide();
+    }
+
     public void DeActivateDefendersMoveZone()
     {
-        defendersMoveZone.gameObject.SetActive(false);
+        defendersMoveZone.SetActive(false);
     }
 
     public void SelectDefendersOnUI()
     {
         selectedBuildingArea.SelectDefenderTowerOnUI();
-        defendersMoveZone.gameObject.SetActive(true);
+        defendersMoveZone.SetActive(true);
     }
+
+    
 
     public void ActivateOrDeactivateSelectDefendersButton(bool tof)
     {
@@ -99,6 +141,11 @@ public class TowerUpgradeUI : MonoBehaviour
     public void Hide()
     {
         gameObjectRoot.SetActive(false);
+        upgradeButtonUI.Unselect();
+        sellButtonUI.Unselect();
+        repairButtonUI.Unselect();
+        upgradeInformPopupUI.DisablePopup();
+        defendersMoveZone.SetActive(false);
     }
 
     public bool IsGameObjectActive()

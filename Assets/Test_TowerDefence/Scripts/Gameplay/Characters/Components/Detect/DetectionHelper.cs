@@ -1,3 +1,4 @@
+using Assets.Scripts.Tower;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,19 +8,27 @@ public class DetectionHelper : MonoBehaviour
 
     public List<BaseMonster> Monsters { get; private set; } = new();
     public List<BaseHero> Heroes { get; private set; } = new();
+    public List<BaseTower> Towers { get; private set; }
+
 
     [SerializeField] private MonstersFactoriesService monstersFactoriesService;
     [SerializeField] private HeroesSpawner heroesSpawner;
     [SerializeField] private BuildsController buildsController;
+    [SerializeField] private TowerBuilder towerBuilder;
 
 
 
     private void Awake()
     {
         Instance = this;
-        monstersFactoriesService.MonsterCountChanged += OnMonstersCountChanged;
+
+        monstersFactoriesService.MonsterCountIncreased += OnMonstersCountIncreased;
+        monstersFactoriesService.MonsterCountDecreased += OnMonstersCountDecreased;
+
         heroesSpawner.HeroAdded += OnHeroesCountIncreased;
         buildsController.DefendersRemoved += OnDefendersRemoved;
+
+        Towers = towerBuilder.Towers;
     }
 
     private void OnDefendersRemoved(DefenderUnit defender)
@@ -27,9 +36,14 @@ public class DetectionHelper : MonoBehaviour
         Heroes.Remove(defender);
     }
 
-    private void OnMonstersCountChanged(BaseMonster monster)
+    private void OnMonstersCountIncreased(BaseMonster monster)
     {
-        Monsters.Add(monster);  
+        Monsters.Add(monster);
+    }
+
+    private void OnMonstersCountDecreased(BaseMonster monster)
+    {
+        Monsters.Remove(monster);
     }
 
     public void OnHeroesCountIncreased(BaseHero hero)
@@ -39,7 +53,9 @@ public class DetectionHelper : MonoBehaviour
 
     private void OnDestroy()
     {
-        monstersFactoriesService.MonsterCountChanged -= OnMonstersCountChanged;
+        monstersFactoriesService.MonsterCountIncreased -= OnMonstersCountIncreased;
+        monstersFactoriesService.MonsterCountDecreased -= OnMonstersCountDecreased;
+
         heroesSpawner.HeroAdded -= OnHeroesCountIncreased;
         buildsController.DefendersRemoved -= OnDefendersRemoved;
     }

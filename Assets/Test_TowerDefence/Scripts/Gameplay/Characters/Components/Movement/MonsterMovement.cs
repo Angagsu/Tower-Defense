@@ -84,7 +84,9 @@ public class MonsterMovement : BaseMovement
         transform.Translate(direction.normalized * moveSpeed * Time.deltaTime, Space.World);
         LockOnTarget(this.target, turnSpeed);
 
-        if (Vector3.Distance(this.target.position, transform.position) <= 3f && IsMoves)
+        float sqrDistance = (this.target.position - transform.position).sqrMagnitude;
+
+        if (sqrDistance <= 9f && IsMoves)
         {
             GetNextWayPoint();
         }
@@ -123,10 +125,10 @@ public class MonsterMovement : BaseMovement
     private void PathEnd()
     {
         baseMonster.GameplayPlayerDataHandler.ReduceLives(1);
-        baseMonster.MonstersFactoriesService.ReduceAliveEnemiesAmount();
+        baseMonster.MonstersFactoriesService.DecreaseMonsterCount(baseMonster);
 
-        gameObject.SetActive(false);
         baseMonster.SetIsDead(true);
+        gameObject.SetActive(false);     
     }
 
     public void SetWaypointsAndTarget(Transform[] waypoints, Transform currentTransform, Transform targetWaypoint, int waypointIndex)

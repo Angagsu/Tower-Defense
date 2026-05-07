@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f6c82c1f981274b8ec947a19aa2354, type: 3}
+  m_Name: LightningTower_Common
+  m_EditorClassIdentifier: 
+  <TowerName>k__BackingField: Lightning
+  <TowerDescription>k__BackingField: Bari or Brat jan es tower@ bomba karas arnes
+    xzares axpers top tazaya hamarya qshac chi
+  <Cost>k__BackingField: 200
+  <TowerPrefab>k__BackingField: {fileID: 6660008564374663589, guid: 1fbcf43ffd0593c4cbb11c90cee32cbd,
+    type: 3}
+  <TowerSprite>k__BackingField: {fileID: 21300000, guid: 6d4ebf55577f1c542b7df1f2733a59dc,
+    type: 3}
+  <CurrentUpgradeLevel>k__BackingField: {fileID: 11400000, guid: 02677c955838b4f42bd220d712292e52,
+    type: 2}
+  <UpgradeLevelsSO>k__BackingField: {fileID: 11400000, guid: 635cee75b8e85704a95007c5be277307,
+    type: 2}
+  <PassivSkilleSprites>k__BackingField:
+  - {fileID: 2129735835, guid: 8949f1fdfec1c734e907f73fb3b94541, type: 3}
+  - {fileID: 21300000, guid: 64b547c3432c3d343a4a3face9946cd5, type: 3}
+  <PassiveSkillsAmount>k__BackingField: 2
+  <PassiveSkillsUnlockLevels>k__BackingField: 0300000003000000
+  <StatsMaxValues>k__BackingField:
+  - 40
+  - 17
+  - 0.4
+  - 180
+  <PassiveSkillsMaxValues>k__BackingField:
+  - 0.3
+  - 15
+  <PassiveSkillsDescripsions>k__BackingField:
+  - The Lightning Tower slows down targets during attacks.Upgrade the tower to increase
+    the deceleration factor
+  - The Lightning Tower damage increases while continuously attacking a single target.
+    Upgrade the tower to increase the damage-over-time effect
+  <PassiveSkillsNames>k__BackingField:
+  - Deceleration Multiplier
+  - Damage Multiplier
+  <TowerData>k__BackingField:
+    TowerType: 5
+    UpgradeLevel: 3
+    CardType: 0
+    IsAcquired: 1
+    Price: 100
+    ReseivedCards:
+    - TowerType: 5
+      CardType: 0

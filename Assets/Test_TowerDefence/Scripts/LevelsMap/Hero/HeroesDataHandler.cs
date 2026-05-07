@@ -24,7 +24,7 @@ public class HeroesDataHandler : MonoBehaviour
 
     private void Awake()
     {
-        for (int i = 0; i < AllHeroes.Heroes.Count; i++)
+        for (int i = 0; i < AllHeroAndTowerTypes.HeroTypes.Count; i++)
         {
             levelsMapHeros.Add(Instantiate(levelsMapHeroPrefab, parentTransform, true));
             levelsMapHeros[i].SetHeroesDataHandler(this);
@@ -33,9 +33,15 @@ public class HeroesDataHandler : MonoBehaviour
 
         currentSelectedHero = levelsMapHeros[0];
 
+
         // make first two heroes to selected by default
         selectedAcquiredHeroesByIndex.Add(0);
         selectedAcquiredHeroesByIndex.Add(1);
+    }
+
+    private void OnDisable()
+    {
+        heroesDataStoreService.HeroesDataToStoreChanged -= OnHeroesDataToStoreChange;
     }
 
     [Inject]
@@ -46,17 +52,38 @@ public class HeroesDataHandler : MonoBehaviour
 
         this.heroesDataStoreService.SetHeroDataHandler(this);
         this.SelectedAcquiredHeroesChanged?.Invoke(selectedAcquiredHeroesByIndex);
+        this.heroesDataStoreService.HeroesDataToStoreChanged += OnHeroesDataToStoreChange;
         this.heroesDataStoreService.Load();
+    }
+
+    private void OnHeroesDataToStoreChange(HeroesDataToStore heroesDataToStore)
+    {
+        AllHeroes.AcquiredHeroes.Clear();
+
+        for (int i = 0; i < AllHeroAndTowerTypes.HeroTypes.Count; i++)
+        {
+            levelsMapHeros[i].HeroSO.HeroData.UpgradeLevel = heroesDataToStore.AllHeroes[(HeroType)i].UpgradeLevel;
+            levelsMapHeros[i].HeroSO.HeroData.HeroType = heroesDataToStore.AllHeroes[(HeroType)i].HeroType;
+            levelsMapHeros[i].HeroSO.HeroData.CardType = heroesDataToStore.AllHeroes[(HeroType)i].CardType;
+            levelsMapHeros[i].HeroSO.HeroData.IsAcquired = heroesDataToStore.AllHeroes[(HeroType)i].IsAcquired;
+            levelsMapHeros[i].HeroSO.HeroData.ReseivedCards = heroesDataToStore.AllHeroes[(HeroType)i].ReseivedCards;
+
+            levelsMapHeros[i].HeroSO.CurrentUpgradeLevel = levelsMapHeros[i].HeroSO.UpgradeLevelsSO.HeroUpgradeLevelSOs[(int)heroesDataToStore.AllHeroes[(HeroType)i].UpgradeLevel - 1];
+
+            levelsMapHeros[i].SetParams(levelsMapHeros[i].HeroSO, i);
+
+            if (heroesDataToStore.AllHeroes[(HeroType)i].IsAcquired)
+            {
+                AllHeroes.AcquiredHeroes.Add(AllHeroes.Heroes[i]);
+            }
+        }
+
+        currentSelectedHero.Select();
     }
 
     public List<LevelsMapHero> GetLevelsMapHeroes()
     {
         return levelsMapHeros;
-    }
-
-    public void SetSavedHeroData(HeroData heroData, int index)
-    {
-        levelsMapHeros[index].OnHeroDataChange(heroData);
     }
 
     public void SetSelectedHeroesByIndex(List<int> selectedHeroesByIndex)
@@ -70,24 +97,65 @@ public class HeroesDataHandler : MonoBehaviour
         heroesUpgradeUI.SetSelectedHeroStats(currentSelectedHero);
     }
 
-
-    public void UpgradeHero(int upgradeGoldCost)
+    public void UpgradeHero(int upgradeGoldCost, int upgradeCardCost)
     {
-        if ((int)currentSelectedHero.HeroData.UpgradeLevel == currentSelectedHero.HeroSO.UpgradeLevelsSO.HeroUpgradeLevelSOs.Count)
+        if(upgradeCardCost > 0 && upgradeCardCost <= currentSelectedHero.HeroData.ReseivedCards.Count)
         {
-            Debug.Log("You Reached Maximum Level of Upgrade !!!");
-            return;
+            UpgradeHeroByGoldAndCard(upgradeGoldCost, upgradeCardCost);
         }
+        else if(upgradeCardCost == 0)
+        {
+            UpgradeHeroByGold(upgradeGoldCost);
+        }
+        else
+        {
+            Debug.Log("Not enought card to upgrade hero !!!");
+        }
+    }
 
+    private void UpgradeHeroByGoldAndCard(int upgradeGoldCost, int upgradeCardCost)
+    {
         if (gamePlayerDataHandler.TrySpendGold(upgradeGoldCost))
-        {            
+        {
+            currentSelectedHero.HeroData.UpgradeLevel = currentSelectedHero.HeroData.UpgradeLevel + 1;
+            currentSelectedHero.HeroSO.CurrentUpgradeLevel = currentSelectedHero.HeroSO.UpgradeLevelsSO.HeroUpgradeLevelSOs[(int)currentSelectedHero.HeroData.UpgradeLevel - 1];
+
+            var upgradedHeroData = new HeroData(currentSelectedHero.HeroData.HeroType, currentSelectedHero.HeroData.UpgradeLevel, currentSelectedHero.HeroData.CardType, isAcquired: true, currentSelectedHero.HeroData.Price);
+
+            currentSelectedHero.HeroData.ReseivedCards.RemoveRange(0, upgradeCardCost);
+            
+            upgradedHeroData.ReseivedCards = currentSelectedHero.HeroData.ReseivedCards;
+
+            currentSelectedHero.OnHeroDataChange(upgradedHeroData);
+            heroesUpgradeUI.SetSelectedHeroStats(currentSelectedHero);
+
+            heroesDataStoreService.ReduceCard(upgradedHeroData, upgradeCardCost);
+            heroesDataStoreService.StoreChangedHeroData(upgradedHeroData, selectedAcquiredHeroesByIndex);
+        }
+        else
+        {
+            Debug.Log("Not enoght money to upgrade hero !!!");
+        }
+    }
+
+    private void UpgradeHeroByGold(int upgradeGoldCost)
+    {
+        if (gamePlayerDataHandler.TrySpendGold(upgradeGoldCost))
+        {
             currentSelectedHero.HeroData.UpgradeLevel = currentSelectedHero.HeroData.UpgradeLevel + 1;
             currentSelectedHero.HeroSO.CurrentUpgradeLevel = currentSelectedHero.HeroSO.UpgradeLevelsSO.HeroUpgradeLevelSOs[(int)currentSelectedHero.HeroData.UpgradeLevel - 1];
             heroesUpgradeUI.SetSelectedHeroStats(currentSelectedHero);
+
             var upgradedHeroData = new HeroData(currentSelectedHero.HeroData.HeroType, currentSelectedHero.HeroData.UpgradeLevel, currentSelectedHero.HeroData.CardType, isAcquired: true, currentSelectedHero.HeroData.Price);
             upgradedHeroData.ReseivedCards = currentSelectedHero.HeroData.ReseivedCards;
+
             currentSelectedHero.OnHeroDataChange(upgradedHeroData);
+
             heroesDataStoreService.StoreChangedHeroData(upgradedHeroData, selectedAcquiredHeroesByIndex);
+        }
+        else
+        {
+            Debug.Log("Not enoght money to upgrade hero !!!");
         }
     }
 
@@ -105,7 +173,7 @@ public class HeroesDataHandler : MonoBehaviour
             heroesUpgradeUI.SetSelectedHeroStats(currentSelectedHero);
             heroesDataStoreService.StoreChangedHeroData(currentSelectedHero.HeroData, selectedAcquiredHeroesByIndex);
 
-            AllHeroes.AcquiredHeroes.Add(currentSelectedHero.HeroSO);
+            //AllHeroes.AcquiredHeroes.Add(currentSelectedHero.HeroSO);
             return true;
         }
         else

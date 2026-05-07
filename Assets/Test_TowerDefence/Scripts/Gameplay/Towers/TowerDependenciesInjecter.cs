@@ -16,13 +16,15 @@ public class TowerDependenciesInjecter : MonoBehaviour
         playerInputHandler = ServiceLocator.GetService<PlayerInputHandler>();
     }
 
-    public void SetTowerDependencies(BaseTower tower)
+    public void SetTowerDependencies(BaseTower tower, TowerSO towerSO)
     {
         tower.Construct(gameplayStates, projectilesFactoriesService);
+        tower.SetParams(towerSO);
     }
 
-    public void SetDefenderTowerDependencies(DefenderTower tower)
+    public void SetDefenderTowerDependencies(DefenderTower tower, TowerSO towerSO)
     {
-        tower.Construct(playerInputHandler, gameplayStates, towerUpgradeUI, touchBuildingArea, projectilesFactoriesService);
+        tower.Construct(playerInputHandler, gameplayStates, towerUpgradeUI, touchBuildingArea, projectilesFactoriesService, towerSO);
+        tower.SetParams(towerSO);
     }
 }

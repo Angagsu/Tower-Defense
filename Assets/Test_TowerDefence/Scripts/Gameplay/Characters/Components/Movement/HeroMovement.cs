@@ -45,13 +45,16 @@ public class HeroMovement : BaseMovement
                 {
                     StopCoroutine(coroutine);
                 }
+                isMoves = true;
+                hero.ResetTargetedMonster();
+                //hero.ResetTarget();
                 coroutine = StartCoroutine(HeroMoveTowerds(raycastHit.point, moveSpeed, turnSpeed));
                 NewPosition = raycastHit.point;
             }
         }
     }
 
-    public void MoveToTargetMonster(float moveSpeed, float turnSpeed, Vector3 targetPosition)
+    public void MoveToTargetMonster(BaseMonster monster, float moveSpeed, float turnSpeed, Vector3 targetPosition)
     {
         if (IsMoves)
         {
@@ -62,8 +65,10 @@ public class HeroMovement : BaseMovement
         {
             StopCoroutine(coroutine);
         }
-        
-        coroutine = StartCoroutine(MoveToTargetedMonster(hero, targetPosition, moveSpeed, turnSpeed));      
+  
+        isMoves = true;
+
+        coroutine = StartCoroutine(MoveToTargetedMonster(monster, targetPosition, moveSpeed, turnSpeed));      
     }
 
     public void ReturnToPreviousPosition(float moveSpeed, float turnSpeed, Vector3 targetPosition)
@@ -77,7 +82,7 @@ public class HeroMovement : BaseMovement
         {
             StopCoroutine(coroutine);
         }
-        
+
         coroutine = StartCoroutine(GoToPreviousPosition(hero, targetPosition, moveSpeed, turnSpeed));
     }
 
@@ -93,14 +98,16 @@ public class HeroMovement : BaseMovement
         float heroDistanceToFloor = transform.position.y - targetPosition.y;
         targetPosition.y += heroDistanceToFloor;
 
-        while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
+
+        while ((transform.position - targetPosition).sqrMagnitude > 0.1f)
         {
             while(isPaused) yield return null;
 
             Vector3 direction = targetPosition - transform.position;
-            Vector3 movement = direction.normalized * moveSpeed * Time.deltaTime;
+            Vector3 movement =  moveSpeed * Time.deltaTime * direction.normalized;
 
-            characterController.Move(movement);
+            //characterController.Move(movement);
+            hero.transform.position += movement;
 
             hero.RotatPart.rotation = Quaternion.Slerp(hero.RotatPart.rotation, Quaternion.LookRotation(direction.normalized),
                 turnSpeed * Time.deltaTime);
@@ -117,7 +124,7 @@ public class HeroMovement : BaseMovement
         hero.Anim.SetMoveAnimation(false);
     }
 
-    private IEnumerator MoveToTargetedMonster(BaseHero hero, Vector3 targetPosition, float moveSpeed, float turnSpeed)
+    private IEnumerator MoveToTargetedMonster(BaseMonster monster, Vector3 targetPosition, float moveSpeed, float turnSpeed)
     {
         IsOnPreviosPosition = false;
         isMoves = true;
@@ -129,14 +136,15 @@ public class HeroMovement : BaseMovement
         float heroDistanceToFloor = transform.position.y - targetPosition.y;
         targetPosition.y += heroDistanceToFloor;
 
-        while (Vector3.Distance(transform.position, targetPosition) > (hero.AttackRange))
+        while ((transform.position - targetPosition).sqrMagnitude > (hero.AttackRange * hero.AttackRange) && monster != null && !monster.IsDead)
         {
             while (isPaused) yield return null;
 
             Vector3 direction = targetPosition - transform.position;
             Vector3 movement = direction.normalized * moveSpeed * Time.deltaTime;
 
-            characterController.Move(movement);
+            //characterController.Move(movement);
+            hero.transform.position += movement;
 
             hero.RotatPart.rotation = Quaternion.Slerp(hero.RotatPart.rotation, Quaternion.LookRotation(direction.normalized),
                 turnSpeed * Time.deltaTime);
@@ -161,14 +169,15 @@ public class HeroMovement : BaseMovement
         float heroDistanceToFloor = transform.position.y - targetPosition.y;
         targetPosition.y += heroDistanceToFloor;
 
-        while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
+        while ((transform.position - targetPosition).sqrMagnitude > 0.1f)
         {
             while (isPaused) yield return null;
 
             Vector3 direction = targetPosition - transform.position;
             Vector3 movement = direction.normalized * moveSpeed * Time.deltaTime;
 
-            characterController.Move(movement);
+            //characterController.Move(movement);
+            hero.transform.position += movement;
 
             hero.RotatPart.rotation = Quaternion.Slerp(hero.RotatPart.rotation, Quaternion.LookRotation(direction.normalized),
                 turnSpeed * Time.deltaTime);

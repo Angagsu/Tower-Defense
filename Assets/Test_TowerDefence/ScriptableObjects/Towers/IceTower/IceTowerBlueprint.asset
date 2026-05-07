@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae2b388ea7185a34b9299ac6f8b875f1, type: 3}
   m_Name: IceTowerBlueprint
   m_EditorClassIdentifier: 
-  Towers:
+  TowerType: 4
+  TowerUpgrades:
   - {fileID: 11400000, guid: 6b75106a03536974db5cb0ea3170b146, type: 2}
   - {fileID: 11400000, guid: 7389cd5ef6e90fb429533cf78a3572e5, type: 2}
   - {fileID: 11400000, guid: ff64cb2bfca61c84e8b50ea08eff2ca0, type: 2}

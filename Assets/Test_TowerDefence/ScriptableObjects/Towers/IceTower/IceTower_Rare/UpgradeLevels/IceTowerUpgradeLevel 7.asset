@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4dc40daf145b284c87961d8dc09d3a5, type: 3}
+  m_Name: IceTowerUpgradeLevel 7
+  m_EditorClassIdentifier: 
+  <AttackStats>k__BackingField:
+    Health: 500
+    MaxHealth: 500
+    Armor: 0
+    MaxArmor: 0
+    PhysicalResistance: 13
+    MagicalResistance: 15
+    ArmorType: 3
+    DamageData:
+      DamageAmount: 52
+      DamageType: 1
+      PhysicalPenetration: 0
+      MagicalPenetration: 14
+      ArmorPercent: 0.3
+      HealthPercent: 0.7
+  <AttackRange>k__BackingField: 21
+  <AttackRate>k__BackingField: 0.3
+  <BuyCost>k__BackingField: 690
+  <UpgradeCostByGold>k__BackingField: 1100
+  <UpgradeCostByCard>k__BackingField: 7
+  <StatsValues>k__BackingField:
+  - 500
+  - 52
+  - 21
+  - 0.3
+  - 690
+  <PassiveSkillsValues>k__BackingField:
+  - 0.45
+  - 3.5
+  <PassiveSkillsAccessibility>k__BackingField: 0101
+  <DecelerationMultiplier>k__BackingField: 0.45
+  <OverTimeDamageMultiplier>k__BackingField: 3.5

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c68b215d4d2e041acd5d1f71fbc6d5, type: 3}
+  m_Name: IceTower_Epic_UpgradeLevels
+  m_EditorClassIdentifier: 
+  TowerUpgradeLevelSOs:
+  - {fileID: 11400000, guid: 38aa197b6fec60c48927db9987be81b1, type: 2}
+  - {fileID: 11400000, guid: 10cb70b4afeaa164f994a5f3631a268a, type: 2}
+  - {fileID: 11400000, guid: dc54295c6f5d48047a4833a27dfb0764, type: 2}
+  - {fileID: 11400000, guid: c376578d4d1bb8746a1da5f78d49007b, type: 2}
+  - {fileID: 11400000, guid: 9ba74b9c3807f9c4e9b33f22533170df, type: 2}
+  - {fileID: 11400000, guid: 60cd9c817d47d6b4a8bdf40d770dafc6, type: 2}
+  - {fileID: 11400000, guid: b12b78a04ff932048ae4b904a9a6a3b3, type: 2}
+  - {fileID: 11400000, guid: 4ebe355b92ee6074c81d4650939cf648, type: 2}
+  - {fileID: 11400000, guid: 7ecedd371cabf924eb3c916a21804e1d, type: 2}
+  - {fileID: 11400000, guid: afbdbaf69c2a4bb419f888d149e16bc4, type: 2}

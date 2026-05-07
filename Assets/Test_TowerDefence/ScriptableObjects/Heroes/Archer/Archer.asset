@@ -12,17 +12,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e728543fc3a92394ba9d47852d0a635a, type: 3}
   m_Name: Archer
   m_EditorClassIdentifier: 
-  <CurrentUpgradeLevel>k__BackingField: {fileID: 11400000, guid: ce217533c681965439a90fe35e496dde,
-    type: 2}
-  <UpgradeLevelsSO>k__BackingField: {fileID: 11400000, guid: 1a061e853fbae744d989ad0157ee9185,
-    type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: d2eedf5076fc81b4ea28fa7cc3c38643,
+  <HeroName>k__BackingField: Archer
+  <HeroDescription>k__BackingField: Netov xpox qac
+  <Sprite>k__BackingField: {fileID: 21300000, guid: e0534e9632ec38e48a075885adbfee43,
+    type: 3}
+  <BigSprite>k__BackingField: {fileID: 21300000, guid: 8e0f64cbd4a872640b84e2619c6774e9,
+    type: 3}
+  <CardSprite>k__BackingField: {fileID: 21300000, guid: 85a0ae10af6f5f84cacf5c96c1cf1bda,
     type: 3}
   <Prefab>k__BackingField: {fileID: 3073217194499311935, guid: 02b40aa2074ce974c8c96d0457996f78,
     type: 3}
+  <CurrentUpgradeLevel>k__BackingField: {fileID: 11400000, guid: ad6faa37b2f154e47b69b34dd22b32ce,
+    type: 2}
+  <UpgradeLevelsSO>k__BackingField: {fileID: 11400000, guid: 1a061e853fbae744d989ad0157ee9185,
+    type: 2}
+  <ActiveSkillSprite>k__BackingField: {fileID: 21300000, guid: 9fd6eb2c02f2c2e45a12e29102cf55e8,
+    type: 3}
+  <ActiveSkillUnlockLevel>k__BackingField: 2
+  <ActiveSkillMaxValue>k__BackingField: 0
+  <ActiveSkillName>k__BackingField: 
+  <ActiveSkillDescripsion>k__BackingField: 
+  <PassivSkillsSprites>k__BackingField:
+  - {fileID: 21300000, guid: 6bc8847b0b06eba4bb8b35cd4d4f9d0f, type: 3}
+  - {fileID: 21300000, guid: 963667f040f3c024c8cae05d7891da61, type: 3}
+  <PassiveSkillsAmount>k__BackingField: 2
+  <PassiveSkillsUnlockLevels>k__BackingField: 0300000003000000
+  <PassiveSkillsNames>k__BackingField:
+  - Critical Damage
+  - Critical Hit Chance
+  <PassiveSkillsDescripsions>k__BackingField:
+  - Attacks have chance to apply critical damage
+  - Critical damage chance
   <HeroData>k__BackingField:
     HeroType: 1
-    UpgradeLevel: 1
+    UpgradeLevel: 2
     CardType: 1
     IsAcquired: 1
     Price: 0

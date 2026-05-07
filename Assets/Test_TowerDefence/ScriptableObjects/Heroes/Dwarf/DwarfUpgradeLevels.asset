@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: DwarfUpgradeLevels
   m_EditorClassIdentifier: 
   HeroUpgradeLevelSOs:
-  - {fileID: 11400000, guid: ad680ff1536e87a4ab9ff925d1a8c491, type: 2}
-  - {fileID: 11400000, guid: 9e9c879315a056344850564d8f44b87e, type: 2}
-  - {fileID: 11400000, guid: 5d3a7dd22929a7e498db219852cab138, type: 2}
-  - {fileID: 11400000, guid: ab5aad009c0f0e24e9b6b893014b5b54, type: 2}
-  - {fileID: 11400000, guid: 9b3caee301dd63f48a2d135cd35c81d0, type: 2}
-  - {fileID: 11400000, guid: eecb578ee5abe8e47b862cd3d07d5cc4, type: 2}
+  - {fileID: 11400000, guid: c6d114c68d6e01642be42fbea4b5d5e3, type: 2}
+  - {fileID: 11400000, guid: deed952aa67b9fa41afab20ff4b4d4ed, type: 2}
+  - {fileID: 11400000, guid: 15b53447cab3baf41995ab40e4e62e00, type: 2}
+  - {fileID: 11400000, guid: 49ee9af2d2d5f7d4285e655fdc235c94, type: 2}
+  - {fileID: 11400000, guid: 91254dbd6dd5aff4b9cb8177b9e3854b, type: 2}
+  - {fileID: 11400000, guid: a813e7a54ba547c418643b7e0025ad4d, type: 2}
+  - {fileID: 11400000, guid: ca9bab8cce500f4499e5b4ee696d440a, type: 2}
+  - {fileID: 11400000, guid: 7555821bfea92b44bae4c1cb88e1717e, type: 2}
+  - {fileID: 11400000, guid: 3a7c19f8e5c874641928c45ca2a5a0ef, type: 2}
+  - {fileID: 11400000, guid: 9d6ef88527b0b8249a00a529dfed7b69, type: 2}

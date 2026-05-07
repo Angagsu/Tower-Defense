@@ -33,14 +33,16 @@ public class TouchBuildingArea : MonoBehaviour
 
             BuildingArea = buildingArea;
 
-            if (buildingArea.Tower != null)
+            if (buildingArea.CurrentTower != null)
             {
+                buildsController.DeselectTowerBuilUIObject();
                 buildsController.SelectedGroundForUpgradeTowerUI(buildingArea);
                 return;
             }
 
-            if (buildingArea.Tower == null)
+            if (buildingArea.CurrentTower == null)
             {
+                buildsController.DeselectTowerUpgradeUIObject();
                 buildsController.SelectedGroundForBuildTowerUI(buildingArea);
                 return;
             }

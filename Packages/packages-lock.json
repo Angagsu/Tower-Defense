@@ -20,8 +20,8 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.2d.aseprite": {
-      "version": "1.1.10",
-      "depth": 0,
+      "version": "1.1.11",
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.2d.common": "6.0.6",
@@ -33,7 +33,7 @@
     },
     "com.unity.2d.common": {
       "version": "9.1.1",
-      "depth": 1,
+      "depth": 2,
       "source": "registry",
       "dependencies": {
         "com.unity.burst": "1.8.4",
@@ -63,13 +63,13 @@
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
-      "depth": 0,
+      "depth": 1,
       "source": "builtin",
       "dependencies": {}
     },
     "com.unity.2d.spriteshape": {
       "version": "10.0.7",
-      "depth": 0,
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.2d.common": "9.0.7",
@@ -108,13 +108,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.collab-proxy": {
-      "version": "2.9.3",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.com"
-    },
     "com.unity.collections": {
       "version": "2.5.1",
       "depth": 1,
@@ -128,7 +121,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.device-simulator.devices": {
-      "version": "1.0.0",
+      "version": "1.0.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -159,11 +152,11 @@
         "com.unity.2d.spriteshape": "10.0.7",
         "com.unity.2d.tilemap": "1.0.0",
         "com.unity.2d.tilemap.extras": "4.1.0",
-        "com.unity.2d.aseprite": "1.1.10"
+        "com.unity.2d.aseprite": "1.1.11"
       }
     },
     "com.unity.ide.rider": {
-      "version": "3.0.38",
+      "version": "3.0.40",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -172,11 +165,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.23",
+      "version": "2.0.27",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.test-framework": "1.1.9"
+        "com.unity.test-framework": "1.1.33"
       },
       "url": "https://packages.unity.com"
     },
@@ -197,7 +190,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.memoryprofiler": {
-      "version": "1.1.9",
+      "version": "1.1.12",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -210,14 +203,14 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.mobile.android-logcat": {
-      "version": "1.4.5",
+      "version": "1.4.7",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.mobile.notifications": {
-      "version": "2.4.2",
+      "version": "2.4.3",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -241,7 +234,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.nuget.newtonsoft-json": {
-      "version": "3.2.1",
+      "version": "3.2.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -334,7 +327,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.8.9",
+      "version": "1.8.12",
       "depth": 0,
       "source": "registry",
       "dependencies": {

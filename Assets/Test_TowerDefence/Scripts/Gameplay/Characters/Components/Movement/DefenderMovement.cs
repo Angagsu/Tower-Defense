@@ -66,7 +66,6 @@ public class DefenderMovement : BaseMovement
     {
         if (IsOnPreviosPosition)
         {
-            Debug.Log("Yaqu Arraaa");
             return;
         }
 
@@ -91,9 +90,9 @@ public class DefenderMovement : BaseMovement
 
         positionOffset = new Vector3(transform.position.x - DirectionOffset.x, transform.position.y - DirectionOffset.y, transform.position.z - DirectionOffset.z);
         targetPositionOffset = new Vector3(DirectionOffset.x + targetPosition.x, DirectionOffset.y + targetPosition.y, DirectionOffset.z + targetPosition.z);
+        
 
-
-        while (Vector3.Distance(positionOffset, targetPositionOffset) > 0.1f)
+        while ((positionOffset - targetPositionOffset).sqrMagnitude > 0.1f)
         {
             while (isPaused) yield return null;
 
@@ -102,7 +101,8 @@ public class DefenderMovement : BaseMovement
 
             Vector3 movement = direction.normalized * moveSpeed * Time.deltaTime;
             
-            characterController.Move(movement);
+            //characterController.Move(movement);
+            defender.transform.position += movement;
 
             defender.RotatPart.rotation = Quaternion.Slerp(defender.RotatPart.rotation, Quaternion.LookRotation(direction.normalized),
                 turnSpeed * Time.deltaTime);
@@ -138,14 +138,15 @@ public class DefenderMovement : BaseMovement
         float heroDistanceToFloor = transform.position.y - targetPosition.y;
         targetPosition.y += heroDistanceToFloor;
 
-        while (Vector3.Distance(transform.position, targetPosition) > defender.AttackRange)
+        while ((transform.position - targetPosition).sqrMagnitude > (defender.AttackRange * defender.AttackRange))
         {
             while(isPaused) yield return null;
 
             Vector3 direction = targetPosition - transform.position;
             Vector3 movement = direction.normalized * moveSpeed * Time.deltaTime;
 
-            characterController.Move(movement);
+            //characterController.Move(movement);
+            defender.transform.position += movement;
 
             defender.RotatPart.rotation = Quaternion.Slerp(defender.RotatPart.rotation, Quaternion.LookRotation(direction.normalized),
                 turnSpeed * Time.deltaTime);
@@ -169,14 +170,15 @@ public class DefenderMovement : BaseMovement
         float heroDistanceToFloor = transform.position.y - targetPosition.y;
         targetPosition.y += heroDistanceToFloor;
 
-        while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
+        while ((transform.position - targetPosition).sqrMagnitude > 0.1f)
         {
             while (isPaused) yield return null;
 
             Vector3 direction = targetPosition - transform.position;
             Vector3 movement = direction.normalized * moveSpeed * Time.deltaTime;
 
-            characterController.Move(movement);
+           // characterController.Move(movement);
+            defender.transform.position += movement;    
 
             defender.RotatPart.rotation = Quaternion.Slerp(defender.RotatPart.rotation, Quaternion.LookRotation(direction.normalized),
                 turnSpeed * Time.deltaTime);
@@ -189,5 +191,11 @@ public class DefenderMovement : BaseMovement
         isMoves = false;
         defender.SetCanAttack(true);
         defender.Anim.SetMoveAnimation(false);
+    }
+
+    public void SetPreviousPosition(Vector3 position)
+    {
+        PreviousPosition = position;
+        IsOnPreviosPosition = true;
     }
 }

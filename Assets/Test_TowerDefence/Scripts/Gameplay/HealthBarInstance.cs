@@ -1,0 +1,25 @@
+using UnityEngine;
+
+
+public class HealthBarInstance : MonoBehaviour
+{
+    private MaterialPropertyBlock materialPropertyBlock;
+
+    [SerializeField] private MeshRenderer meshRenderer;
+
+    
+    private void Awake()
+    {
+        materialPropertyBlock = new();
+        meshRenderer.SetPropertyBlock(materialPropertyBlock);
+    }
+
+    public void SetMaterialProperty(float amount)
+    {
+        if (materialPropertyBlock != null)
+        {
+            materialPropertyBlock.SetFloat("_Slider", amount);
+            meshRenderer.SetPropertyBlock(materialPropertyBlock);
+        }
+    }
+}
