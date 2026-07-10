@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Test_TowerDefence.Scripts.Monster.Boss
 {
     public class GenerativeBossMonster : BossMonster
     {
+        [SerializeField] private List<BaseMonster> minions;
 
         protected override void Awake()
         {
@@ -35,9 +38,19 @@ namespace Assets.Test_TowerDefence.Scripts.Monster.Boss
             base.Move(target);
         }
 
-        //public override void TakeDamage(float amount)
-        //{
-        //    base.TakeDamage(amount);
-        //}
+        protected override IEnumerator DyingAnimationDuration()
+        {
+            anim.SetDeadAnimation(isDead);
+
+            yield return new WaitForSeconds(0.7f);
+
+            while (isPaused) yield return null;
+
+            Movement.SetMinionsPositionAndTarget(minions, transform, transform.rotation);
+
+            yield return new WaitForSeconds(dyingAnimationDuration);
+
+            gameObject.SetActive(false);
+        }
     }
 }

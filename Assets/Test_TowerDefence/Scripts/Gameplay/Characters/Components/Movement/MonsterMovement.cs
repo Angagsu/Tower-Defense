@@ -86,7 +86,7 @@ public class MonsterMovement : BaseMovement
 
         float sqrDistance = (this.target.position - transform.position).sqrMagnitude;
 
-        if (sqrDistance <= 9f && IsMoves)
+        if (sqrDistance <= 4f && IsMoves)
         {
             GetNextWayPoint();
         }
@@ -98,6 +98,18 @@ public class MonsterMovement : BaseMovement
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         Vector3 rotation = Quaternion.Lerp(rotatablePart.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
         rotatablePart.rotation = Quaternion.Euler(0, rotation.y, 0);
+
+        //Vector3 direction = target.position - transform.position;
+        //direction.y = 0f;
+        //
+        //if (direction.sqrMagnitude > 0.001f)
+        //{
+        //    rotatablePart.rotation = Quaternion.RotateTowards(
+        //        rotatablePart.rotation,
+        //        Quaternion.LookRotation(direction),
+        //        turnSpeed * Time.deltaTime
+        //    );
+        //}
     }
 
     private void GetNextWayPoint()

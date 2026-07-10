@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 935a5792627a430eadb402684692f56e
+timeCreated: 1771278433
+AssetOrigin:
+  serializedVersion: 1
+  productId: 363718
+  packageName: Flexy.SystemInfo
+  packageVersion: 6.0.0
+  assetPath: Packages/fun.flexy.systeminfo/Runtime/Window_SystemInfo.cs
+  uploadId: 879092

@@ -25,10 +25,10 @@ public class GameEntryPoint
     {
         coroutines = new GameObject("[COROUTINES]").AddComponent<Coroutines>();
         Object.DontDestroyOnLoad(coroutines.gameObject);
-
+        
         SceneLoader = new GameObject("[SceneLoadService]").AddComponent<AsyncSceneLoadService>();
         Object.DontDestroyOnLoad(SceneLoader.gameObject);
-
+        
         var loadingScreenUIPrefab = Resources.Load<LoadingScreenUI>("LoadingScreenUI");
         loadingScreenUI = Object.Instantiate(loadingScreenUIPrefab);
         Object.DontDestroyOnLoad(loadingScreenUI.gameObject); 
@@ -38,8 +38,9 @@ public class GameEntryPoint
     private void RunGame()
     {
 #if UNITY_EDITOR
-        var sceneName = SceneManager.GetActiveScene().name;
-        coroutines.StartCoroutine(LoadSceneInEditor(sceneName));
+        //var sceneName = SceneManager.GetActiveScene().name;
+        //coroutines.StartCoroutine(LoadSceneInEditor(sceneName));
+
 
 #else
         coroutines.StartCoroutine(LoadScene(Scenes.MAIN_MENU));

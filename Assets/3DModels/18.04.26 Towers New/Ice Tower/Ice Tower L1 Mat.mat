@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Ice Tower L1 Mat
-  m_Shader: {fileID: -6465566751694194690, guid: 61f50d5d3d54c8f4b94f6893243e945e,
+  m_Shader: {fileID: -6465566751694194690, guid: 724544f91deeb1141a50cdea4fd80791,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -73,7 +73,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emmisive_Tower:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 89ffc7f5e0494b8439ef8145308762b1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emmisive_Tower_Broken:
@@ -92,12 +92,20 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Noise_Textures:
+        m_Texture: {fileID: 2800000, guid: 7453459e8aaebd84cb6348c46458e930, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RGBA_Mask:
+        m_Texture: {fileID: 2800000, guid: f4d3563fd42558846b2577e1c6be050f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Snow_Map:
@@ -137,7 +145,7 @@ Material:
     - _All_Animaton_Speed: 1
     - _AlphaClip: 1
     - _AlphaToMask: 1
-    - _Alpha_Clipping: 0.84
+    - _Alpha_Clipping: 0.94
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -152,15 +160,20 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _Emmisive_Intensity: 0
+    - _Emmisive_Intensity: 1
     - _EnvironmentReflections: 1
     - _Fall: 1
+    - _Flow_Opacity: 1.88
+    - _Flow_Speed: 0.02
     - _Global_Light_Intensity: 0
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
     - _Lake: 1
+    - _LightWaveOpacity: 0.202
+    - _LightWaveSpeed: 0.2
     - _Metallic: 0
+    - _Night_Effect_Intensity: 0.62
     - _Night_Mode_On: 0
     - _OcclusionStrength: 1
     - _On_Broken_Tower: 0
@@ -169,6 +182,8 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _ShineOpacity: 5
+    - _ShineSpeed: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _Snow_Edge: 0.5
@@ -192,6 +207,10 @@ Material:
     - _Color: {r: 0.9063317, g: 0.9063317, b: 0.9063317, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Global_Light_Color: {r: 0, g: 0, b: 0, a: 0}
+    - _InnerCoreColor: {r: 11.12796, g: 14.60795, b: 47.23201, a: 0}
+    - _LightWaveColor: {r: 3.880286, g: 6.536274, b: 14.37143, a: 0}
+    - _Moonlight_Color: {r: 0, g: 0, b: 0, a: 0}
+    - _ShineColor: {r: 0.17548257, g: 4.984667, b: 6.7034364, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

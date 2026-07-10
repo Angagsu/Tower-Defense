@@ -29,15 +29,43 @@ namespace Assets.Scripts.Hero
             }
         }
 
-        public override void SuperAttack(Action skillCooldown)
+        public override void SuperAttack()
         {
             if (movement.IsMoves) return;
 
-            Debug.Log($"Hero: {this} Super Attack");
-            superAttack.AreaEffect(AttackStats, superAttackRadius, superAttackEffectDuration);
-            skillCooldown?.Invoke();
+            if (!activeSkillUI.IsSelected)
+            {
+                activeSkillUI.Select();
+                superAttack.SetIsSuperAttackStarted(true);
+                superAttack.OnSuperAttackPerformed(activeSkillUI);
+
+                Anim.SetAllAnimationsFalse();
+                canAttack = false;
+            }
+            else
+            {
+                Anim.SetSupperAttackAnimation(true);
+            }
         }
+
+        public override void OnSuperAttackAnimationTriggerStart()
+        {
+            canDetect = false;
+            canMove = false;
  
+            superAttack.AreaEffect(AttackStats, superAttackRadius, superAttackEffectDuration);
+            activeSkillUI.StartCooldown();
+            activeSkillUI.Deselect();
+        }
+
+        public override void OnSuperAttackAnimationTriggerEnd()
+        {
+            Anim.SetSupperAttackAnimation(false);
+            canAttack = true;
+            canDetect = true;
+            canMove = true;
+        }
+
         protected override void Awake()
         {
             base.Awake();

@@ -13,14 +13,14 @@ public class HeroesDataToStore
     [JsonProperty("hrs")]
     public Dictionary<HeroType, HeroData> AllHeroes = new();
     
-    public Dictionary<HeroType, HeroCardData> AllCards = new();
+    //public Dictionary<HeroType, HeroCardData> AllCards = new();
 
     public HeroesDataToStore()
     {
         for (int i = 0; i < AllHeroAndTowerTypes.HeroTypes.Count; i++)
         {           
             AllHeroes.Add((HeroType)i, new HeroData(AllHeroAndTowerTypes.HeroTypes[i], HeroUpgradeLevel.Level_1, AllHeroAndTowerTypes.HeroCards[i], isAcquired: false, price: default));
-            AllCards.Add((HeroType)i, new HeroCardData(AllHeroAndTowerTypes.HeroCards[i]));
+           // AllCards.Add((HeroType)i, new HeroCardData(AllHeroAndTowerTypes.HeroCards[i]));
         }
 
         AllHeroes[HeroType.Knight].IsAcquired = true;

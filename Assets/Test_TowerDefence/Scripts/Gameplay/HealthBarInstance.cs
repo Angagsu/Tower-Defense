@@ -3,11 +3,12 @@ using UnityEngine;
 
 public class HealthBarInstance : MonoBehaviour
 {
-    private MaterialPropertyBlock materialPropertyBlock;
-
     [SerializeField] private MeshRenderer meshRenderer;
 
-    
+    private MaterialPropertyBlock materialPropertyBlock;
+    private const string sliderPropertyName = "_Slider";
+
+
     private void Awake()
     {
         materialPropertyBlock = new();
@@ -18,7 +19,7 @@ public class HealthBarInstance : MonoBehaviour
     {
         if (materialPropertyBlock != null)
         {
-            materialPropertyBlock.SetFloat("_Slider", amount);
+            materialPropertyBlock.SetFloat(sliderPropertyName, amount);
             meshRenderer.SetPropertyBlock(materialPropertyBlock);
         }
     }

@@ -28,7 +28,7 @@ public class HeroSuperAttack : MonoBehaviour
         superAttackValue = baseHero.UpgradeLevel.ActiveSkillValue;
     }
 
-    public virtual void OnSuperAttackPerformed(Action superAttackPerformed) { }
+    public virtual void OnSuperAttackPerformed(GameplayHeroActiveSkillUI activeSkillUI = null) { }
 
     public virtual void AreaEffect(AttackStats stats, float areaRadius, float passiveEffectDuration = 0, float passiveEffect_2 = 0) { }
 

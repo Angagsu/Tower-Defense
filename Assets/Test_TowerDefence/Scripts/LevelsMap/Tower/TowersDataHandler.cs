@@ -5,6 +5,7 @@ using UnityEngine;
 public class TowersDataHandler : MonoBehaviour
 {
     public event Action<List<int>> SelectedAcquiredTowersChanged;
+    public event Action DataChanged;
     public List<int> SelectedTowersByIndex => selectedAcquiredTowersByIndex;
 
     [SerializeField] private AllTowersBlueprintSO AllTowers;
@@ -14,6 +15,7 @@ public class TowersDataHandler : MonoBehaviour
     [SerializeField] private PreparingToPlayUI preparingToPlayUI;
 
     private TowersDataStoreService towersDataStoreService;
+    private TowersDataToStore towersDataToStore;
 
     private List<LevelsMapTower> levelsMapTowers = new();
     private GamePlayerDataHandler gamePlayerDataHandler;
@@ -60,6 +62,7 @@ public class TowersDataHandler : MonoBehaviour
 
     private void OnTowerDataChange(TowersDataToStore towerDataToStore)
     {
+        this.towersDataToStore = towerDataToStore;
         AllTowers.AcquiredTowers.Clear();
 
         for (int i = 0; i < AllHeroAndTowerTypes.TowerTypes.Count; i++)
@@ -72,7 +75,8 @@ public class TowersDataHandler : MonoBehaviour
                 levelsMapTowers[i].TowerFullBlueprintSO.TowerUpgrades[j].TowerData.IsAcquired = towerDataToStore.AllTowers[(TowerType)i].TowerUpgrades[j].IsAcquired;
                 levelsMapTowers[i].TowerFullBlueprintSO.TowerUpgrades[j].CurrentUpgradeLevel =
                     levelsMapTowers[i].TowerFullBlueprintSO.TowerUpgrades[j].UpgradeLevelsSO.TowerUpgradeLevelSOs[(int)towerDataToStore.AllTowers[(TowerType)i].TowerUpgrades[j].UpgradeLevel - 1];
-                levelsMapTowers[i].TowerFullBlueprintSO.TowerUpgrades[j].TowerData.ReseivedCards = towerDataToStore.AllTowers[(TowerType)i].TowerUpgrades[j].ReseivedCards;
+                levelsMapTowers[i].TowerFullBlueprintSO.TowerUpgrades[j].TowerData.ReceivedCards = towerDataToStore.AllTowers[(TowerType)i].TowerUpgrades[j].ReceivedCards;
+                levelsMapTowers[i].TowerFullBlueprintSO.TowerUpgrades[j].TowerData.CostOfChange = towerDataToStore.AllTowers[(TowerType)i].TowerUpgrades[j].CostOfChange;
             }
 
             levelsMapTowers[i].SetParams(levelsMapTowers[i].TowerFullBlueprintSO, i);
@@ -84,6 +88,7 @@ public class TowersDataHandler : MonoBehaviour
         }
 
         currentSelectedTower.Select();
+        DataChanged?.Invoke();
     }
 
     public List<LevelsMapTower> GetLevelsMapTowers()
@@ -110,7 +115,8 @@ public class TowersDataHandler : MonoBehaviour
     public void UpgradeTower(LevelsMapTowerUpgrade levelsMapTowerUpgrade, int upgradeGoldCost, int upgradeCardCost)
     {
         this.currentSelectedTowerUpgrade = levelsMapTowerUpgrade;
-        if (upgradeCardCost > 0 && upgradeCardCost <= currentSelectedTowerUpgrade.TowerData.ReseivedCards.Count)
+
+        if (upgradeCardCost > 0 && upgradeCardCost <= currentSelectedTowerUpgrade.TowerData.ReceivedCards.Count)
         {
             UpgradeTowerByGoldAndCard(upgradeGoldCost, upgradeCardCost, currentSelectedTowerUpgrade.ID);
         }
@@ -132,10 +138,7 @@ public class TowersDataHandler : MonoBehaviour
             currentSelectedTowerUpgrade.TowerSO.CurrentUpgradeLevel = currentSelectedTowerUpgrade.TowerSO.UpgradeLevelsSO.TowerUpgradeLevelSOs[(int)currentSelectedTowerUpgrade.TowerData.UpgradeLevel - 1];
 
             var upgradedHeroData = new TowerData(currentSelectedTowerUpgrade.TowerData.TowerType, currentSelectedTowerUpgrade.TowerData.UpgradeLevel, currentSelectedTowerUpgrade.TowerData.CardType, isAcquired: true, currentSelectedTowerUpgrade.TowerData.Price);
-
-            currentSelectedTowerUpgrade.TowerData.ReseivedCards.RemoveRange(0, upgradeCardCost);
-
-            upgradedHeroData.ReseivedCards = currentSelectedTowerUpgrade.TowerData.ReseivedCards;
+            upgradedHeroData.ReceivedCards = currentSelectedTowerUpgrade.TowerData.ReceivedCards;
 
             towerUpgradeUI.SetSelectedTowerUpgradeStats(currentSelectedTowerUpgrade);
 
@@ -158,7 +161,7 @@ public class TowersDataHandler : MonoBehaviour
             towerUpgradeUI.SetSelectedTowerUpgradeStats(currentSelectedTowerUpgrade);
 
             var upgradedTowerData = new TowerData(currentSelectedTowerUpgrade.TowerData.TowerType, currentSelectedTowerUpgrade.TowerData.UpgradeLevel, currentSelectedTowerUpgrade.TowerData.CardType, isAcquired: true, currentSelectedTowerUpgrade.TowerData.Price);
-            upgradedTowerData.ReseivedCards = currentSelectedTowerUpgrade.TowerData.ReseivedCards;
+            upgradedTowerData.ReceivedCards = currentSelectedTowerUpgrade.TowerData.ReceivedCards;
 
             towersDataStoreService.StoreChangedTowerData(upgradedTowerData, currentSelectedTowerUpgrade.ID, selectedAcquiredTowersByIndex);
         }
@@ -208,5 +211,20 @@ public class TowersDataHandler : MonoBehaviour
             Debug.Log("Not Enought Gold To Buy");
             return false;
         }
+    }
+
+    public void ExchangeCards()
+    {
+        towersDataStoreService.ExchangeCards();
+    }
+
+    public void AddTowerCards(List<TowerCard> towerCards)
+    {
+        towersDataStoreService.AddCard(towerCards);
+    }
+
+    public TowersDataToStore GetStoredTowersData()
+    {
+        return towersDataToStore;
     }
 }

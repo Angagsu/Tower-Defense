@@ -8,93 +8,44 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Ice Tower L4 Mat
-  m_Shader: {fileID: -6465566751694194690, guid: 170e2ec2222e6ee43b573c177b76b498,
+  m_Shader: {fileID: -6465566751694194690, guid: 724544f91deeb1141a50cdea4fd80791,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _ALPHATEST_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: TransparentCutout
   disabledShaderPasses:
   - MOTIONVECTORS
+  - SHADOWCASTER
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_882b8c533bcf4e429d607fa08b04cd72:
-        m_Texture: {fileID: 2800000, guid: 0e852c6d128721b4bb968d8d7baa119e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_a6f03190d40346b2bcde06215cbbfc90:
-        m_Texture: {fileID: 2800000, guid: fd6fd7c1ff9017b45b619348106c2c56, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 4677bd410a38bd944b4053dc6cd9aea1, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _Broken_Tower_Texture:
         m_Texture: {fileID: 2800000, guid: 0e22ddf94bbb27443810068d888d80e1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _CrystalShine_7a0a88d71d6943df843f14dec1b00385_ShineTexture_4251173653_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 4bf8ff0c9bae49c48bc9b4b9f5a31afd, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _CrystalShine_e59cc8b17550419a9d5cf87edcb88f99_ShineTexture_4251173653_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 07d20919b36e8fe4f94f153d99adef59, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _Emmisive_Tower:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e5cc1930232252a4ba501539f7161d03, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emmisive_Tower_Broken:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 4677bd410a38bd944b4053dc6cd9aea1, type: 3}
+    - _Noise_Textures:
+        m_Texture: {fileID: 2800000, guid: 7453459e8aaebd84cb6348c46458e930, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Masks:
-        m_Texture: {fileID: 2800000, guid: cca6b9e4c8ed09143a62e77d23b0b2b4, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
+    - _RGBA_Mask:
+        m_Texture: {fileID: 2800000, guid: 01b6e0632ba972242988531751e0435d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Snow_Map:
@@ -102,10 +53,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Snow_Map_Broken:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -127,69 +74,38 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_dca9548193674f71b98e564791daeaec: 0
-    - Vector1_dca9548193674f71b98e564791daeaec_1: 0
-    - Vector1_e39e54e740944a78a00b1eb770d1d23b: 0.608
-    - _AddPrecomputedVelocity: 0
-    - _All_Animaton_Speed: 1
     - _AlphaClip: 1
     - _AlphaToMask: 1
-    - _Alpha_Clipping: 0.84
+    - _Alpha_Clipping: 0.68
     - _Blend: 0
-    - _BlendModePreserveSpecular: 1
-    - _BumpScale: 1
     - _CastShadows: 0
-    - _ClearCoatMask: 0
-    - _ClearCoatSmoothness: 0
-    - _Crystal_Light_Anim_Speed: 1.22
-    - _Crystal_Shine_Bright: 1
     - _Cull: 2
-    - _Cutoff: 0.772
-    - _DetailAlbedoMapScale: 1
-    - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _DstBlendAlpha: 0
-    - _Emmisive_Intensity: 0
-    - _EnvironmentReflections: 1
-    - _Fall: 1
-    - _Global_Light_Intensity: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0
-    - _GlossyReflections: 1
-    - _Lake: 1
-    - _Metallic: 0
+    - _Emmisive_Intensity: 1
+    - _Flow_Opacity: 0.62
+    - _Flow_Speed: 0.02
+    - _LightWaveOpacity: 0.279
+    - _LightWaveSpeed: 0.2
+    - _Night_Effect_Intensity: 0.62
     - _Night_Mode_On: 0
-    - _OcclusionStrength: 1
     - _On_Broken_Tower: 0
     - _On_Winter_Mode: 0
-    - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ReceiveShadows: 1
-    - _Smoothness: 0.5
-    - _SmoothnessTextureChannel: 0
+    - _ShineOpacity: 4.05
+    - _ShineSpeed: 1
     - _Snow_Edge: 0.5
     - _Snow_Intensity: 1
-    - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - Color_4e1e75e1a66c45b2845f4eb092e37217: {r: 0.9056604, g: 0.9056604, b: 0.9056604,
-        a: 0}
-    - Vector2_09ee369b9d234e24aa3f5cd2062481de: {r: 3.09, g: 19, b: 0, a: 0}
-    - Vector2_a0743b7b27324430a0a73051d5f656c2: {r: 15.19, g: 2.7, b: 0, a: 0}
-    - Vector2_deac43de9e554aeab128167e01e28b59: {r: 0, g: 0.2, b: 0, a: 0}
-    - Vector2_deac43de9e554aeab128167e01e28b59_1: {r: 0, g: 0.41, b: 0, a: 0}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.9063317, g: 0.9063317, b: 0.9063317, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Global_Light_Color: {r: 0, g: 0, b: 0, a: 0}
-    - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _InnerCoreColor: {r: 11.12796, g: 14.60795, b: 47.23201, a: 0}
+    - _LightWaveColor: {r: 3.880286, g: 6.536274, b: 14.37143, a: 0}
+    - _Moonlight_Color: {r: 0, g: 0, b: 0, a: 0}
+    - _ShineColor: {r: 0.45591646, g: 2.0754263, b: 2.3745964, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &898023926201738394

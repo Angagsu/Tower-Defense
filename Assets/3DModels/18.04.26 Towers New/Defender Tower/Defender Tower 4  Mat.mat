@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Defender Tower 4  Mat
+  m_Shader: {fileID: -6465566751694194690, guid: c9241a5a86f18714c872952306f7519f,
+    type: 3}
+  m_Parent: {fileID: 2100000, guid: b362ef41c7d72c34fa04b85ba8cf5ba4, type: 2}
+  m_ModifiedSerializedProperties: 16
+  m_ValidKeywords:
+  - _ALPHATEST_ON
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 2450
+  stringTagMap:
+    RenderType: TransparentCutout
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  - SHADOWCASTER
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Broken_Tower_Texture:
+        m_Texture: {fileID: 2800000, guid: 051f5b90f9b3c694481ef9523bfe7e4e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Emmisive_Tower:
+        m_Texture: {fileID: 2800000, guid: a2e21b1a60da3eb44ad502b3d4aaf9bd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Flag_Mask:
+        m_Texture: {fileID: 2800000, guid: 01aae83c6e034eb4e91a784179f70263, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Snow_Map_Broken:
+        m_Texture: {fileID: 2800000, guid: 5e17b60b2d398a8468a330e55e210a1c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Tower_Texture:
+        m_Texture: {fileID: 2800000, guid: 7478eef440f833e4c80abcdd13b7ca90, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Alpha_Clipping: 0.82
+    - _Banner_Speed: 3
+    - _Banner_Wave_Amplitude: 0.0063
+    - _Flag_Speed: 3
+    - _Flag_Wave_Amplitude: 0.01
+    - _Flag_Wave_Density: 30
+    - _On_Broken_Tower: 0
+    - _Snow_Edge: 1
+    - _Snow_Intensity: 1.07
+    m_Colors:
+    - _Tower_Color: {r: 0.482, g: 0.7017576, b: 1, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
+--- !u!114 &898023926201738394
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 10

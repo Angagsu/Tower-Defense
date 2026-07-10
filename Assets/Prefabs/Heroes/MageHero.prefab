@@ -40,7 +40,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7159134112173179553}
-  - component: {fileID: 7159134112173179557}
   - component: {fileID: 2918971119291250067}
   - component: {fileID: 2366083804998803738}
   - component: {fileID: 4917897518465217744}
@@ -49,6 +48,8 @@ GameObject:
   - component: {fileID: -3169207504160919718}
   - component: {fileID: 4307176021028549481}
   - component: {fileID: 8928026866784414984}
+  - component: {fileID: 4697825883652362816}
+  - component: {fileID: 6344277800045659351}
   m_Layer: 19
   m_Name: MageHero
   m_TagString: ArcherHero
@@ -76,31 +77,6 @@ Transform:
   - {fileID: 2147332871548631381}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &7159134112173179557
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7159134112173179556}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 262144
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2.08
-  m_Radius: 0.45
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.68, z: 0}
 --- !u!114 &2918971119291250067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +97,7 @@ MonoBehaviour:
     MaxArmor: 0
     PhysicalResistance: 10
     MagicalResistance: 10
+    ArmorType: 0
     DamageData:
       DamageAmount: 80
       DamageType: 1
@@ -128,8 +105,6 @@ MonoBehaviour:
       MagicalPenetration: 40
       ArmorPercent: 0.3
       HealthPercent: 0.7
-      HasPassiveSkill: 0
-      PassiveSkills: []
   damage: 20
   moveSpeed: 10
   attackRate: 1
@@ -140,7 +115,7 @@ MonoBehaviour:
   <ReviveTimer>k__BackingField: 5
   <RotatPart>k__BackingField: {fileID: 4097323005000386063}
   <Anim>k__BackingField: {fileID: 8945637575376214888}
-  <ActiveSkillCooldown>k__BackingField: 30
+  <ActiveSkillCooldown>k__BackingField: 5
   superAttack: {fileID: 8928026866784414984}
   attack: {fileID: 2366083804998803738}
   detect: {fileID: 4307176021028549481}
@@ -171,22 +146,6 @@ MonoBehaviour:
   bulletInstPoint1: {fileID: 0}
   bulletInstPoint2: {fileID: 0}
   hasTwoInstantiatePoint: 0
-  attackStats:
-    Health: 0
-    MaxHealth: 0
-    Armor: 0
-    MaxArmor: 0
-    PhysicalResistance: 0
-    MagicalResistance: 0
-    DamageData:
-      DamageAmount: 0
-      DamageType: 0
-      PhysicalPenetration: 0
-      MagicalPenetration: 0
-      ArmorPercent: 0
-      HealthPercent: 0
-      HasPassiveSkill: 0
-      PassiveSkills: []
 --- !u!114 &4917897518465217744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hero: {fileID: 2918971119291250067}
+  navMeshAgent: {fileID: 4697825883652362816}
   IsOnPreviosPosition: 0
   IsOnLockedPosition: 0
 --- !u!114 &8945637575376214888
@@ -214,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe26696e9692e75489464a9b1604dd78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 7943418748498107509}
+  animator: {fileID: 6344277800045659351}
 --- !u!114 &607671109515974821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,6 +318,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireProjectile: {fileID: 1282616101262134638, guid: 11753621eac7bec4da21e6c7a65fc645,
     type: 3}
+--- !u!195 &4697825883652362816
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7159134112173179556}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 9
+  m_Acceleration: 1000
+  avoidancePriority: 50
+  m_AngularSpeed: 0
+  m_StoppingDistance: 0.1
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 1
+  m_ObstacleAvoidanceType: 4
+--- !u!95 &6344277800045659351
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7159134112173179556}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: f83a6c544f39a1a4d8512e64f5f59db8, type: 3}
+  m_Controller: {fileID: 9100000, guid: b2ea94ff3133d5648a1be31380a341ee, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 0
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &9145535840668837265
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,7 +586,8 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: f83a6c544f39a1a4d8512e64f5f59db8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: f83a6c544f39a1a4d8512e64f5f59db8,
@@ -594,12 +599,6 @@ PrefabInstance:
 --- !u!4 &4097323005000386063 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f83a6c544f39a1a4d8512e64f5f59db8,
-    type: 3}
-  m_PrefabInstance: {fileID: 4563875876968128996}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &7943418748498107509 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: f83a6c544f39a1a4d8512e64f5f59db8,
     type: 3}
   m_PrefabInstance: {fileID: 4563875876968128996}
   m_PrefabAsset: {fileID: 0}

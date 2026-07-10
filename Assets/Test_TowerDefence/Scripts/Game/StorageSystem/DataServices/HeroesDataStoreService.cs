@@ -11,7 +11,7 @@ public class HeroesDataStoreService : MonoBehaviour, IService
     private const string HEROES_DATA_KEY = "HeroesData.Json";
 
     [SerializeField] private StorageService storageService;
-    [SerializeField] private HeroesDataToStore heroesDataToStore = new HeroesDataToStore();
+    private HeroesDataToStore heroesDataToStore = new HeroesDataToStore();
 
     private HeroesDataHandler heroesDataHandler;
     private HeroCardData heroCardData;
@@ -66,7 +66,7 @@ public class HeroesDataStoreService : MonoBehaviour, IService
                 {
                     this.heroesDataToStore.AllHeroes.Add((HeroType)i, new HeroData(AllHeroAndTowerTypes.HeroTypes[i], HeroUpgradeLevel.Level_1, AllHeroAndTowerTypes.HeroCards[i], isAcquired: false, price: default));
 
-                    this.heroesDataToStore.AllCards.Add((HeroType)i, new HeroCardData(AllHeroAndTowerTypes.HeroCards[i]));
+                    //this.heroesDataToStore.AllCards.Add((HeroType)i, new HeroCardData(AllHeroAndTowerTypes.HeroCards[i]));
                 }
             }
         }
@@ -99,10 +99,10 @@ public class HeroesDataStoreService : MonoBehaviour, IService
     {
         for (int i = 0; i < cards.Count; i++)
         {
-            if (heroesDataToStore.AllCards.ContainsKey(cards[i].CardType))
+            if (heroesDataToStore.AllHeroes.ContainsKey(cards[i].CardType))
             {
-                heroesDataToStore.AllCards[cards[i].CardType].ReceivedCards.Add(cards[i]);
-                heroesDataToStore.AllHeroes[cards[i].CardType].ReseivedCards.Add(cards[i]);
+                //heroesDataToStore.AllCards[cards[i].CardType].ReceivedCards.Add(cards[i]);
+                heroesDataToStore.AllHeroes[cards[i].CardType].ReceivedCards.Add(cards[i]);
             }
         }
         
@@ -111,8 +111,11 @@ public class HeroesDataStoreService : MonoBehaviour, IService
 
     public void ReduceCard(HeroData heroData, int cards)
     {
-        heroesDataToStore.AllCards[heroData.HeroType].ReceivedCards.RemoveRange(0, cards);
+        heroesDataToStore.AllHeroes[heroData.HeroType].ReceivedCards.RemoveRange(0, cards);
     }
 
-    public HeroCardData HeroCardData { get { return heroCardData; } }
+    public void ExchangeCards()
+    {
+        Save();
+    }
 }

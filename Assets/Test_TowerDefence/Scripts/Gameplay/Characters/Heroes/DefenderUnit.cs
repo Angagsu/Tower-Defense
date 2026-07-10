@@ -112,11 +112,6 @@ public class DefenderUnit : BaseHero
         {
             DetectTarget();
         }
-
-        if (!DefenderMovement.IsMoves && target)
-        {
-            LockOnTarget();
-        }
     }
 
     protected override void DetectTarget()
@@ -131,28 +126,34 @@ public class DefenderUnit : BaseHero
 
                 if (currentTargetedMonster.CurrentAttackerHero == null)
                 {
+                    currentAttackerMonster = currentTargetedMonster;
+
                     currentTargetedMonster.SetCurrentAttackerHero(this);
                     currentTargetedMonster.SetCurrentTargetedHero();
+
                     currentTargetedMonster.Movement.SetIsMove(false);
                     currentTargetedMonster.Anim.StopAllAnimations();
+                    currentTargetedMonster.SetCanAttack(false);
                     DefenderMovement.MoveToTargetMonster(moveSpeed, turnSpeed, target.position);
                 }
 
                 LockOnTarget();
 
-                if (canAttack && !currentTargetedMonster.Movement.IsMoves)
+                if (canAttack)
                 {
-                    Anim.SetAttackAnimation(true);
+                    currentAttackerMonster.SetCanAttack(true);
+                    attackCountdown -= Time.deltaTime;
 
                     if (attackCountdown <= 0)
                     {
                         attackCountdown = attackRate;
 
-                        Attack(target);
+                        Anim.SetAttackAnimation(true);
                     }
                 }
                 else
                 {
+
                     Anim.SetAttackAnimation(false);
                 }     
             }
@@ -185,14 +186,14 @@ public class DefenderUnit : BaseHero
                 DefenderMovement.ReturnToPreviousPosition(moveSpeed, turnSpeed, DefenderMovement.PreviousPosition);
             }
         }
-
-        attackCountdown -= Time.deltaTime;
-
     }
+
 
     protected override void Attack(Transform target)
     {
-        attack.AttackWithPassiveSkill(AttackStats, target, damage, hasPassiveSkill, passiveValue_1: passiveSkillsList[0], passiveValue_2: passiveSkillsList[1], currentTargetedMonster);
+        attack.AttackWithPassiveSkill(AttackStats, target, damage, hasPassiveSkill, passiveValue_1: passiveSkillsList[0],
+            passiveValue_2: passiveSkillsList[1], currentTargetedMonster, currentTargetedMonster);
+
         baseSFX.PlayAttackSFX();
     }
 

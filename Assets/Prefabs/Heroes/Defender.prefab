@@ -42,12 +42,12 @@ GameObject:
   - component: {fileID: 7071157408416458364}
   - component: {fileID: 1884465273778652183}
   - component: {fileID: 1015050056497624904}
-  - component: {fileID: 7071157408416458366}
   - component: {fileID: 5228296712707346474}
   - component: {fileID: -7905658746008348904}
   - component: {fileID: 4587005776824408635}
   - component: {fileID: 1954088150584843863}
   - component: {fileID: 8302993148553184160}
+  - component: {fileID: 6355935274435608184}
   m_Layer: 19
   m_Name: Defender
   m_TagString: Defender
@@ -94,6 +94,7 @@ MonoBehaviour:
     MaxArmor: 0
     PhysicalResistance: 5
     MagicalResistance: 5
+    ArmorType: 0
     DamageData:
       DamageAmount: 30
       DamageType: 0
@@ -101,8 +102,6 @@ MonoBehaviour:
       MagicalPenetration: 0
       ArmorPercent: 0.7
       HealthPercent: 0.3
-      HasPassiveSkill: 0
-      PassiveSkills: []
   damage: 15
   moveSpeed: 10
   attackRate: 1
@@ -142,32 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe26696e9692e75489464a9b1604dd78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 8035981321183611594}
---- !u!143 &7071157408416458366
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7071157408416458360}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 786432
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Height: 1.3
-  m_Radius: 0.3
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  animator: {fileID: 6355935274435608184}
 --- !u!114 &5228296712707346474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,6 +298,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de3e2f32b326db4f8f3315907afb9e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &6355935274435608184
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7071157408416458360}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: cc88e4bf3a5baa04e997df11bc8ce0b8, type: 3}
+  m_Controller: {fileID: 9100000, guid: 08cd09bee207ffb45ad3f00b1bc135a9, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 0
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1216803209815950083
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -520,7 +516,8 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: cc88e4bf3a5baa04e997df11bc8ce0b8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -528,12 +525,6 @@ PrefabInstance:
 --- !u!4 &4135895158718664880 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: cc88e4bf3a5baa04e997df11bc8ce0b8,
-    type: 3}
-  m_PrefabInstance: {fileID: 4534878287684597595}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &8035981321183611594 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: cc88e4bf3a5baa04e997df11bc8ce0b8,
     type: 3}
   m_PrefabInstance: {fileID: 4534878287684597595}
   m_PrefabAsset: {fileID: 0}

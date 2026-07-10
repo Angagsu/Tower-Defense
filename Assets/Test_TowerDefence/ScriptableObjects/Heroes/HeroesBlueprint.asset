@@ -17,7 +17,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 32b5aa4a80c577843b72ed91ddfea7fc, type: 2}
   - {fileID: 11400000, guid: 86ea7560c964b234b9eae1367879245f, type: 2}
   - {fileID: 11400000, guid: 9240381e47306454bb1ac428cc6ade32, type: 2}
-  <HeroTypes>k__BackingField: 00000000010000000200000003000000
   <AcquiredHeroes>k__BackingField:
   - {fileID: 11400000, guid: 42531fe0e9be5f24aac1e6ac62ef8f28, type: 2}
   - {fileID: 11400000, guid: 32b5aa4a80c577843b72ed91ddfea7fc, type: 2}

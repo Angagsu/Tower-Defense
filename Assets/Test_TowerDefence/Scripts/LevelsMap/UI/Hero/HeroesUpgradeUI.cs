@@ -42,8 +42,15 @@ public class HeroesUpgradeUI : MonoBehaviour
         currentSelectedHero = levelsMapHeros[0];
         SetSelectedHeroStats(currentSelectedHero);
 
+        heroesDataHandler.DataChanged += OnDataChange;
+
         buyButton.onClick.AddListener(OnBuy);
         upgradeButton.onClick.AddListener(OnUpgrade);
+    }
+
+    private void OnDestroy()
+    {
+        heroesDataHandler.DataChanged -= OnDataChange;
     }
 
     public void SetSelectedHeroStats(LevelsMapHero currentSelectedHero)
@@ -64,12 +71,20 @@ public class HeroesUpgradeUI : MonoBehaviour
         SetupSliders();
     }
 
+    public void OnDataChange()
+    {
+        SetupCardParams();
+        SetupButtons();
+        SetupTexts();
+        SetupSliders();
+    }
+
     private void SetupCardParams()
     {
         cardUI.SetParams(currentSelectedHero.HeroSO);
         requiredCardToUpgrade.SetCardSprite(currentSelectedHero.HeroSO);
 
-        receivedCardsText.text = currentSelectedHero.HeroSO.HeroData.ReseivedCards.Count.ToString();
+        receivedCardsText.text = currentSelectedHero.HeroSO.HeroData.ReceivedCards.Count.ToString();
     }
 
     private void SetupTexts()
@@ -86,8 +101,6 @@ public class HeroesUpgradeUI : MonoBehaviour
         float x = (float)currentSelectedHero.HeroSO.HeroData.UpgradeLevel;
         float y = currentSelectedHero.HeroSO.UpgradeLevelsSO.HeroUpgradeLevelSOs.Count;
         float value = x / y;
-
-        //reachedUpgradeLevelBar.value = value;
 
         heroStatsHandlerUI.UpdateStats(currentSelectedHero.HeroSO, nextUpgradeLevel);
     }

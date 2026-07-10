@@ -8,7 +8,9 @@ public class HeroData
     public HeroCardType CardType;
     public bool IsAcquired;
     public int Price;
-    public List<HeroCard> ReseivedCards;
+    public List<HeroCard> ReceivedCards;
+    public int ReceivedCardsAmount => ReceivedCards.Count;
+
 
     public HeroData(HeroType heroType, HeroUpgradeLevel upgradeLevel, HeroCardType cardType, bool isAcquired, int price)
     {
@@ -17,6 +19,6 @@ public class HeroData
         CardType = cardType;
         IsAcquired = isAcquired;
         Price = price;
-        ReseivedCards = new List<HeroCard>();
+        ReceivedCards = new List<HeroCard>();
     }
 }

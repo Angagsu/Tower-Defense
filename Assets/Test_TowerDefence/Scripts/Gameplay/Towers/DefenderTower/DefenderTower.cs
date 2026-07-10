@@ -12,6 +12,7 @@ namespace Assets.Scripts.Tower
         }
 
         protected override void Awake() { }
+
         protected override void Update() { }
         protected override void OnDisable() { }
 

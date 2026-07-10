@@ -17,14 +17,14 @@ TagManager:
   - UI
   - Ground
   - Environment
-  - PlacementLayer
-  - LevelArea
+  - UnsafeArea
+  - MovableArea
   - Towers
-  - GroundEnemies
-  - FriendlyProjectiles
-  - EnemyProjectiles
-  - FlyingEnemies
-  - GroundEnemyTargettingProjectiles
+  - 
+  - 
+  - 
+  - 
+  - 
   - DefendersMoveZone
   - BuildingArea
   - Monster

@@ -64,10 +64,4 @@ public class HeroDetection : BaseDetection
             return null;
         }
     }
-
-    public override void ResetDetectedTarget()
-    {
-        DetectedMonster = null;
-        target = null;
-    }
 }

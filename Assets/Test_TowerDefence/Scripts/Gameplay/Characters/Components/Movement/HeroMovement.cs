@@ -1,15 +1,15 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 public class HeroMovement : BaseMovement
 {
     [SerializeField] private BaseHero hero;
-
+    [SerializeField] private NavMeshAgent navMeshAgent;
     private Camera mainCamera;
-    private int groundLayer;
+    LayerMask movableAreaLayer;
     private Coroutine coroutine;
-    private CharacterController characterController;
 
     public Vector3 LockedPosition {  get; private set; }
     public Vector3 NewPosition { get; private set; }
@@ -26,28 +26,26 @@ public class HeroMovement : BaseMovement
     {
         isMoves = false;
         mainCamera = Camera.main;
-        characterController = GetComponent<CharacterController>();
-        groundLayer = LayerMask.NameToLayer("Ground");
+
+        movableAreaLayer = LayerMask.GetMask("MovableArea");
+
         PreviousPosition = NewPosition = transform.position;
         IsOnPreviosPosition = true;
     }
 
     public void MoveToTarget(float moveSpeed, float turnSpeed, Vector2 touchPosition)
     {
-        if (hero.IsSelected && !hero.IsDead)
+        if (hero.IsSelected && !hero.IsDead && hero.CanMove)
         {
             Ray ray = mainCamera.ScreenPointToRay(touchPosition);
-            
-            if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider &&
-                raycastHit.collider.gameObject.layer.CompareTo(groundLayer) == 0)
+
+            if (Physics.Raycast(ray, out RaycastHit raycastHit, 150f, movableAreaLayer))
             {
                 if (coroutine != null)
                 {
                     StopCoroutine(coroutine);
                 }
-                isMoves = true;
-                hero.ResetTargetedMonster();
-                //hero.ResetTarget();
+
                 coroutine = StartCoroutine(HeroMoveTowerds(raycastHit.point, moveSpeed, turnSpeed));
                 NewPosition = raycastHit.point;
             }
@@ -91,37 +89,54 @@ public class HeroMovement : BaseMovement
         isMoves = true;
         hero.Deselect();
         hero.SetCanAttack(false);
+        hero.SetCanDetect(false);
+        hero.ResetAttackerMoster();
         hero.Anim.SetAllAnimationsFalse();
         hero.Anim.SetMoveAnimation(true);
-        
+        hero.CanSuperAttack(false);
 
         float heroDistanceToFloor = transform.position.y - targetPosition.y;
         targetPosition.y += heroDistanceToFloor;
 
+        navMeshAgent.speed = moveSpeed;
+        navMeshAgent.enabled = true;
+        
+        
+        navMeshAgent.SetDestination(targetPosition);
+        
 
         while ((transform.position - targetPosition).sqrMagnitude > 0.1f)
         {
-            while(isPaused) yield return null;
+            while (isPaused)
+            {
+                navMeshAgent.isStopped = true;
+                yield return null;
+            }
 
-            Vector3 direction = targetPosition - transform.position;
-            Vector3 movement =  moveSpeed * Time.deltaTime * direction.normalized;
+            Vector3 dir = navMeshAgent.desiredVelocity;
 
-            //characterController.Move(movement);
-            hero.transform.position += movement;
+            if (dir.sqrMagnitude > 0.001f)
+            {
+                hero.RotatPart.rotation = Quaternion.Slerp(hero.RotatPart.rotation, Quaternion.LookRotation(dir.normalized), turnSpeed * Time.deltaTime);
+            }
 
-            hero.RotatPart.rotation = Quaternion.Slerp(hero.RotatPart.rotation, Quaternion.LookRotation(direction.normalized),
-                turnSpeed * Time.deltaTime);
-
+            navMeshAgent.isStopped = false;
             yield return null;
         }
+
+        navMeshAgent.enabled = false;
 
         IsOnLockedPosition = true;
         IsOnPreviosPosition = true;
         PreviousPosition = NewPosition;
         LockedPosition = NewPosition;
         isMoves = false;
+
+
         hero.SetCanAttack(true);
+        hero.SetCanDetect(true);
         hero.Anim.SetMoveAnimation(false);
+        hero.CanSuperAttack(true);
     }
 
     private IEnumerator MoveToTargetedMonster(BaseMonster monster, Vector3 targetPosition, float moveSpeed, float turnSpeed)
@@ -129,9 +144,10 @@ public class HeroMovement : BaseMovement
         IsOnPreviosPosition = false;
         isMoves = true;
         hero.SetCanAttack(false);
+        hero.SetCanDetect(false);
         hero.Anim.SetAllAnimationsFalse();
         hero.Anim.SetMoveAnimation(true);
-
+        hero.CanSuperAttack(false);
 
         float heroDistanceToFloor = transform.position.y - targetPosition.y;
         targetPosition.y += heroDistanceToFloor;
@@ -143,7 +159,6 @@ public class HeroMovement : BaseMovement
             Vector3 direction = targetPosition - transform.position;
             Vector3 movement = direction.normalized * moveSpeed * Time.deltaTime;
 
-            //characterController.Move(movement);
             hero.transform.position += movement;
 
             hero.RotatPart.rotation = Quaternion.Slerp(hero.RotatPart.rotation, Quaternion.LookRotation(direction.normalized),
@@ -155,15 +170,19 @@ public class HeroMovement : BaseMovement
         NewPosition = targetPosition;
         isMoves = false;
         hero.SetCanAttack(true);
+        hero.SetCanDetect(true);
         hero.Anim.SetMoveAnimation(false);
+        hero.CanSuperAttack(true);
     }
 
     private IEnumerator GoToPreviousPosition(BaseHero hero, Vector3 targetPosition, float moveSpeed, float turnSpeed)
     {
         isMoves = true;
         hero.SetCanAttack(false);
+        hero.SetCanDetect(false);
         hero.Anim.SetAllAnimationsFalse();
         hero.Anim.SetMoveAnimation(true);
+        hero.CanSuperAttack(false);
 
 
         float heroDistanceToFloor = transform.position.y - targetPosition.y;
@@ -176,7 +195,6 @@ public class HeroMovement : BaseMovement
             Vector3 direction = targetPosition - transform.position;
             Vector3 movement = direction.normalized * moveSpeed * Time.deltaTime;
 
-            //characterController.Move(movement);
             hero.transform.position += movement;
 
             hero.RotatPart.rotation = Quaternion.Slerp(hero.RotatPart.rotation, Quaternion.LookRotation(direction.normalized),
@@ -190,6 +208,8 @@ public class HeroMovement : BaseMovement
         NewPosition = targetPosition;
         isMoves = false;
         hero.SetCanAttack(true);
+        hero.SetCanDetect(true);
         hero.Anim.SetMoveAnimation(false);
+        hero.CanSuperAttack(true);
     }
 }

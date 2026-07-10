@@ -27,6 +27,7 @@ public class BaseMonster : Character
     [SerializeField] protected int moneyGain = 50;
     [SerializeField] protected float dyingAnimationDuration;
     [SerializeField] protected float detectionRange;
+    
 
     protected GameplayStates gameplayStates;
     protected Coroutine coroutine;
@@ -71,7 +72,6 @@ public class BaseMonster : Character
         }
     }
 
-
     protected virtual void Awake()
     { 
         Movement = move as MonsterMovement; 
@@ -115,7 +115,11 @@ public class BaseMonster : Character
             return;
         }
 
-        DetectTarget();
+        if (currentTargetedHero != null)
+        {
+            DetectTarget();
+        }
+
 
         if (!Movement.IsMoves)
         {
@@ -127,25 +131,33 @@ public class BaseMonster : Character
 
     protected override void DetectTarget()
     {
-        if (currentTargetedHero && currentTargetedHero.CanAttack)
-        {
-            Movement.LockOnTarget(target, turnSpeed);
+        
+        attackCountdown -= Time.deltaTime;
 
+        Movement.LockOnTarget(target, turnSpeed);
+
+        if (canAttack)
+        {
             if (attackCountdown <= 0)
             {
-                attackCountdown =  attackRate;
-        
-                Attack(target); 
+                attackCountdown = attackRate;
+
+                anim.SetAttackAnimation(true);
             }
+        }     
+    }
 
-            anim.SetAttackAnimation(true);
-        }
-        else 
-        {
-            anim.SetAttackAnimation(false);
-        }
+    public void SetCanAttack(bool tof)
+    {
+        canAttack = tof;
+    }
 
-        attackCountdown -= Time.deltaTime;
+    public void AttackOnAnimationTrigger()
+    {
+        if (target == null || isStunned)
+            return;
+
+        Attack(target);
     }
 
     protected override void Attack(Transform target)
@@ -388,9 +400,11 @@ public class BaseMonster : Character
     }
     public void RejectCurrentAttackerHero()
     {
+        Debug.Log("RejectCurrentAttackerHero");
         target = null;
         currentTargetedHero = null;
         currentAttackerHero = null;
+        canAttack = true;
 
         if (tower)
         {
@@ -398,6 +412,7 @@ public class BaseMonster : Character
             tower = null;
         }
 
+        anim.SetAttackAnimation(false);
         Movement.SetIsMove(true);
         anim.SetMoveAnimation(true);
     }

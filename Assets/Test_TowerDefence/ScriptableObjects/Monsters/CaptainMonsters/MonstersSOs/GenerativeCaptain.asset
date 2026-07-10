@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d6f115fce7cfc439f35577e88bbc9e, type: 3}
+  m_Name: GenerativeCaptain
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterSO
+  <Type>k__BackingField: 1
+  <UniqueSkillType>k__BackingField: 3
+  <Monster>k__BackingField: {fileID: -6824531674202233935, guid: 681d0064669e18e4e9cbcd80c92575f4,
+    type: 3}
+  <Name>k__BackingField: Generative
+  <Sprite>k__BackingField: {fileID: 0}
+  <MoveSpeed>k__BackingField: 4
+  <AttackRange>k__BackingField: 5
+  <StatsValues>k__BackingField:
+  - 400
+  - 80
+  - 4
+  - 5
+  <HasUniqueSkill>k__BackingField: 1
+  <UniqueSkillDescription>k__BackingField: Upon death, monster units appear.

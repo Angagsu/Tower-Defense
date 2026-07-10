@@ -1,0 +1,8 @@
+C:\Users\Gagik\AppData\Local\Temp\HayguardRiseOfHighlandCloud\module-compilation\HayguardRiseOfHighlandCloud.dll
+C:\Users\Gagik\AppData\Local\Temp\HayguardRiseOfHighlandCloud\module-compilation\HayguardRiseOfHighlandCloud.deps.json
+C:\Users\Gagik\AppData\Local\Temp\HayguardRiseOfHighlandCloud\module-compilation\HayguardRiseOfHighlandCloud.pdb
+C:\Users\Gagik\AppData\Local\Temp\HayguardRiseOfHighlandCloud\module-compilation\Unity.Services.CloudCode.Apis.dll
+C:\Users\Gagik\AppData\Local\Temp\HayguardRiseOfHighlandCloud\module-compilation\Unity.Services.CloudCode.Core.dll
+C:\Users\Gagik\AppData\Local\Temp\HayguardRiseOfHighlandCloud\module-compilation\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Gagik\AppData\Local\Temp\HayguardRiseOfHighlandCloud\module-compilation\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Gagik\AppData\Local\Temp\HayguardRiseOfHighlandCloud\module-compilation\Newtonsoft.Json.dll

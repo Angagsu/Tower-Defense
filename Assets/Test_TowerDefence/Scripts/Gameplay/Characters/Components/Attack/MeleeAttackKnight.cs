@@ -33,12 +33,12 @@ public class MeleeAttackKnight : MeleeAttack
             }
             else
             {
-                targetCharacter.TakeDamage(attackStats);
+                attackableTarget?.TakeDamage(attackStats);
             }
         }
         else
         {
-            targetCharacter.TakeDamage(attackStats);
+            attackableTarget?.TakeDamage(attackStats);
         }
     }
 

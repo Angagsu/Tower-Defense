@@ -15,22 +15,34 @@ public class LevelsMapMainUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private Button quitButton;
 
-    [Header("Hero Upgrade")]
+    [Header("Hero Upgrade Panel")]
     [Space(5)]
     [SerializeField] private Button heroUpgradButton;
     [SerializeField] private GameObject heroUpgradPanel;
 
-    [Header("Tower Upgrade")]
+    [Header("Tower Upgrade Panel")]
     [Space(5)]
     [SerializeField] private Button towerUpgradeButton;
     [SerializeField] private GameObject towerUpgradePanel;
 
-    [Header("Shop")]
+    [Header("Shop Panel")]
     [Space(5)]
     [SerializeField] private Button shopButton;
     [SerializeField] private GameObject shopPanel;
 
-    [Header("Preparing To Play")]
+    [Header("Cards Library Panel")]
+    [SerializeField] private Button cardsLibraryButton;
+    [SerializeField] private GameObject cardsLibraryPanel;
+
+    [Header("Monsters Book Panel")]
+    [SerializeField] private Button monstersBookButton;
+    [SerializeField] private GameObject monstersBookPanel;
+
+    [Header("Settings Panel")]
+    [SerializeField] private Button settingsButton;
+    [SerializeField] private GameObject settingsPanel;
+
+    [Header("Preparing To Play Panel")]
     [Space(5)]
     [SerializeField] private GameObject preparingToPlayPanel;
 
@@ -48,6 +60,9 @@ public class LevelsMapMainUI : MonoBehaviour
         heroUpgradButton.onClick.AddListener(() => { heroUpgradPanel.SetActive(true); quitButton.gameObject.SetActive(true); });
         towerUpgradeButton.onClick.AddListener(() => { towerUpgradePanel.SetActive(true); quitButton.gameObject.SetActive(true); });
         shopButton.onClick.AddListener(() => { shopPanel.SetActive(true); quitButton.gameObject.SetActive(true); });
+        cardsLibraryButton.onClick.AddListener(() => { cardsLibraryPanel.SetActive(true); quitButton.gameObject.SetActive(true); });
+        monstersBookButton.onClick.AddListener(() => { monstersBookPanel.SetActive(true); quitButton.gameObject.SetActive(true); });
+        settingsButton.onClick.AddListener(() => { settingsPanel.SetActive(true); quitButton.gameObject.SetActive(true); });
         quitButton.onClick.AddListener(HideAllPanels);
     }
 
@@ -102,6 +117,9 @@ public class LevelsMapMainUI : MonoBehaviour
         heroUpgradPanel.SetActive(false);
         towerUpgradePanel.SetActive(false);
         shopPanel.SetActive(false);
+        cardsLibraryPanel.SetActive(false);
+        monstersBookPanel.SetActive(false);
+        settingsPanel.SetActive(false);
         quitButton.gameObject.SetActive(false);
     }
 

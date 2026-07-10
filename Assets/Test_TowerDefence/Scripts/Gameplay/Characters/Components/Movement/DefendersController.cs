@@ -28,7 +28,7 @@ public class DefendersController : BaseMovement
     private int groundLayer;
     private bool isSelected;
 
-    
+    LayerMask unsafeAreaLayerMask;
 
     public void Construct(PlayerInputHandler playerInputHandler, GameplayStates gameplayStates, TowerUpgradeUI towerUpgradeUI, TouchBuildingArea touchBuildingArea, ProjectilesFactoriesService projectilesFactoriesService, TowerSO towerSO)
     {
@@ -50,6 +50,7 @@ public class DefendersController : BaseMovement
         mainCamera = Camera.main;
 
         groundLayer = LayerMask.NameToLayer("DefendersMoveZone");
+        unsafeAreaLayerMask = LayerMask.GetMask("UnsafeArea");
         detectionHelper = DetectionHelper.Instance;
 
         SetTheSworderDefenderArray();
@@ -72,7 +73,6 @@ public class DefendersController : BaseMovement
         for (int i = 0; i < defenderUnits.Length; i++)
         {
             defenderUnits[i].OnTowerCrush(defendersStartPoint);
-           // defenderUnits[i].StopAllCoroutines();
         }
     }
 
@@ -96,6 +96,13 @@ public class DefendersController : BaseMovement
         if (isSelected)
         {
             Ray ray = mainCamera.ScreenPointToRay(touchPosition);
+
+            if (Physics.Raycast(ray, out RaycastHit unsafeAreaHit, 1000f, unsafeAreaLayerMask))
+            {
+                isSelected = false;
+                isMoves = false;
+                return;
+            }
 
             if (Physics.Raycast(ray, out RaycastHit raycastHit) && Vector3.Distance(raycastHit.point, transform.position) <= movementRandiusRange)
             {

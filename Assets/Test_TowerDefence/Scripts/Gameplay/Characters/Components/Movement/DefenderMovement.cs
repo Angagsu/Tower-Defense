@@ -10,7 +10,6 @@ public class DefenderMovement : BaseMovement
     [SerializeField] private BaseHero defender;
 
     private Coroutine coroutine;
-    private CharacterController characterController;
 
     private Vector3 newPosition;
     private Vector3 positionOffset;
@@ -24,8 +23,6 @@ public class DefenderMovement : BaseMovement
     private void Awake()
     {
         isMoves = false;
-
-        characterController = GetComponent<CharacterController>();
 
         PreviousPosition = transform.position;
         IsOnPreviosPosition = true;
@@ -101,7 +98,6 @@ public class DefenderMovement : BaseMovement
 
             Vector3 movement = direction.normalized * moveSpeed * Time.deltaTime;
             
-            //characterController.Move(movement);
             defender.transform.position += movement;
 
             defender.RotatPart.rotation = Quaternion.Slerp(defender.RotatPart.rotation, Quaternion.LookRotation(direction.normalized),
@@ -145,7 +141,6 @@ public class DefenderMovement : BaseMovement
             Vector3 direction = targetPosition - transform.position;
             Vector3 movement = direction.normalized * moveSpeed * Time.deltaTime;
 
-            //characterController.Move(movement);
             defender.transform.position += movement;
 
             defender.RotatPart.rotation = Quaternion.Slerp(defender.RotatPart.rotation, Quaternion.LookRotation(direction.normalized),
@@ -177,7 +172,6 @@ public class DefenderMovement : BaseMovement
             Vector3 direction = targetPosition - transform.position;
             Vector3 movement = direction.normalized * moveSpeed * Time.deltaTime;
 
-           // characterController.Move(movement);
             defender.transform.position += movement;    
 
             defender.RotatPart.rotation = Quaternion.Slerp(defender.RotatPart.rotation, Quaternion.LookRotation(direction.normalized),

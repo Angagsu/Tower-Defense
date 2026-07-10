@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2504e50f8fad34343ae86ccbc314df1c, type: 3}
+  m_Name: SoldierMonsters
+  m_EditorClassIdentifier: Assembly-CSharp::MonstersByTypeSO
+  <Monsters>k__BackingField:
+  - {fileID: 11400000, guid: f7e280a16cffde74cb70722c7bb0177a, type: 2}
+  - {fileID: 11400000, guid: 4dcd2c44ab403434688168dc3e5a3123, type: 2}
+  - {fileID: 11400000, guid: d4c4d439152a68c4193c310ab3829763, type: 2}
+  - {fileID: 11400000, guid: ae8b30d5daa5745439fe4351d07e1e3a, type: 2}
+  - {fileID: 11400000, guid: 9da592329eb109047a2a644dfdde2af9, type: 2}
+  - {fileID: 11400000, guid: 080dc7a31e680a64f83114acf0698ab9, type: 2}
+  - {fileID: 11400000, guid: df6d0f4168756c34395372e70bc2155b, type: 2}
+  - {fileID: 11400000, guid: 47d498a45942a7c42a1f3db5c65989a1, type: 2}

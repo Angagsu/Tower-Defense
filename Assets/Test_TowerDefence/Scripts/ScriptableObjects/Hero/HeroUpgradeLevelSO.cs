@@ -3,11 +3,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "HeroUpgradeLevel", menuName = "SO/HeroSO/HeroUpgradeLevel")]
 public class HeroUpgradeLevelSO : ScriptableObject
-{
-    //[field: SerializeField] public HeroUpgradeLevel HeroUpgradeLevel { get; private set; }
-    //[field: SerializeField] public float Health { get; private set; }
-    //[field: SerializeField] public float Damage { get; private set; }
-    
+{  
     [field: SerializeField] public int UpgradeCostByGold { get; private set; }
     [field: SerializeField] public int UpgradeCostByCard { get; private set; }
 

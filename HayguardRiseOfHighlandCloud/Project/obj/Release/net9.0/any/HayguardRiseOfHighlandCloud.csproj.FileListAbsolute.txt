@@ -1,0 +1,13 @@
+C:\Users\Gagik\Documents\GitHub\Tower-Defense\HayguardRiseOfHighlandCloud\Project\bin\Release\net9.0\any\HayguardRiseOfHighlandCloud.deps.json
+C:\Users\Gagik\Documents\GitHub\Tower-Defense\HayguardRiseOfHighlandCloud\Project\bin\Release\net9.0\any\HayguardRiseOfHighlandCloud.dll
+C:\Users\Gagik\Documents\GitHub\Tower-Defense\HayguardRiseOfHighlandCloud\Project\bin\Release\net9.0\any\HayguardRiseOfHighlandCloud.pdb
+C:\Users\Gagik\Documents\GitHub\Tower-Defense\HayguardRiseOfHighlandCloud\Project\obj\Release\net9.0\any\HayguardRiseOfHighlandCloud.csproj.AssemblyReference.cache
+C:\Users\Gagik\Documents\GitHub\Tower-Defense\HayguardRiseOfHighlandCloud\Project\obj\Release\net9.0\any\HayguardRiseOfHighlandCloud.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gagik\Documents\GitHub\Tower-Defense\HayguardRiseOfHighlandCloud\Project\obj\Release\net9.0\any\HayguardRiseOfHighlandCloud.AssemblyInfoInputs.cache
+C:\Users\Gagik\Documents\GitHub\Tower-Defense\HayguardRiseOfHighlandCloud\Project\obj\Release\net9.0\any\HayguardRiseOfHighlandCloud.AssemblyInfo.cs
+C:\Users\Gagik\Documents\GitHub\Tower-Defense\HayguardRiseOfHighlandCloud\Project\obj\Release\net9.0\any\HayguardRiseOfHighlandCloud.csproj.CoreCompileInputs.cache
+C:\Users\Gagik\Documents\GitHub\Tower-Defense\HayguardRiseOfHighlandCloud\Project\obj\Release\net9.0\any\HayguardRiseOfHighlandCloud.sourcelink.json
+C:\Users\Gagik\Documents\GitHub\Tower-Defense\HayguardRiseOfHighlandCloud\Project\obj\Release\net9.0\any\HayguardRiseOfHighlandCloud.dll
+C:\Users\Gagik\Documents\GitHub\Tower-Defense\HayguardRiseOfHighlandCloud\Project\obj\Release\net9.0\any\refint\HayguardRiseOfHighlandCloud.dll
+C:\Users\Gagik\Documents\GitHub\Tower-Defense\HayguardRiseOfHighlandCloud\Project\obj\Release\net9.0\any\HayguardRiseOfHighlandCloud.pdb
+C:\Users\Gagik\Documents\GitHub\Tower-Defense\HayguardRiseOfHighlandCloud\Project\obj\Release\net9.0\any\ref\HayguardRiseOfHighlandCloud.dll

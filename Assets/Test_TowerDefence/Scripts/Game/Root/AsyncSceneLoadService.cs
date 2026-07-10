@@ -11,7 +11,7 @@ public class AsyncSceneLoadService : MonoBehaviour, IService
         SceneManager.sceneLoaded += SceneManager_SceneLoaded;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         SceneManager.sceneLoaded -= SceneManager_SceneLoaded;
     }

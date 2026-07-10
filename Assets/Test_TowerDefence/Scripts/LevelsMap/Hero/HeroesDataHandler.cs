@@ -5,6 +5,7 @@ using UnityEngine;
 public class HeroesDataHandler : MonoBehaviour
 {
     public event Action<List<int>> SelectedAcquiredHeroesChanged;
+    public event Action DataChanged;
     public List<int> SelectedHeroesByIndex => selectedAcquiredHeroesByIndex;
 
     [SerializeField] private HeroesFullBlueprintSO AllHeroes;
@@ -14,6 +15,7 @@ public class HeroesDataHandler : MonoBehaviour
     [SerializeField] private PreparingToPlayUI preparingToPlayUI;
 
     private HeroesDataStoreService heroesDataStoreService;
+    private HeroesDataToStore heroesDataToStore;
 
     private List<LevelsMapHero> levelsMapHeros = new();
     private GamePlayerDataHandler gamePlayerDataHandler;
@@ -58,6 +60,8 @@ public class HeroesDataHandler : MonoBehaviour
 
     private void OnHeroesDataToStoreChange(HeroesDataToStore heroesDataToStore)
     {
+        this.heroesDataToStore = heroesDataToStore;
+
         AllHeroes.AcquiredHeroes.Clear();
 
         for (int i = 0; i < AllHeroAndTowerTypes.HeroTypes.Count; i++)
@@ -66,7 +70,7 @@ public class HeroesDataHandler : MonoBehaviour
             levelsMapHeros[i].HeroSO.HeroData.HeroType = heroesDataToStore.AllHeroes[(HeroType)i].HeroType;
             levelsMapHeros[i].HeroSO.HeroData.CardType = heroesDataToStore.AllHeroes[(HeroType)i].CardType;
             levelsMapHeros[i].HeroSO.HeroData.IsAcquired = heroesDataToStore.AllHeroes[(HeroType)i].IsAcquired;
-            levelsMapHeros[i].HeroSO.HeroData.ReseivedCards = heroesDataToStore.AllHeroes[(HeroType)i].ReseivedCards;
+            levelsMapHeros[i].HeroSO.HeroData.ReceivedCards = heroesDataToStore.AllHeroes[(HeroType)i].ReceivedCards;
 
             levelsMapHeros[i].HeroSO.CurrentUpgradeLevel = levelsMapHeros[i].HeroSO.UpgradeLevelsSO.HeroUpgradeLevelSOs[(int)heroesDataToStore.AllHeroes[(HeroType)i].UpgradeLevel - 1];
 
@@ -79,6 +83,7 @@ public class HeroesDataHandler : MonoBehaviour
         }
 
         currentSelectedHero.Select();
+        DataChanged?.Invoke();
     }
 
     public List<LevelsMapHero> GetLevelsMapHeroes()
@@ -99,7 +104,7 @@ public class HeroesDataHandler : MonoBehaviour
 
     public void UpgradeHero(int upgradeGoldCost, int upgradeCardCost)
     {
-        if(upgradeCardCost > 0 && upgradeCardCost <= currentSelectedHero.HeroData.ReseivedCards.Count)
+        if(upgradeCardCost > 0 && upgradeCardCost <= currentSelectedHero.HeroData.ReceivedCards.Count)
         {
             UpgradeHeroByGoldAndCard(upgradeGoldCost, upgradeCardCost);
         }
@@ -122,9 +127,9 @@ public class HeroesDataHandler : MonoBehaviour
 
             var upgradedHeroData = new HeroData(currentSelectedHero.HeroData.HeroType, currentSelectedHero.HeroData.UpgradeLevel, currentSelectedHero.HeroData.CardType, isAcquired: true, currentSelectedHero.HeroData.Price);
 
-            currentSelectedHero.HeroData.ReseivedCards.RemoveRange(0, upgradeCardCost);
+            //currentSelectedHero.HeroData.ReceivedCards.RemoveRange(0, upgradeCardCost);
             
-            upgradedHeroData.ReseivedCards = currentSelectedHero.HeroData.ReseivedCards;
+            upgradedHeroData.ReceivedCards = currentSelectedHero.HeroData.ReceivedCards;
 
             currentSelectedHero.OnHeroDataChange(upgradedHeroData);
             heroesUpgradeUI.SetSelectedHeroStats(currentSelectedHero);
@@ -147,7 +152,7 @@ public class HeroesDataHandler : MonoBehaviour
             heroesUpgradeUI.SetSelectedHeroStats(currentSelectedHero);
 
             var upgradedHeroData = new HeroData(currentSelectedHero.HeroData.HeroType, currentSelectedHero.HeroData.UpgradeLevel, currentSelectedHero.HeroData.CardType, isAcquired: true, currentSelectedHero.HeroData.Price);
-            upgradedHeroData.ReseivedCards = currentSelectedHero.HeroData.ReseivedCards;
+            upgradedHeroData.ReceivedCards = currentSelectedHero.HeroData.ReceivedCards;
 
             currentSelectedHero.OnHeroDataChange(upgradedHeroData);
 
@@ -181,5 +186,20 @@ public class HeroesDataHandler : MonoBehaviour
             Debug.Log("Not Enought Diamonds To Buy");
             return false;
         }
+    }
+
+    public void AddTowerCards(List<HeroCard> heroCards)
+    {
+        heroesDataStoreService.AddCard(heroCards);
+    }
+
+    public void ExchangeCards()
+    {
+        heroesDataStoreService.ExchangeCards();
+    }
+
+    public HeroesDataToStore GetStoredHeroesData()
+    {
+        return heroesDataToStore;
     }
 }

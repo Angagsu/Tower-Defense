@@ -34,7 +34,7 @@ public class LevelsMapTowerUpgrade : MonoBehaviour
 
     public void OnTowerDataChange(TowerData towerData)
     {
-        TowerData.ReseivedCards = towerData.ReseivedCards;
+        TowerData.ReceivedCards = towerData.ReceivedCards;
         TowerData.UpgradeLevel = towerData.UpgradeLevel;
         isAcquired = TowerData.IsAcquired;
         //priceText.text = TowerData.Price.ToString();

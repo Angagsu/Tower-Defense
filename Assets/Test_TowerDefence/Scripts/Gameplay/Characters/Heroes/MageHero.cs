@@ -52,14 +52,14 @@ public class MageHero : BaseHero
                 LockOnTarget();
 
                 if (canAttack)
-                {
-                    Anim.SetAttackAnimation(true);
+                {         
+                    attackCountdown -= Time.deltaTime;
 
                     if (attackCountdown <= 0)
                     {
-                        attackCountdown = 1 / attackRate;
+                        attackCountdown = attackRate;
 
-                        Attack(target);
+                        Anim.SetAttackAnimation(true);
                     }
                 }
                 else
@@ -99,15 +99,25 @@ public class MageHero : BaseHero
                 movement.ReturnToPreviousPosition(moveSpeed, turnSpeed, movement.PreviousPosition);
             }
         }
-
-        attackCountdown -= Time.deltaTime;
     }
 
-    public override void SuperAttack(Action skillCooldown)
+    public override void SuperAttack()
     {
         if (movement.IsMoves) return;
 
-        superAttack.SetIsSuperAttackStarted(true);
-        superAttack.OnSuperAttackPerformed(skillCooldown);
+        if (!activeSkillUI.IsSelected)
+        {
+            activeSkillUI.Select();
+            superAttack.SetIsSuperAttackStarted(true);
+            superAttack.OnSuperAttackPerformed(activeSkillUI);
+        }
+        else
+        {
+            activeSkillUI.Deselect();
+        }
     }
+
+    public override void OnSuperAttackAnimationTriggerStart() { }
+
+    public override void OnSuperAttackAnimationTriggerEnd() { }
 }

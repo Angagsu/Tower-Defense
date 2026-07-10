@@ -122,6 +122,7 @@ MonoBehaviour:
     MaxArmor: 0
     PhysicalResistance: 10
     MagicalResistance: 10
+    ArmorType: 0
     DamageData:
       DamageAmount: 50
       DamageType: 0
@@ -129,8 +130,6 @@ MonoBehaviour:
       MagicalPenetration: 0
       ArmorPercent: 0.7
       HealthPercent: 0.3
-      HasPassiveSkill: 0
-      PassiveSkills: []
   <PartForTargeting>k__BackingField: {fileID: 1979589074453430465}
   detect: {fileID: -5357050719839162658}
   attack: {fileID: 8092254593978286248}
@@ -403,7 +402,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e7f0941294648194c93012d0b4149b98,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e7f0941294648194c93012d0b4149b98,
         type: 3}
@@ -533,7 +532,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 507b18ff05d132b48977d84402e5b524,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 507b18ff05d132b48977d84402e5b524,
         type: 3}

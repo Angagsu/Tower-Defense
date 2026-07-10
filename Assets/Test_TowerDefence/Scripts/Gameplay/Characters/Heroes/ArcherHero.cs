@@ -62,13 +62,13 @@ namespace Assets.Scripts.Hero
 
                     if (canAttack)
                     {
-                        Anim.SetAttackAnimation(true);
+                        attackCountdown -= Time.deltaTime;
 
                         if (attackCountdown <= 0)
                         {
-                            attackCountdown = 1 / attackRate;
+                            attackCountdown = attackRate;
 
-                            Attack(target);
+                            Anim.SetAttackAnimation(true);
                         }
                     }
                     else
@@ -108,31 +108,33 @@ namespace Assets.Scripts.Hero
                     movement.ReturnToPreviousPosition(moveSpeed, turnSpeed, movement.PreviousPosition);
                 }
             }
-
-            attackCountdown -= Time.deltaTime;
         }
 
-        public override void SuperAttack(Action skillCooldown)
+        public override void SuperAttack()
         {
             if (movement.IsMoves) return;
 
-            superAttack.SetIsSuperAttackStarted(true);
-            superAttack.OnSuperAttackPerformed(skillCooldown);
+            if (!activeSkillUI.IsSelected)
+            {
+                activeSkillUI.Select();
+                superAttack.SetIsSuperAttackStarted(true);
+                superAttack.OnSuperAttackPerformed(activeSkillUI);
+            }
+            else
+            {
+                activeSkillUI.Deselect();
+            } 
         }
 
-        protected override void Attack(Transform target)
+        public override void OnSuperAttackAnimationTriggerStart()
         {
-            base.Attack(target);
+            canDetect = false;
+            canMove = false;
         }
 
-        protected override void Move(Transform target)
+        public override void OnSuperAttackAnimationTriggerEnd()
         {
-            base.Move(target);
-        }
 
-        public override void OnRevive()
-        {
-            base.OnRevive();
         }
     }
 }

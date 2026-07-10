@@ -32,3 +32,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: edd5b1f28b706244b86ec6f54a3e6057, type: 3}
   - {fileID: 21300000, guid: 3c0f9904fbd0d2148a49b139886ad21e, type: 3}
   - {fileID: 21300000, guid: 178c48f9081e5a5449909639b25d5a43, type: 3}
+  <MonstersSprites>k__BackingField:
+  - {fileID: 21300000, guid: 3391c4c0964fdaa48b3c8a947146fa06, type: 3}
+  - {fileID: 21300000, guid: ffa361d1fc477734fbc4016f55e2966f, type: 3}
+  - {fileID: 21300000, guid: 6409c9b0b2da38c408f7319cc75fb45c, type: 3}
+  - {fileID: 21300000, guid: 9bfb309f93c92494d82416b57adf1fc1, type: 3}

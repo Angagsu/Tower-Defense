@@ -9,6 +9,7 @@ public class BaseProjectile : MonoBehaviour
     [SerializeField] protected float speed = 70f;
     [SerializeField] protected float explosionRadius = 0f;
     [SerializeField] protected ParticleSystem impactEffect;
+    [SerializeField] protected float impactEffectDuration = 0.2f;
     [Space(15)]
     [SerializeField] protected ProjectileType upgradLevel;
 
@@ -28,6 +29,7 @@ public class BaseProjectile : MonoBehaviour
     protected readonly Collider[] overlapResults = new Collider[32];
     protected AttackStats attackStats;
     protected WaitForSeconds waitForSeconds;
+    
 
 
     public virtual void Construct(GameplayStates gameplayStates)
@@ -70,7 +72,7 @@ public class BaseProjectile : MonoBehaviour
 
     protected virtual void Start()
     {
-        waitForSeconds = new WaitForSeconds(0.2f);
+        waitForSeconds = new WaitForSeconds(impactEffectDuration);
     }
 
     protected virtual void Update()
@@ -146,12 +148,12 @@ public class BaseProjectile : MonoBehaviour
 
     protected virtual void ApplyDamage(AttackStats attackStats)
     {
-        attackableTarget.TakeDamage(attackStats);
+        attackableTarget?.TakeDamage(attackStats);   
     }
 
     protected virtual void DoDamageWithPassiveSkill(AttackStats attackStats, Character targetCharacter, Transform target, float damage, float passiveSkill_1, float passiveSkill_2)
     {
-        attackableTarget.TakeDamage(attackStats);
+        attackableTarget?.TakeDamage(attackStats);
     }
 
     protected void OnDisable()

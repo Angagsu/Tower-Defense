@@ -5,9 +5,7 @@ public enum TowerType
     Golem,
     Ice,
     Fire,
-    Lightning,
-    Unknown,
-    ComingSoon
+    Lightning
 }
 
 

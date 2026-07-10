@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Thunder Tower L2 Mat
-  m_Shader: {fileID: -6465566751694194690, guid: 61f50d5d3d54c8f4b94f6893243e945e,
+  m_Shader: {fileID: -6465566751694194690, guid: 2df83ae9f53324741ab85b5f6bb1e50d,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -28,20 +28,32 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_06a983e5e2514540a4aa2338516120e2:
+        m_Texture: {fileID: 2800000, guid: 3204d9da411e29548b6a3b6081687681, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_1:
+        m_Texture: {fileID: 2800000, guid: 86b78c9095ec82a4b9e7efb79edee4ae, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_882b8c533bcf4e429d607fa08b04cd72:
-        m_Texture: {fileID: 2800000, guid: 0e852c6d128721b4bb968d8d7baa119e, type: 3}
+        m_Texture: {fileID: 2800000, guid: dc500f9c6fbd84d4284c57baf844597c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_a55570a67eae4cbe8b26eaa93900d962:
+        m_Texture: {fileID: 2800000, guid: 883a8c7d9d15e4e4d88fe50f1cbe9ba6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_a6f03190d40346b2bcde06215cbbfc90:
-        m_Texture: {fileID: 2800000, guid: 61079afa9b8322742b7078e3b4f6ee2c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 06ee7db96365c3f408bc872fc37e5532, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 4677bd410a38bd944b4053dc6cd9aea1, type: 3}
+        m_Texture: {fileID: 2800000, guid: bdfca40c002121542a02a89ed218ea99, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Broken_Tower_Texture:
-        m_Texture: {fileID: 2800000, guid: 8e35a7ba719d6524cb4d6ed64f34cd99, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4b39d1024ec90864ca6d2c3b02801a91, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -73,15 +85,23 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emmisive_Tower:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: f7ce1ac434f3c7944939c6b1cc60c3ba, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emmisive_Tower_Broken:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _LightWaveNoise:
+        m_Texture: {fileID: 2800000, guid: 113537734cb6dd842b26f306dbbeb3eb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Lightning_Texture:
+        m_Texture: {fileID: 18700000, guid: c786244dc9739d84ebd1ddae4a7e1fdb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 4677bd410a38bd944b4053dc6cd9aea1, type: 3}
+        m_Texture: {fileID: 2800000, guid: bdfca40c002121542a02a89ed218ea99, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Masks:
@@ -100,6 +120,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RGBA_Mask:
+        m_Texture: {fileID: 2800000, guid: c577ad9bbe30b254cae572d65d1d544b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_6e6bc0a103e4445c807bf8769b707847_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 243fd6b7b4f5b9841afea6a2a5595ec5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Snow_Map:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -110,6 +138,22 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StormTexture:
+        m_Texture: {fileID: 2800000, guid: 2d8fd09d25f4ec243a6fa01b836f4c77, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_25ae259977684aae8fe0d392be0ce4e1_Out_0_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 2d8fd09d25f4ec243a6fa01b836f4c77, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_cdc4760592b4436498f11822f613324c_Out_0_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 113537734cb6dd842b26f306dbbeb3eb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ThunderLine:
+        m_Texture: {fileID: 2800000, guid: 243fd6b7b4f5b9841afea6a2a5595ec5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Tower_Texture:
@@ -130,14 +174,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_dca9548193674f71b98e564791daeaec: 0
+    - Vector1_dca9548193674f71b98e564791daeaec: 0.11
     - Vector1_dca9548193674f71b98e564791daeaec_1: 0
-    - Vector1_e39e54e740944a78a00b1eb770d1d23b: 0.608
+    - Vector1_e39e54e740944a78a00b1eb770d1d23b: 0.789
     - _AddPrecomputedVelocity: 0
+    - _All_Animation_Speed: 1
     - _All_Animaton_Speed: 1
     - _AlphaClip: 1
     - _AlphaToMask: 1
-    - _Alpha_Clipping: 0.84
+    - _Alpha_Clipping: 0.91
+    - _AnimSpeed: 12
+    - _Base_Texture_Scroll: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -147,20 +194,29 @@ Material:
     - _Crystal_Light_Anim_Speed: 1.22
     - _Crystal_Shine_Bright: 1
     - _Cull: 2
-    - _Cutoff: 0.772
+    - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _Emmisive_Intensity: 0
+    - _Emmisive_Intensity: 1
     - _EnvironmentReflections: 1
     - _Fall: 1
-    - _Global_Light_Intensity: 0
+    - _FrameCount: 27
+    - _Global_Light_Intensity: 0.97
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
     - _Lake: 1
+    - _LightWave: 1
+    - _LightWaveNoiseSize: 0.8
+    - _LightWaveOpacity: 0.6
+    - _LightWaveSpeed: 0.4
+    - _LightWave_Intensity: 0.95
+    - _Lightning_Edges: 0.084
+    - _Ligtning_Scale: 1.65
     - _Metallic: 0
+    - _Night_Effect_Intensity: 0.75
     - _Night_Mode_On: 0
     - _OcclusionStrength: 1
     - _On_Broken_Tower: 0
@@ -176,23 +232,43 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
+    - _StormOpacity: 0.541
+    - _StormSpeed: 0.5
+    - _StormTextureSize: 1.7
     - _Surface: 0
+    - _Thunder: 1
+    - _ThunderLineOffset: -1.35
+    - _ThunderOpacity: 0.45
+    - _ThunderSpeed: 2.5
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - Color_4e1e75e1a66c45b2845f4eb092e37217: {r: 0.9056604, g: 0.9056604, b: 0.9056604,
+    - Color_4e1e75e1a66c45b2845f4eb092e37217: {r: 0.20754719, g: 0.20754719, b: 0.20754719,
         a: 0}
     - Vector2_09ee369b9d234e24aa3f5cd2062481de: {r: 3.09, g: 19, b: 0, a: 0}
-    - Vector2_a0743b7b27324430a0a73051d5f656c2: {r: 15.19, g: 2.7, b: 0, a: 0}
-    - Vector2_deac43de9e554aeab128167e01e28b59: {r: 0, g: 0.2, b: 0, a: 0}
-    - Vector2_deac43de9e554aeab128167e01e28b59_1: {r: 0, g: 0.41, b: 0, a: 0}
+    - Vector2_a0743b7b27324430a0a73051d5f656c2: {r: 5.17, g: 3.03, b: 0, a: 0}
+    - Vector2_a0743b7b27324430a0a73051d5f656c2_1: {r: 3.22, g: 1.57, b: 0, a: 0}
+    - Vector2_a0743b7b27324430a0a73051d5f656c2_2: {r: 2.55, g: 1.37, b: 0, a: 0}
+    - Vector2_bd04e5b970ca4b45af748b16a701b6a1: {r: 3.82, g: -1.12, b: 0, a: 0}
+    - Vector2_bd04e5b970ca4b45af748b16a701b6a1_1: {r: 4.34, g: -0.67, b: 0, a: 0}
+    - Vector2_deac43de9e554aeab128167e01e28b59: {r: 0, g: 0.93, b: 0, a: 0}
+    - Vector2_deac43de9e554aeab128167e01e28b59_1: {r: 0, g: -1.8, b: 0, a: 0}
+    - Vector2_deac43de9e554aeab128167e01e28b59_2: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.9063317, g: 0.9063317, b: 0.9063317, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Global_Light_Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Global_Light_Color: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 0}
+    - _LightWaveColor: {r: 8.847647, g: 7.805381, b: 24.69763, a: 0}
+    - _LightningPosition: {r: -0.21, g: -1.07, b: 0, a: 0}
+    - _Lightning_Color: {r: 3.171346, g: 3.2553568, b: 4.2823267, a: 0}
+    - _Moonlight_Color: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 0}
+    - _Size: {r: 1.36, g: 1.2, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _StormColor: {r: 2.0023372, g: 6.7873235, b: 12.863499, a: 0}
+    - _ThunderColor: {r: 2.923107, g: 17.705679, b: 16.305683, a: 0}
+    - _ThunderLineTile: {r: 3.53, g: 2.49, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &898023926201738394

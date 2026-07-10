@@ -19,11 +19,6 @@ public class HeroSkillsInformPopupUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentUpgradeValueText;
     [SerializeField] private TextMeshProUGUI nextUpgradeValueText;
 
-    [Header("Attack and Defense Stats View Setup")]
-    [SerializeField] private TextMeshProUGUI damageTypeText;
-    [SerializeField] private TextMeshProUGUI physicalPenetrationText;
-    [SerializeField] private TextMeshProUGUI magicalePenetrationText;
-
 
 
     public void EnablePopup(HeroSO HeroSO, bool isPassiveSkill, int id, HeroUpgradeLevelSO nextUpgradeLevel = null)

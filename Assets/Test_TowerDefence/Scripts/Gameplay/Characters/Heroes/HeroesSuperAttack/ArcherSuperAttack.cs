@@ -7,8 +7,8 @@ public class ArcherSuperAttack : HeroSuperAttack
 
     private SuperAttackProjectile projectile;
     private Camera mainCamera;
-    private Action superAttackPerformed;
-
+    private GameplayHeroActiveSkillUI activeSkillUI;
+    LayerMask movableAreaLayer;
 
     public override void SetDependencies(BaseHero baseHero, PlayerInputHandler playerInputHandler)
     {
@@ -16,6 +16,8 @@ public class ArcherSuperAttack : HeroSuperAttack
 
         this.playerInputHandler.TouchPressed += OnPlayerInput_TouchPressed;
         this.playerInputHandler.TouchedGround += OnPlayerInput_TouchedGround;
+        this.baseHero.CanUseSuperAttack += OnCanUseSuperAttack;
+
         mainCamera = Camera.main;
         
         projectile = Instantiate(fireProjectile, transform.position, Quaternion.identity);
@@ -25,13 +27,23 @@ public class ArcherSuperAttack : HeroSuperAttack
 
         projectile.Setup(baseHero, hasPassiveSkill);
         projectile.gameObject.SetActive(false);
+
+        movableAreaLayer = LayerMask.GetMask("MovableArea");
     }
 
-    public override void OnSuperAttackPerformed(Action superAttackPerformed)
+    private void OnCanUseSuperAttack(bool canUseSuperAttack)
     {
-        if (this.superAttackPerformed == null)
+        if (!canUseSuperAttack)
         {
-            this.superAttackPerformed = superAttackPerformed;
+            isSuperAttackStarted = false;
+        }
+    }
+
+    public override void OnSuperAttackPerformed(GameplayHeroActiveSkillUI activeSkillUI)
+    {
+        if (this.activeSkillUI == null)
+        {
+            this.activeSkillUI = activeSkillUI;
         }
     }
 
@@ -46,20 +58,27 @@ public class ArcherSuperAttack : HeroSuperAttack
         {
             Ray ray = mainCamera.ScreenPointToRay(touchPosition);
 
-            if (Physics.Raycast(ray, out RaycastHit raycastHit) && raycastHit.collider)
+            if (Physics.Raycast(ray, out RaycastHit raycastHit, 150f, movableAreaLayer))
             {
                 projectile.Activate(baseHero.transform.position);
                 projectile.SetTarget(raycastHit.point);
-                superAttackPerformed?.Invoke();
+                activeSkillUI.StartCooldown();
+                activeSkillUI.Deselect();
             }
 
+            activeSkillUI.Deselect();
             isSuperAttackStarted = false;
         }
+        else if (activeSkillUI)
+        {
+            activeSkillUI.Deselect();
+        }  
     }
 
     private void OnDisable()
     {
         playerInputHandler.TouchPressed -= OnPlayerInput_TouchPressed;
         playerInputHandler.TouchedGround -= OnPlayerInput_TouchedGround;
+        baseHero.CanUseSuperAttack -= OnCanUseSuperAttack;
     }
 }

@@ -9,6 +9,7 @@ public class BaseHero : Character
 {
     public event Action<bool> Died;
     public event Action<BaseHero, float, float> DamageTaked;
+    public event Action<bool> CanUseSuperAttack;
 
     [field: SerializeField] public int ReviveTimer { get; private set; }
     [field: SerializeField] public Transform RotatPart { get; private set; }
@@ -19,7 +20,9 @@ public class BaseHero : Character
 
     public bool IsSelected => isSelected;
     public bool CanAttack => canAttack;    
-   // public bool IsMoves => movement.IsMoves;
+    public bool IsMoves => movement.IsMoves;
+    public bool CanDetect => canDetect;
+    public bool CanMove => canMove;
     public bool IsPaused => isPaused;
     public float AttackRange => attackRange;
 
@@ -40,6 +43,7 @@ public class BaseHero : Character
     protected HeroUpgradeLevelSO upgradeLevel;
     protected PlayerInputHandler playerInputHandler;
     protected GameplayStates gameplayStates;
+    protected GameplayHeroActiveSkillUI activeSkillUI;
     protected BaseMonster currentTargetedMonster;
     protected BaseMonster currentAttackerMonster;
     protected Transform target;
@@ -55,13 +59,15 @@ public class BaseHero : Character
     protected bool isSelected;
     protected bool isPaused;
     protected bool canAttack;
-    protected Vector2 touchPosition;
+    protected bool canDetect;
+    protected bool canMove;
 
+    protected Vector2 touchPosition;
     protected HeroMovement movement;
     protected List<float> passiveSkillsList;
     protected bool hasPassiveSkill;
     protected bool hasActiveSkill;
-
+    protected bool canUseSuperAttack;
 
     protected float magicResistStartValue;
     protected float physicResistStartValue;
@@ -127,16 +133,23 @@ public class BaseHero : Character
     protected virtual void Awake()
     {
         movement = move as HeroMovement;
+
         isSelected = false;
         canAttack = true;
+        canUseSuperAttack = true;
+        canDetect = true;
+        canMove = true;
+
         health = startHealth;
         healthBarInstance.gameObject.SetActive(false);
         selectionZone.SetActive(false);
 
+        DamageTaked?.Invoke(this, health, startHealth);
+        CanUseSuperAttack?.Invoke(canUseSuperAttack);
+
         waitUntilRevive = new WaitForSeconds(ReviveTimer);
         waitUntilReviveAnimationEnd = new WaitForSeconds(reviveAnimationDuration);
         waitUntilDyingAnimationEnd = new WaitForSeconds(dyingAnimationDuration);
-        //DamageTaked?.Invoke(this, health, startHealth);
     }
 
     protected virtual void OnEnable() { }
@@ -171,7 +184,7 @@ public class BaseHero : Character
     {
         if (isPaused) return;
 
-        if ((!move.IsMoves && !IsDead))
+        if (canDetect)
         {
             DetectTarget();
         }
@@ -180,13 +193,7 @@ public class BaseHero : Character
             target = null;
             currentTargetedMonster.RejectCurrentAttackerHero();
             currentTargetedMonster = null;
-            //detect.ResetDetectedTarget();
         }
-    }
-
-    public virtual void ResetTarget()
-    {
-        detect.ResetDetectedTarget();
     }
 
     protected override void DetectTarget()
@@ -201,25 +208,31 @@ public class BaseHero : Character
 
                 if (currentTargetedMonster.CurrentAttackerHero == null) 
                 {
+                    currentAttackerMonster = currentTargetedMonster;
+
                     currentTargetedMonster.SetCurrentAttackerHero(this);
                     currentTargetedMonster.SetCurrentTargetedHero();
+
                     currentTargetedMonster.Movement.SetIsMove(false);
                     currentTargetedMonster.Anim.StopAllAnimations();
+                    currentTargetedMonster.SetCanAttack(false);
                     movement.MoveToTargetMonster(currentTargetedMonster, moveSpeed, turnSpeed, target.position);
                 }
 
                 LockOnTarget();
 
-                if (canAttack && !currentTargetedMonster.Movement.IsMoves)
+                if (canAttack)
                 {
-                    Anim.SetAttackAnimation(true);
+                    currentAttackerMonster.SetCanAttack(true);
+                    attackCountdown -= Time.deltaTime;
 
                     if (attackCountdown <= 0)
                     {
-                        attackCountdown =  attackRate;
+                        attackCountdown = attackRate;
 
-                        Attack(target);
-                    }
+                        Anim.SetAttackAnimation(true);
+                    } 
+
                 }
                 else
                 {
@@ -258,11 +271,32 @@ public class BaseHero : Character
                 movement.ReturnToPreviousPosition(moveSpeed, turnSpeed, movement.PreviousPosition);
             }
         }
-
-        attackCountdown -= Time.deltaTime;
     }
 
-    public virtual void SuperAttack(Action skillCooldown) { }
+    public void AttackOnAnimationTrigger()
+    {
+        if (target == null)
+            return;
+
+        Attack(target);
+    }
+
+    public virtual void SuperAttack() { }
+
+    public virtual void OnSuperAttackAnimationTriggerStart() { }
+
+    public virtual void OnSuperAttackAnimationTriggerEnd() { }
+
+    public void CanSuperAttack(bool tof)
+    {
+        canUseSuperAttack = tof;
+        CanUseSuperAttack?.Invoke(canUseSuperAttack);
+    }
+
+    public void SetActiveSkillButtonUI(GameplayHeroActiveSkillUI activeSkillUI) 
+    {
+        this.activeSkillUI = activeSkillUI;
+    }
 
     public void IncreaseResistance(DamageType damageType, float amount, float effectDuration)
     {
@@ -300,7 +334,9 @@ public class BaseHero : Character
     protected override void Attack(Transform target)
     {
         baseSFX.PlayAttackSFX();
-        attack.AttackWithPassiveSkill(AttackStats,target, AttackStats.DamageData.DamageAmount, hasPassiveSkill, passiveValue_1: passiveSkillsList[0], passiveValue_2: passiveSkillsList[1], currentTargetedMonster, currentTargetedMonster);
+
+        attack.AttackWithPassiveSkill(AttackStats,target, AttackStats.DamageData.DamageAmount, hasPassiveSkill, passiveValue_1: passiveSkillsList[0],
+            passiveValue_2: passiveSkillsList[1], currentTargetedMonster, currentTargetedMonster);
     }
 
     protected override void Move(Transform target)
@@ -339,17 +375,29 @@ public class BaseHero : Character
     {
         healthBarInstance.gameObject.SetActive(false);
         isDead = true;
+        canDetect = false;
+        canUseSuperAttack = false;
+
         Anim.SetAttackAnimation(false);
         Anim.SetMoveAnimation(false);
         Anim.SetDeadAnimation(true);
+
         Died?.Invoke(isDead);
+        CanUseSuperAttack?.Invoke(canUseSuperAttack);
 
         if (currentTargetedMonster)
         {
             currentTargetedMonster.RejectCurrentAttackerHero();
             currentTargetedMonster = null;
-            target = null;
         }
+
+        if (currentAttackerMonster)
+        {
+            currentAttackerMonster.RejectCurrentAttackerHero();
+            currentAttackerMonster = null;
+        }
+
+        target = null;
 
         if (coroutine != null)
         {
@@ -408,13 +456,23 @@ public class BaseHero : Character
         healthBarInstance.gameObject.SetActive(true);
         healthBarInstance.SetMaterialProperty((AttackStats.Health / AttackStats.MaxHealth));
         DamageTaked?.Invoke(this, AttackStats.Health, AttackStats.MaxHealth);
+
         isDead = false;
+        canUseSuperAttack = true;
+        canDetect = true;
+
         Died?.Invoke(isDead);
+        CanUseSuperAttack?.Invoke(canUseSuperAttack);
     }
 
     public void SetCanAttack(bool tof)
     {
         canAttack = tof;
+    }
+
+    public void SetCanDetect(bool tof)
+    {
+        canDetect = tof;
     }
 
     public virtual void Select()
@@ -438,12 +496,23 @@ public class BaseHero : Character
     {
         if (currentTargetedMonster)
         {
+            Debug.Log("Reset Targeted Monster");
             currentTargetedMonster.RejectCurrentAttackerHero();
             Anim.SetAttackAnimation(false);
             currentTargetedMonster = null;
             target = null;
         }
-        ResetTarget();
+    }
+
+    public void ResetAttackerMoster()
+    {
+        if (currentAttackerMonster)
+        {
+            Debug.Log("Reset Attacker Monster");
+            currentAttackerMonster.RejectCurrentAttackerHero();
+            currentAttackerMonster = null;
+            target = null;
+        }
     }
 
     public bool IsMove()

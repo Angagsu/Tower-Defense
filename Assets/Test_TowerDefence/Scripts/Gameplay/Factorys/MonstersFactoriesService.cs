@@ -118,7 +118,7 @@ public class MonstersFactoriesService : MonoBehaviour
                             {
                                 while (isPaused) yield return null;
 
-                                var generatedMinion = monstersFactories[u].GetMonsterByType(monsterPrefab, SpawnPoints[j].Waypoints[k].transform, SpawnPoints[j].Waypoints[k].transform.rotation);
+                                var generatedMinion = monstersFactories[u].GetMonsterByType(monsterPrefab, SpawnPoints[j].Waypoints[k].transform, Quaternion.identity);
                                 monsterDependencyInjecter.SetMonsterDependencies(generatedMinion);
                                 enemiesAlive++;
                                 MonsterCountIncreased?.Invoke(generatedMinion);

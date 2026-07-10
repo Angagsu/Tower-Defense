@@ -11,7 +11,11 @@ public class TowerData
     public TowerCardType CardType;
     public bool IsAcquired;
     public int Price;
-    public List<TowerCard> ReseivedCards;
+    public List<TowerCard> ReceivedCards;
+
+    public int CostOfChange;
+    public int ReceivedCardsAmount => ReceivedCards.Count;
+
 
     public TowerData(TowerType towerType, TowerUpgradeLevel upgradeLevel, TowerCardType cardType, bool isAcquired, int price)
     {
@@ -20,6 +24,22 @@ public class TowerData
         CardType = cardType;
         IsAcquired = isAcquired;
         Price = price;
-        ReseivedCards = new List<TowerCard>();
+        ReceivedCards = new List<TowerCard>();
+
+        switch (CardType)
+        {
+            case TowerCardType.Common:
+                CostOfChange = 0;
+                break;
+            case TowerCardType.Epic:
+                CostOfChange = 5;
+                break;
+            case TowerCardType.Mythic:
+                CostOfChange = 10;
+                break;
+            case TowerCardType.Rare:
+                CostOfChange = 15;
+                break;
+        }
     }
 }

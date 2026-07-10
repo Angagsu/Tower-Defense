@@ -36,7 +36,7 @@ public class LevelsMapHero : MonoBehaviour
 
     public void OnHeroDataChange(HeroData heroData)
     {
-        HeroData.ReseivedCards = heroData.ReseivedCards;
+        HeroData.ReceivedCards = heroData.ReceivedCards;
         HeroData.UpgradeLevel = heroData.UpgradeLevel;
         isAcquired = HeroData.IsAcquired;
         priceText.text = HeroData.Price.ToString();

@@ -7,5 +7,6 @@ public class IconsSO : ScriptableObject
     [field: SerializeField] public List<Sprite> AllIconsSprites { get; private set; }
     [field: SerializeField] public List<Sprite> AllHeroIconsSprites { get; private set; }
     [field: SerializeField] public List<Sprite> AttackStatsSprites { get; private set; }
-    [field: SerializeField] public List<Sprite> DefenseSprites { get; private set; }    
+    [field: SerializeField] public List<Sprite> DefenseSprites { get; private set; }
+    [field: SerializeField] public List<Sprite> MonstersSprites { get; private set; }
 }

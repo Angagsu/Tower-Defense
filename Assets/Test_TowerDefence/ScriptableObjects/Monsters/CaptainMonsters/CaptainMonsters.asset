@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2504e50f8fad34343ae86ccbc314df1c, type: 3}
+  m_Name: CaptainMonsters
+  m_EditorClassIdentifier: Assembly-CSharp::MonstersByTypeSO
+  <Monsters>k__BackingField:
+  - {fileID: 11400000, guid: 323b622b955eada438396e51da562df4, type: 2}
+  - {fileID: 11400000, guid: b71e8d6f5a61908489c7ab190ce3fe7b, type: 2}
+  - {fileID: 11400000, guid: c09d66a14ec19db4290f11227294e941, type: 2}
+  - {fileID: 11400000, guid: 87681f50ead65434bb04db8efcbf372d, type: 2}
+  - {fileID: 11400000, guid: 0c6e5307973b5d545b065b2bf014e2ac, type: 2}

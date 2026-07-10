@@ -18,7 +18,7 @@ public class DwarfHero : BaseHero
     {
         if (isPaused) return;
         
-        if ((!move.IsMoves && !IsDead))
+        if (canDetect)
         {
             DetectTarget();
         }
@@ -61,12 +61,40 @@ public class DwarfHero : BaseHero
         attack.AttackTarget(AttackStats,target, AttackStats.DamageData.DamageAmount, currentTargetedMonster);
     }
 
-    public override void SuperAttack(Action skillCooldown)
+    public override void SuperAttack()
     {
         if (movement.IsMoves) return;
 
-        Debug.Log($"Hero: {this} Super Attack");
+        if (!activeSkillUI.IsSelected)
+        {
+            activeSkillUI.Select();
+            superAttack.SetIsSuperAttackStarted(true);
+            superAttack.OnSuperAttackPerformed(activeSkillUI);
+
+            Anim.SetAllAnimationsFalse();
+            canAttack = false;
+        }
+        else
+        {
+            Anim.SetSupperAttackAnimation(true);
+        }
+    }
+
+    public override void OnSuperAttackAnimationTriggerStart()
+    {
+        canDetect = false;
+        canMove = false;
+
         superAttack.AreaEffect(AttackStats, superAttackRadius, superAttackEffectDuration);
-        skillCooldown?.Invoke();
+        activeSkillUI.StartCooldown();
+        activeSkillUI.Deselect();
+    }
+
+    public override void OnSuperAttackAnimationTriggerEnd()
+    {
+        Anim.SetSupperAttackAnimation(false);
+        canAttack = true;
+        canDetect = true;
+        canMove = true;
     }
 }

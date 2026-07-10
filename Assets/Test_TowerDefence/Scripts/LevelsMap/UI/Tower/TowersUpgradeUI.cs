@@ -55,8 +55,15 @@ public class TowersUpgradeUI : MonoBehaviour
 
         SetSelectedTowerStats(currentSelectedTower);
 
+        towersDataHandler.DataChanged += OnDataChange;
+
         buyButton.onClick.AddListener(OnBuy);
         upgradeButton.onClick.AddListener(OnUpgrade);
+    }
+
+    private void OnDestroy()
+    {
+        towersDataHandler.DataChanged -= OnDataChange;
     }
 
     public void SetSelectedTowerStats(LevelsMapTower currentSelectedTower)
@@ -73,6 +80,7 @@ public class TowersUpgradeUI : MonoBehaviour
         {
             levelsMapTowerUpgrads[i].SetParams(currentSelectedTower.TowerFullBlueprintSO.TowerUpgrades[i], i);
         }
+
         currentSelectedTowerUpgrade = levelsMapTowerUpgrads[0];
         SetSelectedTowerUpgradeStats(currentSelectedTowerUpgrade);
     }
@@ -96,10 +104,18 @@ public class TowersUpgradeUI : MonoBehaviour
         SetupSliders();
     }
 
+    public void OnDataChange()
+    {
+        SetupCardParams();
+        SetupButtons();
+        SetupTexts();
+        SetupSliders();
+    }
+
     private void SetupCardParams()
     {
         cardUI.SetParams(currentSelectedTowerUpgrade.TowerSO);
-        receivedCardsText.text = currentSelectedTowerUpgrade.TowerSO.TowerData.ReseivedCards.Count.ToString();
+        receivedCardsText.text = currentSelectedTowerUpgrade.TowerSO.TowerData.ReceivedCards.Count.ToString();
     }
 
     private void SetupTexts()

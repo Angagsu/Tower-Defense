@@ -5,12 +5,4 @@ public enum TowerCardType
     Mythic,
     Rare 
 }
-//public enum TowerCardType
-//{
-//    ArrowCard,
-//    DefenderCard,
-//    FireCard,
-//    GolemCard,
-//    IceCard,
-//    LightningCard
-//}
+

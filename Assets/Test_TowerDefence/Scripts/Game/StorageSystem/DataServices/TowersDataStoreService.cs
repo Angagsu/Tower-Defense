@@ -7,15 +7,15 @@ public class TowersDataStoreService : MonoBehaviour, IService
 {
     public event Action<TowersDataToStore> TowerDataChanged;
     public List<int> SelectedAcquiredTowerByIndex => selectedAcquiredTowerByIndex;
+    public TowersDataToStore TowersDataToStore => towersDataToStore;
     [field: SerializeField] public AllTowersBlueprintSO AllTowers { get; private set; }
 
     private const string TOWERS_DATA_KEY = "TowersData.Json";
 
     [SerializeField] private StorageService storageService;
-    [SerializeField] private TowersDataToStore towersDataToStore = new TowersDataToStore();
+    private TowersDataToStore towersDataToStore = new TowersDataToStore();
 
     private TowersDataHandler towersDataHandler;
-    private TowerCardData towerCardData;
     private List<int> selectedAcquiredTowerByIndex = new();
 
 
@@ -66,16 +66,13 @@ public class TowersDataStoreService : MonoBehaviour, IService
                 else
                 {
                     TowerUpgradesData towerUpgradesData = new TowerUpgradesData();
-                    TowerUpgradesCardData towerUpgradesCardData = new TowerUpgradesCardData((TowerType)i);
 
                     for (int j = 0; j < AllHeroAndTowerTypes.TowerCards.Count; j++)
                     {
                         towerUpgradesData.AddTowerData(new TowerData(AllHeroAndTowerTypes.TowerTypes[i], TowerUpgradeLevel.Level_1, AllHeroAndTowerTypes.TowerCards[j], isAcquired: false, price: default));
-                        towerUpgradesCardData.AddTowerCardData(new TowerCardData(AllHeroAndTowerTypes.TowerTypes[i], AllHeroAndTowerTypes.TowerCards[j]));
                     }
 
                     this.towersDataToStore.AllTowers.Add(AllHeroAndTowerTypes.TowerTypes[i], towerUpgradesData);
-                    this.towersDataToStore.AllTowerUpgradesCards.Add(AllHeroAndTowerTypes.TowerTypes[i], towerUpgradesCardData);
                 } 
             }
         }
@@ -108,10 +105,9 @@ public class TowersDataStoreService : MonoBehaviour, IService
     {
         for (int i = 0; i < cards.Count; i++)
         {
-            if (towersDataToStore.AllTowerUpgradesCards.ContainsKey(cards[i].TowerType))
+            if (towersDataToStore.AllTowers.ContainsKey(cards[i].TowerType))
             {
-                towersDataToStore.AllTowerUpgradesCards[cards[i].TowerType].TowerUpgradesCards[(int)cards[i].CardType].ReceivedCards.Add(cards[i]);
-                towersDataToStore.AllTowers[cards[i].TowerType].TowerUpgrades[(int)cards[i].CardType].ReseivedCards.Add(cards[i]);
+                towersDataToStore.AllTowers[cards[i].TowerType].TowerUpgrades[(int)cards[i].CardType].ReceivedCards.Add(cards[i]);
             }
         }
 
@@ -120,6 +116,11 @@ public class TowersDataStoreService : MonoBehaviour, IService
 
     public void ReduceCard(TowerData towerData, int cards, int index)
     {
-        towersDataToStore.AllTowerUpgradesCards[towerData.TowerType].TowerUpgradesCards[index].ReceivedCards.RemoveRange(0, cards);
+        towersDataToStore.AllTowers[towerData.TowerType].TowerUpgrades[index].ReceivedCards.RemoveRange(0, cards);
+    }
+
+    public void ExchangeCards()
+    {
+        Save();
     }
 }
