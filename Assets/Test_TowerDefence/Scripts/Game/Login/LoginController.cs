@@ -1,30 +1,40 @@
 using System;
-using System.Text;
 using System.Threading.Tasks;
-using TMPro;
 using Unity.Services.Authentication;
 using Unity.Services.Authentication.PlayerAccounts;
 using Unity.Services.Core;
 using UnityEngine;
-using UnityEngine.UI;
 using Facebook.Unity;
-
+#if UNITY_ANDROID
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
+#endif
 
 
 public class LoginController : MonoBehaviour
 {
+    public Action PlayerSignedIn;
+    private string googlePlayGamesToken;
+    
 
-    private async void Awake()
+    private void Awake()
     {
-        InitializeFacebook();
+#if UNITY_ANDROID
+        PlayGamesPlatform.DebugLogEnabled = true;
+        PlayGamesPlatform.Activate();
+        LoginGooglePlayGames();
+# endif
 
-        if(UnityServices.State.Equals(ServicesInitializationState.Uninitialized))
+        InitializeFacebook();  
+
+        if(UnityServices.State.Equals(ServicesInitializationState.Initialized))
         {
-            Debug.Log("Initializing Unity Services...");
-            await UnityServices.InitializeAsync();
+            UnitySignInSubscription();
         }
-
-        PlayerAccountService.Instance.SignedIn += SignInOrLinkWithUnity;
+        else
+        {
+            UnityServices.Initialized += UnitySignInSubscription;
+        }
     }
 
     private async void Start()
@@ -37,6 +47,17 @@ public class LoginController : MonoBehaviour
 
         Debug.Log("Returning player signing in...");
         await SignInAnonymouslyAsync();
+    }
+
+    private void OnDestroy()
+    {
+        PlayerAccountService.Instance.SignedIn -= SignInOrLinkWithUnity;
+        UnityServices.Initialized -= UnitySignInSubscription;
+    }
+
+    private void UnitySignInSubscription()
+    {
+        PlayerAccountService.Instance.SignedIn += SignInOrLinkWithUnity;
     }
 
     #region Anonymous
@@ -54,6 +75,7 @@ public class LoginController : MonoBehaviour
             Debug.Log("Sign in anonymously succeeded!");
             Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
 
+            PlayerSignedIn?.Invoke();
         }
         catch (AuthenticationException ex)
         {
@@ -184,9 +206,44 @@ public class LoginController : MonoBehaviour
 
     public void StartFacebookSignIn()
     {
+        Debug.Log("========== FACEBOOK LOGIN START ==========");
+        Debug.Log($"FB.IsInitialized: {FB.IsInitialized}");
+        Debug.Log($"FB.IsLoggedIn BEFORE: {FB.IsLoggedIn}");
+
+        if (AccessToken.CurrentAccessToken != null)
+        {
+            Debug.Log($"Current Access Token: {AccessToken.CurrentAccessToken.TokenString}");
+            Debug.Log($"Current User ID: {AccessToken.CurrentAccessToken.UserId}");
+            Debug.Log($"Granted Permissions: {string.Join(", ", AccessToken.CurrentAccessToken.Permissions)}");
+        }
+        else
+        {
+            Debug.Log("CurrentAccessToken: NULL");
+        }
+
         var permissions = new System.Collections.Generic.List<string>() { "public_profile", "email" };
+
         FB.LogInWithReadPermissions(permissions, async result =>
         {
+            Debug.Log("========== FACEBOOK LOGIN CALLBACK ==========");
+
+            Debug.Log($"Result.Cancelled: {result.Cancelled}");
+            Debug.Log($"Result.Error: {result.Error}");
+            Debug.Log($"Result.RawResult: {result.RawResult}");
+
+            Debug.Log($"FB.IsLoggedIn AFTER: {FB.IsLoggedIn}");
+
+            if (AccessToken.CurrentAccessToken != null)
+            {
+                Debug.Log($"Access Token: {AccessToken.CurrentAccessToken.TokenString}");
+                Debug.Log($"User ID: {AccessToken.CurrentAccessToken.UserId}");
+                Debug.Log($"Granted Permissions: {string.Join(", ", AccessToken.CurrentAccessToken.Permissions)}");
+            }
+            else
+            {
+                Debug.Log("CurrentAccessToken: NULL");
+            }
+
             if (FB.IsLoggedIn)
             {
                 var accessToken = AccessToken.CurrentAccessToken.TokenString;
@@ -206,30 +263,9 @@ public class LoginController : MonoBehaviour
             {
                 Debug.LogError("User cancelled Facebook login");
             }
-        });
-    }
 
-    private async void FacebookAuthCallback(ILoginResult result)
-    {
-        if(FB.IsLoggedIn)
-        {
-            var accessToken = AccessToken.CurrentAccessToken.TokenString;
-            Debug.Log($"Facebook login succeeded. Access Token: {accessToken}");
-            if(!AuthenticationService.Instance.IsSignedIn)
-            {
-                Debug.Log("Signing in with Facebook...");
-                await SignInWithFacebookAsync(accessToken); 
-            }
-            else
-            {
-                Debug.Log("Linking with Facebook...");
-                await LinkWithFacebookAsync(accessToken);
-            }
-        }
-        else
-        {
-            Debug.LogError("User cancelled Facebook login");
-        }
+            Debug.Log("========== FACEBOOK LOGIN END ==========");
+        });
     }
 
     private async Task LinkWithFacebookAsync(string accessToken)
@@ -263,8 +299,103 @@ public class LoginController : MonoBehaviour
 
     #endregion
 
+    #region Google Play Games
 
+    public void StartSignInWithGooglePlayGames()
+    {
+        if (!PlayGamesPlatform.Instance.IsAuthenticated())
+        {
+            Debug.LogWarning("Google Play Games is not authenticated. Please log in first.");
+            LoginGooglePlayGames();
+            return;
+        }
 
+        SignInOrLinkWithGooglePlayGames();
+    }
+
+    private void LoginGooglePlayGames()
+    {
+        PlayGamesPlatform.Instance.Authenticate((status) =>
+        {
+            if (status == SignInStatus.Success)
+            {
+                Debug.Log("Google Play Games login succeeded!");
+
+                PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
+                {
+                    Debug.Log($"Google Play Games server auth code: {code}");
+                    googlePlayGamesToken = code;
+                });
+            }
+            else
+            {
+                Debug.LogError($"Google Play Games login failed: {status}");
+            }
+        });
+    }
+
+    private async void SignInOrLinkWithGooglePlayGames()
+    {
+        if (string.IsNullOrEmpty(googlePlayGamesToken))
+        {
+            //Debug.LogWarning("Google Play Games token is not available. Please log in first.");
+            //LoginGooglePlayGames();
+            //return;
+            Debug.LogWarning("Authorization code is null or empty");
+            return;
+        }
+
+        if (!AuthenticationService.Instance.IsSignedIn)
+        {
+            Debug.Log("Signing in with Google Play Games...");
+            await SignInWithGooglePlayGamesAsync(googlePlayGamesToken);
+        }
+        else
+        {
+            Debug.Log("Linking with Google Play Games...");
+            await LinkWithGooglePlayGamesAsync(googlePlayGamesToken);
+        }
+    }
+
+    private async Task SignInWithGooglePlayGamesAsync(string googlePlayGamesToken)
+    {
+        try
+        {
+            await AuthenticationService.Instance.SignInWithGooglePlayGamesAsync(googlePlayGamesToken);
+            Debug.Log("Sign in with Google Play Games succeeded!");
+        }
+        catch (AuthenticationException ex)
+        {
+            Debug.LogException(ex);
+        }
+        catch (RequestFailedException ex)
+        {
+            Debug.LogException(ex);
+        }
+    }
+
+    private async Task LinkWithGooglePlayGamesAsync(string googlePlayGamesToken)
+    {
+        try
+        {
+            await AuthenticationService.Instance.LinkWithGooglePlayGamesAsync(googlePlayGamesToken);
+            Debug.Log("Link with Google Play Games succeeded!");
+        }
+        catch (AuthenticationException ex) when (ex.ErrorCode == AuthenticationErrorCodes.AccountAlreadyLinked)
+        {
+            Debug.LogException(ex);
+        }
+        catch (AuthenticationException ex)
+        {
+            Debug.LogException(ex);
+        }
+        catch (RequestFailedException ex)
+        {
+            Debug.LogException(ex);
+        }
+    }
+
+    #endregion
 
 
 
@@ -287,24 +418,45 @@ public class LoginController : MonoBehaviour
     //    }
     //}
 
-    //public void SignOut(bool clearSessionToken = false)
-    //{
-    //    AuthenticationService.Instance.SignOut(clearSessionToken);
-    //
-    //    PlayerAccountService.Instance.SignOut();
-    //}
-    //
-    //public void ClearSessionToken()
-    //{
-    //    AuthenticationService.Instance.ClearSessionToken();
-    //
-    //    Debug.Log("Session token cleared.");
-    //}
-    //
-    //public void DeleteAccount()
-    //{
-    //    AuthenticationService.Instance.DeleteAccountAsync();
-    //
-    //    Debug.Log("Account deleted.");
-    //}
+    public void SignOut(bool clearSessionToken = false)
+    {
+        AuthenticationService.Instance.SignOut(clearSessionToken);
+        PlayerAccountService.Instance.SignOut();
+
+        ClearSessionToken();
+
+        if (FB.IsLoggedIn)
+        {
+            Debug.Log("========== FACEBOOK LOGOUT ==========");
+
+            FB.LogOut();
+
+            if (AccessToken.CurrentAccessToken != null)
+            {
+                Debug.Log("AccessToken still exists after logout!");
+            }
+            else
+            {
+                Debug.Log("AccessToken is NULL after logout.");
+            }
+
+            Debug.Log("========== LOGOUT END ==========");
+        }
+
+        DeleteAccount();
+    }
+    
+    public void ClearSessionToken()
+    {
+        AuthenticationService.Instance.ClearSessionToken();
+    
+        Debug.Log("Session token cleared.");
+    }
+    
+    public void DeleteAccount()
+    {
+        AuthenticationService.Instance.DeleteAccountAsync();
+
+        Debug.Log("Account deleted.");
+    }
 }

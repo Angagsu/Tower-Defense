@@ -16,15 +16,15 @@ MonoBehaviour:
   clientTokens:
   - 9258f8ad9ee6aaf02fb95109054213cc
   appIds:
-  - 01026390639751935
+  - 1026390639751935
   appLabels:
-  - 'Hayguard: Rise of Highlands'
+  - 'Hayguard: Rise of Highland'
   cookie: 1
   logging: 1
   status: 1
   xfbml: 0
   frictionlessRequests: 1
-  androidKeystorePath: 
+  androidKeystorePath: C:\Users\Gagik\Keystore\Angagsu.keystore
   iosURLSuffix: 
   appLinkSchemes:
   - list: []

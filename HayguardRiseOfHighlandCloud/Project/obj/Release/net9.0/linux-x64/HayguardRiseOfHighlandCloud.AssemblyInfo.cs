@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HayguardRiseOfHighlandCloud")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8515092522ff9e3c8cb16094ade548ac097c4a13")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3542027fcd5c453fa390697d24e48961bf954b6")]
 [assembly: System.Reflection.AssemblyProductAttribute("HayguardRiseOfHighlandCloud")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HayguardRiseOfHighlandCloud")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

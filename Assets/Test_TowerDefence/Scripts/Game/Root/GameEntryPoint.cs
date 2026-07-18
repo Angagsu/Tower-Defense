@@ -38,8 +38,8 @@ public class GameEntryPoint
     private void RunGame()
     {
 #if UNITY_EDITOR
-        //var sceneName = SceneManager.GetActiveScene().name;
-        //coroutines.StartCoroutine(LoadSceneInEditor(sceneName));
+        var sceneName = SceneManager.GetActiveScene().name;
+        coroutines.StartCoroutine(LoadSceneInEditor(sceneName));
 
 
 #else
