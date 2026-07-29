@@ -100,6 +100,7 @@ public class LoginController : MonoBehaviour
         try
         {
             await PlayerAccountService.Instance.StartSignInAsync();
+            PlayerSignedIn?.Invoke();
         }
         catch (RequestFailedException ex)
         {
@@ -206,44 +207,10 @@ public class LoginController : MonoBehaviour
 
     public void StartFacebookSignIn()
     {
-        Debug.Log("========== FACEBOOK LOGIN START ==========");
-        Debug.Log($"FB.IsInitialized: {FB.IsInitialized}");
-        Debug.Log($"FB.IsLoggedIn BEFORE: {FB.IsLoggedIn}");
-
-        if (AccessToken.CurrentAccessToken != null)
-        {
-            Debug.Log($"Current Access Token: {AccessToken.CurrentAccessToken.TokenString}");
-            Debug.Log($"Current User ID: {AccessToken.CurrentAccessToken.UserId}");
-            Debug.Log($"Granted Permissions: {string.Join(", ", AccessToken.CurrentAccessToken.Permissions)}");
-        }
-        else
-        {
-            Debug.Log("CurrentAccessToken: NULL");
-        }
-
         var permissions = new System.Collections.Generic.List<string>() { "public_profile", "email" };
 
         FB.LogInWithReadPermissions(permissions, async result =>
         {
-            Debug.Log("========== FACEBOOK LOGIN CALLBACK ==========");
-
-            Debug.Log($"Result.Cancelled: {result.Cancelled}");
-            Debug.Log($"Result.Error: {result.Error}");
-            Debug.Log($"Result.RawResult: {result.RawResult}");
-
-            Debug.Log($"FB.IsLoggedIn AFTER: {FB.IsLoggedIn}");
-
-            if (AccessToken.CurrentAccessToken != null)
-            {
-                Debug.Log($"Access Token: {AccessToken.CurrentAccessToken.TokenString}");
-                Debug.Log($"User ID: {AccessToken.CurrentAccessToken.UserId}");
-                Debug.Log($"Granted Permissions: {string.Join(", ", AccessToken.CurrentAccessToken.Permissions)}");
-            }
-            else
-            {
-                Debug.Log("CurrentAccessToken: NULL");
-            }
-
             if (FB.IsLoggedIn)
             {
                 var accessToken = AccessToken.CurrentAccessToken.TokenString;
@@ -290,6 +257,7 @@ public class LoginController : MonoBehaviour
         {
             await AuthenticationService.Instance.SignInWithFacebookAsync(accessToken);
             Debug.Log("Sign in with Facebook succeeded!");
+            PlayerSignedIn?.Invoke();
         }
         catch (RequestFailedException ex)
         {
@@ -363,6 +331,7 @@ public class LoginController : MonoBehaviour
         {
             await AuthenticationService.Instance.SignInWithGooglePlayGamesAsync(googlePlayGamesToken);
             Debug.Log("Sign in with Google Play Games succeeded!");
+            PlayerSignedIn?.Invoke();
         }
         catch (AuthenticationException ex)
         {

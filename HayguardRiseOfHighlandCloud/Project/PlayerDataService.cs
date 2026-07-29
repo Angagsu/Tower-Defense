@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,22 +14,20 @@ namespace HayguardRiseOfHighlandCloud;
 
 public class PlayerDataService
 {       
-    //private readonly IGameApiClient m_GameApiClient;
-    private readonly ILogger<PlayerDataService> m_Logger;
+    public const string PLAYER_DATA_KEY = "playerData";
     public const string PLAYER_NAME_KEY = "playerName";
 
-    public PlayerDataService(ILogger<PlayerDataService> logger)
+    private readonly ILogger<PlayerDataService> logger;
+    private PlayerEconomyService playerEconomyService;
+
+
+    public PlayerDataService(ILogger<PlayerDataService> logger, PlayerEconomyService playerEconomyService)
     {
-        m_Logger = logger;
+        this.logger = logger;
+        this.playerEconomyService = playerEconomyService;
     }
 
-    //public PlayerDataService(IGameApiClient gameApiClient, ILogger<PlayerDataService> logger)
-    //{
-    //    m_GameApiClient = gameApiClient;
-    //    m_Logger = logger;
-    //}
-
-    private async Task SavePlayerData(IExecutionContext context, IGameApiClient gameApiClient, string key, string value)
+    public async Task SaveData(IExecutionContext context, IGameApiClient gameApiClient, string key, object value)
     {
         try
         {
@@ -39,57 +38,51 @@ public class PlayerDataService
                 context.PlayerId!,
                 new SetItemBody(key, value));
 
-            m_Logger.LogInformation("Successfully saved data for key: {Key}", key);
+            logger.LogInformation("Successfully saved data for key: {Key}", key);
         }
         catch (ApiException ex)
         {
-            m_Logger.LogError("Failed to save data for key {Key}. Error: {Error}", key, ex.Message);
+            logger.LogError("Failed to save data for key {Key}. Error: {Error}", key, ex.Message);
             throw new Exception($"Unable to save player data: {ex.Message}");
         }
     }
 
-    private async Task<string> GetPlayerData(IExecutionContext context, IGameApiClient gameApiClient, string key)
+    public async Task SaveData(IExecutionContext context, IGameApiClient gameApiClient, string key, string value)
     {
         try
         {
-            var result = await gameApiClient.CloudSaveData.GetItemsAsync(
+            await gameApiClient.CloudSaveData.SetItemAsync(
                 context,
                 context.AccessToken!,
                 context.ProjectId!,
                 context.PlayerId!,
-                new List<string> { key });
+                new SetItemBody(key, value));
 
-            var data = result.Data.Results.FirstOrDefault()?.Value?.ToString() ?? string.Empty;
-            m_Logger.LogInformation("Successfully retrieved data for key: {Key}", key);
-            return data;
+            logger.LogInformation("Successfully saved data for key: {Key}", key);
         }
         catch (ApiException ex)
         {
-            m_Logger.LogError("Failed to retrieve data for key {Key}. Error: {Error}", key, ex.Message);
-            throw new Exception($"Unable to retrieve player data: {ex.Message}");
+            logger.LogError("Failed to save data for key {Key}. Error: {Error}", key, ex.Message);
+            throw new Exception($"Unable to save player data: {ex.Message}");
         }
     }
 
-    
-
-    [CloudCodeFunction("SayHello")]
-    public string Hello(string name)
-    {
-        return $"Hello, {name}!";
-    }
-
-    [CloudCodeFunction("GetServerTime")]
-    public string GetServerTime(IExecutionContext context)
-    {
-        return DateTime.UtcNow.ToString(CultureInfo.InvariantCulture);
-    }
 
     [CloudCodeFunction("HandleNewPlayerNameEntry")]
     public async Task<string> HandleNewPlayerNameEntry(IExecutionContext context, IGameApiClient gameApiClient, string newName)
     {
         if (IsPlayerNameValid(newName))
         {
-            await SavePlayerData(context, gameApiClient, PLAYER_NAME_KEY, newName);
+            var (_, playerData) = await TryGetPlayerData(context, gameApiClient);
+
+            if(playerData == null)
+            {
+                throw new InvalidOperationException($"Player data not found for player: {context.PlayerId}");
+            }
+
+            playerData.DisplayName = newName;
+            await SaveData(context, gameApiClient, PLAYER_DATA_KEY, playerData);
+
             return newName;
         }
 
@@ -109,6 +102,106 @@ public class PlayerDataService
         }
 
         return true;
+    }
+
+    [CloudCodeFunction("HandlePlayerSignIn")]
+    public async Task<PlayerDataResponse> HandlePlayerSignIn(IExecutionContext context, IGameApiClient gameApiClient)
+    {
+        var (playerExists, playerData) = await TryGetPlayerData(context, gameApiClient);
+
+        if (!playerExists || playerData == null)
+        {
+            return await InitializeNewPlayer(context, gameApiClient);
+        }
+
+        PlayerEconomyData economyData = await playerEconomyService.GetPlayerEconomyData(context, gameApiClient);
+
+        return new PlayerDataResponse
+        {
+            PlayerData = playerData,
+            EconomyData = economyData,
+            IsNewPlayer = false
+        };
+    }
+
+    private async Task<(bool playerExists, PlayerData? playerData)> TryGetPlayerData(IExecutionContext context, IGameApiClient gameApiClient)
+    {
+        try
+        {
+            var (success, playerDataJson) = await TryGetData(context, gameApiClient, PLAYER_DATA_KEY);
+
+            if (playerDataJson == null)
+            {
+                return (false, null);
+            }
+
+            var playerData = JsonConvert.DeserializeObject<PlayerData>($"{playerDataJson}");
+            return (playerData != null, playerData);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, $"Error deserializing player data for player: {context.PlayerId}");
+            return (false, null);
+        }
+    }
+
+    public async Task<(bool success, string? value)> TryGetData(IExecutionContext context, IGameApiClient gameApiClient, string key)
+    {
+        try
+        {
+            var response = await gameApiClient.CloudSaveData.GetItemsAsync(
+                context,
+                context.AccessToken,
+                context.ProjectId,
+                context.PlayerId ?? throw new InvalidOperationException("PlayerId is null"),
+                new List<string> { key });
+
+            var retrivedItem = response.Data.Results.FirstOrDefault();
+
+            if (retrivedItem != null)
+            {
+                return (true, Convert.ToString(retrivedItem.Value));
+            }
+
+            return (false, null);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, $"Error retrieving data from CloudSave for player: {context.PlayerId}");
+            return (false, null);
+        }
+    }
+
+    private async Task<PlayerDataResponse> InitializeNewPlayer(IExecutionContext context, IGameApiClient gameApiClient)
+    {
+        PlayerData newPlayerData = new PlayerData
+        {
+            DisplayName = "NewPlayer",
+            Experience = 0
+        };
+
+        PlayerEconomyData newEconomyData;
+
+        try
+        {
+            await SaveData(context, gameApiClient, PLAYER_DATA_KEY, newPlayerData);
+
+            newEconomyData = await playerEconomyService.InitializeNewPlayerEconomy(context, gameApiClient);
+
+            logger.LogInformation($"Initialized new player with ID: {context.PlayerId}");
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, $"Error initializing new player with ID: {context.PlayerId}");
+            throw new Exception($"Faild to initialize new player: {ex.Message}");
+        }
+
+        return new PlayerDataResponse
+        {
+            PlayerData = newPlayerData,
+            EconomyData = newEconomyData,
+            IsNewPlayer = true
+        };
     }
 }
 

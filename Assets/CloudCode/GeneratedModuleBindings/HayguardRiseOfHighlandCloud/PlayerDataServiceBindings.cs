@@ -16,27 +16,6 @@ namespace Unity.Services.CloudCode.GeneratedBindings
             k_Service = service;
         }
 
-        public async Task<string> SayHello(string name)
-        {
-            return await k_Service.CallModuleEndpointAsync<string>(
-                "HayguardRiseOfHighlandCloud",
-                "SayHello",
-                new Dictionary<string, object>()
-                {
-                    {"name", name},
-                });
-        }
-
-        public async Task<string> GetServerTime()
-        {
-            return await k_Service.CallModuleEndpointAsync<string>(
-                "HayguardRiseOfHighlandCloud",
-                "GetServerTime",
-                new Dictionary<string, object>()
-                {
-                });
-        }
-
         public async Task<string> HandleNewPlayerNameEntry(string newName)
         {
             return await k_Service.CallModuleEndpointAsync<string>(
@@ -45,6 +24,16 @@ namespace Unity.Services.CloudCode.GeneratedBindings
                 new Dictionary<string, object>()
                 {
                     {"newName", newName},
+                });
+        }
+
+        public async Task<HayguardRiseOfHighlandCloud.PlayerDataResponse> HandlePlayerSignIn()
+        {
+            return await k_Service.CallModuleEndpointAsync<HayguardRiseOfHighlandCloud.PlayerDataResponse>(
+                "HayguardRiseOfHighlandCloud",
+                "HandlePlayerSignIn",
+                new Dictionary<string, object>()
+                {
                 });
         }
     }

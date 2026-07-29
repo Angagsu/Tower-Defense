@@ -1,32 +1,59 @@
+using Newtonsoft.Json;
 using System;
 using System.Linq;
 using Unity.Services.CloudCode;
 using Unity.Services.CloudCode.GeneratedBindings;
+using Unity.Services.CloudCode.GeneratedBindings.HayguardRiseOfHighlandCloud;
 using UnityEngine;
 
 public class PlayarDataManager : MonoBehaviour
 {
-    private PlayerDataServiceBindings bindings;
+    public event Action<PlayerData> PlayerDataUpdated;
+    [SerializeField] private PlayerEconomyManager playerEconomyManager;
+    private PlayerDataServiceBindings playerDataServiceBindings;
     public LoginController loginController;
     public string playerName;
+    public PlayerData PlayerDataLocal;
 
     private void Start()
     {
         loginController.PlayerSignedIn += InitializePlayer;
-        bindings = new PlayerDataServiceBindings(CloudCodeService.Instance);
+
+        playerDataServiceBindings = new PlayerDataServiceBindings(CloudCodeService.Instance);
+        
     }
 
     private async void InitializePlayer()
     {
         try
         {
-            var resultFromCloud = await bindings.SayHello(playerName);
-            Debug.Log(resultFromCloud);
+            var playerDataResponse = await playerDataServiceBindings.HandlePlayerSignIn();
+
+            PlayerDataLocal = playerDataResponse.PlayerData;
+            PlayerDataUpdated?.Invoke(PlayerDataLocal);
+
+            playerEconomyManager.HandleEconomyUpdate(playerDataResponse.EconomyData);
+
+            LogResponse(playerDataResponse);
         }
         catch (CloudCodeException ex)
         {
             Debug.LogException(ex);
         }
+    }
+
+    private void LogResponse(PlayerDataResponse playerDataResponse)
+    {
+        string economyJson = JsonConvert.SerializeObject(playerDataResponse.EconomyData, Formatting.Indented);
+
+        Debug.Log(
+            $"===== Player Sign-In Response =====\n" +
+            $"Name: {playerDataResponse.PlayerData.DisplayName}\n" +
+            $"New player: {playerDataResponse.IsNewPlayer}\n" +
+            $"XP: {playerDataResponse.PlayerData.Experience}\n" +
+            $"Economy: {economyJson}\n" +
+            $"============================================"
+            );
     }
 
     public async void SaveNewPlayerName()
@@ -39,7 +66,7 @@ public class PlayarDataManager : MonoBehaviour
 
         try
         {
-            playerName = await bindings.HandleNewPlayerNameEntry(playerName);
+            playerName = await playerDataServiceBindings.HandleNewPlayerNameEntry(playerName);
             Debug.Log($"Player name saved successfully: {playerName}");
         }
         catch (Exception ex)
