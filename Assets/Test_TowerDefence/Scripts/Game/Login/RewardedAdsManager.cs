@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using System;
 using Unity.Services.Authentication;
+using Unity.Services.CloudCode;
 using Unity.Services.CloudCode.GeneratedBindings;
 using Unity.Services.LevelPlay;
 using UnityEngine;
@@ -31,6 +32,7 @@ public class RewardedAdsManager : MonoBehaviour
 
     private void Start()
     {
+        bindings = new AdRewardsServiceBindings(CloudCodeService.Instance);
         RegisterSDKEvents();
 
         AuthenticationService.Instance.SignedIn += InitializeRewardedAds;
@@ -325,7 +327,7 @@ public class RewardedAdsManager : MonoBehaviour
             InstanceId = adInfo.InstanceId,
             InstanceName = adInfo.InstanceName,
             AdNetwork = adInfo.AdNetwork,
-            RewardName = "Gold",    // can use RewardName = reward.Name, but in editor reward is "editor_reward" and will fail validation
+            RewardName = "GOLD",    // can use RewardName = reward.Name, but in editor reward is "editor_reward" and will fail validation
             RewardAmount = reward.Amount
         };
 

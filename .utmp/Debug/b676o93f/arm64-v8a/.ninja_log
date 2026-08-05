@@ -1,10 +1,19 @@
 # ninja log v5
-26	936	8060710122412170	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	4bc616e570f067a7
 8	806	8060710121124424	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	a4b903e5c792c6c9
+26	936	8060710122412170	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	4bc616e570f067a7
 12	811	8060710121154953	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	b1adb0d91a81c8b6
 16	812	8060710121154953	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	d1bb3a60ba1c3f79
-4	844	8060710121477066	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	f1dde3552cffacd3
 31	816	8060710121245139	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	99c9ec94ba3bbc92
+4	844	8060710121477066	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	f1dde3552cffacd3
 21	887	8060710121881979	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	e3a235cdff570acd
-936	1054	8060710123615269	C:/Users/Gagik/Documents/GitHub/Tower-Defense/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/b676o93f/obj/arm64-v8a/libgame.so	da972ecd872b3926
 0	908	8060710122117730	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	ec874e3277083edf
+936	1054	8060710123615269	C:/Users/Gagik/Documents/GitHub/Tower-Defense/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/b676o93f/obj/arm64-v8a/libgame.so	da972ecd872b3926
+180	7993	8070400163079619	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	d1bb3a60ba1c3f79
+186	8003	8070400163180522	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	a4b903e5c792c6c9
+193	8008	8070400163221754	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	b1adb0d91a81c8b6
+205	8009	8070400163241855	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	99c9ec94ba3bbc92
+173	8025	8070400163415642	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	f1dde3552cffacd3
+199	8088	8070400164017304	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	e3a235cdff570acd
+4	8114	8070400164272445	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	ec874e3277083edf
+210	8220	8070400165313883	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	4bc616e570f067a7
+8221	8334	8070400166463179	C:/Users/Gagik/Documents/GitHub/Tower-Defense/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/b676o93f/obj/arm64-v8a/libgame.so	da972ecd872b3926
